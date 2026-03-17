@@ -1,0 +1,2384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design system — Playbook Advisory Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES — mapped from playbook-design-tokens.json
+       ============================================================ */
+    :root {
+      /* Colour — primary */
+      --color-black:       #000000;
+      --color-gold:        #AB7F58;
+      --color-white:       #FFFFFF;
+
+      /* Colour — supporting */
+      --color-navy:        #271F57;
+      --color-paper-dark:  #FADCC1;
+      --color-mid-grey:    #F4F4F4;
+
+      /* Colour — semantic */
+      --color-background-page:          #FFFFFF;
+      --color-background-section-dark:  #271F57;
+      --color-background-section-warm:  #FADCC1;
+      --color-background-section-light: #F4F4F4;
+      --color-text-primary:             #000000;
+      --color-text-on-dark:             #FFFFFF;
+      --color-text-secondary:           #555555;
+      --color-text-accent:              #AB7F58;
+      --color-border-default:           #E5E5E5;
+      --color-border-strong:            #000000;
+      --color-border-accent:            #AB7F58;
+
+      /* Typography */
+      --font-primary: 'Inter', sans-serif;
+
+      --weight-light:    300;
+      --weight-regular:  400;
+      --weight-medium:   500;
+      --weight-semibold: 600;
+      --weight-bold:     700;
+
+      --size-display:  4.5rem;
+      --size-h1:       3.5rem;
+      --size-h2:       2.5rem;
+      --size-h3:       2rem;
+      --size-h4:       1.5rem;
+      --size-h5:       1.25rem;
+      --size-body-lg:  1.125rem;
+      --size-body:     1rem;
+      --size-body-sm:  0.875rem;
+      --size-caption:  0.75rem;
+      --size-label:    0.6875rem;
+
+      --lh-none:    1;
+      --lh-tight:   1.1;
+      --lh-snug:    1.2;
+      --lh-normal:  1.5;
+      --lh-relaxed: 1.6;
+      --lh-loose:   1.8;
+
+      --ls-tight:   -0.025em;
+      --ls-normal:  0;
+      --ls-wide:    0.025em;
+      --ls-wider:   0.05em;
+      --ls-widest:  0.1em;
+
+      /* Spacing — 8-point grid */
+      --space-0:   0;
+      --space-px:  1px;
+      --space-0-5: 0.125rem;
+      --space-1:   0.25rem;
+      --space-2:   0.5rem;
+      --space-3:   0.75rem;
+      --space-4:   1rem;
+      --space-5:   1.25rem;
+      --space-6:   1.5rem;
+      --space-8:   2rem;
+      --space-10:  2.5rem;
+      --space-12:  3rem;
+      --space-16:  4rem;
+      --space-20:  5rem;
+      --space-24:  6rem;
+      --space-32:  8rem;
+
+      /* Border radius */
+      --radius-none: 0;
+      --radius-sm:   2px;
+      --radius-md:   4px;
+      --radius-lg:   8px;
+      --radius-pill: 9999px;
+
+      /* Shadows */
+      --shadow-none:       none;
+      --shadow-sm:         0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md:         0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-lg:         0 8px 24px rgba(0, 0, 0, 0.12);
+      --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.10);
+
+      /* Motion — durations */
+      --duration-instant: 80ms;
+      --duration-fast:    140ms;
+      --duration-base:    220ms;
+      --duration-slow:    320ms;
+      --duration-page:    400ms;
+
+      /* Motion — easing */
+      --ease-standard:    cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-decelerate:  cubic-bezier(0, 0, 0.2, 1);
+      --ease-accelerate:  cubic-bezier(0.4, 0, 1, 1);
+      --ease-sharp:       cubic-bezier(0.4, 0, 0.6, 1);
+
+      /* Layout */
+      --max-width-content: 1280px;
+      --container-padding: 5rem;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      font-size: var(--size-body);
+      font-weight: var(--weight-regular);
+      line-height: var(--lh-relaxed);
+      color: var(--color-text-primary);
+      background-color: var(--color-background-page);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ============================================================
+       LAYOUT SHELL
+       ============================================================ */
+    .ds-shell {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar navigation */
+    .ds-sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 220px;
+      flex-shrink: 0;
+      background-color: var(--color-mid-grey);
+      border-right: 1px solid var(--color-border-default);
+      overflow-y: auto;
+      padding: var(--space-8) 0;
+      z-index: 200;
+    }
+
+    .ds-sidebar-brand {
+      padding: 0 var(--space-6) var(--space-8);
+      border-bottom: 1px solid var(--color-border-default);
+      margin-bottom: var(--space-6);
+    }
+
+    .ds-sidebar-brand-name {
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--ls-wider);
+      text-transform: uppercase;
+      color: var(--color-navy);
+      line-height: var(--lh-snug);
+    }
+
+    .ds-sidebar-brand-sub {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+      letter-spacing: var(--ls-wide);
+      margin-top: var(--space-1);
+    }
+
+    .ds-sidebar nav {
+      padding: 0 var(--space-4);
+    }
+
+    .ds-sidebar-label {
+      font-size: 10px;
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      padding: var(--space-4) var(--space-2) var(--space-2);
+    }
+
+    .ds-sidebar a {
+      display: block;
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      padding: var(--space-2) var(--space-2);
+      border-radius: var(--radius-sm);
+      transition: color var(--duration-base) var(--ease-standard),
+                  background-color var(--duration-base) var(--ease-standard);
+      line-height: var(--lh-normal);
+    }
+
+    .ds-sidebar a:hover {
+      color: var(--color-navy);
+      background-color: var(--color-border-default);
+    }
+
+    .ds-sidebar a.active {
+      color: var(--color-navy);
+      font-weight: var(--weight-semibold);
+    }
+
+    /* Main content */
+    .ds-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ============================================================
+       PAGE HEADER
+       ============================================================ */
+    .ds-header {
+      background-color: var(--color-navy);
+      padding: var(--space-20) var(--space-16);
+    }
+
+    .ds-header-inner {
+      max-width: var(--max-width-content);
+    }
+
+    .ds-header-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--size-label);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: var(--space-6);
+    }
+
+    .ds-header-star {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      /* The guiding star — simplified representation */
+      background-color: var(--color-gold);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .ds-header-wordmark {
+      font-size: var(--size-h1);
+      font-weight: var(--weight-bold);
+      color: var(--color-white);
+      line-height: var(--lh-tight);
+      letter-spacing: var(--ls-tight);
+      margin-bottom: var(--space-4);
+    }
+
+    .ds-header-subtitle {
+      font-size: var(--size-h3);
+      font-weight: var(--weight-light);
+      color: var(--color-gold);
+      line-height: var(--lh-snug);
+      margin-bottom: var(--space-8);
+    }
+
+    .ds-header-meta {
+      display: flex;
+      gap: var(--space-6);
+      align-items: center;
+      padding-top: var(--space-8);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .ds-header-meta-item {
+      font-size: var(--size-caption);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-wider);
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+    }
+
+    .ds-header-meta-item span {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* ============================================================
+       SECTION WRAPPER
+       ============================================================ */
+    .ds-section {
+      padding: var(--space-20) var(--space-16);
+      border-bottom: 1px solid var(--color-border-default);
+    }
+
+    .ds-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .ds-section-inner {
+      max-width: var(--max-width-content);
+    }
+
+    .ds-section-header {
+      margin-bottom: var(--space-12);
+      padding-bottom: var(--space-8);
+      border-bottom: 1px solid var(--color-black);
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-6);
+    }
+
+    .ds-section-number {
+      font-size: var(--size-label);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-gold);
+      min-width: 3ch;
+    }
+
+    .ds-section-title {
+      font-size: var(--size-h2);
+      font-weight: var(--weight-bold);
+      line-height: var(--lh-snug);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-black);
+    }
+
+    .ds-subsection-title {
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-6);
+    }
+
+    /* ============================================================
+       1. COLOUR
+       ============================================================ */
+    .ds-colour-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-10);
+    }
+
+    .ds-colour-swatch {
+      border-radius: var(--radius-none);
+      overflow: hidden;
+      border: 1px solid var(--color-border-default);
+    }
+
+    .ds-colour-block {
+      height: 140px;
+    }
+
+    .ds-colour-info {
+      padding: var(--space-4) var(--space-5);
+      background-color: var(--color-background-page);
+    }
+
+    .ds-colour-token {
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--color-black);
+      margin-bottom: var(--space-1);
+    }
+
+    .ds-colour-hex {
+      font-size: var(--size-caption);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-secondary);
+      font-family: 'Courier New', monospace;
+      letter-spacing: var(--ls-wide);
+      margin-bottom: var(--space-2);
+    }
+
+    .ds-colour-use {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+      line-height: var(--lh-normal);
+    }
+
+    /* Semantic aliases */
+    .ds-semantic-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-3);
+    }
+
+    .ds-semantic-swatch {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-border-default);
+    }
+
+    .ds-semantic-block {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .ds-semantic-label {
+      font-size: var(--size-caption);
+      font-weight: var(--weight-medium);
+      color: var(--color-black);
+      line-height: var(--lh-snug);
+    }
+
+    .ds-semantic-value {
+      font-size: 10px;
+      color: var(--color-text-secondary);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ============================================================
+       2. TYPOGRAPHY
+       ============================================================ */
+    .ds-type-specimen {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-8);
+      padding: var(--space-6) 0;
+      border-bottom: 1px solid var(--color-border-default);
+    }
+
+    .ds-type-specimen:last-of-type {
+      border-bottom: none;
+    }
+
+    .ds-type-meta {
+      min-width: 180px;
+      flex-shrink: 0;
+    }
+
+    .ds-type-token {
+      font-size: var(--size-caption);
+      font-weight: var(--weight-semibold);
+      color: var(--color-gold);
+      font-family: 'Courier New', monospace;
+      letter-spacing: var(--ls-wide);
+      display: block;
+      margin-bottom: var(--space-1);
+    }
+
+    .ds-type-details {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+      line-height: var(--lh-loose);
+    }
+
+    .ds-type-text {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .ds-weight-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: var(--space-8);
+      align-items: center;
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-border-default);
+    }
+
+    .ds-weight-row:last-child {
+      border-bottom: none;
+    }
+
+    .ds-weight-meta {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+    }
+
+    .ds-weight-label {
+      font-size: var(--size-caption);
+      font-weight: var(--weight-medium);
+      color: var(--color-black);
+    }
+
+    .ds-weight-value {
+      font-family: 'Courier New', monospace;
+      font-size: var(--size-caption);
+      color: var(--color-gold);
+    }
+
+    .ds-tracking-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: var(--space-8);
+      align-items: center;
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-border-default);
+    }
+
+    .ds-tracking-row:last-child {
+      border-bottom: none;
+    }
+
+    /* ============================================================
+       3. SPACING
+       ============================================================ */
+    .ds-spacing-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border-default);
+    }
+
+    .ds-spacing-row:last-child {
+      border-bottom: none;
+    }
+
+    .ds-spacing-token {
+      font-size: var(--size-caption);
+      font-family: 'Courier New', monospace;
+      color: var(--color-gold);
+      min-width: 90px;
+    }
+
+    .ds-spacing-bar-wrap {
+      flex: 1;
+      height: 24px;
+      background-color: var(--color-mid-grey);
+      position: relative;
+    }
+
+    .ds-spacing-bar {
+      height: 100%;
+      background-color: var(--color-navy);
+      opacity: 0.7;
+    }
+
+    .ds-spacing-value {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+      min-width: 100px;
+      text-align: right;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ============================================================
+       4. MOTION
+       ============================================================ */
+    .ds-motion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-6);
+      margin-bottom: var(--space-12);
+    }
+
+    .ds-motion-card {
+      border: 1px solid var(--color-border-default);
+      padding: var(--space-6);
+      background-color: var(--color-white);
+    }
+
+    .ds-motion-demo-box {
+      width: 100%;
+      height: 80px;
+      background-color: var(--color-mid-grey);
+      border: 1px solid var(--color-border-default);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-4);
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-wide);
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* fade-in demo — starts faded, hover reveals */
+    .demo-fade-in {
+      opacity: 0.2;
+      transition: opacity var(--duration-base) var(--ease-decelerate);
+    }
+    .demo-fade-in:hover {
+      opacity: 1;
+    }
+
+    /* fade-up demo — starts faded + translated down, hover reveals */
+    .demo-fade-up {
+      opacity: 0.2;
+      transform: translateY(16px);
+      transition: opacity var(--duration-slow) var(--ease-decelerate),
+                  transform var(--duration-slow) var(--ease-decelerate);
+    }
+    .demo-fade-up:hover {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* card-hover demo — wraps the whole card */
+    .demo-card-hover-wrap {
+      transition: transform var(--duration-base) var(--ease-standard),
+                  box-shadow var(--duration-base) var(--ease-standard);
+      cursor: pointer;
+    }
+    .demo-card-hover-wrap:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    /* nav-underline demo */
+    .demo-nav-underline-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .demo-nav-link {
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-black);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: var(--space-1);
+      letter-spacing: var(--ls-wider);
+    }
+
+    .demo-nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--duration-fast) var(--ease-standard);
+    }
+
+    .demo-nav-underline-wrap:hover .demo-nav-link::after {
+      transform: scaleX(1);
+    }
+
+    /* button-press demo */
+    .demo-btn-press {
+      padding: var(--space-3) var(--space-6);
+      background-color: var(--color-black);
+      color: var(--color-white);
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-wider);
+      border: none;
+      cursor: pointer;
+      transition: transform var(--duration-instant) var(--ease-sharp);
+      font-family: var(--font-primary);
+    }
+
+    .demo-btn-press:active {
+      transform: scale(0.97);
+    }
+
+    .ds-motion-title {
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--color-black);
+      margin-bottom: var(--space-1);
+    }
+
+    .ds-motion-description {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+      line-height: var(--lh-normal);
+    }
+
+    /* Duration bars */
+    .ds-duration-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border-default);
+    }
+
+    .ds-duration-row:last-child {
+      border-bottom: none;
+    }
+
+    .ds-duration-token {
+      font-size: var(--size-caption);
+      font-family: 'Courier New', monospace;
+      color: var(--color-gold);
+      min-width: 90px;
+    }
+
+    .ds-duration-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background-color: var(--color-mid-grey);
+    }
+
+    .ds-duration-bar {
+      height: 100%;
+      background-color: var(--color-navy);
+    }
+
+    .ds-duration-value {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+      min-width: 50px;
+      text-align: right;
+      font-family: 'Courier New', monospace;
+    }
+
+    .ds-duration-guide {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+      min-width: 240px;
+    }
+
+    /* Easing */
+    .ds-easing-row {
+      display: grid;
+      grid-template-columns: 120px 240px 1fr;
+      gap: var(--space-6);
+      align-items: center;
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-border-default);
+    }
+
+    .ds-easing-row:last-child {
+      border-bottom: none;
+    }
+
+    .ds-easing-token {
+      font-size: var(--size-caption);
+      font-family: 'Courier New', monospace;
+      color: var(--color-gold);
+    }
+
+    .ds-easing-value {
+      font-size: var(--size-caption);
+      font-family: 'Courier New', monospace;
+      color: var(--color-text-secondary);
+    }
+
+    .ds-easing-guide {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+      line-height: var(--lh-normal);
+    }
+
+    /* ============================================================
+       5. BORDER RADIUS
+       ============================================================ */
+    .ds-radius-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .ds-radius-demo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .ds-radius-block {
+      width: 80px;
+      height: 80px;
+      background-color: var(--color-navy);
+    }
+
+    .ds-radius-label {
+      text-align: center;
+    }
+
+    .ds-radius-token {
+      font-size: var(--size-caption);
+      font-weight: var(--weight-semibold);
+      color: var(--color-black);
+      display: block;
+      font-family: 'Courier New', monospace;
+    }
+
+    .ds-radius-value {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+    }
+
+    /* ============================================================
+       6. SHADOWS
+       ============================================================ */
+    .ds-shadow-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-8);
+    }
+
+    .ds-shadow-demo {
+      background-color: var(--color-white);
+      padding: var(--space-8);
+      border: 1px solid transparent; /* so 'none' variant is visible on white */
+    }
+
+    .ds-shadow-token {
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--color-black);
+      margin-bottom: var(--space-2);
+      font-family: 'Courier New', monospace;
+    }
+
+    .ds-shadow-value {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+      line-height: var(--lh-normal);
+      font-family: 'Courier New', monospace;
+      word-break: break-all;
+    }
+
+    /* ============================================================
+       7. COMPONENTS
+       ============================================================ */
+
+    /* Buttons */
+    .ds-button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-12);
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font-primary);
+      font-size: var(--size-body);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-wider);
+      padding: 0.75rem 2rem;
+      border-radius: var(--radius-none);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color var(--duration-base) var(--ease-standard),
+                  color var(--duration-base) var(--ease-standard),
+                  border-color var(--duration-base) var(--ease-standard);
+      line-height: 1;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background-color: var(--color-black);
+      color: var(--color-white);
+      border: 1px solid var(--color-black);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-navy);
+      border-color: var(--color-navy);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--color-black);
+      border: 1px solid var(--color-black);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-black);
+      color: var(--color-white);
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--color-gold);
+      border: none;
+      padding-left: 0;
+      padding-right: 0;
+      position: relative;
+    }
+
+    .btn-ghost::after {
+      content: '';
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--duration-fast) var(--ease-standard);
+    }
+
+    .btn-ghost:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* Tags */
+    .ds-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-bottom: var(--space-12);
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: var(--color-mid-grey);
+      color: var(--color-black);
+      font-size: var(--size-label);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Card grid */
+    .ds-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      margin-bottom: var(--space-12);
+    }
+
+    .ds-card {
+      background-color: var(--color-white);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-none);
+      padding: var(--space-8);
+      transition: transform var(--duration-base) var(--ease-standard),
+                  box-shadow var(--duration-base) var(--ease-standard);
+    }
+
+    .ds-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .ds-card-tag {
+      margin-bottom: var(--space-4);
+    }
+
+    .ds-card-title {
+      font-size: var(--size-h4);
+      font-weight: var(--weight-bold);
+      line-height: var(--lh-snug);
+      color: var(--color-black);
+      margin-bottom: var(--space-4);
+    }
+
+    .ds-card-body {
+      font-size: var(--size-body-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--lh-relaxed);
+      margin-bottom: var(--space-6);
+    }
+
+    /* Section colour variants */
+    .ds-section-variants {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-12);
+    }
+
+    .ds-section-variant {
+      padding: var(--space-10) var(--space-8);
+    }
+
+    .ds-section-variant-label {
+      font-size: var(--size-label);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      margin-bottom: var(--space-4);
+      opacity: 0.6;
+    }
+
+    .ds-section-variant-heading {
+      font-size: var(--size-h4);
+      font-weight: var(--weight-bold);
+      line-height: var(--lh-snug);
+      margin-bottom: var(--space-3);
+    }
+
+    .ds-section-variant-body {
+      font-size: var(--size-body-sm);
+      line-height: var(--lh-relaxed);
+      opacity: 0.8;
+    }
+
+    .variant-white {
+      background-color: var(--color-white);
+      color: var(--color-black);
+      border: 1px solid var(--color-border-default);
+    }
+
+    .variant-navy {
+      background-color: var(--color-navy);
+      color: var(--color-white);
+    }
+
+    .variant-navy .ds-section-variant-label {
+      color: var(--color-gold);
+      opacity: 1;
+    }
+
+    .variant-paper {
+      background-color: var(--color-paper-dark);
+      color: var(--color-black);
+    }
+
+    .variant-grey {
+      background-color: var(--color-mid-grey);
+      color: var(--color-black);
+    }
+
+    /* Form elements */
+    .ds-form-demo {
+      max-width: 480px;
+    }
+
+    .ds-form-group {
+      margin-bottom: var(--space-6);
+    }
+
+    .ds-form-label {
+      display: block;
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-wide);
+      color: var(--color-black);
+      margin-bottom: var(--space-2);
+    }
+
+    .ds-input,
+    .ds-textarea {
+      display: block;
+      width: 100%;
+      font-family: var(--font-primary);
+      font-size: var(--size-body);
+      font-weight: var(--weight-regular);
+      color: var(--color-black);
+      background-color: var(--color-white);
+      border: 1px solid var(--color-black);
+      border-radius: var(--radius-none);
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: box-shadow var(--duration-fast) var(--ease-standard);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .ds-input:focus,
+    .ds-textarea:focus {
+      box-shadow: 0 0 0 2px var(--color-gold);
+    }
+
+    .ds-textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: var(--lh-relaxed);
+    }
+
+    /* ============================================================
+       8. BRAND CONCEPTS
+       ============================================================ */
+    .ds-brand-section {
+      background-color: var(--color-navy);
+      padding: var(--space-20) var(--space-16);
+    }
+
+    .ds-brand-inner {
+      max-width: var(--max-width-content);
+    }
+
+    .ds-brand-section-header {
+      margin-bottom: var(--space-12);
+      padding-bottom: var(--space-8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-6);
+    }
+
+    .ds-brand-section-number {
+      font-size: var(--size-label);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-gold);
+      min-width: 3ch;
+    }
+
+    .ds-brand-section-title {
+      font-size: var(--size-h2);
+      font-weight: var(--weight-bold);
+      line-height: var(--lh-snug);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-white);
+    }
+
+    .ds-brand-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+    }
+
+    .ds-brand-block-title {
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: var(--space-6);
+    }
+
+    .ds-brand-positioning {
+      font-size: var(--size-h3);
+      font-weight: var(--weight-light);
+      color: var(--color-white);
+      line-height: var(--lh-snug);
+      letter-spacing: var(--ls-tight);
+      margin-bottom: var(--space-8);
+    }
+
+    .ds-brand-positioning strong {
+      font-weight: var(--weight-bold);
+      color: var(--color-gold);
+    }
+
+    .ds-brand-pillars {
+      display: flex;
+      gap: var(--space-6);
+    }
+
+    .ds-brand-pillar {
+      padding: var(--space-4) var(--space-6);
+      border: 1px solid rgba(171, 127, 88, 0.4);
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-wider);
+      color: var(--color-white);
+    }
+
+    .ds-concept-list {
+      list-style: none;
+    }
+
+    .ds-concept-item {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ds-concept-item:last-child {
+      border-bottom: none;
+    }
+
+    .ds-concept-star {
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-gold);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      flex-shrink: 0;
+      position: relative;
+      top: 1px;
+    }
+
+    .ds-concept-name {
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-white);
+      line-height: var(--lh-normal);
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .ds-footer {
+      padding: var(--space-10) var(--space-16);
+      background-color: var(--color-black);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .ds-footer-text {
+      font-size: var(--size-caption);
+      font-weight: var(--weight-medium);
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: var(--ls-wide);
+    }
+
+    /* ============================================================
+       UTILITY CLASSES
+       ============================================================ */
+    .mt-8  { margin-top: var(--space-8); }
+    .mt-12 { margin-top: var(--space-12); }
+    .mb-6  { margin-bottom: var(--space-6); }
+    .mb-8  { margin-bottom: var(--space-8); }
+    .mb-12 { margin-bottom: var(--space-12); }
+
+    .mono {
+      font-family: 'Courier New', monospace;
+      font-size: var(--size-caption);
+      color: var(--color-gold);
+    }
+
+    .text-secondary {
+      color: var(--color-text-secondary);
+    }
+
+    .text-small {
+      font-size: var(--size-caption);
+    }
+
+    .subsection-divider {
+      border: none;
+      border-top: 1px solid var(--color-border-default);
+      margin: var(--space-12) 0;
+    }
+
+    /* ============================================================
+       RESPONSIVE — sidebar collapses on mobile
+       ============================================================ */
+    @media (max-width: 768px) {
+      .ds-shell {
+        flex-direction: column;
+      }
+
+      .ds-sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        overflow-y: visible;
+        padding: var(--space-4) 0;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border-default);
+      }
+
+      .ds-sidebar nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-1);
+      }
+
+      .ds-sidebar-label {
+        display: none;
+      }
+
+      .ds-sidebar a {
+        font-size: var(--size-caption);
+        padding: var(--space-2) var(--space-3);
+      }
+
+      .ds-header {
+        padding: var(--space-12) var(--space-6);
+      }
+
+      .ds-header-wordmark {
+        font-size: var(--size-h2);
+      }
+
+      .ds-header-subtitle {
+        font-size: var(--size-h4);
+      }
+
+      .ds-section {
+        padding: var(--space-12) var(--space-6);
+      }
+
+      .ds-brand-section {
+        padding: var(--space-12) var(--space-6);
+      }
+
+      .ds-footer {
+        padding: var(--space-8) var(--space-6);
+      }
+
+      .ds-colour-row {
+        grid-template-columns: 1fr;
+      }
+
+      .ds-card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ds-section-variants {
+        grid-template-columns: 1fr;
+      }
+
+      .ds-brand-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+      }
+
+      .ds-shadow-row {
+        grid-template-columns: 1fr;
+      }
+
+      .ds-motion-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .ds-type-specimen {
+        flex-direction: column;
+        gap: var(--space-3);
+      }
+
+      .ds-type-meta {
+        min-width: auto;
+      }
+
+      .ds-type-text {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+      }
+
+      .ds-easing-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+      }
+
+      .ds-tracking-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+      }
+
+      .ds-header-meta {
+        flex-wrap: wrap;
+        gap: var(--space-3);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .ds-motion-grid {
+        grid-template-columns: 1fr;
+      }
+      .ds-radius-row {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* ============================================================
+       SCROLL-REVEAL — subtle fade-in on section entry
+       ============================================================ */
+    .ds-reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity var(--duration-slow) var(--ease-decelerate),
+                  transform var(--duration-slow) var(--ease-decelerate);
+    }
+
+    .ds-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="ds-shell">
+
+    <!-- ============================================================
+         SIDEBAR NAVIGATION
+         ============================================================ -->
+    <aside class="ds-sidebar" aria-label="Design system navigation">
+      <div class="ds-sidebar-brand">
+        <div class="ds-sidebar-brand-name">Playbook</div>
+        <div class="ds-sidebar-brand-sub">Design system v1.0.0</div>
+      </div>
+      <nav aria-label="Sections">
+        <div class="ds-sidebar-label">Foundations</div>
+        <a href="#colour">Colour</a>
+        <a href="#typography">Typography</a>
+        <a href="#spacing">Spacing</a>
+        <a href="#motion">Motion</a>
+        <a href="#radius">Border radius</a>
+        <a href="#shadows">Shadows</a>
+        <div class="ds-sidebar-label">Components</div>
+        <a href="#components">Buttons</a>
+        <a href="#tags">Tags</a>
+        <a href="#cards">Cards</a>
+        <a href="#sections">Sections</a>
+        <a href="#forms">Forms</a>
+        <div class="ds-sidebar-label">Brand</div>
+        <a href="#brand">Brand concepts</a>
+      </nav>
+    </aside>
+
+    <!-- ============================================================
+         MAIN CONTENT
+         ============================================================ -->
+    <main class="ds-main">
+
+      <!-- PAGE HEADER -->
+      <header class="ds-header">
+        <div class="ds-header-inner">
+          <div class="ds-header-eyebrow">
+            <span class="ds-header-star" aria-hidden="true"></span>
+            <!-- The guiding star — derived from the + brand mark -->
+            Playbook Advisory Group
+          </div>
+          <h1 class="ds-header-wordmark">Design system</h1>
+          <p class="ds-header-subtitle">Token reference and component library</p>
+          <div class="ds-header-meta">
+            <div class="ds-header-meta-item">Version&nbsp;<span>1.0.0</span></div>
+            <div class="ds-header-meta-item">Last updated&nbsp;<span>March 2026</span></div>
+            <div class="ds-header-meta-item">Stack&nbsp;<span>Next.js · Tailwind v4 · TypeScript</span></div>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- ========================================================
+           SECTION 1: COLOUR
+           ======================================================== -->
+      <section class="ds-section" id="colour" aria-labelledby="colour-title">
+        <div class="ds-section-inner">
+          <div class="ds-section-header">
+            <span class="ds-section-number">01</span>
+            <h2 class="ds-section-title" id="colour-title">Colour</h2>
+          </div>
+
+          <!-- Primary palette -->
+          <p class="ds-subsection-title">Primary palette</p>
+          <div class="ds-colour-row">
+            <div class="ds-colour-swatch ds-reveal">
+              <div class="ds-colour-block" style="background-color:#000000;"></div>
+              <div class="ds-colour-info">
+                <div class="ds-colour-token">black</div>
+                <div class="ds-colour-hex">#000000</div>
+                <div class="ds-colour-use">Primary body text, high-contrast elements, borders on light backgrounds</div>
+              </div>
+            </div>
+            <div class="ds-colour-swatch ds-reveal">
+              <div class="ds-colour-block" style="background-color:#AB7F58;"></div>
+              <div class="ds-colour-info">
+                <div class="ds-colour-token">gold</div>
+                <div class="ds-colour-hex">#AB7F58</div>
+                <div class="ds-colour-use">Accent colour. The guiding star mark. Highlights. Active states. Never used for large background fills.</div>
+              </div>
+            </div>
+            <div class="ds-colour-swatch ds-reveal">
+              <div class="ds-colour-block" style="background-color:#FFFFFF; border-bottom: 1px solid #E5E5E5;"></div>
+              <div class="ds-colour-info">
+                <div class="ds-colour-token">white</div>
+                <div class="ds-colour-hex">#FFFFFF</div>
+                <div class="ds-colour-use">Page background. Text on dark backgrounds.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Supporting palette -->
+          <p class="ds-subsection-title">Supporting palette</p>
+          <div class="ds-colour-row">
+            <div class="ds-colour-swatch ds-reveal">
+              <div class="ds-colour-block" style="background-color:#271F57;"></div>
+              <div class="ds-colour-info">
+                <div class="ds-colour-token">navy</div>
+                <div class="ds-colour-hex">#271F57</div>
+                <div class="ds-colour-use">Supporting section backgrounds. Hero variants. Headers. Dark overlays.</div>
+              </div>
+            </div>
+            <div class="ds-colour-swatch ds-reveal">
+              <div class="ds-colour-block" style="background-color:#FADCC1;"></div>
+              <div class="ds-colour-info">
+                <div class="ds-colour-token">paper-dark</div>
+                <div class="ds-colour-hex">#FADCC1</div>
+                <div class="ds-colour-use">Alternating section backgrounds. Warm tonal break without using navy. Never overused.</div>
+              </div>
+            </div>
+            <div class="ds-colour-swatch ds-reveal">
+              <div class="ds-colour-block" style="background-color:#F4F4F4; border-bottom: 1px solid #E5E5E5;"></div>
+              <div class="ds-colour-info">
+                <div class="ds-colour-token">mid-grey</div>
+                <div class="ds-colour-hex">#F4F4F4</div>
+                <div class="ds-colour-use">Secondary text. Captions. Subtle dividers. Light section backgrounds.</div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="subsection-divider">
+
+          <!-- Semantic aliases -->
+          <p class="ds-subsection-title">Semantic aliases</p>
+          <div class="ds-semantic-row">
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#FFFFFF; border: 1px solid #E5E5E5;"></div>
+              <div>
+                <div class="ds-semantic-label">background-page</div>
+                <div class="ds-semantic-value">#FFFFFF</div>
+              </div>
+            </div>
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#271F57;"></div>
+              <div>
+                <div class="ds-semantic-label">background-section-dark</div>
+                <div class="ds-semantic-value">#271F57</div>
+              </div>
+            </div>
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#FADCC1;"></div>
+              <div>
+                <div class="ds-semantic-label">background-section-warm</div>
+                <div class="ds-semantic-value">#FADCC1</div>
+              </div>
+            </div>
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#F4F4F4; border: 1px solid #E5E5E5;"></div>
+              <div>
+                <div class="ds-semantic-label">background-section-light</div>
+                <div class="ds-semantic-value">#F4F4F4</div>
+              </div>
+            </div>
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#000000;"></div>
+              <div>
+                <div class="ds-semantic-label">text-primary</div>
+                <div class="ds-semantic-value">#000000</div>
+              </div>
+            </div>
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#FFFFFF; border: 1px solid #E5E5E5;"></div>
+              <div>
+                <div class="ds-semantic-label">text-on-dark</div>
+                <div class="ds-semantic-value">#FFFFFF</div>
+              </div>
+            </div>
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#555555;"></div>
+              <div>
+                <div class="ds-semantic-label">text-secondary</div>
+                <div class="ds-semantic-value">#555555</div>
+              </div>
+            </div>
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#AB7F58;"></div>
+              <div>
+                <div class="ds-semantic-label">text-accent</div>
+                <div class="ds-semantic-value">#AB7F58</div>
+              </div>
+            </div>
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#E5E5E5;"></div>
+              <div>
+                <div class="ds-semantic-label">border-default</div>
+                <div class="ds-semantic-value">#E5E5E5</div>
+              </div>
+            </div>
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#000000;"></div>
+              <div>
+                <div class="ds-semantic-label">border-strong</div>
+                <div class="ds-semantic-value">#000000</div>
+              </div>
+            </div>
+            <div class="ds-semantic-swatch">
+              <div class="ds-semantic-block" style="background-color:#AB7F58;"></div>
+              <div>
+                <div class="ds-semantic-label">border-accent</div>
+                <div class="ds-semantic-value">#AB7F58</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 2: TYPOGRAPHY
+           ======================================================== -->
+      <section class="ds-section" id="typography" aria-labelledby="typography-title" style="background-color: var(--color-mid-grey);">
+        <div class="ds-section-inner">
+          <div class="ds-section-header">
+            <span class="ds-section-number">02</span>
+            <h2 class="ds-section-title" id="typography-title">Typography</h2>
+          </div>
+
+          <!-- Type scale -->
+          <p class="ds-subsection-title">Type scale — desktop sizes</p>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">display</span>
+              <div class="ds-type-details">4.5rem / 72px<br>Weight 700<br>Leading 1.1 (tight)<br>Tracking −0.025em</div>
+            </div>
+            <div class="ds-type-text" style="font-size:4.5rem; font-weight:700; line-height:1.1; letter-spacing:-0.025em; color:#000000;">The governance bridge</div>
+          </div>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">h1</span>
+              <div class="ds-type-details">3.5rem / 56px<br>Weight 700<br>Leading 1.1 (tight)<br>Tracking −0.025em</div>
+            </div>
+            <div class="ds-type-text" style="font-size:3.5rem; font-weight:700; line-height:1.1; letter-spacing:-0.025em; color:#000000;">The governance bridge</div>
+          </div>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">h2</span>
+              <div class="ds-type-details">2.5rem / 40px<br>Weight 700<br>Leading 1.2 (snug)</div>
+            </div>
+            <div class="ds-type-text" style="font-size:2.5rem; font-weight:700; line-height:1.2; color:#000000;">The governance bridge between board and programme delivery</div>
+          </div>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">h3</span>
+              <div class="ds-type-details">2rem / 32px<br>Weight 700<br>Leading 1.2 (snug)</div>
+            </div>
+            <div class="ds-type-text" style="font-size:2rem; font-weight:700; line-height:1.2; color:#000000;">The governance bridge between board oversight and programme delivery</div>
+          </div>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">h4</span>
+              <div class="ds-type-details">1.5rem / 24px<br>Weight 700<br>Leading 1.5 (normal)<br>Tracking 0.025em</div>
+            </div>
+            <div class="ds-type-text" style="font-size:1.5rem; font-weight:700; line-height:1.5; letter-spacing:0.025em; color:#000000;">The governance bridge between board oversight and programme delivery</div>
+          </div>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">h5</span>
+              <div class="ds-type-details">1.25rem / 20px<br>Weight 600<br>Leading 1.5 (normal)<br>Tracking 0.025em</div>
+            </div>
+            <div class="ds-type-text" style="font-size:1.25rem; font-weight:600; line-height:1.5; letter-spacing:0.025em; color:#000000;">The governance bridge between board oversight and programme delivery</div>
+          </div>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">body-lg</span>
+              <div class="ds-type-details">1.125rem / 18px<br>Weight 400<br>Leading 1.6 (relaxed)</div>
+            </div>
+            <div class="ds-type-text" style="font-size:1.125rem; font-weight:400; line-height:1.6; color:#000000;">The governance bridge between board oversight and programme delivery. Used for lead paragraph text and introductory copy beneath headlines.</div>
+          </div>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">body</span>
+              <div class="ds-type-details">1rem / 16px<br>Weight 400<br>Leading 1.6 (relaxed)</div>
+            </div>
+            <div class="ds-type-text" style="font-size:1rem; font-weight:400; line-height:1.6; color:#000000;">The governance bridge between board oversight and programme delivery. Standard body copy throughout the site. Maximum line length 65ch for comfortable reading.</div>
+          </div>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">body-sm</span>
+              <div class="ds-type-details">0.875rem / 14px<br>Weight 400<br>Leading 1.6 (relaxed)</div>
+            </div>
+            <div class="ds-type-text" style="font-size:0.875rem; font-weight:400; line-height:1.6; color:#555555;">The governance bridge between board oversight and programme delivery. Used for captions, footnotes, and metadata.</div>
+          </div>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">caption</span>
+              <div class="ds-type-details">0.75rem / 12px<br>Weight 400<br>Leading 1.5 (normal)</div>
+            </div>
+            <div class="ds-type-text" style="font-size:0.75rem; font-weight:400; line-height:1.5; color:#555555;">Image captions, timestamps, micro-labels. The governance bridge between board oversight and programme delivery.</div>
+          </div>
+
+          <div class="ds-type-specimen">
+            <div class="ds-type-meta">
+              <span class="ds-type-token">label</span>
+              <div class="ds-type-details">0.6875rem / 11px<br>Weight 500<br>Uppercase<br>Tracking 0.1em</div>
+            </div>
+            <div class="ds-type-text" style="font-size:0.6875rem; font-weight:500; line-height:1.5; letter-spacing:0.1em; text-transform:uppercase; color:#555555;">UI LABELS · TAGS · CATEGORY BADGES</div>
+          </div>
+
+          <hr class="subsection-divider">
+
+          <!-- Weight specimens -->
+          <p class="ds-subsection-title">Weight specimens — h3 size (2rem)</p>
+
+          <div class="ds-weight-row">
+            <div class="ds-weight-meta">
+              <div class="ds-weight-label">Light</div>
+              <div class="ds-weight-value">300</div>
+              <div class="text-secondary text-small" style="margin-top:2px;">Display text only</div>
+            </div>
+            <div style="font-size:2rem; font-weight:300; line-height:1.2; color:#000000;">Connecting you to clarity</div>
+          </div>
+
+          <div class="ds-weight-row">
+            <div class="ds-weight-meta">
+              <div class="ds-weight-label">Regular</div>
+              <div class="ds-weight-value">400</div>
+              <div class="text-secondary text-small" style="margin-top:2px;">Body copy</div>
+            </div>
+            <div style="font-size:2rem; font-weight:400; line-height:1.2; color:#000000;">Connecting you to clarity</div>
+          </div>
+
+          <div class="ds-weight-row">
+            <div class="ds-weight-meta">
+              <div class="ds-weight-label">Medium</div>
+              <div class="ds-weight-value">500</div>
+              <div class="text-secondary text-small" style="margin-top:2px;">UI labels, navigation</div>
+            </div>
+            <div style="font-size:2rem; font-weight:500; line-height:1.2; color:#000000;">Connecting you to clarity</div>
+          </div>
+
+          <div class="ds-weight-row">
+            <div class="ds-weight-meta">
+              <div class="ds-weight-label">Semibold</div>
+              <div class="ds-weight-value">600</div>
+              <div class="text-secondary text-small" style="margin-top:2px;">Subheadings, callouts</div>
+            </div>
+            <div style="font-size:2rem; font-weight:600; line-height:1.2; color:#000000;">Connecting you to clarity</div>
+          </div>
+
+          <div class="ds-weight-row">
+            <div class="ds-weight-meta">
+              <div class="ds-weight-label">Bold</div>
+              <div class="ds-weight-value">700</div>
+              <div class="text-secondary text-small" style="margin-top:2px;">h1–h3 headings</div>
+            </div>
+            <div style="font-size:2rem; font-weight:700; line-height:1.2; color:#000000;">Connecting you to clarity</div>
+          </div>
+
+          <hr class="subsection-divider">
+
+          <!-- Letter-spacing -->
+          <p class="ds-subsection-title">Letter-spacing</p>
+
+          <div class="ds-tracking-row">
+            <div>
+              <span class="mono">tight</span>
+              <div class="text-secondary text-small" style="margin-top:2px;">−0.025em · Display &amp; h1</div>
+            </div>
+            <div style="font-size:1.5rem; font-weight:700; letter-spacing:-0.025em; color:#000000;">Capital programme governance</div>
+          </div>
+          <div class="ds-tracking-row">
+            <div>
+              <span class="mono">normal</span>
+              <div class="text-secondary text-small" style="margin-top:2px;">0 · Body default</div>
+            </div>
+            <div style="font-size:1.5rem; font-weight:400; letter-spacing:0; color:#000000;">Capital programme governance</div>
+          </div>
+          <div class="ds-tracking-row">
+            <div>
+              <span class="mono">wide</span>
+              <div class="text-secondary text-small" style="margin-top:2px;">0.025em · h4, h5</div>
+            </div>
+            <div style="font-size:1.5rem; font-weight:600; letter-spacing:0.025em; color:#000000;">Capital programme governance</div>
+          </div>
+          <div class="ds-tracking-row">
+            <div>
+              <span class="mono">wider</span>
+              <div class="text-secondary text-small" style="margin-top:2px;">0.05em · Navigation, CTAs</div>
+            </div>
+            <div style="font-size:1rem; font-weight:500; letter-spacing:0.05em; color:#000000;">Talk to Playbook</div>
+          </div>
+          <div class="ds-tracking-row">
+            <div>
+              <span class="mono">widest</span>
+              <div class="text-secondary text-small" style="margin-top:2px;">0.1em · Tags, uppercase labels</div>
+            </div>
+            <div style="font-size:0.6875rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:#000000;">Capital Governance</div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 3: SPACING
+           ======================================================== -->
+      <section class="ds-section" id="spacing" aria-labelledby="spacing-title">
+        <div class="ds-section-inner">
+          <div class="ds-section-header">
+            <span class="ds-section-number">03</span>
+            <h2 class="ds-section-title" id="spacing-title">Spacing</h2>
+          </div>
+
+          <p class="ds-subsection-title">8-point grid — base unit 4px (0.25rem)</p>
+
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-0</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:0%;"></div></div>
+            <span class="ds-spacing-value">0</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-px</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:0.5%;"></div></div>
+            <span class="ds-spacing-value">1px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-1</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:1%;"></div></div>
+            <span class="ds-spacing-value">0.25rem / 4px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-2</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:2%;"></div></div>
+            <span class="ds-spacing-value">0.5rem / 8px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-3</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:3%;"></div></div>
+            <span class="ds-spacing-value">0.75rem / 12px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-4</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:4%;"></div></div>
+            <span class="ds-spacing-value">1rem / 16px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-5</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:5%;"></div></div>
+            <span class="ds-spacing-value">1.25rem / 20px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-6</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:6%;"></div></div>
+            <span class="ds-spacing-value">1.5rem / 24px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-8</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:8%;"></div></div>
+            <span class="ds-spacing-value">2rem / 32px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-10</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:10%;"></div></div>
+            <span class="ds-spacing-value">2.5rem / 40px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-12</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:12%;"></div></div>
+            <span class="ds-spacing-value">3rem / 48px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-16</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:16%;"></div></div>
+            <span class="ds-spacing-value">4rem / 64px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-20</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:20%;"></div></div>
+            <span class="ds-spacing-value">5rem / 80px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-24</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:24%;"></div></div>
+            <span class="ds-spacing-value">6rem / 96px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-32</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:32%;"></div></div>
+            <span class="ds-spacing-value">8rem / 128px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-40</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:40%;"></div></div>
+            <span class="ds-spacing-value">10rem / 160px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-48</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:48%;"></div></div>
+            <span class="ds-spacing-value">12rem / 192px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-64</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:64%;"></div></div>
+            <span class="ds-spacing-value">16rem / 256px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-80</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:80%;"></div></div>
+            <span class="ds-spacing-value">20rem / 320px</span>
+          </div>
+          <div class="ds-spacing-row">
+            <span class="ds-spacing-token">space-96</span>
+            <div class="ds-spacing-bar-wrap"><div class="ds-spacing-bar" style="width:96%;"></div></div>
+            <span class="ds-spacing-value">24rem / 384px</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 4: MOTION
+           ======================================================== -->
+      <section class="ds-section" id="motion" aria-labelledby="motion-title" style="background-color: var(--color-mid-grey);">
+        <div class="ds-section-inner">
+          <div class="ds-section-header">
+            <span class="ds-section-number">04</span>
+            <h2 class="ds-section-title" id="motion-title">Motion</h2>
+          </div>
+
+          <!-- Pattern demos -->
+          <p class="ds-subsection-title">Interaction patterns — hover to preview</p>
+          <div class="ds-motion-grid">
+
+            <!-- fade-in -->
+            <div class="ds-motion-card">
+              <div class="ds-motion-demo-box demo-fade-in" aria-label="Fade-in demo — hover to trigger">
+                Hover me
+              </div>
+              <div class="ds-motion-title">Fade-in</div>
+              <div class="ds-motion-description">Primary reveal. Opacity only. 220ms, decelerate easing.</div>
+            </div>
+
+            <!-- fade-up -->
+            <div class="ds-motion-card">
+              <div class="ds-motion-demo-box demo-fade-up" aria-label="Fade-up demo — hover to trigger">
+                Hover me
+              </div>
+              <div class="ds-motion-title">Fade-up</div>
+              <div class="ds-motion-description">Scroll reveal. Opacity + translateY(16px). 320ms, decelerate easing.</div>
+            </div>
+
+            <!-- card-hover -->
+            <div class="ds-motion-card demo-card-hover-wrap" aria-label="Card hover demo — hover to trigger">
+              <div class="ds-motion-demo-box" style="margin-bottom: var(--space-4);">
+                Hover card
+              </div>
+              <div class="ds-motion-title">Card-hover</div>
+              <div class="ds-motion-description">Lift −4px + shadow on hover. 220ms, standard easing.</div>
+            </div>
+
+            <!-- nav-underline -->
+            <div class="ds-motion-card">
+              <div class="ds-motion-demo-box demo-nav-underline-wrap" style="background:transparent; border-color: transparent;" aria-label="Nav underline demo — hover to trigger">
+                <a class="demo-nav-link" href="#" onclick="return false;">Services</a>
+              </div>
+              <div class="ds-motion-title">Nav underline</div>
+              <div class="ds-motion-description">Gold underline slides from left. scaleX 0→1. 140ms, standard easing.</div>
+            </div>
+
+            <!-- button-press -->
+            <div class="ds-motion-card">
+              <div class="ds-motion-demo-box" style="background:transparent; border-color:transparent;" aria-label="Button press demo — click to trigger">
+                <button class="demo-btn-press">Press me</button>
+              </div>
+              <div class="ds-motion-title">Button press</div>
+              <div class="ds-motion-description">Scale 0.97 on active. 80ms, sharp easing.</div>
+            </div>
+
+          </div>
+
+          <hr class="subsection-divider">
+
+          <!-- Duration scale -->
+          <p class="ds-subsection-title">Duration tokens</p>
+          <div class="ds-duration-row">
+            <span class="ds-duration-token">instant</span>
+            <div class="ds-duration-bar-wrap"><div class="ds-duration-bar" style="width:4%;"></div></div>
+            <span class="ds-duration-value">80ms</span>
+            <span class="ds-duration-guide">Immediate feedback — hover state colours, button press</span>
+          </div>
+          <div class="ds-duration-row">
+            <span class="ds-duration-token">fast</span>
+            <div class="ds-duration-bar-wrap"><div class="ds-duration-bar" style="width:8%;"></div></div>
+            <span class="ds-duration-value">140ms</span>
+            <span class="ds-duration-guide">Micro-interactions — icon swap, underline reveal, focus ring</span>
+          </div>
+          <div class="ds-duration-row">
+            <span class="ds-duration-token">base</span>
+            <div class="ds-duration-bar-wrap"><div class="ds-duration-bar" style="width:14%;"></div></div>
+            <span class="ds-duration-value">220ms</span>
+            <span class="ds-duration-guide">Component transitions — card hover lift, accordion open, nav link</span>
+          </div>
+          <div class="ds-duration-row">
+            <span class="ds-duration-token">slow</span>
+            <div class="ds-duration-bar-wrap"><div class="ds-duration-bar" style="width:20%;"></div></div>
+            <span class="ds-duration-value">320ms</span>
+            <span class="ds-duration-guide">Layout shifts — section reveals, modal entry, sidebar slide</span>
+          </div>
+          <div class="ds-duration-row">
+            <span class="ds-duration-token">page</span>
+            <div class="ds-duration-bar-wrap"><div class="ds-duration-bar" style="width:26%;"></div></div>
+            <span class="ds-duration-value">400ms</span>
+            <span class="ds-duration-guide">Page-level transitions — route change fade, hero entrance</span>
+          </div>
+
+          <hr class="subsection-divider">
+
+          <!-- Easing -->
+          <p class="ds-subsection-title">Easing curves</p>
+          <div class="ds-easing-row">
+            <span class="ds-easing-token">standard</span>
+            <span class="ds-easing-value">cubic-bezier(0.4, 0, 0.2, 1)</span>
+            <span class="ds-easing-guide">General-purpose. Default for most transitions.</span>
+          </div>
+          <div class="ds-easing-row">
+            <span class="ds-easing-token">decelerate</span>
+            <span class="ds-easing-value">cubic-bezier(0, 0, 0.2, 1)</span>
+            <span class="ds-easing-guide">Elements entering the screen — settles into place.</span>
+          </div>
+          <div class="ds-easing-row">
+            <span class="ds-easing-token">accelerate</span>
+            <span class="ds-easing-value">cubic-bezier(0.4, 0, 1, 1)</span>
+            <span class="ds-easing-guide">Elements leaving the screen — clean exit.</span>
+          </div>
+          <div class="ds-easing-row">
+            <span class="ds-easing-token">sharp</span>
+            <span class="ds-easing-value">cubic-bezier(0.4, 0, 0.6, 1)</span>
+            <span class="ds-easing-guide">Quick state changes where snap is intentional.</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 5: BORDER RADIUS
+           ======================================================== -->
+      <section class="ds-section" id="radius" aria-labelledby="radius-title">
+        <div class="ds-section-inner">
+          <div class="ds-section-header">
+            <span class="ds-section-number">05</span>
+            <h2 class="ds-section-title" id="radius-title">Border radius</h2>
+          </div>
+
+          <p style="font-size: var(--size-body-sm); color: var(--color-text-secondary); max-width: 55ch; line-height: var(--lh-relaxed); margin-bottom: var(--space-10);">Minimal rounding. The brand signals authority through restraint. Default components use <code class="mono">none</code> or <code class="mono">sm</code> only.</p>
+
+          <div class="ds-radius-row">
+            <div class="ds-radius-demo">
+              <div class="ds-radius-block" style="border-radius:0;"></div>
+              <div class="ds-radius-label">
+                <span class="ds-radius-token">none</span>
+                <div class="ds-radius-value">0 — Cards, buttons, inputs</div>
+              </div>
+            </div>
+            <div class="ds-radius-demo">
+              <div class="ds-radius-block" style="border-radius:2px;"></div>
+              <div class="ds-radius-label">
+                <span class="ds-radius-token">sm</span>
+                <div class="ds-radius-value">2px — Tags</div>
+              </div>
+            </div>
+            <div class="ds-radius-demo">
+              <div class="ds-radius-block" style="border-radius:4px;"></div>
+              <div class="ds-radius-label">
+                <span class="ds-radius-token">md</span>
+                <div class="ds-radius-value">4px</div>
+              </div>
+            </div>
+            <div class="ds-radius-demo">
+              <div class="ds-radius-block" style="border-radius:8px;"></div>
+              <div class="ds-radius-label">
+                <span class="ds-radius-token">lg</span>
+                <div class="ds-radius-value">8px</div>
+              </div>
+            </div>
+            <div class="ds-radius-demo">
+              <div class="ds-radius-block" style="border-radius:9999px; width:80px; height:40px;"></div>
+              <div class="ds-radius-label">
+                <span class="ds-radius-token">pill</span>
+                <div class="ds-radius-value">9999px</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 6: SHADOWS
+           ======================================================== -->
+      <section class="ds-section" id="shadows" aria-labelledby="shadows-title" style="background-color: var(--color-mid-grey);">
+        <div class="ds-section-inner">
+          <div class="ds-section-header">
+            <span class="ds-section-number">06</span>
+            <h2 class="ds-section-title" id="shadows-title">Shadows</h2>
+          </div>
+
+          <p style="font-size: var(--size-body-sm); color: var(--color-text-secondary); max-width: 55ch; line-height: var(--lh-relaxed); margin-bottom: var(--space-10);">Used only for interactive lift states. The brand relies on colour, typography, and spacing for depth — not shadow.</p>
+
+          <div class="ds-shadow-row">
+            <div class="ds-shadow-demo" style="box-shadow:none; border: 1px solid var(--color-border-default);">
+              <div class="ds-shadow-token">none</div>
+              <div class="ds-shadow-value">none</div>
+            </div>
+            <div class="ds-shadow-demo" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);">
+              <div class="ds-shadow-token">sm</div>
+              <div class="ds-shadow-value">0 1px 3px rgba(0,0,0,0.08)</div>
+            </div>
+            <div class="ds-shadow-demo" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+              <div class="ds-shadow-token">md</div>
+              <div class="ds-shadow-value">0 4px 12px rgba(0,0,0,0.08)</div>
+            </div>
+            <div class="ds-shadow-demo" style="box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);">
+              <div class="ds-shadow-token">lg</div>
+              <div class="ds-shadow-value">0 8px 24px rgba(0,0,0,0.12)</div>
+            </div>
+            <div class="ds-shadow-demo" style="box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);">
+              <div class="ds-shadow-token">card-hover</div>
+              <div class="ds-shadow-value">0 8px 32px rgba(0,0,0,0.10)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 7: COMPONENTS
+           ======================================================== -->
+      <section class="ds-section" id="components" aria-labelledby="components-title">
+        <div class="ds-section-inner">
+          <div class="ds-section-header">
+            <span class="ds-section-number">07</span>
+            <h2 class="ds-section-title" id="components-title">Components</h2>
+          </div>
+
+          <!-- Buttons -->
+          <p class="ds-subsection-title">Buttons</p>
+          <div class="ds-button-row" style="margin-bottom: var(--space-4);">
+            <a class="btn btn-primary" href="#" onclick="return false;">Talk to Playbook</a>
+            <a class="btn btn-secondary" href="#" onclick="return false;">View the model</a>
+            <a class="btn btn-ghost" href="#" onclick="return false;">Read the insight</a>
+          </div>
+          <p style="font-size: var(--size-caption); color: var(--color-text-secondary); margin-bottom: var(--space-12);">CTAs are calm invitations, not commands. Prefer: "Talk to Playbook." Never include exclamation marks.</p>
+
+          <hr class="subsection-divider">
+
+          <!-- Tags -->
+          <p class="ds-subsection-title" id="tags">Tags and labels</p>
+          <div class="ds-tag-row">
+            <span class="tag">governance</span>
+            <span class="tag">healthcare</span>
+            <span class="tag">capital programmes</span>
+            <span class="tag">regeneration</span>
+            <span class="tag">funding</span>
+          </div>
+
+          <hr class="subsection-divider">
+
+          <!-- Cards -->
+          <p class="ds-subsection-title" id="cards">Cards — hover to lift</p>
+          <div class="ds-card-grid">
+            <article class="ds-card">
+              <div class="ds-card-tag"><span class="tag">governance</span></div>
+              <h3 class="ds-card-title">The Memory Gap in major programme delivery</h3>
+              <p class="ds-card-body">When institutional knowledge is lost between phases, decisions become disconnected from the intent that shaped them. Playbook Advisory Group helps boards retain the thread.</p>
+              <a class="btn btn-ghost" href="#" onclick="return false;">Read the insight</a>
+            </article>
+            <article class="ds-card">
+              <div class="ds-card-tag"><span class="tag">capital programmes</span></div>
+              <h3 class="ds-card-title">Why sponsor-side governance fails at the critical moment</h3>
+              <p class="ds-card-body">The Translation Gap between Board intent and programme execution is rarely visible until it causes damage. Independent advisory changes that dynamic.</p>
+              <a class="btn btn-ghost" href="#" onclick="return false;">Read the insight</a>
+            </article>
+            <article class="ds-card">
+              <div class="ds-card-tag"><span class="tag">healthcare</span></div>
+              <h3 class="ds-card-title">Capital governance in NHS infrastructure: a different kind of risk</h3>
+              <p class="ds-card-body">Public sector capital programmes carry obligations that commercial frameworks do not account for. The Governance Bridge exists to close that distance.</p>
+              <a class="btn btn-ghost" href="#" onclick="return false;">Read the insight</a>
+            </article>
+          </div>
+
+          <hr class="subsection-divider">
+
+          <!-- Section colour variants -->
+          <p class="ds-subsection-title" id="sections">Section colour variants</p>
+          <div class="ds-section-variants">
+            <div class="ds-section-variant variant-white">
+              <div class="ds-section-variant-label">section — white</div>
+              <h4 class="ds-section-variant-heading">Clarity, control, and confidence</h4>
+              <p class="ds-section-variant-body">The foundation of every engagement. Standard body copy sits on white at full contrast.</p>
+            </div>
+            <div class="ds-section-variant variant-navy">
+              <div class="ds-section-variant-label">section — navy</div>
+              <h4 class="ds-section-variant-heading">Connecting you to clarity</h4>
+              <p class="ds-section-variant-body">Hero sections, closing CTAs, and concept introductions. Gold accent on navy for emphasis.</p>
+            </div>
+            <div class="ds-section-variant variant-paper">
+              <div class="ds-section-variant-label">section — paper-dark</div>
+              <h4 class="ds-section-variant-heading">A warm tonal break</h4>
+              <p class="ds-section-variant-body">Alternating section rhythm. Avoid using consecutively. Black text on paper-dark.</p>
+            </div>
+            <div class="ds-section-variant variant-grey">
+              <div class="ds-section-variant-label">section — mid-grey</div>
+              <h4 class="ds-section-variant-heading">Secondary content areas</h4>
+              <p class="ds-section-variant-body">Used for supporting sections, index pages, and reference content. Recedes behind primary sections.</p>
+            </div>
+          </div>
+
+          <hr class="subsection-divider">
+
+          <!-- Form elements -->
+          <p class="ds-subsection-title" id="forms">Form elements</p>
+          <div class="ds-form-demo">
+            <div class="ds-form-group">
+              <label class="ds-form-label" for="demo-name">Full name</label>
+              <input class="ds-input" type="text" id="demo-name" placeholder="Firstname Surname" autocomplete="off">
+            </div>
+            <div class="ds-form-group">
+              <label class="ds-form-label" for="demo-email">Email address</label>
+              <input class="ds-input" type="email" id="demo-email" placeholder="you@organisation.co.uk" autocomplete="off">
+            </div>
+            <div class="ds-form-group">
+              <label class="ds-form-label" for="demo-message">Enquiry</label>
+              <textarea class="ds-textarea" id="demo-message" placeholder="Describe the programme or challenge you are working on. The more context you can provide, the better we can assess how to help."></textarea>
+            </div>
+            <a class="btn btn-primary" href="#" onclick="return false;">Send enquiry</a>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECTION 8: BRAND CONCEPTS
+           ======================================================== -->
+      <section class="ds-brand-section" id="brand" aria-labelledby="brand-title">
+        <div class="ds-brand-inner">
+          <div class="ds-brand-section-header">
+            <span class="ds-brand-section-number">08</span>
+            <h2 class="ds-brand-section-title" id="brand-title">Brand concepts</h2>
+          </div>
+
+          <div class="ds-brand-grid">
+            <!-- Positioning and pillars -->
+            <div>
+              <p class="ds-brand-block-title">Positioning line</p>
+              <p class="ds-brand-positioning"><strong>Connecting you to clarity</strong></p>
+
+              <p class="ds-brand-block-title" style="margin-top: var(--space-10);">Three pillars</p>
+              <div class="ds-brand-pillars">
+                <div class="ds-brand-pillar">Clarity</div>
+                <div class="ds-brand-pillar">Control</div>
+                <div class="ds-brand-pillar">Confidence</div>
+              </div>
+
+              <p class="ds-brand-block-title" style="margin-top: var(--space-10);">The guiding star</p>
+              <p style="font-size: var(--size-body-sm); color: rgba(255,255,255,0.7); line-height: var(--lh-relaxed); max-width: 45ch;">The brand mark — derived from the + symbol — is always referenced as "the guiding star" in copy and code comments. Never described as a plain plus symbol.</p>
+
+              <p class="ds-brand-block-title" style="margin-top: var(--space-10);">Copy rules</p>
+              <ul style="list-style:none; font-size: var(--size-body-sm); color: rgba(255,255,255,0.7); line-height: var(--lh-loose);">
+                <li>British English throughout</li>
+                <li>Sentence case — never title case</li>
+                <li>No exclamation marks in formal or website copy</li>
+                <li>Oxford comma always: "clarity, control, and confidence"</li>
+              </ul>
+            </div>
+
+            <!-- Named concepts -->
+            <div>
+              <p class="ds-brand-block-title">Named concepts — always capitalised</p>
+              <ul class="ds-concept-list" aria-label="Named brand concepts">
+                <li class="ds-concept-item">
+                  <span class="ds-concept-star" aria-hidden="true"></span>
+                  <span class="ds-concept-name">the Playbook Paradox</span>
+                </li>
+                <li class="ds-concept-item">
+                  <span class="ds-concept-star" aria-hidden="true"></span>
+                  <span class="ds-concept-name">the Capital Governance Diagnostic</span>
+                </li>
+                <li class="ds-concept-item">
+                  <span class="ds-concept-star" aria-hidden="true"></span>
+                  <span class="ds-concept-name">the Memory Gap</span>
+                </li>
+                <li class="ds-concept-item">
+                  <span class="ds-concept-star" aria-hidden="true"></span>
+                  <span class="ds-concept-name">the Translation Gap</span>
+                </li>
+                <li class="ds-concept-item">
+                  <span class="ds-concept-star" aria-hidden="true"></span>
+                  <span class="ds-concept-name">the Decision Gap</span>
+                </li>
+                <li class="ds-concept-item">
+                  <span class="ds-concept-star" aria-hidden="true"></span>
+                  <span class="ds-concept-name">the Governance Bridge</span>
+                </li>
+                <li class="ds-concept-item">
+                  <span class="ds-concept-star" aria-hidden="true"></span>
+                  <span class="ds-concept-name">the Institutional Playbook Model</span>
+                </li>
+              </ul>
+
+              <p class="ds-brand-block-title" style="margin-top: var(--space-10);">Words to avoid in copy</p>
+              <p style="font-size: var(--size-body-sm); color: rgba(255,255,255,0.7); line-height: var(--lh-loose);">leverage (as verb) · stakeholder alignment · value-add · bespoke · cutting-edge · world-class · best-in-class · excited · passionate · delighted</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- FOOTER -->
+      <footer class="ds-footer" role="contentinfo">
+        <p class="ds-footer-text">Playbook Advisory Group Limited &middot; Design system v1.0.0 &middot; March 2026 &middot; Commercial in confidence</p>
+      </footer>
+
+    </main>
+  </div>
+
+
+  <!-- ============================================================
+       JAVASCRIPT — scroll-reveal and active nav state
+       ============================================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Scroll-reveal: fade-up elements when they enter the viewport
+      var revealEls = document.querySelectorAll('.ds-reveal');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        revealEls.forEach(function (el) {
+          observer.observe(el);
+        });
+      } else {
+        // Fallback: show all immediately for browsers without IntersectionObserver
+        revealEls.forEach(function (el) {
+          el.classList.add('visible');
+        });
+      }
+
+      // Active sidebar nav: highlight the section currently in view
+      var sections = document.querySelectorAll('section[id], header[id]');
+      var navLinks = document.querySelectorAll('.ds-sidebar a');
+
+      var navObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            navLinks.forEach(function (link) {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + id) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+
+      sections.forEach(function (section) {
+        navObserver.observe(section);
+      });
+
+    }());
+  </script>
+
+</body>
+</html>

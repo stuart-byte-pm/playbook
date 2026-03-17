@@ -1,0 +1,127 @@
+{
+  "generatedAt": "2026-03-17T11:58:27.418Z",
+  "model": "black-forest-labs/flux-1.1-pro",
+  "totalRequested": 10,
+  "totalGenerated": 8,
+  "totalFailed": 0,
+  "images": [
+    {
+      "filename": "hero-programme-site-01.png",
+      "outputDir": "hero",
+      "aspectRatio": "16:9",
+      "prompt": "Wide cinematic aerial view of a large-scale urban regeneration construction site at golden hour, organised concrete structures and steel frameworks rising against a warm amber sky, documentary photography style, warm natural lighting with long soft shadows, subtle industrial atmosphere, editorial quality, no people, no text",
+      "result": {
+        "success": true,
+        "skipped": true,
+        "filename": "hero-programme-site-01.png"
+      }
+    },
+    {
+      "filename": "hero-governance-briefing-02.png",
+      "outputDir": "hero",
+      "aspectRatio": "16:9",
+      "prompt": "Senior consultant standing at floor-to-ceiling windows in a contemporary glass-walled meeting room overlooking a city skyline, reviewing a printed report, natural daylight, calm and authoritative presence, shallow depth of field, cinematic photography, warm neutral colour grading, no text visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "hero-governance-briefing-02.png",
+        "url": "https://replicate.delivery/xezq/1o8puaZQefrQ7U5rqC5Ls4jyFlWdjRD8Kvn2NRuglwjyKvRWA/tmp_awnrs65.png"
+      }
+    },
+    {
+      "filename": "hero-capital-programme-03.png",
+      "outputDir": "hero",
+      "aspectRatio": "16:9",
+      "prompt": "Wide shot of a major infrastructure project at dusk, a new bridge or civic building under construction framed against a deep blue sky, construction cranes silhouetted, dramatic natural lighting, architectural documentary photography, sense of scale and precision, muted warm tones, no text or logos",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "hero-capital-programme-03.png",
+        "url": "https://replicate.delivery/xezq/aweDngFBmS0Iaq05T8nRoNv91TWsbDekHpZRWS7KodTILvRWA/tmps1p8q5ik.png"
+      }
+    },
+    {
+      "filename": "services-advisory-review-01.png",
+      "outputDir": "services",
+      "aspectRatio": "16:9",
+      "prompt": "Two senior professionals seated at a wide timber conference table reviewing large-format architectural drawings, natural light from tall windows, modern boardroom interior with clean lines, engaged but calm discussion, documentary photography style, warm neutral colour grading, shallow depth of field, no text visible",
+      "result": {
+        "success": true,
+        "skipped": true,
+        "filename": "services-advisory-review-01.png"
+      }
+    },
+    {
+      "filename": "services-programme-controls-02.png",
+      "outputDir": "services",
+      "aspectRatio": "16:9",
+      "prompt": "Close-up of an open leather-bound notebook with handwritten notes alongside printed programme schedule documents on a pale desk, a cup of coffee partially in frame, soft natural window light, editorial still-life photography, warm paper tones, calm and considered atmosphere, no readable text",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "services-programme-controls-02.png",
+        "url": "https://replicate.delivery/xezq/L5jjZQtYfxzfeJMKg69QhmujALnbwtuILDsfJ735rQttt8GZB/tmpylt5x0hp.png"
+      }
+    },
+    {
+      "filename": "services-client-advisory-03.png",
+      "outputDir": "services",
+      "aspectRatio": "16:9",
+      "prompt": "A senior female professional in a modern minimalist office space, seated at a glass-topped desk, attentively listening during a one-to-one conversation, warm natural daylight from large windows behind her, contemporary architectural interior, candid documentary style, warm neutral tones, professional business attire, no text visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "services-client-advisory-03.png",
+        "url": "https://replicate.delivery/xezq/PkAnQ7GfhOy2BSuvexFZ3mf8AK6gByhqW7SAOsNOQppdXeGZB/tmpegxrrv0s.png"
+      }
+    },
+    {
+      "filename": "sectors-public-infrastructure-01.png",
+      "outputDir": "sectors",
+      "aspectRatio": "16:9",
+      "prompt": "Exterior view of a newly completed civic public building, contemporary British architecture, clean geometric facade in pale stone and dark steel, wide plaza in foreground with soft natural afternoon light, architectural photography, calm and authoritative composition, no people, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "sectors-public-infrastructure-01.png",
+        "url": "https://replicate.delivery/xezq/Sh4b77tXoBYvPBQYUDQhA2IhyyQsAGVjLfSnhrMypC1Am3ILA/tmp0st6k2c_.png"
+      }
+    },
+    {
+      "filename": "sectors-private-development-02.png",
+      "outputDir": "sectors",
+      "aspectRatio": "16:9",
+      "prompt": "Interior of a premium modern commercial office building atrium, double-height space with exposed concrete columns and warm timber accents, natural light flooding through a glazed roof, subtle sense of scale and quality, architectural photography, warm neutral colour grading, no people, no text or branding visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "sectors-private-development-02.png",
+        "url": "https://replicate.delivery/xezq/ZvF21a7xdGZvB9j4JfPHtnsofQJGWXeOL3fwmt1CiAnN18GZB/tmpdbo2p7_x.png"
+      }
+    },
+    {
+      "filename": "insights-portrait-adviser-01.png",
+      "outputDir": "insights",
+      "aspectRatio": "16:9",
+      "prompt": "Thoughtful portrait of a senior male adviser, mid-fifties, standing in a naturally lit industrial-heritage workspace, exposed brick and steel beam background, direct but calm gaze toward camera, editorial portrait photography, warm cinematic colour grading, shallow depth of field, professional but not corporate, no text visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "insights-portrait-adviser-01.png",
+        "url": "https://replicate.delivery/xezq/ztmPiR0KHE71BZ03L3hHcTte4fr2TqN6Vd0jrenvjU2Ie8GZB/tmp5lgdc5jy.png"
+      }
+    },
+    {
+      "filename": "insights-architectural-detail-02.png",
+      "outputDir": "insights",
+      "aspectRatio": "16:9",
+      "prompt": "Abstract close-up architectural detail of a contemporary building facade, repeating geometric grid of dark steel mullions and glass panels, soft overcast natural daylight creating even tonal gradations, editorial architectural photography, muted cool-warm colour contrast, no people, no text or signage",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "insights-architectural-detail-02.png",
+        "url": "https://replicate.delivery/xezq/9ra46fg90T3nNS1cfpf7WQuaOtYVCMHfSOGBv5IKiT2Je5NyC/tmpb8y6talj.png"
+      }
+    }
+  ]
+}

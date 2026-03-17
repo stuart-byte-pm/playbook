@@ -1,0 +1,130 @@
+{
+  "generatedAt": "2026-03-17T12:15:43.130Z",
+  "model": "black-forest-labs/flux-1.1-pro",
+  "run": 2,
+  "totalRequested": 10,
+  "totalGenerated": 10,
+  "totalFailed": 0,
+  "images": [
+    {
+      "filename": "hero-corridor-04.png",
+      "outputDir": "hero",
+      "aspectRatio": "16:9",
+      "prompt": "Ground-level perspective looking down a long glazed construction corridor inside a major civic building under construction, structural steel lattice overhead, concrete floor, daylight streaming through glass panels beyond, sense of scale and controlled progress, architectural documentary photography, muted warm tones, no people, no text or signage",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "hero-corridor-04.png",
+        "url": "https://replicate.delivery/xezq/HojcQbMmc5bDJZFqt4c0fo3ufLGIv1SESHit2yeP3GV35eGZB/tmpm2l5fp95.png"
+      }
+    },
+    {
+      "filename": "hero-site-dusk-05.png",
+      "outputDir": "hero",
+      "aspectRatio": "16:9",
+      "prompt": "Wide cinematic ground-level shot of a major rail or road infrastructure construction site at last light, illuminated site compound and heavy plant equipment in the foreground, deep blue-violet evening sky, construction lighting creating warm pools against the cool dusk, documentary photography style, muted cool-warm colour contrast, sense of scale and precision, no people, no text",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "hero-site-dusk-05.png",
+        "url": "https://replicate.delivery/xezq/qdi0Wuv8SVZqKZfXWHLk21wDUelJf8WylmhEncXJilXf09GZB/tmp9r32kju8.png"
+      }
+    },
+    {
+      "filename": "hero-briefing-table-06.png",
+      "outputDir": "hero",
+      "aspectRatio": "16:9",
+      "prompt": "Straight down overhead view of a wide pale timber boardroom table with a large printed site masterplan and annotated drawings spread across it, two pairs of hands partially visible at the edges gesturing over the plans, warm directional natural light from one side creating soft shadows, editorial documentary photography, warm neutral colour grading, no faces, no readable text",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "hero-briefing-table-06.png",
+        "url": "https://replicate.delivery/xezq/l92vFTCoLsruNpi95jfBy41OFl3akq3h5bYBxwuMfVgkdvRWA/tmp1ce6k0xg.png"
+      }
+    },
+    {
+      "filename": "services-governance-workshop-04.png",
+      "outputDir": "services",
+      "aspectRatio": "16:9",
+      "prompt": "Three senior professionals standing in a working session beside a large wall-mounted pin-board covered with printed cards and diagrams, an industrial workspace with exposed steel and natural daylight from high windows, side-on composition showing engaged but focused discussion, lifestyle documentary photography, warm neutral colour grading, no readable text on materials",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "services-governance-workshop-04.png",
+        "url": "https://replicate.delivery/xezq/OZNeXIp1eCr8p0EyetCWFtM0bbCbdCwl0R4vDQV5nDGy7eGZB/tmpqv5wi4zn.png"
+      }
+    },
+    {
+      "filename": "services-risk-review-05.png",
+      "outputDir": "services",
+      "aspectRatio": "16:9",
+      "prompt": "Close-up of a senior professional's hands annotating a printed document with a fine-point pen on a pale pale-oak desk surface, partial view of a coffee cup and a second document to one side, only the hands and desk visible, no face in frame, editorial still-life photography, soft warm directional light from a nearby window, warm paper tones, no readable text",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "services-risk-review-05.png",
+        "url": "https://replicate.delivery/xezq/E8VMigAYC6JqKtuInfE49XDFpqZoB3lZK5ImOe0bdruNeeGZB/tmp5dzxb6bx.png"
+      }
+    },
+    {
+      "filename": "services-walkthrough-06.png",
+      "outputDir": "services",
+      "aspectRatio": "16:9",
+      "prompt": "A senior male professional in business attire walking through the interior of a partially complete modern building, hard hat held under his arm, looking upward at the structural steel and concrete frame above, candid documentary moment, soft construction-site daylight filtering through open facade panels, cinematic photography, warm neutral tones, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "services-walkthrough-06.png",
+        "url": "https://replicate.delivery/xezq/Nhf2VZRZTVxf0kt8FyQ7Jf59zl66n9YLOeS9Xs2uz7UB69GZB/tmpbh0m3czj.png"
+      }
+    },
+    {
+      "filename": "sectors-healthcare-03.png",
+      "outputDir": "sectors",
+      "aspectRatio": "16:9",
+      "prompt": "Exterior of a contemporary NHS-style healthcare facility, modern British architecture, clean pale brick and full-height glass facade with a welcoming covered entrance forecourt, wide shot under soft overcast daylight creating even neutral tones, architectural photography, calm authoritative composition, no people, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "sectors-healthcare-03.png",
+        "url": "https://replicate.delivery/xezq/XoLawL6mBFZHGdc9PmktJS5xvcidDf9fqw0BO09FIx50eeGZB/tmpuc0m17d5.png"
+      }
+    },
+    {
+      "filename": "sectors-education-04.png",
+      "outputDir": "sectors",
+      "aspectRatio": "16:9",
+      "prompt": "Interior of a contemporary British university or sixth-form learning building, double-height open library or collaborative study space, warm timber shelving and pale concrete columns, natural daylight flooding from tall clerestory windows, sense of scale and intellectual calm, architectural photography, warm neutral colour grading, no people, no text or branding visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "sectors-education-04.png",
+        "url": "https://replicate.delivery/xezq/MrkiMNfI2DXUa6X13uKYdt4gloez1hhj1omDK8EN4uNHfeGZB/tmpaxdb7yof.png"
+      }
+    },
+    {
+      "filename": "insights-portrait-adviser-03.png",
+      "outputDir": "insights",
+      "aspectRatio": "16:9",
+      "prompt": "Editorial portrait of a senior female adviser, early sixties, seated beside a tall sash window in a minimal contemporary office with pale walls, reading glasses held loosely in one hand, calm direct expression toward camera, soft natural window light on one side creating a gentle shadow fall, shallow depth of field, editorial portrait photography, warm cinematic colour grading, professional but not corporate, no text visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "insights-portrait-adviser-03.png",
+        "url": "https://replicate.delivery/xezq/0nJWRPrk3FblJdJAM1vpVnfW1lODUelSIho1GGFkJEuafeGZB/tmpmf49fp0x.png"
+      }
+    },
+    {
+      "filename": "insights-structural-detail-04.png",
+      "outputDir": "insights",
+      "aspectRatio": "16:9",
+      "prompt": "Abstract macro architectural photograph of a raw poured concrete column base meeting a heavy steel connection plate and bolt assembly, industrial textures of aggregate and brushed steel, soft raking natural light from one side revealing surface texture and material quality, editorial architectural photography, muted warm-grey tonal palette, no people, no text or signage",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "insights-structural-detail-04.png",
+        "url": "https://replicate.delivery/xezq/r3QpeBajM2wQJKqe41GH0u4JFKYExTzhVPhLXex6tme5e7NyC/tmpa9arm043.png"
+      }
+    }
+  ]
+}
