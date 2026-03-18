@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Playbook Advisory Group — Connecting you to clarity</title>
+  <title>Playbook Advisory Group — Connecting you to clarity (Variation 03)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
@@ -72,12 +72,10 @@
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
       --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
       --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
-      --shadow-card-hover: 0 12px 40px rgba(0,0,0,0.10);
 
       --duration-fast:   140ms;
       --duration-base:   220ms;
       --duration-slow:   320ms;
-      --duration-page:   400ms;
 
       --ease-standard:   cubic-bezier(0.4, 0, 0.2, 1);
       --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
@@ -120,7 +118,7 @@
        ============================================================ */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(24px);
       transition:
         opacity var(--duration-slow) var(--ease-decelerate),
         transform var(--duration-slow) var(--ease-decelerate);
@@ -134,6 +132,32 @@
     .reveal-delay-3 { transition-delay: 240ms; }
     .reveal-delay-4 { transition-delay: 320ms; }
     .reveal-delay-5 { transition-delay: 400ms; }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition:
+        opacity var(--duration-slow) var(--ease-decelerate),
+        transform var(--duration-slow) var(--ease-decelerate);
+    }
+    .reveal-left.is-visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(32px);
+      transition:
+        opacity var(--duration-slow) var(--ease-decelerate),
+        transform var(--duration-slow) var(--ease-decelerate);
+    }
+    .reveal-right.is-visible { opacity: 1; transform: translateX(0); }
+
+    /* Delay tokens for directional variants */
+    .reveal-left.reveal-delay-1,
+    .reveal-right.reveal-delay-1 { transition-delay: 80ms; }
+    .reveal-left.reveal-delay-2,
+    .reveal-right.reveal-delay-2 { transition-delay: 160ms; }
+    .reveal-left.reveal-delay-3,
+    .reveal-right.reveal-delay-3 { transition-delay: 240ms; }
 
     /* ============================================================
        LAYOUT UTILITIES
@@ -152,10 +176,11 @@
       padding-block: var(--space-24);
     }
 
+    /* Label tag — gold rule + uppercase eyebrow */
     .label-tag {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-2);
+      gap: 0.625rem;
       font-size: var(--size-label);
       font-weight: var(--weight-semibold);
       letter-spacing: var(--ls-widest);
@@ -168,17 +193,42 @@
       width: 20px;
       height: 1px;
       background: var(--color-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 400ms var(--ease-decelerate) 120ms;
     }
+    .is-visible .label-tag::before,
+    .label-tag.is-visible::before { transform: scaleX(1); }
 
     .label-tag--on-dark {
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.55);
     }
     .label-tag--on-dark::before {
-      background: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.35);
+    }
+
+    /* Arrow SVG inline utility */
+    .arrow {
+      flex-shrink: 0;
+      transition: transform var(--duration-fast) var(--ease-standard);
     }
 
     /* ============================================================
-       NAVIGATION
+       SCROLL PROGRESS BAR
+       ============================================================ */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--color-gold);
+      z-index: 300;
+      pointer-events: none;
+      will-change: width;
+    }
+
+    /* ============================================================
+       NAVIGATION — light-from-load, bordered
        ============================================================ */
     .nav {
       position: fixed;
@@ -186,38 +236,39 @@
       left: 0;
       right: 0;
       z-index: 100;
-      padding-block: var(--space-6);
-      transition: background-color var(--duration-base) var(--ease-standard),
-                  box-shadow var(--duration-base) var(--ease-standard),
-                  padding var(--duration-base) var(--ease-standard);
+      background-color: var(--color-white);
+      border-bottom: 1px solid var(--color-border-default);
+      padding-block: var(--space-4);
+      transition:
+        box-shadow var(--duration-base) var(--ease-standard),
+        padding var(--duration-base) var(--ease-standard);
     }
 
     .nav.is-scrolled {
-      background-color: rgba(255,255,255,0.96);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 1px 0 var(--color-border-default);
-      padding-block: var(--space-4);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     }
 
     .nav__inner {
       max-width: var(--max-width);
       margin-inline: auto;
       padding-inline: var(--gutter);
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
+      gap: var(--space-8);
     }
 
+    /* Logo — left-aligned */
     .nav__logo {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
+      gap: 0.625rem;
+      justify-self: start;
     }
 
-    /* Guiding star mark — SVG inline */
     .nav__mark {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       flex-shrink: 0;
     }
 
@@ -226,26 +277,30 @@
       font-weight: var(--weight-semibold);
       letter-spacing: var(--ls-wide);
       text-transform: uppercase;
-      color: var(--color-white);
-      line-height: 1.2;
-      transition: color var(--duration-base) var(--ease-standard);
-    }
-
-    .nav.is-scrolled .nav__wordmark {
       color: var(--color-black);
+      line-height: 1.2;
     }
 
+    .nav__sub {
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.38);
+    }
+
+    /* Links — centred */
     .nav__links {
       display: flex;
       align-items: center;
       gap: var(--space-8);
       list-style: none;
+      justify-self: center;
     }
 
     .nav__link {
       font-size: var(--size-body-sm);
       font-weight: var(--weight-medium);
-      color: rgba(255,255,255,0.8);
+      color: var(--color-text-secondary);
       letter-spacing: var(--ls-wide);
       transition: color var(--duration-fast) var(--ease-standard);
       position: relative;
@@ -262,45 +317,35 @@
       transition: width var(--duration-base) var(--ease-standard);
     }
 
-    .nav__link:hover { color: var(--color-white); }
+    .nav__link:hover { color: var(--color-black); }
     .nav__link:hover::after { width: 100%; }
 
-    .nav.is-scrolled .nav__link {
-      color: var(--color-text-secondary);
-    }
-    .nav.is-scrolled .nav__link:hover {
-      color: var(--color-black);
+    /* CTA — right-aligned */
+    .nav__right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
 
     .nav__cta {
       font-size: var(--size-body-sm);
       font-weight: var(--weight-medium);
       letter-spacing: var(--ls-wide);
-      padding: 0.625rem 1.25rem;
-      border: 1px solid rgba(255,255,255,0.4);
-      color: var(--color-white);
+      padding: 0.5rem 1.125rem;
+      border: 1px solid var(--color-black);
+      color: var(--color-black);
       border-radius: var(--radius-sm);
       transition:
         background-color var(--duration-fast) var(--ease-standard),
-        border-color var(--duration-fast) var(--ease-standard),
         color var(--duration-fast) var(--ease-standard);
     }
 
     .nav__cta:hover {
-      background-color: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.7);
-    }
-
-    .nav.is-scrolled .nav__cta {
-      border-color: var(--color-black);
-      color: var(--color-black);
-    }
-    .nav.is-scrolled .nav__cta:hover {
       background-color: var(--color-black);
       color: var(--color-white);
     }
 
-    /* Mobile menu toggle */
+    /* Mobile toggle */
     .nav__toggle {
       display: none;
       flex-direction: column;
@@ -311,118 +356,164 @@
     .nav__toggle span {
       display: block;
       height: 1.5px;
-      background: var(--color-white);
+      background: var(--color-black);
       transition: transform var(--duration-base) var(--ease-standard),
                   opacity var(--duration-fast) var(--ease-standard);
     }
-    .nav.is-scrolled .nav__toggle span { background: var(--color-black); }
 
     @media (max-width: 900px) {
-      .nav__links, .nav__cta { display: none; }
-      .nav__toggle { display: flex; }
+      .nav__inner { grid-template-columns: 1fr 1fr; }
+      .nav__links { display: none; }
+      .nav__right { display: none; }
+      .nav__toggle { display: flex; justify-self: end; }
     }
 
     /* ============================================================
-       HERO
+       HERO — 50/50 split
        ============================================================ */
     .hero {
-      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      background-color: var(--color-navy);
-      background-image: url('../images/hero/hero-briefing-table-06.png');
-      background-size: cover;
-      background-position: center 30%;
-      overflow: hidden;
+      padding-top: 61px; /* nav height offset */
     }
 
-    /* Photo overlay — ensures text legibility across the full image */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to right, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%),
-        linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 50%, transparent 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Grid texture overlay */
-    .hero__grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 64px 64px;
-      pointer-events: none;
-    }
-
-
+    /* Left: text panel */
     .hero__content {
-      position: relative;
-      z-index: 1;
-      max-width: var(--max-width);
-      margin-inline: auto;
-      padding-inline: var(--gutter);
-      padding-block: var(--space-32) var(--space-24);
-      /* Natural left-aligned layout — content occupies left ~60% of viewport */
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      justify-content: center;
+      padding: var(--space-24) var(--gutter) var(--space-24) var(--gutter);
+      max-width: 720px;
+      margin-inline-start: auto;
     }
 
     .hero__label {
       margin-bottom: var(--space-8);
       opacity: 0;
-      animation: fadeUp var(--duration-slow) var(--ease-decelerate) 200ms forwards;
+      animation: fadeUp var(--duration-slow) var(--ease-decelerate) 100ms forwards;
+    }
+
+    /* Override label-tag line-draw for hero (bypasses observer) */
+    .hero__label .label-tag::before {
+      animation: lineGrow 400ms var(--ease-decelerate) 240ms both;
+    }
+    @keyframes lineGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
     }
 
     .hero__heading {
-      font-size: var(--size-display);
+      font-size: var(--size-h1);
       font-weight: var(--weight-bold);
       line-height: var(--lh-tight);
       letter-spacing: var(--ls-tight);
-      color: var(--color-white);
-      max-width: 22ch;
+      color: var(--color-black);
+      max-width: 18ch;
       margin-bottom: var(--space-8);
       opacity: 0;
-      animation: fadeUp var(--duration-slow) var(--ease-decelerate) 320ms forwards;
-    }
-
-    .hero__heading em {
-      font-style: normal;
-      color: var(--color-gold);
+      animation: fadeUp var(--duration-slow) var(--ease-decelerate) 220ms forwards;
     }
 
     .hero__sub {
       font-size: var(--size-body-lg);
       font-weight: var(--weight-light);
       line-height: var(--lh-relaxed);
-      color: rgba(255,255,255,0.65);
-      max-width: 52ch;
+      color: var(--color-text-secondary);
+      max-width: 44ch;
       margin-bottom: var(--space-12);
       opacity: 0;
-      animation: fadeUp var(--duration-slow) var(--ease-decelerate) 440ms forwards;
+      animation: fadeUp var(--duration-slow) var(--ease-decelerate) 340ms forwards;
     }
 
+    /* CTAs stacked vertically */
     .hero__actions {
       display: flex;
-      align-items: center;
-      gap: var(--space-6);
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+      margin-bottom: var(--space-12);
       opacity: 0;
-      animation: fadeUp var(--duration-slow) var(--ease-decelerate) 560ms forwards;
+      animation: fadeUp var(--duration-slow) var(--ease-decelerate) 460ms forwards;
     }
 
-    /* Primary button */
+    /* Stats row */
+    .hero__stats {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-10);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-border-default);
+      opacity: 0;
+      animation: fadeUp var(--duration-slow) var(--ease-decelerate) 580ms forwards;
+    }
+
+    .hero__stat {}
+
+    .hero__stat-number {
+      font-size: var(--size-h3);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-gold);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero__stat-desc {
+      font-size: var(--size-caption);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-wider);
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+    }
+
+    /* Right: image panel */
+    .hero__image {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--color-mid-grey);
+    }
+
+    .hero__image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Mobile hero layout */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: 50vh 1fr;
+        min-height: auto;
+      }
+      .hero__image {
+        order: -1;
+        min-height: 50vh;
+      }
+      .hero__content {
+        padding: var(--space-16) var(--gutter);
+        max-width: 100%;
+        margin-inline-start: 0;
+      }
+      .hero__heading { max-width: 100%; }
+      .hero__stats { gap: var(--space-8); flex-wrap: wrap; }
+    }
+
+    @media (max-width: 600px) {
+      .hero__stats { gap: var(--space-6); }
+    }
+
+    /* ============================================================
+       BUTTON STYLES
+       ============================================================ */
     .btn-primary {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-3);
+      gap: 0.625rem;
       font-size: var(--size-body-sm);
       font-weight: var(--weight-medium);
       letter-spacing: var(--ls-wide);
@@ -439,167 +530,126 @@
     .btn-primary:hover {
       background-color: #9a7050;
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(171,127,88,0.35);
+      box-shadow: 0 6px 20px rgba(171,127,88,0.32);
     }
     .btn-primary:active { transform: translateY(0); }
-
-    .btn-primary .arrow {
-      transition: transform var(--duration-fast) var(--ease-standard);
-    }
     .btn-primary:hover .arrow { transform: translateX(3px); }
 
-    /* Ghost button */
-    .btn-ghost {
+    .btn-text-link {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-3);
-      font-size: var(--size-body-sm);
-      font-weight: var(--weight-medium);
-      letter-spacing: var(--ls-wide);
-      color: rgba(255,255,255,0.7);
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      padding-bottom: 2px;
-      transition: color var(--duration-fast) var(--ease-standard),
-                  border-color var(--duration-fast) var(--ease-standard);
-    }
-    .btn-ghost:hover {
-      color: var(--color-white);
-      border-color: rgba(255,255,255,0.6);
-    }
-    .btn-ghost .arrow {
-      transition: transform var(--duration-fast) var(--ease-standard);
-    }
-    .btn-ghost:hover .arrow { transform: translateX(3px); }
-
-    /* Scroll indicator */
-    .hero__scroll {
-      position: absolute;
-      bottom: var(--space-8);
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-2);
-      font-size: var(--size-caption);
-      letter-spacing: var(--ls-wider);
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      opacity: 0;
-      animation: fadeIn 600ms var(--ease-decelerate) 1200ms forwards;
-      z-index: 1;
-    }
-
-    .hero__scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
-      animation: scrollPulse 2.4s ease-in-out infinite;
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; transform: scaleY(1); }
-      50% { opacity: 0.7; transform: scaleY(1.1); }
-    }
-
-    /* ============================================================
-       BELIEF STATEMENT
-       ============================================================ */
-    .belief {
-      background-color: var(--color-white);
-      padding-block: var(--space-32);
-    }
-
-    .belief__inner {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: var(--space-20);
-      align-items: start;
-    }
-
-    .belief__eyebrow {
-      padding-top: 0.5rem;
-    }
-
-    .belief__image {
-      margin-top: var(--space-8);
-      width: 50%;
-      overflow: hidden;
-    }
-
-    .belief__image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .belief__body {
-      border-top: 1px solid var(--color-border-default);
-      padding-top: var(--space-8);
-    }
-
-    .belief__quote {
-      font-size: var(--size-h3);
-      font-weight: var(--weight-bold);
-      line-height: var(--lh-snug);
-      letter-spacing: var(--ls-tight);
-      color: var(--color-black);
-      margin-bottom: var(--space-8);
-    }
-
-    .belief__quote strong {
-      font-weight: var(--weight-semibold);
-    }
-
-    .belief__copy {
-      font-size: var(--size-body-lg);
-      font-weight: var(--weight-light);
-      color: var(--color-text-secondary);
-      line-height: var(--lh-relaxed);
-      max-width: 55ch;
-      margin-bottom: var(--space-8);
-    }
-
-    .belief__link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
+      gap: 0.5rem;
       font-size: var(--size-body-sm);
       font-weight: var(--weight-medium);
       letter-spacing: var(--ls-wide);
       color: var(--color-black);
       border-bottom: 1px solid var(--color-black);
       padding-bottom: 2px;
-      transition: color var(--duration-fast), border-color var(--duration-fast);
+      transition:
+        color var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard);
     }
-    .belief__link:hover {
-      color: var(--color-gold);
-      border-color: var(--color-gold);
-    }
-    .belief__link .arrow {
-      transition: transform var(--duration-fast) var(--ease-standard);
-    }
-    .belief__link:hover .arrow { transform: translateX(3px); }
+    .btn-text-link:hover { color: var(--color-gold); border-color: var(--color-gold); }
+    .btn-text-link:hover .arrow { transform: translateX(3px); }
 
-    @media (max-width: 768px) {
-      .belief__inner { grid-template-columns: 1fr; gap: var(--space-8); }
+    .btn-outline-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-wide);
+      padding: 0.875rem 1.75rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--color-white);
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition:
+        background-color var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard);
+      will-change: transform;
+    }
+    .btn-outline-light:hover {
+      background-color: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.6);
+      transform: translateY(-1px);
+    }
+    .btn-outline-light:hover .arrow { transform: translateX(3px); }
+
+    /* ============================================================
+       BELIEF STATEMENT — 3-column editorial
+       ============================================================ */
+    .belief {
+      background-color: var(--color-white);
+      padding-block: var(--space-32);
+      border-top: 1px solid var(--color-border-default);
+    }
+
+    .belief__inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+
+    /* Left column: label + gold dash */
+    .belief__left {
+      padding-top: 0.375rem;
+    }
+
+    .belief__dash {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: var(--weight-bold);
+      color: var(--color-gold);
+      line-height: 1;
+      margin-top: var(--space-6);
+      letter-spacing: -0.04em;
+    }
+
+    /* Centre: blockquote */
+    .belief__quote {
+      font-size: var(--size-h3);
+      font-weight: var(--weight-bold);
+      line-height: var(--lh-snug);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-black);
+    }
+
+    /* Right column: body copy + link */
+    .belief__right {
+      padding-top: 0.25rem;
+    }
+
+    .belief__copy {
+      font-size: var(--size-body);
+      font-weight: var(--weight-light);
+      color: var(--color-text-secondary);
+      line-height: var(--lh-relaxed);
+      margin-bottom: var(--space-6);
+    }
+
+    @media (max-width: 900px) {
+      .belief__inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+      }
+      .belief__dash { display: none; }
     }
 
     /* ============================================================
-       THREE GAPS
+       THREE GAPS — horizontal rule list
        ============================================================ */
     .gaps {
       background-color: var(--color-mid-grey);
-      background-image: url('../images/backgrounds/background-image-04.png');
-      background-repeat: no-repeat;
-      background-size: 100% auto;
-      background-position: center bottom;
       padding-block: var(--space-32);
+      border-top: 1px solid var(--color-border-default);
+      border-bottom: 1px solid var(--color-border-default);
     }
 
     .gaps__header {
-      margin-bottom: var(--space-16);
+      margin-bottom: var(--space-12);
     }
 
     .gaps__title {
@@ -609,75 +659,64 @@
       line-height: var(--lh-snug);
       color: var(--color-black);
       margin-top: var(--space-6);
-      max-width: 28ch;
+      max-width: 32ch;
     }
 
-    .gaps__grid {
+    /* List framed with top + bottom rule */
+    .gaps__list {
+      border-top: 1px solid var(--color-border-default);
+    }
+
+    /* Each gap: full-width row */
+    .gap-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background-color: var(--color-border-default);
+      grid-template-columns: 3rem 1fr 1fr;
+      gap: var(--space-8);
+      align-items: baseline;
+      padding-block: var(--space-8);
+      border-bottom: 1px solid var(--color-border-default);
     }
 
-    .gap-card {
-      background-color: var(--color-white);
-      padding: var(--space-10) var(--space-8);
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-6);
-      transition: background-color var(--duration-base) var(--ease-standard);
-    }
-
-    .gap-card:hover {
-      background-color: var(--color-black);
-    }
-
-    .gap-card__number {
-      font-size: var(--size-caption);
+    .gap-row__number {
+      font-size: var(--size-body-sm);
       font-weight: var(--weight-semibold);
       letter-spacing: var(--ls-widest);
-      text-transform: uppercase;
       color: var(--color-gold);
+      font-variant-numeric: tabular-nums;
     }
 
-    .gap-card__name {
+    .gap-row__name {
       font-size: var(--size-h4);
       font-weight: var(--weight-bold);
       letter-spacing: var(--ls-tight);
       color: var(--color-black);
-      transition: color var(--duration-base) var(--ease-standard);
     }
 
-    .gap-card__copy {
+    .gap-row__copy {
       font-size: var(--size-body);
       font-weight: var(--weight-light);
       line-height: var(--lh-relaxed);
       color: var(--color-text-secondary);
-      transition: color var(--duration-base) var(--ease-standard);
-      flex: 1;
-    }
-
-    .gap-card__divider {
-      width: 24px;
-      height: 1px;
-      background-color: var(--color-border-default);
-      transition: background-color var(--duration-base) var(--ease-standard),
-                  width var(--duration-base) var(--ease-standard);
-    }
-
-    .gap-card:hover .gap-card__name { color: var(--color-white); }
-    .gap-card:hover .gap-card__copy { color: rgba(255,255,255,0.6); }
-    .gap-card:hover .gap-card__divider {
-      background-color: var(--color-gold);
-      width: 40px;
+      max-width: 40ch;
+      justify-self: end;
     }
 
     @media (max-width: 768px) {
-      .gaps__grid { grid-template-columns: 1fr; }
+      .gap-row {
+        grid-template-columns: 2.5rem 1fr;
+        grid-template-rows: auto auto;
+        gap: var(--space-4);
+        padding-block: var(--space-6);
+      }
+      .gap-row__copy {
+        grid-column: 2;
+        justify-self: start;
+        max-width: 100%;
+      }
     }
 
     /* ============================================================
-       SERVICES
+       SERVICES — card grid
        ============================================================ */
     .services {
       background-color: var(--color-white);
@@ -699,143 +738,121 @@
       line-height: var(--lh-snug);
       color: var(--color-black);
       margin-top: var(--space-6);
-      max-width: 24ch;
+      max-width: 28ch;
     }
 
-    .services__list {
+    /* 2-column card grid */
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background-color: var(--color-border-default);
+      border: 1px solid var(--color-border-default);
+    }
+
+    .service-card {
+      background-color: var(--color-white);
+      padding: var(--space-8);
       display: flex;
       flex-direction: column;
-      border-top: 1px solid var(--color-border-default);
-    }
-
-    .service-row {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: start;
-      gap: var(--space-8);
-      padding-block: var(--space-8);
-      border-bottom: 1px solid var(--color-border-default);
+      gap: var(--space-4);
       cursor: pointer;
+      position: relative;
+      transition:
+        border-color var(--duration-base) var(--ease-standard);
+      min-height: 220px;
     }
 
+    /* gold border-top on hover via outline */
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      height: 2px;
+      background: var(--color-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--duration-base) var(--ease-standard);
+    }
 
-    .service-row__index {
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-card__index {
       font-size: var(--size-caption);
       font-weight: var(--weight-semibold);
       letter-spacing: var(--ls-widest);
       color: var(--color-gold);
-      padding-top: 0.3rem;
-      z-index: 1;
-      min-width: 2rem;
     }
 
-    .service-row__content {
-      z-index: 1;
-    }
-
-    .service-row__title {
+    .service-card__title {
       font-size: var(--size-h4);
       font-weight: var(--weight-bold);
       letter-spacing: var(--ls-tight);
       color: var(--color-black);
-      margin-bottom: var(--space-2);
       transition: color var(--duration-base) var(--ease-standard);
+      flex: 1;
     }
 
-    .service-row__desc {
+    .service-card__desc {
       font-size: var(--size-body-sm);
+      font-weight: var(--weight-light);
       color: var(--color-text-secondary);
       line-height: var(--lh-relaxed);
-      max-width: 55ch;
-      transition: color var(--duration-base) var(--ease-standard);
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-      transition: max-height var(--duration-base) var(--ease-decelerate),
-                  opacity var(--duration-base) var(--ease-standard),
-                  color var(--duration-base) var(--ease-standard);
     }
 
-    .service-row:hover .service-row__desc {
-      max-height: 5rem;
-      opacity: 1;
-    }
-
-    .service-row__arrow {
-      z-index: 1;
-      width: 40px;
-      height: 40px;
+    .service-card__arrow {
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
       border: 1px solid var(--color-border-default);
       border-radius: 50%;
       color: var(--color-black);
+      align-self: flex-end;
       transition:
         transform var(--duration-base) var(--ease-standard),
         background-color var(--duration-base) var(--ease-standard),
         border-color var(--duration-base) var(--ease-standard),
         color var(--duration-base) var(--ease-standard);
-      margin-top: 0.2rem;
     }
 
-    .service-row:hover .service-row__arrow {
+    .service-card:hover .service-card__title { color: var(--color-gold); }
+    .service-card:hover .service-card__arrow {
       transform: rotate(45deg);
       background-color: var(--color-gold);
       border-color: var(--color-gold);
       color: var(--color-white);
     }
 
-    .service-row:hover .service-row__title { color: var(--color-gold); }
-
-    /* Services split layout with sticky image */
-    .services__layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-16);
-      align-items: stretch;
-    }
-
-    .services__image-panel {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .services__image-frame {
-      position: relative;
-      flex: 1;
-      overflow: hidden;
+    /* CTA card — bottom-right cell */
+    .service-card--cta {
       background-color: var(--color-mid-grey);
+      justify-content: center;
+      align-items: flex-start;
+      gap: var(--space-4);
+      cursor: default;
     }
 
-    .services__image-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .service-card--cta::before { display: none; }
 
-    .services__image-caption {
-      font-size: var(--size-caption);
-      font-weight: var(--weight-medium);
-      letter-spacing: var(--ls-wider);
-      text-transform: uppercase;
-      color: var(--color-text-secondary);
-      margin-top: var(--space-3);
-    }
-
-    @media (max-width: 900px) {
-      .services__layout { grid-template-columns: 1fr; }
-      .services__image-panel { display: none; }
+    .service-card--cta .service-card__cta-heading {
+      font-size: var(--size-h4);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-black);
+      margin-bottom: var(--space-4);
     }
 
     @media (max-width: 600px) {
+      .services__grid { grid-template-columns: 1fr; }
       .services__header { flex-direction: column; align-items: flex-start; }
-      .service-row { grid-template-columns: auto 1fr auto; gap: var(--space-4); }
     }
 
     /* ============================================================
-       THE PLAYBOOK MODEL — CTA band
+       THE PLAYBOOK MODEL — black, auto-cycling (locked design)
        ============================================================ */
     .model-band {
       background-color: var(--color-black);
@@ -852,7 +869,6 @@
       pointer-events: none;
     }
 
-    /* Header row: label/title/copy left, button right */
     .model-band__header {
       display: flex;
       align-items: flex-end;
@@ -897,21 +913,20 @@
       cursor: pointer;
       position: relative;
       opacity: 0.38;
-      transition: opacity 320ms var(--ease-standard),
-                  background-color 320ms var(--ease-standard);
+      transition:
+        opacity 320ms var(--ease-standard),
+        background-color 320ms var(--ease-standard);
       overflow: hidden;
       user-select: none;
     }
 
     .model-stage:last-child { border-right: none; }
-
     .model-stage:hover { opacity: 0.65; }
 
     .model-stage--active {
       opacity: 1;
       background-color: rgba(255,255,255,0.04);
     }
-
     .model-stage--active:hover { opacity: 1; }
 
     .model-stage__number {
@@ -924,7 +939,6 @@
       opacity: 0.5;
       transition: opacity 320ms;
     }
-
     .model-stage--active .model-stage__number { opacity: 1; }
 
     .model-stage__name {
@@ -936,10 +950,7 @@
       margin-bottom: var(--space-4);
       transition: color 320ms var(--ease-standard);
     }
-
-    .model-stage--active .model-stage__name {
-      color: var(--color-white);
-    }
+    .model-stage--active .model-stage__name { color: var(--color-white); }
 
     .model-stage__desc {
       font-size: var(--size-body-sm);
@@ -948,12 +959,9 @@
       margin-top: var(--space-4);
       transition: color 320ms var(--ease-standard);
     }
+    .model-stage--active .model-stage__desc { color: rgba(255,255,255,0.65); }
 
-    .model-stage--active .model-stage__desc {
-      color: rgba(255,255,255,0.65);
-    }
-
-    /* Gold progress bar pinned to bottom of card */
+    /* Gold progress bar pinned to bottom */
     .model-stage__bar {
       position: absolute;
       bottom: 0;
@@ -978,35 +986,6 @@
       to   { width: 100%; }
     }
 
-    .btn-outline-light {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-3);
-      font-size: var(--size-body-sm);
-      font-weight: var(--weight-medium);
-      letter-spacing: var(--ls-wide);
-      padding: 0.875rem 1.75rem;
-      border: 1px solid rgba(255,255,255,0.3);
-      color: var(--color-white);
-      border-radius: var(--radius-sm);
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition:
-        background-color var(--duration-fast) var(--ease-standard),
-        border-color var(--duration-fast) var(--ease-standard),
-        transform var(--duration-fast) var(--ease-standard);
-      will-change: transform;
-    }
-    .btn-outline-light:hover {
-      background-color: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.6);
-      transform: translateY(-1px);
-    }
-    .btn-outline-light .arrow {
-      transition: transform var(--duration-fast) var(--ease-standard);
-    }
-    .btn-outline-light:hover .arrow { transform: translateX(3px); }
-
     @media (max-width: 960px) {
       .model-band__header { flex-direction: column; align-items: flex-start; }
       .model-stages { grid-template-columns: repeat(2, 1fr); }
@@ -1022,19 +1001,15 @@
     }
 
     /* ============================================================
-       SECTORS
+       SECTORS — paper-dark, horizontal rule list
        ============================================================ */
     .sectors {
-      background-color: #f7f7f7;
-      background-image: url('../images/backgrounds/background-image-02.png');
-      background-repeat: no-repeat;
-      background-size: 100% auto;
-      background-position: center bottom;
+      background-color: var(--color-paper-dark);
       padding-block: var(--space-32);
     }
 
     .sectors__header {
-      margin-bottom: var(--space-16);
+      margin-bottom: var(--space-12);
     }
 
     .sectors__title {
@@ -1044,98 +1019,67 @@
       line-height: var(--lh-snug);
       color: var(--color-black);
       margin-top: var(--space-6);
-      max-width: 28ch;
+      max-width: 32ch;
     }
 
-    .sectors__grid {
+    /* Full-width rule list */
+    .sectors__list {
+      border-top: 1px solid rgba(0,0,0,0.12);
+    }
+
+    .sector-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-4);
-    }
-
-    .sector-card {
-      background-color: var(--color-white);
-      display: flex;
-      flex-direction: column;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      align-items: center;
+      padding-block: var(--space-8);
+      border-bottom: 1px solid rgba(0,0,0,0.12);
       cursor: pointer;
-      overflow: hidden;
-      transition:
-        transform var(--duration-base) var(--ease-standard),
-        box-shadow var(--duration-base) var(--ease-standard);
-      will-change: transform;
+      transition: background-color var(--duration-fast) var(--ease-standard);
+      margin-inline: calc(-1 * var(--gutter));
+      padding-inline: var(--gutter);
     }
 
-    .sector-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-card-hover);
-    }
+    .sector-row:hover { background-color: rgba(0,0,0,0.03); }
 
-    .sector-card__image {
-      position: relative;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      background-color: var(--color-navy);
-    }
-
-    .sector-card__image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform var(--duration-slow) var(--ease-standard);
-    }
-
-    .sector-card:hover .sector-card__image img {
-      transform: scale(1.04);
-    }
-
-    .sector-card__body {
-      padding: var(--space-6) var(--space-6) var(--space-8);
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-4);
-      flex: 1;
-    }
-
-    .sector-card__name {
-      font-size: var(--size-h5);
-      font-weight: var(--weight-semibold);
+    .sector-row__name {
+      font-size: var(--size-h4);
+      font-weight: var(--weight-bold);
       letter-spacing: var(--ls-tight);
       color: var(--color-black);
     }
 
-    .sector-card__sub {
-      font-size: var(--size-body-sm);
+    .sector-row__desc {
+      font-size: var(--size-body);
+      font-weight: var(--weight-light);
       color: var(--color-text-secondary);
       line-height: var(--lh-relaxed);
-      flex: 1;
     }
 
-    .sector-card__tags {
+    /* CTA row at bottom */
+    .sectors__cta-row {
       display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-2);
+      align-items: center;
+      justify-content: space-between;
+      padding-block: var(--space-8);
+      gap: var(--space-4);
     }
 
-    .tag {
-      font-size: var(--size-caption);
-      font-weight: var(--weight-medium);
-      letter-spacing: var(--ls-wide);
-      padding: 0.2rem 0.6rem;
-      border: 1px solid var(--color-border-default);
+    .sectors__cta-label {
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-light);
       color: var(--color-text-secondary);
-      border-radius: var(--radius-sm);
     }
 
-    @media (max-width: 768px) {
-      .sectors__grid { grid-template-columns: 1fr; }
-    }
-    @media (min-width: 769px) and (max-width: 960px) {
-      .sectors__grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 600px) {
+      .sector-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+      }
     }
 
     /* ============================================================
-       INSIGHTS
+       INSIGHTS — 2-column (featured + stack)
        ============================================================ */
     .insights {
       background-color: var(--color-white);
@@ -1157,31 +1101,33 @@
       line-height: var(--lh-snug);
       color: var(--color-black);
       margin-top: var(--space-6);
-      max-width: 22ch;
+      max-width: 28ch;
     }
 
-    .insights__grid {
+    .insights__layout {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-6);
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+      align-items: start;
     }
 
-    .insight-card {
+    /* Featured card — left */
+    .insight-featured {
       display: flex;
       flex-direction: column;
-      gap: 0;
+      border-top: 3px solid var(--color-gold);
       cursor: pointer;
     }
 
-    .insight-card__image {
-      aspect-ratio: 16/9;
-      background-color: var(--color-mid-grey);
-      overflow: hidden;
+    .insight-featured__image {
       position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background-color: var(--color-mid-grey);
       margin-bottom: var(--space-6);
     }
 
-    .insight-card__img {
+    .insight-featured__image img {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -1191,25 +1137,16 @@
       transition: transform var(--duration-slow) var(--ease-standard);
     }
 
-    .insight-card:hover .insight-card__img {
-      transform: scale(1.04);
-    }
+    .insight-featured:hover .insight-featured__image img { transform: scale(1.03); }
 
-    .insight-card__image-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .insight-card__meta {
+    .insight-featured__meta {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
+      gap: 0.625rem;
       margin-bottom: var(--space-4);
     }
 
-    .insight-card__tag {
+    .insight-featured__tag {
       font-size: var(--size-caption);
       font-weight: var(--weight-semibold);
       letter-spacing: var(--ls-wider);
@@ -1217,70 +1154,116 @@
       color: var(--color-gold);
     }
 
-    .insight-card__dot {
+    .insight-featured__dot {
       width: 3px;
       height: 3px;
       border-radius: 50%;
       background: var(--color-border-default);
+      flex-shrink: 0;
     }
 
-    .insight-card__date {
+    .insight-featured__date {
       font-size: var(--size-caption);
       color: var(--color-text-secondary);
     }
 
-    .insight-card__title {
+    .insight-featured__title {
       font-size: var(--size-h5);
       font-weight: var(--weight-semibold);
       letter-spacing: var(--ls-tight);
       line-height: var(--lh-snug);
       color: var(--color-black);
-      transition: color var(--duration-fast) var(--ease-standard);
       margin-bottom: var(--space-4);
+      transition: color var(--duration-fast) var(--ease-standard);
     }
 
-    .insight-card:hover .insight-card__title {
-      color: var(--color-navy);
-    }
+    .insight-featured:hover .insight-featured__title { color: var(--color-gold); }
 
-    .insight-card__excerpt {
+    .insight-featured__excerpt {
       font-size: var(--size-body-sm);
       color: var(--color-text-secondary);
       line-height: var(--lh-relaxed);
       margin-bottom: var(--space-6);
     }
 
-    .insight-card__link {
+    /* Stack — right column */
+    .insight-stack {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .insight-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      padding-block: var(--space-6);
+      border-bottom: 1px solid var(--color-border-default);
+      cursor: pointer;
+    }
+
+    .insight-item:first-child {
+      border-top: 1px solid var(--color-border-default);
+    }
+
+    .insight-item__meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .insight-item__tag {
+      font-size: var(--size-caption);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--ls-wider);
+      text-transform: uppercase;
+      color: var(--color-gold);
+    }
+
+    .insight-item__dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--color-border-default);
+      flex-shrink: 0;
+    }
+
+    .insight-item__date {
+      font-size: var(--size-caption);
+      color: var(--color-text-secondary);
+    }
+
+    .insight-item__title {
+      font-size: var(--size-body);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--ls-tight);
+      line-height: var(--lh-snug);
+      color: var(--color-black);
+      transition: color var(--duration-fast) var(--ease-standard);
+    }
+
+    .insight-item:hover .insight-item__title { color: var(--color-gold); }
+
+    .insight-item__link {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-2);
-      font-size: var(--size-body-sm);
+      gap: 0.4rem;
+      font-size: var(--size-caption);
       font-weight: var(--weight-medium);
-      color: var(--color-black);
-      border-bottom: 1px solid var(--color-border-default);
-      padding-bottom: 2px;
-      align-self: flex-start;
-      transition: color var(--duration-fast), border-color var(--duration-fast);
+      letter-spacing: var(--ls-wide);
+      color: var(--color-text-secondary);
+      transition: color var(--duration-fast) var(--ease-standard);
     }
-    .insight-card__link .arrow {
-      transition: transform var(--duration-fast) var(--ease-standard);
-    }
-    .insight-card:hover .insight-card__link {
-      color: var(--color-gold);
-      border-color: var(--color-gold);
-    }
-    .insight-card:hover .insight-card__link .arrow { transform: translateX(3px); }
+
+    .insight-item:hover .insight-item__link { color: var(--color-gold); }
+    .insight-item:hover .insight-item__link .arrow { transform: translateX(3px); }
 
     @media (max-width: 768px) {
-      .insights__grid { grid-template-columns: 1fr; }
+      .insights__layout { grid-template-columns: 1fr; }
       .insights__header { flex-direction: column; align-items: flex-start; }
-    }
-    @media (min-width: 769px) and (max-width: 960px) {
-      .insights__grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     /* ============================================================
-       DIAGNOSTIC CTA
+       DIAGNOSTIC CTA — black, meet-in-middle (locked design)
        ============================================================ */
     .diagnostic {
       background-color: var(--color-black);
@@ -1328,7 +1311,7 @@
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-md);
-      aspect-ratio: 4/5;
+      aspect-ratio: 3/4;
       align-self: stretch;
     }
 
@@ -1339,22 +1322,18 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform var(--duration-slow) var(--ease-standard);
     }
 
+    /* Left-edge gradient blending into black background */
     .diagnostic__image::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.25) 0%, transparent 40%);
+      background: linear-gradient(to right, rgba(0,0,0,0.45) 0%, transparent 35%);
       pointer-events: none;
     }
 
-    .diagnostic:hover .diagnostic__image img {
-      transform: scale(1.03);
-    }
-
-    /* Meet-in-middle entrance — triggered on .diagnostic__inner */
+    /* Meet-in-middle entrance animation */
     .diagnostic--meet .diagnostic__content {
       opacity: 0;
       transform: translateX(-80px);
@@ -1380,7 +1359,6 @@
     @media (max-width: 768px) {
       .diagnostic__inner { grid-template-columns: 1fr; }
       .diagnostic__image { aspect-ratio: 16/9; }
-      /* On mobile, slide both from bottom instead */
       .diagnostic--meet .diagnostic__content,
       .diagnostic--meet .diagnostic__image {
         transform: translateY(40px);
@@ -1430,11 +1408,7 @@
       gap: var(--space-6);
     }
 
-    .office {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-1);
-    }
+    .office { display: flex; flex-direction: column; gap: 0.25rem; }
 
     .office__label {
       font-size: var(--size-caption);
@@ -1462,11 +1436,7 @@
       gap: var(--space-4);
     }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-2);
-    }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
 
     .form-label {
       font-size: var(--size-caption);
@@ -1510,7 +1480,7 @@
     .form-submit {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-3);
+      gap: 0.625rem;
       font-size: var(--size-body-sm);
       font-weight: var(--weight-medium);
       letter-spacing: var(--ls-wide);
@@ -1525,13 +1495,10 @@
       will-change: transform;
     }
     .form-submit:hover {
-      background-color: var(--color-navy);
+      background-color: #1a1a1a;
       transform: translateY(-1px);
     }
     .form-submit:active { transform: translateY(0); }
-    .form-submit .arrow {
-      transition: transform var(--duration-fast) var(--ease-standard);
-    }
     .form-submit:hover .arrow { transform: translateX(3px); }
 
     @media (max-width: 768px) {
@@ -1589,7 +1556,7 @@
     .footer__nav-links {
       display: flex;
       flex-direction: column;
-      gap: var(--space-3);
+      gap: 0.75rem;
       list-style: none;
     }
 
@@ -1657,162 +1624,24 @@
 
     .text-gold { color: var(--color-gold); }
 
-    /* ============================================================
-       SCROLL PROGRESS BAR
-       ============================================================ */
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 2px;
-      background: var(--color-gold);
-      z-index: 300;
-      pointer-events: none;
-      will-change: width;
-    }
-
-    /* ============================================================
-       DIRECTIONAL REVEAL VARIANTS
-       ============================================================ */
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-40px);
-      transition:
-        opacity var(--duration-slow) var(--ease-decelerate),
-        transform var(--duration-slow) var(--ease-decelerate);
-    }
-    .reveal-left.is-visible { opacity: 1; transform: translateX(0); }
-
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(40px);
-      transition:
-        opacity var(--duration-slow) var(--ease-decelerate),
-        transform var(--duration-slow) var(--ease-decelerate);
-    }
-    .reveal-right.is-visible { opacity: 1; transform: translateX(0); }
-
-    .reveal-scale {
-      opacity: 0;
-      transform: scale(0.93) translateY(24px);
-      transition:
-        opacity var(--duration-slow) var(--ease-decelerate),
-        transform var(--duration-slow) var(--ease-decelerate);
-    }
-    .reveal-scale.is-visible { opacity: 1; transform: scale(1) translateY(0); }
-
-    /* Delay tokens apply to all reveal variants */
-    .reveal-left.reveal-delay-1,
-    .reveal-right.reveal-delay-1,
-    .reveal-scale.reveal-delay-1  { transition-delay: 80ms; }
-    .reveal-left.reveal-delay-2,
-    .reveal-right.reveal-delay-2,
-    .reveal-scale.reveal-delay-2  { transition-delay: 160ms; }
-    .reveal-left.reveal-delay-3,
-    .reveal-right.reveal-delay-3,
-    .reveal-scale.reveal-delay-3  { transition-delay: 240ms; }
-    .reveal-left.reveal-delay-4,
-    .reveal-right.reveal-delay-4,
-    .reveal-scale.reveal-delay-4  { transition-delay: 320ms; }
-    .reveal-left.reveal-delay-5,
-    .reveal-right.reveal-delay-5,
-    .reveal-scale.reveal-delay-5  { transition-delay: 400ms; }
-
-    /* ============================================================
-       LABEL TAG — line draw on reveal
-       ============================================================ */
-    .label-tag::before {
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 400ms var(--ease-decelerate) 120ms;
-    }
-    /* Triggers when self or any ancestor receives is-visible */
-    .is-visible .label-tag::before,
-    .label-tag.is-visible::before { transform: scaleX(1); }
-
-    /* Hero label: uses CSS keyframe since hero bypasses the observer */
-    .hero__label .label-tag::before {
-      animation: lineGrow 400ms var(--ease-decelerate) 240ms both;
-    }
-    @keyframes lineGrow {
-      from { transform: scaleX(0); }
-      to   { transform: scaleX(1); }
-    }
-
-    /* ============================================================
-       HERO — word-by-word clip reveal
-       ============================================================ */
-    .hero__word {
-      display: inline-block;
-      overflow: hidden;
-      /* Prevents descenders clipping */
-      padding-bottom: 0.08em;
-      margin-bottom: -0.08em;
-      vertical-align: top;
-    }
-    .hero__word-inner {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(105%);
-      animation: wordUp var(--duration-slow) var(--ease-decelerate) both;
-    }
-    @keyframes wordUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-
-
-    /* ============================================================
-       BELIEF QUOTE — line-by-line clip
-       ============================================================ */
-    .belief__quote .quote-line {
-      display: inline;
-      overflow: hidden;
-      padding-bottom: 0.06em;
-      margin-bottom: -0.06em;
-    }
-    .belief__quote .quote-line-inner {
-      display: inline;
-      opacity: 0;
-      transform: translateY(100%);
-      transition:
-        opacity 360ms var(--ease-decelerate),
-        transform 360ms var(--ease-decelerate);
-    }
-    .belief__quote.is-visible .quote-line-inner { opacity: 1; transform: translateY(0); }
-    .belief__quote.is-visible .quote-line:nth-child(1) .quote-line-inner { transition-delay:   0ms; }
-    .belief__quote.is-visible .quote-line:nth-child(2) .quote-line-inner { transition-delay: 120ms; }
-    .belief__quote.is-visible .quote-line:nth-child(3) .quote-line-inner { transition-delay: 240ms; }
-
-    /* ============================================================
-       SECTION NUMBER — count-up clip
-       ============================================================ */
-    .gap-card__number {
-      overflow: hidden;
-    }
-    .gap-card__number-digit {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(110%);
-      transition:
-        opacity 320ms var(--ease-decelerate),
-        transform 320ms var(--ease-decelerate);
-    }
-    .gap-card.is-visible .gap-card__number-digit { opacity: 1; transform: translateY(0); }
-    .gap-card.is-visible .gap-card__number-digit:nth-child(1) { transition-delay:  40ms; }
-    .gap-card.is-visible .gap-card__number-digit:nth-child(2) { transition-delay: 120ms; }
   </style>
 </head>
 
 <body>
 
   <!-- ============================================================
-       NAVIGATION
+       SCROLL PROGRESS BAR
+       ============================================================ -->
+  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+
+  <!-- ============================================================
+       NAVIGATION — light / bordered from load
        ============================================================ -->
   <header class="nav" id="nav" role="banner">
     <div class="nav__inner">
 
-      <!-- Logo -->
+      <!-- Logo — left -->
       <a href="/" class="nav__logo" aria-label="Playbook Advisory Group — home">
         <!-- Guiding star mark -->
         <svg class="nav__mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1823,21 +1652,24 @@
         </svg>
         <div>
           <div class="nav__wordmark">Playbook</div>
-          <div style="font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);transition:color 220ms;">Advisory Group</div>
+          <div class="nav__sub">Advisory Group</div>
         </div>
       </a>
 
-      <!-- Navigation links -->
+      <!-- Navigation links — centred -->
       <nav aria-label="Primary navigation">
         <ul class="nav__links">
-          <li><a href="#" class="nav__link">The Playbook model</a></li>
-          <li><a href="#" class="nav__link">Services</a></li>
-          <li><a href="#" class="nav__link">Sectors</a></li>
-          <li><a href="#" class="nav__link">Insights</a></li>
+          <li><a href="#model" class="nav__link">The Playbook model</a></li>
+          <li><a href="#services" class="nav__link">Services</a></li>
+          <li><a href="#sectors" class="nav__link">Sectors</a></li>
+          <li><a href="#insights" class="nav__link">Insights</a></li>
         </ul>
       </nav>
 
-      <a href="#contact" class="nav__cta">Talk to Playbook</a>
+      <!-- CTA — right -->
+      <div class="nav__right">
+        <a href="#contact" class="nav__cta">Talk to Playbook</a>
+      </div>
 
       <!-- Mobile toggle -->
       <button class="nav__toggle" aria-label="Open menu" aria-expanded="false">
@@ -1849,19 +1681,19 @@
 
 
   <!-- ============================================================
-       HERO
+       HERO — 50/50 split
        ============================================================ -->
   <section class="hero" aria-labelledby="hero-heading">
-    <div class="hero__grid" aria-hidden="true"></div>
 
-
+    <!-- Left: text content -->
     <div class="hero__content">
+
       <div class="hero__label">
-        <span class="label-tag label-tag--on-dark">Senior-led, sponsor-side advisory</span>
+        <span class="label-tag">Senior-led, sponsor-side advisory</span>
       </div>
 
       <h1 class="hero__heading" id="hero-heading">
-        Organisations don't lack experience. They lack a way to <em>remember it</em>.
+        Organisations don't lack experience. They lack a way to remember it.
       </h1>
 
       <p class="hero__sub">
@@ -1875,46 +1707,69 @@
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <a href="#model" class="btn-ghost">
+        <a href="#model" class="btn-text-link">
           The Playbook model
-          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
       </div>
+
+      <!-- Stats row -->
+      <div class="hero__stats" aria-label="At a glance">
+        <div class="hero__stat">
+          <div class="hero__stat-number">40+</div>
+          <div class="hero__stat-desc">Programmes</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-number">£28bn</div>
+          <div class="hero__stat-desc">Capital managed</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-number">15+</div>
+          <div class="hero__stat-desc">Years senior experience</div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="hero__scroll" aria-hidden="true">
-      <div class="hero__scroll-line"></div>
-      <span>Scroll</span>
+    <!-- Right: image panel -->
+    <div class="hero__image" aria-hidden="true">
+      <img
+        src="../images/hero/hero-briefing-table-06.png"
+        alt=""
+        loading="eager"
+        decoding="async"
+      >
     </div>
+
   </section>
 
 
   <!-- ============================================================
-       BELIEF STATEMENT
+       BELIEF STATEMENT — 3-column editorial
        ============================================================ -->
   <section class="belief section" aria-labelledby="belief-heading">
     <div class="container">
       <div class="belief__inner">
 
-        <div class="belief__eyebrow reveal">
+        <!-- Left: label + gold dash ornament -->
+        <div class="belief__left reveal">
           <span class="label-tag">The Playbook Paradox</span>
-          <div class="belief__image">
-            <img src="../images/sections/homepage-section-02.png" alt="" loading="lazy">
-          </div>
+          <div class="belief__dash" aria-hidden="true">—</div>
         </div>
 
-        <div class="belief__body">
-          <blockquote class="belief__quote reveal">
-            "Every complex programme eventually writes its playbook. The only question is whether it is written <strong>before the mistakes</strong> or after them."
-          </blockquote>
+        <!-- Centre: blockquote -->
+        <blockquote class="belief__quote reveal reveal-delay-1" id="belief-heading">
+          "Every complex programme eventually writes its playbook. The only question is whether it is written <strong>before the mistakes</strong> or after them."
+        </blockquote>
 
-          <p class="belief__copy reveal reveal-delay-1">
-            Organisations accumulate vast experience across capital programmes, yet the same problems repeat. The difficulty is rarely a lack of knowledge. Knowledge rarely survives long enough to reach the next decision. Playbook exists to close that gap.
+        <!-- Right: body copy + link -->
+        <div class="belief__right reveal reveal-delay-2">
+          <p class="belief__copy">
+            Organisations accumulate vast experience across capital programmes, yet the same problems repeat. The difficulty is rarely a lack of knowledge — knowledge rarely survives long enough to reach the next decision. Playbook exists to close that gap.
           </p>
-
-          <a href="#" class="belief__link reveal reveal-delay-2">
+          <a href="#" class="btn-text-link">
             Understand the Playbook Paradox
             <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1928,10 +1783,11 @@
 
 
   <!-- ============================================================
-       THREE GAPS
+       THREE GAPS — numbered horizontal rule list
        ============================================================ -->
   <section class="gaps section" aria-labelledby="gaps-heading">
     <div class="container">
+
       <div class="gaps__header">
         <span class="label-tag reveal">Failures of institutional memory</span>
         <h2 class="gaps__title reveal reveal-delay-1" id="gaps-heading">
@@ -1939,34 +1795,31 @@
         </h2>
       </div>
 
-      <div class="gaps__grid" role="list">
+      <div class="gaps__list" role="list">
 
-        <article class="gap-card reveal" role="listitem">
-          <div class="gap-card__number">01</div>
-          <h3 class="gap-card__name">The Memory Gap</h3>
-          <div class="gap-card__divider" aria-hidden="true"></div>
-          <p class="gap-card__copy">
+        <div class="gap-row reveal" role="listitem">
+          <div class="gap-row__number">01</div>
+          <h3 class="gap-row__name">The Memory Gap</h3>
+          <p class="gap-row__copy">
             Experience remains with individuals rather than the organisation. When people leave, knowledge disappears. The programme moves on; the lesson does not.
           </p>
-        </article>
+        </div>
 
-        <article class="gap-card reveal reveal-delay-1" role="listitem">
-          <div class="gap-card__number">02</div>
-          <h3 class="gap-card__name">The Translation Gap</h3>
-          <div class="gap-card__divider" aria-hidden="true"></div>
-          <p class="gap-card__copy">
+        <div class="gap-row reveal reveal-delay-1" role="listitem">
+          <div class="gap-row__number">02</div>
+          <h3 class="gap-row__name">The Translation Gap</h3>
+          <p class="gap-row__copy">
             Lessons are recorded but not converted into decision guidance. Knowledge remains descriptive rather than operational — noted, not applied.
           </p>
-        </article>
+        </div>
 
-        <article class="gap-card reveal reveal-delay-2" role="listitem">
-          <div class="gap-card__number">03</div>
-          <h3 class="gap-card__name">The Decision Gap</h3>
-          <div class="gap-card__divider" aria-hidden="true"></div>
-          <p class="gap-card__copy">
+        <div class="gap-row reveal reveal-delay-2" role="listitem">
+          <div class="gap-row__number">03</div>
+          <h3 class="gap-row__name">The Decision Gap</h3>
+          <p class="gap-row__copy">
             Even when knowledge exists, it rarely reaches the moment decisions are made. Under pressure, organisations rely on instinct rather than experience.
           </p>
-        </article>
+        </div>
 
       </div>
     </div>
@@ -1974,10 +1827,11 @@
 
 
   <!-- ============================================================
-       SERVICES
+       SERVICES — 2 × 3 card grid
        ============================================================ -->
   <section class="services section" id="services" aria-labelledby="services-heading">
     <div class="container">
+
       <div class="services__header">
         <div>
           <span class="label-tag reveal">What we do</span>
@@ -1985,7 +1839,7 @@
             Sponsor-side advisory across the full programme lifecycle
           </h2>
         </div>
-        <a href="#" class="belief__link reveal reveal-delay-2" style="white-space:nowrap;align-self:flex-end;">
+        <a href="#" class="btn-text-link reveal reveal-delay-2" style="white-space:nowrap;align-self:flex-end;">
           All services
           <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1993,96 +1847,94 @@
         </a>
       </div>
 
-      <div class="services__layout">
+      <div class="services__grid" role="list">
 
-        <!-- Sticky image panel -->
-        <div class="services__image-panel reveal">
-          <div class="services__image-frame">
-            <img src="../images/sectors/sectors-private-development-02.png" alt="Sponsor-side advisory in practice" loading="lazy">
-          </div>
-          <p class="services__image-caption">Sponsor-side advisory</p>
-        </div>
-
-        <div class="services__list" role="list">
-
-        <div class="service-row reveal" role="listitem" tabindex="0" aria-label="Capital investment strategy">
-          <span class="service-row__index">01</span>
-          <div class="service-row__content">
-            <h3 class="service-row__title">Capital investment strategy</h3>
-            <p class="service-row__desc">Upstream strategic advisory on major capital investment decisions — defining the governance structure, business case rationale, and decision framework before commitment.</p>
-          </div>
-          <div class="service-row__arrow" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <!-- Service card 01 -->
+        <article class="service-card reveal" role="listitem" tabindex="0" aria-label="Capital investment strategy">
+          <div class="service-card__index">01</div>
+          <h3 class="service-card__title">Capital investment strategy</h3>
+          <p class="service-card__desc">Upstream strategic advisory on major capital investment decisions — defining the governance structure, business case rationale, and decision framework before commitment.</p>
+          <div class="service-card__arrow" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
               <path d="M3 3h10v10M3 13L13 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-        </div>
+        </article>
 
-        <div class="service-row reveal reveal-delay-1" role="listitem" tabindex="0" aria-label="Programme governance">
-          <span class="service-row__index">02</span>
-          <div class="service-row__content">
-            <h3 class="service-row__title">Programme governance</h3>
-            <p class="service-row__desc">Designing and strengthening governance frameworks that direct complex programmes with clarity — establishing accountabilities, decision disciplines, and escalation structures.</p>
-          </div>
-          <div class="service-row__arrow" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <!-- Service card 02 -->
+        <article class="service-card reveal reveal-delay-1" role="listitem" tabindex="0" aria-label="Programme governance">
+          <div class="service-card__index">02</div>
+          <h3 class="service-card__title">Programme governance</h3>
+          <p class="service-card__desc">Designing and strengthening governance frameworks that direct complex programmes with clarity — establishing accountabilities, decision disciplines, and escalation structures.</p>
+          <div class="service-card__arrow" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
               <path d="M3 3h10v10M3 13L13 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-        </div>
+        </article>
 
-        <div class="service-row reveal reveal-delay-2" role="listitem" tabindex="0" aria-label="Sponsor-side advisory">
-          <span class="service-row__index">03</span>
-          <div class="service-row__content">
-            <h3 class="service-row__title">Sponsor-side advisory</h3>
-            <p class="service-row__desc">Acting exclusively for the client as an extension of the senior leadership team — providing independent challenge, objective oversight, and protected decision space.</p>
-          </div>
-          <div class="service-row__arrow" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <!-- Service card 03 -->
+        <article class="service-card reveal reveal-delay-2" role="listitem" tabindex="0" aria-label="Sponsor-side advisory">
+          <div class="service-card__index">03</div>
+          <h3 class="service-card__title">Sponsor-side advisory</h3>
+          <p class="service-card__desc">Acting exclusively for the client as an extension of the senior leadership team — providing independent challenge, objective oversight, and protected decision space.</p>
+          <div class="service-card__arrow" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
               <path d="M3 3h10v10M3 13L13 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-        </div>
+        </article>
 
-        <div class="service-row reveal reveal-delay-3" role="listitem" tabindex="0" aria-label="Programme health diagnostics and project recovery">
-          <span class="service-row__index">04</span>
-          <div class="service-row__content">
-            <h3 class="service-row__title">Programme health diagnostics and project recovery</h3>
-            <p class="service-row__desc">Rapid, structured assessment of programmes in distress — identifying root causes, restoring governance clarity, and creating the conditions for recovery.</p>
-          </div>
-          <div class="service-row__arrow" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <!-- Service card 04 -->
+        <article class="service-card reveal reveal-delay-1" role="listitem" tabindex="0" aria-label="Programme health diagnostics and project recovery">
+          <div class="service-card__index">04</div>
+          <h3 class="service-card__title">Programme health diagnostics and project recovery</h3>
+          <p class="service-card__desc">Rapid, structured assessment of programmes in distress — identifying root causes, restoring governance clarity, and creating the conditions for recovery.</p>
+          <div class="service-card__arrow" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
               <path d="M3 3h10v10M3 13L13 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-        </div>
+        </article>
 
-        <div class="service-row reveal reveal-delay-4" role="listitem" tabindex="0" aria-label="Funding and business case advisory">
-          <span class="service-row__index">05</span>
-          <div class="service-row__content">
-            <h3 class="service-row__title">Funding and business case advisory</h3>
-            <p class="service-row__desc">Supporting the development of investment cases and funding submissions that hold under scrutiny — structuring the argument, evidence base, and approval pathway.</p>
-          </div>
-          <div class="service-row__arrow" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <!-- Service card 05 -->
+        <article class="service-card reveal reveal-delay-2" role="listitem" tabindex="0" aria-label="Funding and business case advisory">
+          <div class="service-card__index">05</div>
+          <h3 class="service-card__title">Funding and business case advisory</h3>
+          <p class="service-card__desc">Supporting the development of investment cases and funding submissions that hold under scrutiny — structuring the argument, evidence base, and approval pathway.</p>
+          <div class="service-card__arrow" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
               <path d="M3 3h10v10M3 13L13 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
+        </article>
+
+        <!-- CTA card — final cell -->
+        <div class="service-card service-card--cta reveal reveal-delay-3" role="listitem">
+          <h3 class="service-card__cta-heading">Explore all services</h3>
+          <p style="font-size:var(--size-body-sm);color:var(--color-text-secondary);line-height:var(--lh-relaxed);margin-bottom:var(--space-6);">
+            Each service is designed to operate at the sponsor level — upstream of delivery, independent of supply chain interests.
+          </p>
+          <a href="#" class="btn-text-link">
+            View all services
+            <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
         </div>
 
-        </div><!-- /.services__list -->
-      </div><!-- /.services__layout -->
+      </div>
     </div>
   </section>
 
 
   <!-- ============================================================
-       THE PLAYBOOK MODEL — CTA BAND
+       THE PLAYBOOK MODEL — auto-cycling 4-stage selector
+       (locked design per CLAUDE.md)
        ============================================================ -->
   <section class="model-band section--tight" id="model" aria-labelledby="model-heading">
     <div class="container">
 
-      <!-- Header row -->
       <div class="model-band__header reveal">
         <div class="model-band__intro">
           <span class="label-tag label-tag--on-dark">The Playbook model</span>
@@ -2139,104 +1991,97 @@
 
 
   <!-- ============================================================
-       SECTORS
+       SECTORS — paper-dark, horizontal rule list
        ============================================================ -->
-  <section class="sectors section" aria-labelledby="sectors-heading">
+  <section class="sectors section" id="sectors" aria-labelledby="sectors-heading">
     <div class="container">
+
       <div class="sectors__header">
         <span class="label-tag reveal">Sectors we serve</span>
         <h2 class="sectors__title reveal reveal-delay-1" id="sectors-heading">
-          Senior-led advisory across public, private, and infrastructure
+          Capital programme expertise across four sectors
         </h2>
       </div>
 
-      <div class="sectors__grid">
+      <div class="sectors__list" role="list">
 
-        <article class="sector-card reveal" tabindex="0">
-          <div class="sector-card__image">
-            <img src="../images/sectors/sectors-public-infrastructure-01.png" alt="Public sector capital programme" loading="lazy">
-          </div>
-          <div class="sector-card__body">
-            <h3 class="sector-card__name">Public sector</h3>
-            <p class="sector-card__sub">Local authorities, NHS trusts, and higher education institutions — navigating political complexity, audit scrutiny, and the accountability structures of public capital programmes.</p>
-            <div class="sector-card__tags">
-              <span class="tag">Local authority</span>
-              <span class="tag">Healthcare</span>
-              <span class="tag">Higher education</span>
-            </div>
-          </div>
-        </article>
+        <div class="sector-row reveal" role="listitem" tabindex="0">
+          <h3 class="sector-row__name">Public sector</h3>
+          <p class="sector-row__desc">Local authorities, NHS trusts, and higher education institutions — navigating political complexity, audit scrutiny, and the accountability structures of public capital programmes.</p>
+        </div>
 
-        <article class="sector-card reveal reveal-delay-1" tabindex="0">
-          <div class="sector-card__image">
-            <img src="../images/sectors/sectors-private-development-02.png" alt="Private sector development" loading="lazy">
-          </div>
-          <div class="sector-card__body">
-            <h3 class="sector-card__name">Private sector</h3>
-            <p class="sector-card__sub">Developer sponsors, regeneration leads, manufacturers, and commercial operators — strengthening governance where investment scale demands independent discipline.</p>
-            <div class="sector-card__tags">
-              <span class="tag">Regeneration</span>
-              <span class="tag">Manufacturing</span>
-              <span class="tag">Commercial</span>
-            </div>
-          </div>
-        </article>
+        <div class="sector-row reveal reveal-delay-1" role="listitem" tabindex="0">
+          <h3 class="sector-row__name">Healthcare &amp; life sciences</h3>
+          <p class="sector-row__desc">NHS capital, research infrastructure, and life sciences facilities — programmes where clinical outcome, regulatory constraint, and financial discipline must be held in tension.</p>
+        </div>
 
-        <article class="sector-card reveal reveal-delay-2" tabindex="0">
-          <div class="sector-card__image">
-            <img src="../images/sectors/sectors-healthcare-03.png" alt="Infrastructure and healthcare" loading="lazy">
-          </div>
-          <div class="sector-card__body">
-            <h3 class="sector-card__name">Infrastructure</h3>
-            <p class="sector-card__sub">Logistics, transport, highways, utilities, and defence — complex long-duration programmes where independent governance authority and decision discipline are structurally critical.</p>
-            <div class="sector-card__tags">
-              <span class="tag">Transport</span>
-              <span class="tag">Utilities</span>
-              <span class="tag">Defence</span>
-            </div>
-          </div>
-        </article>
+        <div class="sector-row reveal reveal-delay-2" role="listitem" tabindex="0">
+          <h3 class="sector-row__name">Infrastructure &amp; regeneration</h3>
+          <p class="sector-row__desc">Logistics, transport, highways, utilities, and mixed-use regeneration — complex long-duration programmes where independent governance authority is structurally critical.</p>
+        </div>
+
+        <div class="sector-row reveal reveal-delay-3" role="listitem" tabindex="0">
+          <h3 class="sector-row__name">Transport</h3>
+          <p class="sector-row__desc">Rail, highways, and active travel programmes — operating at the intersection of public accountability, technical complexity, and political scrutiny.</p>
+        </div>
 
       </div>
-    </div>
-  </section>
 
-
-  <!-- ============================================================
-       INSIGHTS
-       ============================================================ -->
-  <section class="insights section" aria-labelledby="insights-heading">
-    <div class="container">
-      <div class="insights__header">
-        <div>
-          <span class="label-tag reveal">Thought leadership</span>
-          <h2 class="insights__title reveal reveal-delay-1" id="insights-heading">
-            Perspectives on governance, capital programmes, and decision quality
-          </h2>
-        </div>
-        <a href="#" class="belief__link reveal reveal-delay-2" style="white-space:nowrap;align-self:flex-end;">
-          All insights
+      <!-- CTA row -->
+      <div class="sectors__cta-row">
+        <span class="sectors__cta-label">Working with Playbook across sectors</span>
+        <a href="#" class="btn-text-link">
+          View sector experience
           <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
       </div>
 
-      <div class="insights__grid">
+    </div>
+  </section>
 
-        <article class="insight-card reveal">
-          <div class="insight-card__image">
-            <img src="../images/hero/hero-governance-briefing-02.png" alt="" loading="lazy" class="insight-card__img">
-            <div class="insight-card__image-overlay"></div>
+
+  <!-- ============================================================
+       INSIGHTS — 2-column (featured left, stack right)
+       ============================================================ -->
+  <section class="insights section" id="insights" aria-labelledby="insights-heading">
+    <div class="container">
+
+      <div class="insights__header">
+        <div>
+          <span class="label-tag reveal">Perspective and analysis</span>
+          <h2 class="insights__title reveal reveal-delay-1" id="insights-heading">
+            Perspectives on governance, capital programmes, and decision quality
+          </h2>
+        </div>
+        <a href="#" class="btn-text-link reveal reveal-delay-2" style="white-space:nowrap;align-self:flex-end;">
+          View all insights
+          <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="insights__layout">
+
+        <!-- Featured article — left -->
+        <article class="insight-featured reveal-left">
+          <div class="insight-featured__image">
+            <img
+              src="../images/insights/insight-editorial-01.png"
+              alt=""
+              loading="lazy"
+            >
           </div>
-          <div class="insight-card__meta">
-            <span class="insight-card__tag">Governance</span>
-            <span class="insight-card__dot" aria-hidden="true"></span>
-            <time class="insight-card__date" datetime="2026-03-10">10 March 2026</time>
+          <div class="insight-featured__meta">
+            <span class="insight-featured__tag">Governance</span>
+            <span class="insight-featured__dot" aria-hidden="true"></span>
+            <time class="insight-featured__date" datetime="2026-03-10">10 March 2026</time>
           </div>
-          <h3 class="insight-card__title">The most expensive lessons in any programme are the ones that must be learned twice</h3>
-          <p class="insight-card__excerpt">Why the Memory Gap, Translation Gap, and Decision Gap repeat — and what structurally closes them before financial commitment.</p>
-          <a href="#" class="insight-card__link">
+          <h3 class="insight-featured__title">The most expensive lessons in any programme are the ones that must be learned twice</h3>
+          <p class="insight-featured__excerpt">Why the Memory Gap, Translation Gap, and Decision Gap repeat — and what structurally closes them before financial commitment.</p>
+          <a href="#" class="btn-text-link">
             Read article
             <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2244,53 +2089,62 @@
           </a>
         </article>
 
-        <article class="insight-card reveal reveal-delay-1">
-          <div class="insight-card__image">
-            <img src="../images/insights/insights-architectural-detail-02.png" alt="" loading="lazy" class="insight-card__img">
-            <div class="insight-card__image-overlay"></div>
-          </div>
-          <div class="insight-card__meta">
-            <span class="insight-card__tag">Healthcare</span>
-            <span class="insight-card__dot" aria-hidden="true"></span>
-            <time class="insight-card__date" datetime="2026-02-24">24 February 2026</time>
-          </div>
-          <h3 class="insight-card__title">Why NHS capital programmes drift: diffuse accountability and the governance bridge</h3>
-          <p class="insight-card__excerpt">The structural conditions that allow NHS capital programmes to escalate in cost and complexity — and where independent sponsor-side advisory changes the outcome.</p>
-          <a href="#" class="insight-card__link">
-            Read article
-            <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </article>
+        <!-- Stack — right -->
+        <div class="insight-stack reveal-right">
 
-        <article class="insight-card reveal reveal-delay-2">
-          <div class="insight-card__image">
-            <img src="../images/insights/insights-structural-detail-04.png" alt="" loading="lazy" class="insight-card__img">
-            <div class="insight-card__image-overlay"></div>
-          </div>
-          <div class="insight-card__meta">
-            <span class="insight-card__tag">Regeneration</span>
-            <span class="insight-card__dot" aria-hidden="true"></span>
-            <time class="insight-card__date" datetime="2026-02-07">7 February 2026</time>
-          </div>
-          <h3 class="insight-card__title">What the Governance Bridge looks like in residential regeneration</h3>
-          <p class="insight-card__excerpt">How the space between Board oversight and programme delivery creates risk in mixed-use schemes — and how structured sponsor-side advisory fills it.</p>
-          <a href="#" class="insight-card__link">
-            Read article
-            <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </article>
+          <article class="insight-item">
+            <div class="insight-item__meta">
+              <span class="insight-item__tag">Healthcare</span>
+              <span class="insight-item__dot" aria-hidden="true"></span>
+              <time class="insight-item__date" datetime="2026-02-24">24 February 2026</time>
+            </div>
+            <h3 class="insight-item__title">Why NHS capital programmes drift: diffuse accountability and the Governance Bridge</h3>
+            <a href="#" class="insight-item__link">
+              Read article
+              <svg class="arrow" width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </article>
 
+          <article class="insight-item">
+            <div class="insight-item__meta">
+              <span class="insight-item__tag">Regeneration</span>
+              <span class="insight-item__dot" aria-hidden="true"></span>
+              <time class="insight-item__date" datetime="2026-02-07">7 February 2026</time>
+            </div>
+            <h3 class="insight-item__title">What the Governance Bridge looks like in residential regeneration</h3>
+            <a href="#" class="insight-item__link">
+              Read article
+              <svg class="arrow" width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </article>
+
+          <article class="insight-item">
+            <div class="insight-item__meta">
+              <span class="insight-item__tag">Capital programmes</span>
+              <span class="insight-item__dot" aria-hidden="true"></span>
+              <time class="insight-item__date" datetime="2026-01-20">20 January 2026</time>
+            </div>
+            <h3 class="insight-item__title">The sponsor function in transport infrastructure: why independence matters at the point of commitment</h3>
+            <a href="#" class="insight-item__link">
+              Read article
+              <svg class="arrow" width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </article>
+
+        </div>
       </div>
     </div>
   </section>
 
 
   <!-- ============================================================
-       DIAGNOSTIC CTA
+       DIAGNOSTIC CTA — black, meet-in-middle (locked design)
        ============================================================ -->
   <section class="diagnostic section" id="diagnostic" aria-labelledby="diagnostic-heading">
     <div class="container">
@@ -2315,7 +2169,11 @@
         </div>
 
         <div class="diagnostic__image">
-          <img src="../images/services/services-walkthrough-06.png" alt="Governance advisory session in progress" loading="lazy">
+          <img
+            src="../images/services/services-governance-workshop-04.png"
+            alt="Governance advisory session in progress"
+            loading="lazy"
+          >
         </div>
 
       </div>
@@ -2363,24 +2221,24 @@
           </div>
         </div>
 
-        <form class="contact__form reveal reveal-delay-1" novalidate aria-label="Contact form">
+        <form class="contact__form reveal-right" novalidate aria-label="Contact form">
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label" for="name">Name</label>
-              <input class="form-input" type="text" id="name" name="name" autocomplete="name" placeholder="Your name" required>
+              <label class="form-label" for="name-03">Name</label>
+              <input class="form-input" type="text" id="name-03" name="name" autocomplete="name" placeholder="Your name" required>
             </div>
             <div class="form-group">
-              <label class="form-label" for="org">Organisation</label>
-              <input class="form-input" type="text" id="org" name="organisation" placeholder="Your organisation" required>
+              <label class="form-label" for="org-03">Organisation</label>
+              <input class="form-input" type="text" id="org-03" name="organisation" placeholder="Your organisation" required>
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label" for="email">Email</label>
-            <input class="form-input" type="email" id="email" name="email" autocomplete="email" placeholder="your@email.com" required>
+            <label class="form-label" for="email-03">Email</label>
+            <input class="form-input" type="email" id="email-03" name="email" autocomplete="email" placeholder="your@email.com" required>
           </div>
           <div class="form-group">
-            <label class="form-label" for="subject">Subject</label>
-            <select class="form-select" id="subject" name="subject">
+            <label class="form-label" for="subject-03">Subject</label>
+            <select class="form-select" id="subject-03" name="subject">
               <option value="" disabled selected>Select a subject</option>
               <option value="diagnostic">Capital Governance Diagnostic</option>
               <option value="governance">Programme governance</option>
@@ -2390,8 +2248,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label" for="message">Message</label>
-            <textarea class="form-textarea" id="message" name="message" placeholder="Briefly describe the programme or challenge you are working with…"></textarea>
+            <label class="form-label" for="message-03">Message</label>
+            <textarea class="form-textarea" id="message-03" name="message" placeholder="Briefly describe the programme or challenge you are working with…"></textarea>
           </div>
           <button type="submit" class="form-submit">
             Send enquiry
@@ -2479,28 +2337,19 @@
 
 
   <!-- ============================================================
-       JAVASCRIPT — interactions, animations & scroll reveal
+       JAVASCRIPT
        ============================================================ -->
   <script>
     'use strict';
 
-    // ── Reduced motion check — must be first ─────────────────────
+    // ── Reduced motion ────────────────────────────────────────────
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // ── DOM refs ──────────────────────────────────────────────────
-    const nav        = document.getElementById('nav');
-    const navSubline = nav.querySelector('[style*="Advisory Group"]');
-    const hero       = document.querySelector('.hero');
+    const nav         = document.getElementById('nav');
+    const progressBar = document.getElementById('progressBar');
 
-
-    // ── Progress bar ──────────────────────────────────────────────
-    const progressBar = document.createElement('div');
-    progressBar.className = 'progress-bar';
-    progressBar.setAttribute('aria-hidden', 'true');
-    document.body.prepend(progressBar);
-
-
-    // ── Shared scroll handler (single rAF per frame) ──────────────
+    // ── Scroll handler (single rAF per frame) ─────────────────────
     let scrollTicking = false;
     let lastScrollY   = 0;
 
@@ -2509,21 +2358,12 @@
       const viewH   = window.innerHeight;
       const docH    = document.documentElement.scrollHeight;
 
-      // Nav state
-      const isScrolled = scrollY > 40;
-      nav.classList.toggle('is-scrolled', isScrolled);
-      if (navSubline) {
-        navSubline.style.color = isScrolled ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.4)';
-      }
+      // Nav shadow on scroll
+      nav.classList.toggle('is-scrolled', scrollY > 40);
 
       // Progress bar
       const progress = docH > viewH ? (scrollY / (docH - viewH)) * 100 : 0;
       progressBar.style.width = `${Math.min(progress, 100)}%`;
-
-      // Hero parallax — only while hero is on-screen
-      if (!prefersReducedMotion && hero && scrollY < viewH * 1.4) {
-        hero.style.backgroundPositionY = `calc(30% + ${scrollY * 0.22}px)`;
-      }
 
       scrollTicking = false;
     }
@@ -2537,190 +2377,45 @@
     }, { passive: true });
 
 
-    // ── Hero heading — word-by-word clip animation ────────────────
-    function buildHeroHeading() {
-      const heading = document.querySelector('.hero__heading');
-      if (!heading || prefersReducedMotion) return;
-
-      // Disable the CSS keyframe on the heading — we take over per-word
-      heading.style.opacity = '1';
-      heading.style.animation = 'none';
-
-      // Known words in sequence (plain, then the <em> group)
-      const plain  = ['Organisations', "don't", 'lack', 'experience.', 'They', 'lack', 'a', 'way', 'to'];
-      const accent = ['remember', 'it.'];
-
-      let delay = 280;
-      const step = 58;
-
-      function makeWord(text, d) {
-        const outer = document.createElement('span');
-        outer.className = 'hero__word';
-        const inner = document.createElement('span');
-        inner.className = 'hero__word-inner';
-        inner.style.animationDelay = `${d}ms`;
-        inner.textContent = text;
-        outer.appendChild(inner);
-        return outer;
-      }
-
-      heading.innerHTML = '';
-
-      plain.forEach((word, i) => {
-        if (i > 0) heading.appendChild(document.createTextNode(' '));
-        heading.appendChild(makeWord(word, delay));
-        delay += step;
-      });
-
-      // Wrap accent words in <em>
-      heading.appendChild(document.createTextNode(' '));
-      const em = document.createElement('em');
-      accent.forEach((word, i) => {
-        if (i > 0) em.appendChild(document.createTextNode(' '));
-        em.appendChild(makeWord(word, delay));
-        delay += step;
-      });
-      heading.appendChild(em);
-    }
-
-    buildHeroHeading();
-
-
-    // ── Belief quote — line-by-line clip animation ────────────────
-    function buildBeliefQuote() {
-      const quote = document.querySelector('.belief__quote');
-      if (!quote || prefersReducedMotion) return;
-
-      // Two logical lines
-      const lines = [
-        '"Every complex programme eventually writes its playbook.',
-        'The only question is whether it is written <strong>before the mistakes</strong> or after them."'
-      ];
-
-      quote.innerHTML = lines.map(line => `
-        <span class="quote-line">
-          <span class="quote-line-inner">${line}</span>
-        </span>
-      `).join('');
-    }
-
-    buildBeliefQuote();
-
-
-    // ── Gap card numbers — wrap digits for clip animation ─────────
-    function buildGapNumbers() {
-      document.querySelectorAll('.gap-card__number').forEach(el => {
-        const text = el.textContent.trim(); // e.g. "01"
-        el.innerHTML = [...text].map(
-          ch => `<span class="gap-card__number-digit">${ch}</span>`
-        ).join('');
-      });
-    }
-
-    buildGapNumbers();
-
-
-    // ── Programmatic reveal class upgrades ───────────────────────
-    // (runs before observer so all elements are correctly classified)
-    function upgradeRevealClasses() {
-      // Cards: scale in from slightly small
-      document.querySelectorAll('.gap-card, .sector-card, .insight-card').forEach(el => {
-        el.classList.replace('reveal', 'reveal-scale');
-      });
-
-      // Left panels: slide from left
-      document.querySelectorAll('.services__image-panel').forEach(el => {
-        el.classList.replace('reveal', 'reveal-left');
-      });
-
-      // Service rows: slide from left (more directional than plain fade)
-      document.querySelectorAll('.service-row').forEach(el => {
-        el.classList.replace('reveal', 'reveal-left');
-      });
-
-      // Contact form: slide from right
-      document.querySelectorAll('.contact__form').forEach(el => {
-        el.classList.replace('reveal', 'reveal-right');
-      });
-
-      // Belief quote itself should be observed (not its parent wrapper)
-      const beliefQuote = document.querySelector('.belief__quote');
-      if (beliefQuote && !beliefQuote.classList.contains('reveal')) {
-        beliefQuote.classList.add('reveal');
-      }
-    }
-
-    upgradeRevealClasses();
-
-
-    // ── IntersectionObserver — all reveal variants ────────────────
-    const allRevealEls = document.querySelectorAll(
-      '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-cascade, .diagnostic--meet'
+    // ── IntersectionObserver — all reveal variants ─────────────────
+    const revealEls = document.querySelectorAll(
+      '.reveal, .reveal-left, .reveal-right, .diagnostic--meet'
     );
 
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -48px 0px'
-    });
-
     if (prefersReducedMotion) {
-      // Instantly reveal everything — no motion
-      allRevealEls.forEach(el => el.classList.add('is-visible'));
-      const heading = document.querySelector('.hero__heading');
-      if (heading) { heading.style.opacity = '1'; heading.style.animation = 'none'; }
-      document.querySelectorAll('.hero__word-inner').forEach(w => {
-        w.style.opacity = '1'; w.style.transform = 'none'; w.style.animation = 'none';
-      });
+      revealEls.forEach(el => el.classList.add('is-visible'));
     } else {
-      allRevealEls.forEach(el => revealObserver.observe(el));
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -48px 0px'
+      });
+
+      revealEls.forEach(el => revealObserver.observe(el));
     }
 
 
-    // ── Magnetic CTA buttons ──────────────────────────────────────
-    document.querySelectorAll('.btn-primary, .btn-outline-light, .btn-ghost').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        const x = (e.clientX - r.left - r.width  / 2) * 0.12;
-        const y = (e.clientY - r.top  - r.height / 2) * 0.18;
-        btn.style.transform = `translate(${x}px, ${y}px) translateY(-1px)`;
-      });
-      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
-    });
-
-
-    // ── Service row hover state — keyboard support ────────────────
-    document.querySelectorAll('.service-row').forEach(row => {
-      row.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          row.classList.toggle('kb-active');
-        }
-      });
-    });
-
-
-    // ── Playbook Model — auto-cycling stage selector ─────────────
+    // ── Playbook Model — auto-cycling stage selector ───────────────
     (function () {
-      const stages    = Array.from(document.querySelectorAll('.model-stage'));
-      const stagesEl  = document.querySelector('.model-stages');
+      const stages   = Array.from(document.querySelectorAll('.model-stage'));
+      const stagesEl = document.querySelector('.model-stages');
       if (!stages.length || !stagesEl) return;
 
-      let current     = 0;
-      let timer       = null;
-      let isRunning   = false;
+      let current   = 0;
+      let timer     = null;
+      let isRunning = false;
 
       function activateStage(index, resetTimer) {
         stages.forEach((s, i) => {
           const active = i === index;
           s.classList.toggle('model-stage--active', active);
-          s.setAttribute('aria-selected', active);
+          s.setAttribute('aria-selected', String(active));
           s.setAttribute('tabindex', active ? '0' : '-1');
 
           // Reset + re-trigger progress bar animation
@@ -2754,7 +2449,7 @@
         clearInterval(timer);
       }
 
-      // Start cycling when section enters viewport; pause when it leaves
+      // Start when section enters viewport; pause when it leaves
       const modelObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) startCycle();
@@ -2764,7 +2459,7 @@
 
       modelObserver.observe(stagesEl);
 
-      // Click to jump to a stage (resets timer)
+      // Click to jump
       stages.forEach((stage, i) => {
         stage.addEventListener('click', () => activateStage(i, true));
         stage.addEventListener('keydown', e => {
@@ -2772,39 +2467,33 @@
             e.preventDefault();
             activateStage(i, true);
           }
-          // Arrow key navigation
           if (e.key === 'ArrowRight') activateStage((i + 1) % stages.length, true);
           if (e.key === 'ArrowLeft')  activateStage((i + stages.length - 1) % stages.length, true);
         });
       });
 
-      // Reduced motion: freeze on first stage, no interval
       if (prefersReducedMotion) stopCycle();
     })();
 
 
-    // ── Gap card keyboard accessibility ───────────────────────────
-    document.querySelectorAll('.gap-card').forEach(card => {
-      card.setAttribute('tabindex', '0');
+    // ── Service card keyboard support ─────────────────────────────
+    document.querySelectorAll('.service-card[tabindex]').forEach(card => {
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          // Navigate to service page (placeholder)
+          card.dispatchEvent(new MouseEvent('click'));
+        }
+      });
     });
 
 
-    // ── Active section → nav link highlight ──────────────────────
-    const navSections = document.querySelectorAll('section[id]');
-    const navLinks    = document.querySelectorAll('.nav__link');
-
-    const navObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const id = entry.target.id;
-        navLinks.forEach(link => {
-          const isActive = link.getAttribute('href') === `#${id}`;
-          link.style.opacity = isActive && nav.classList.contains('is-scrolled') ? '1' : '';
-        });
+    // ── Sector row keyboard support ───────────────────────────────
+    document.querySelectorAll('.sector-row').forEach(row => {
+      row.addEventListener('keydown', e => {
+        if (e.key === 'Enter') row.click();
       });
-    }, { threshold: 0.45, rootMargin: '-80px 0px 0px 0px' });
-
-    navSections.forEach(s => navObserver.observe(s));
+    });
 
 
     // ── Form submit micro-interaction ─────────────────────────────
@@ -2825,26 +2514,11 @@
             Enquiry sent
           `;
           formSubmit.style.opacity = '1';
-          formSubmit.style.backgroundColor = 'var(--color-navy)';
+          formSubmit.style.backgroundColor = '#1a1a1a';
         }, 1200);
       });
     }
 
-
-    // ── Sector card — tilt on hover ───────────────────────────────
-    document.querySelectorAll('.sector-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r   = card.getBoundingClientRect();
-        const x   = (e.clientX - r.left)  / r.width  - 0.5;
-        const y   = (e.clientY - r.top)   / r.height - 0.5;
-        card.style.transform = `translateY(-4px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
-        card.style.boxShadow = `${-x * 8}px ${-y * 8 + 8}px 32px rgba(0,0,0,0.10)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-        card.style.boxShadow = '';
-      });
-    });
   </script>
 
 </body>
