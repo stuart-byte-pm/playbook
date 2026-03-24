@@ -1,3 +1,29 @@
+## [2026-03-24] — Brand colour update, design system sync, decorative icon treatment, deployment fixes
+
+### Changed
+- **Brand colour palette — full rename and revalue** across all active project files:
+  - `gold`: `#AB7F58` → `#af7e56`
+  - `navy` → `teal`: `#271F57` → `#264852`
+  - `paper-dark` → `peach`: `#FADCC1` → `#ffdfae`
+  - `mid-grey` → `sand`: `#F4F4F4` → `#ebe7dc`
+  - New colour added: `pale-blue` `#c3dae2`
+- **Brand positioning line** updated from "Connecting you to clarity" to "Clarity. Control. Confidence." across all files
+- **Files updated with new palette:** `assets/files/playbook-design-system.html`, `CLAUDE.md`, `.claude/rules/playbook-design-tokens.json`, `web/app/globals.css`, `plan/PROJECT_PLAN.md`, `assets/files/homepage-demo-04.html`, `web/public/demos/homepage-demo-04.html`
+- **Task 13 — "When we are typically engaged" section background:** Changed from `sand` to `teal` (`#264852`). Removed the grey sketch background image (`background-image-04.png`) which was opaque and masked the colour change. Section heading and label tag updated to white/on-dark variants.
+- **Guiding star decoration — gaps section:** Two instances of `Playbook_Icon_White_RGB.svg` added as `::before`/`::after` pseudo-elements on `.gaps`. Large (500px, 7% opacity, rotated 20°) top-right bleeding off edge; small (260px, 5% opacity, rotated −10°) bottom-left. `.gaps` given `position: relative; overflow: hidden`.
+- **Guiding star decoration — model section:** Replaced generic repeating dot pattern on `.model-band::after` with two instances of `Playbook_Icon_Outline_Gold_RGB.svg` via CSS multiple backgrounds. Large (420px) bottom-left; small (175px) top-right — diagonal inverted from gaps section. `isolation: isolate` added to `.model-band`; `::after` set to `z-index: -1` to ensure icons sit behind stage cards. Opacity: 0.6.
+
+### Fixed
+- **`web/public/demos/homepage-demo-04.html` sync:** File was 370 lines behind `assets/files/homepage-demo-04.html` — splash screen and multiple session changes were missing from the deployed version. Copied authoritative assets file over the public file.
+- **Hero video path:** `src` was `../../web/public/videos/istockphoto-931929622-640_adpp_is.mp4` (relative to `assets/files/`) — broken on Vercel. Corrected to `../videos/istockphoto-931929622-640_adpp_is.mp4` (relative to `/demos/`).
+
+### Notes
+- `web/public/demos/homepage-demo-04.html` must always be kept in sync with `assets/files/homepage-demo-04.html` — they diverge easily. Copy assets → public before every commit.
+- The `../videos/` path works on Vercel but will not resolve if `assets/files/homepage-demo-04.html` is opened directly in a browser locally.
+- `pale-blue` (`#c3dae2`) has been added to the token system but is not yet used in the prototype.
+
+---
+
 ## [2026-03-24] — Homepage demo v4: client feedback pass — tasks 17–31 + service row bug fix
 
 ### Changed

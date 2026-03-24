@@ -1,3 +1,39 @@
+## Session — 2026-03-24 (Brand colour update, design system sync, decorative treatments, deployment fixes)
+
+### What we worked on
+- Applied client-supplied brand colour updates across entire project: new hex values, renamed tokens (`navy`→`teal`, `paper-dark`→`peach`, `mid-grey`→`sand`), added `pale-blue`
+- Updated brand positioning line from "Connecting you to clarity" to "Clarity. Control. Confidence." across all files
+- Completed task 13: "When we are typically engaged" section background changed to teal, background sketch image removed, text updated for dark background
+- Added decorative guiding star icon treatment to the gaps section (white filled icon, pseudo-elements, rotated)
+- Added decorative guiding star treatment to the model section (gold outline icon, CSS multiple backgrounds, `isolation: isolate` stacking fix)
+- Diagnosed and fixed deployment issues: public demo file was 370 lines behind the assets file; hero video path was broken on Vercel
+
+### Key decisions
+- **Token renames:** Client provided a fully revised palette — not just new hex values but new colour names. All token names updated throughout to avoid confusion between old and new palette. `pale-blue` added as a new supporting colour with no direct predecessor.
+- **Background image removal (gaps section):** The sketch texture image (`background-image-04.png`) was an opaque light-grey PNG — it masked any background colour change entirely. Removed rather than adapted, as the sketch was designed for the light background and would not work on teal.
+- **Guiding star placement principle:** Both sections use the same compositional logic — two instances, different sizes, placed on opposing corners to create diagonal tension. Diagonal direction and icon type deliberately varied between sections (gaps: white filled, rotated, top-right/bottom-left; model: gold outline, unrotated, bottom-left/top-right).
+- **`isolation: isolate` for model section stacking:** `z-index: -1` on `::after` alone would push icons behind the section's own background (invisible). `isolation: isolate` creates a scoped stacking context so `-1` means "behind children" not "behind everything".
+- **Sync discipline:** `web/public/demos/homepage-demo-04.html` must always be explicitly copied from `assets/files/homepage-demo-04.html` before committing — they are not auto-synced and diverge silently.
+- **Video path trade-off:** `../videos/` resolves correctly on Vercel (`/demos/` → `/videos/`) but breaks when opening the assets file directly in a local browser. Accepted trade-off since Vercel is the primary viewing environment.
+
+### Output / artefacts produced
+- `assets/files/playbook-design-system.html` — full colour palette update, new swatches, renamed section variants
+- `assets/files/homepage-demo-04.html` — teal gaps section, guiding star decorations, corrected video path
+- `web/public/demos/homepage-demo-04.html` — fully synced with assets version; all session changes deployed
+- `web/app/globals.css` — `@theme` and `:root` updated with new token names and values
+- `CLAUDE.md` — palette table, Tailwind class examples, prototype notes, positioning line updated
+- `.claude/rules/playbook-design-tokens.json` — full token rename, value update, `pale-blue` added
+- `plan/PROJECT_PLAN.md` — task descriptions, token class names, positioning line references updated
+
+### Outstanding / next steps
+- `pale-blue` (`#c3dae2`) is in the token system but unused in the prototype — consider where it might be applied
+- **Client sign-off** on `homepage-demo-04.html` still required before Next.js component build begins
+- Medium tasks still outstanding: 7, 20, 23, 26, 28, 29, 32, 33
+- Next phase after sign-off: **DS-01 through DS-07** (design system components in `web/components/`)
+- Establish a sync step in the commit workflow: always copy assets demo → public demo before pushing
+
+---
+
 ## Session — 2026-03-24 (Homepage demo v4 — client feedback pass, tasks 17–31)
 
 ### What we worked on
