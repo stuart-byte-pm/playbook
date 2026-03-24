@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import type { DivIcon } from 'leaflet'
 
-const OFFICE = { lat: 52.2856, lng: -1.5337 } // 5 North Hall, Spencer Yard, CV31 3SY
-const TRAIN_STATION = { lat: 52.2816, lng: -1.5365 } // Leamington Spa station
-const CAR_PARK = { lat: 52.2870, lng: -1.5380 } // Covent Garden car park
+const OFFICE = { lat: 52.286284949749955, lng: -1.5346219368765222 } // 5 North Hall, Spencer Yard, CV31 3SY
+const TRAIN_STATION = { lat: 52.28450574324147, lng: -1.5358281721167362 } // Leamington Spa station
+const CAR_PARK = { lat: 52.284774744856804, lng: -1.5336335173679758 } // Covent Garden car park
 
 interface MarkerData {
   position: [number, number]

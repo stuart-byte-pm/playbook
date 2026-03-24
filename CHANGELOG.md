@@ -1,3 +1,24 @@
+## [2026-03-24] — Contact page: full layout, form, Leaflet map with proximity markers
+
+### Added
+- `web/app/contact/page.tsx` — Server component with SEO metadata (title, description)
+- `web/app/contact/ContactPageClient.tsx` — Full contact page: two-column grid (form left, details/map/image right), sand background, teal page header with gold eyebrow label
+- `web/app/contact/actions.ts` — Server action stub for form submission (validates required fields, logs to console, returns success state — Resend not yet wired)
+- `web/components/ContactMap.tsx` — Client-side Leaflet + OpenStreetMap interactive map with three custom SVG markers: office (gold), Leamington Spa railway station (teal), Covent Garden car park (teal). Each marker has a popup label with walking time. Map legend below.
+- `leaflet`, `react-leaflet`, `@types/leaflet` — added to `web/package.json` dependencies
+
+### Notes
+- Contact form fields match the homepage demo exactly: Name, Organisation, Email, Subject (dropdown with 5 options), Message, Submit with arrow icon
+- All styling uses design system tokens with CSS custom property fallbacks — no arbitrary values
+- Form submission is stubbed: logs to console and shows a branded success message. Resend integration deferred to a future session (FORM-01)
+- Phone number placeholder: "Number to be confirmed"
+- Building image: pale-blue placeholder box with "Coming soon" label
+- Homepage contact section retained as-is (user decision); nav/hero CTAs not updated yet (homepage not built)
+- Map uses dynamic import (`next/dynamic` with `ssr: false`) to avoid Leaflet SSR issues
+- Leaflet CSS imported dynamically at runtime with `@ts-expect-error` for the CSS module import
+
+---
+
 ## [2026-03-24] — Brand colour update, design system sync, decorative icon treatment, deployment fixes
 
 ### Changed
