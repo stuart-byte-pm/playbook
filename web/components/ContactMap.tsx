@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import type { DivIcon } from 'leaflet'
 
-const OFFICE = { lat: 52.2882, lng: -1.5347 } // 5 North Hall, Spencer Yard
+const OFFICE = { lat: 52.2856, lng: -1.5337 } // 5 North Hall, Spencer Yard, CV31 3SY
 const TRAIN_STATION = { lat: 52.2816, lng: -1.5365 } // Leamington Spa station
 const CAR_PARK = { lat: 52.2870, lng: -1.5380 } // Covent Garden car park
 
