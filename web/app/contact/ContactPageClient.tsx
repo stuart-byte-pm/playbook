@@ -160,23 +160,13 @@ export default function ContactPageClient() {
             <div className="flex flex-col" style={{ gap: 'var(--space-10, 2.5rem)' }}>
               {/* Contact details */}
               <div className="flex flex-col" style={{ gap: 'var(--space-6, 1.5rem)' }}>
-                <p
-                  style={{
-                    fontSize: 'var(--size-body, 1rem)',
-                    color: 'var(--color-text-secondary, #555)',
-                    lineHeight: 'var(--lh-relaxed, 1.6)',
-                    maxWidth: '44ch',
-                  }}
-                >
-                  Playbook operates as an extension of the senior leadership team. If you are dealing with a complex programme — or want to strengthen governance before problems arise — speak with us directly.
-                </p>
-
                 <div className="flex flex-col" style={{ gap: 'var(--space-6, 1.5rem)' }}>
                   <ContactDetail label="Address">
                     5 North Hall, Spencer Yard<br />
                     Spencer Street<br />
                     Leamington Spa<br />
-                    Warwickshire
+                    Warwickshire<br />
+                    CV31 3SY
                   </ContactDetail>
 
                   <ContactDetail label="Email">

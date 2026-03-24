@@ -1,10 +1,26 @@
+## [2026-03-24] — Contact page: final updates — coordinates, icons, address, copy
+
+### Changed
+- **Map marker coordinates:** Updated all three Leaflet map pins with accurate GPS coordinates provided by user: office (52.286284949749955, -1.5346219368765222), train station (52.28450574324147, -1.5358281721167362), car park (52.284774744856804, -1.5336335173679758)
+- **Map marker icons:** Swapped office and car park icons — office now shows `🅿`, car park now shows `P` (reversed from initial implementation)
+- **Car park name:** Updated all references from "Covent Garden Car Park" to "Bath Street Car Park" in `ContactMap.tsx`, `ContactPageClient.tsx`, and map legend
+- **Address:** Added postcode `CV31 3SY` to the contact details address block
+- **Contact intro copy:** Removed the paragraph "Playbook operates as an extension of the senior leadership team…" from the contact details section
+
+### Notes
+- All coordinate updates deployed; map pins now positioned accurately on Spencer Yard office, Leamington Spa railway station, and Bath Street car park
+- Icon swap rationale: office location now uses the parking icon, car park now uses the `P` label — user-requested adjustment
+- Address block now includes full postcode for improved clarity and searchability
+
+---
+
 ## [2026-03-24] — Contact page: full layout, form, Leaflet map with proximity markers
 
 ### Added
 - `web/app/contact/page.tsx` — Server component with SEO metadata (title, description)
 - `web/app/contact/ContactPageClient.tsx` — Full contact page: two-column grid (form left, details/map/image right), sand background, teal page header with gold eyebrow label
 - `web/app/contact/actions.ts` — Server action stub for form submission (validates required fields, logs to console, returns success state — Resend not yet wired)
-- `web/components/ContactMap.tsx` — Client-side Leaflet + OpenStreetMap interactive map with three custom SVG markers: office (gold), Leamington Spa railway station (teal), Covent Garden car park (teal). Each marker has a popup label with walking time. Map legend below.
+- `web/components/ContactMap.tsx` — Client-side Leaflet + OpenStreetMap interactive map with three custom SVG markers: office, Leamington Spa railway station, Bath Street car park. Each marker has a popup label with walking time. Map legend below.
 - `leaflet`, `react-leaflet`, `@types/leaflet` — added to `web/package.json` dependencies
 
 ### Notes

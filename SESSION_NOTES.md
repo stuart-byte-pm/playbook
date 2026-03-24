@@ -1,26 +1,30 @@
-## Session — 2026-03-24 (Contact page build)
+## Session — 2026-03-24 (Contact page build + refinement)
 
 ### What we worked on
 - Built the full `/contact` page with form, contact details, building image placeholder, and interactive Leaflet map
 - Installed `leaflet`, `react-leaflet`, and `@types/leaflet`
-- Created `ContactMap.tsx` component with three custom SVG markers: office (gold pin), Leamington Spa railway station (teal), Covent Garden car park (teal) — each with popup labels and walking times
-- Created `ContactPageClient.tsx` with two-column layout: form left (Name, Organisation, Email, Subject dropdown, Message, Submit), details/map/image right
+- Created `ContactMap.tsx` component with three custom SVG markers and refined with accurate GPS coordinates
+- Created `ContactPageClient.tsx` with two-column layout: form left, details/map/image right
 - Created `actions.ts` server action stub with basic validation and console logging (Resend deferred)
 - Added SEO metadata to `page.tsx` (title + description)
 - Fixed two TypeScript build errors: `DivIcon` vs `Icon` type mismatch, and Leaflet CSS dynamic import type declaration
+- Updated map markers with user-supplied coordinates and renamed car park to Bath Street
+- Swapped marker icons (office/parking) and removed contact intro paragraph
 
 ### Key decisions
-- **Leaflet + OpenStreetMap over Google Maps:** User wanted multiple markers (office, train station, car park) with labels. Simple iframe embeds only support a single pin. Leaflet is free, needs no API key, and supports custom markers — chosen over Google Maps JavaScript API which requires a Cloud billing account.
-- **Car park:** Covent Garden multi-storey selected as the nearest to Spencer Yard (2 min walk).
-- **Homepage contact section retained:** User chose to keep the existing homepage contact form as-is rather than replacing it with a CTA link to `/contact`.
-- **Form submission stubbed:** No Resend wiring this session — form logs to console and shows a success message. Will be completed in FORM-01.
-- **Phone and building image:** Both left as placeholders per user instruction.
+- **Leaflet + OpenStreetMap:** Free, no API key, supports custom markers — chosen over Google Maps
+- **Marker icons swapped:** Office now uses parking icon (`🅿`), car park uses `P` — user preference
+- **Bath Street Car Park:** Updated all references from Covent Garden to Bath Street
+- **Address postcode:** Added `CV31 3SY` for clarity and searchability
+- **Intro paragraph removed:** Simplified the contact details section by removing explanatory copy
+- **Form submission stubbed:** No Resend wiring — logs to console and shows success message. Deferred to FORM-01
+- **Homepage contact section retained:** User decision to keep existing form as-is
 
 ### Output / artefacts produced
 - `web/app/contact/page.tsx` — server component with metadata
-- `web/app/contact/ContactPageClient.tsx` — full contact page client component
+- `web/app/contact/ContactPageClient.tsx` — full contact page client component (updated with copy/address changes)
 - `web/app/contact/actions.ts` — server action stub
-- `web/components/ContactMap.tsx` — Leaflet map component with 3 markers
+- `web/components/ContactMap.tsx` — Leaflet map with accurate coordinates and Bath Street car park label
 - `web/package.json` — updated with leaflet dependencies
 
 ### Outstanding / next steps
@@ -28,7 +32,6 @@
 - **Building image:** Replace placeholder once photo is available
 - **Phone number:** Update once confirmed by client
 - **Nav and hero CTAs:** Update to link to `/contact` once homepage components are built
-- **Map coordinates:** Verify office pin accuracy (currently estimated from Spencer Yard address — may need fine-tuning)
 - **Design system components (DS-01–DS-07)** still the next major build phase
 
 ---
