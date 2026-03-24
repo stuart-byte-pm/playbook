@@ -360,26 +360,25 @@
     .insights { background-color: var(--color-white); padding-block: var(--space-32); }
     .insights__header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-16); gap: var(--space-8); }
     .insights__title { font-size: var(--size-h2); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-black); margin-top: var(--space-6); max-width: 22ch; }
-    .insights__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
-    .insight-card { display: flex; flex-direction: row; gap: var(--space-8); align-items: stretch; cursor: pointer; padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-border-default); }
-    .insight-card__body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-    .insight-card__image { flex-shrink: 0; width: 180px; aspect-ratio: 4/3; background-color: var(--color-sand); overflow: hidden; position: relative; }
+    .insights__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+    .insight-card { display: flex; flex-direction: column; gap: 0; cursor: pointer; }
+    .insight-card__image { aspect-ratio: 16/9; background-color: var(--color-sand); overflow: hidden; position: relative; margin-bottom: var(--space-6); }
     .insight-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--duration-slow) var(--ease-standard); }
     .insight-card:hover .insight-card__img { transform: scale(1.04); }
-    .insight-card__image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 60%); pointer-events: none; }
-    .insight-card__meta { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
+    .insight-card__image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%); pointer-events: none; }
+    .insight-card__meta { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
     .insight-card__tag { font-size: var(--size-caption); font-weight: var(--weight-semibold); letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--color-gold); }
     .insight-card__dot { width: 3px; height: 3px; border-radius: 50%; background: var(--color-border-default); }
     .insight-card__date { font-size: var(--size-caption); color: var(--color-text-secondary); }
-    .insight-card__title { font-size: var(--size-h5); font-weight: var(--weight-semibold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-black); transition: color var(--duration-fast) var(--ease-standard); margin-bottom: var(--space-3); }
+    .insight-card__title { font-size: var(--size-h5); font-weight: var(--weight-semibold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-black); transition: color var(--duration-fast) var(--ease-standard); margin-bottom: var(--space-4); }
     .insight-card:hover .insight-card__title { color: var(--color-teal); }
-    .insight-card__excerpt { font-size: var(--size-body-sm); color: var(--color-text-secondary); line-height: var(--lh-relaxed); margin-bottom: var(--space-4); flex: 1; }
-    .insight-card__link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--size-body-sm); font-weight: var(--weight-medium); color: var(--color-black); border-bottom: 1px solid var(--color-border-default); padding-bottom: 2px; align-self: flex-start; transition: color var(--duration-fast), border-color var(--duration-fast); margin-top: auto; }
+    .insight-card__excerpt { font-size: var(--size-body-sm); color: var(--color-text-secondary); line-height: var(--lh-relaxed); margin-bottom: var(--space-6); }
+    .insight-card__link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--size-body-sm); font-weight: var(--weight-medium); color: var(--color-black); border-bottom: 1px solid var(--color-border-default); padding-bottom: 2px; align-self: flex-start; transition: color var(--duration-fast), border-color var(--duration-fast); }
     .insight-card__link .arrow { transition: transform var(--duration-fast) var(--ease-standard); }
     .insight-card:hover .insight-card__link { color: var(--color-gold); border-color: var(--color-gold); }
     .insight-card:hover .insight-card__link .arrow { transform: translateX(3px); }
-    @media (max-width: 768px) { .insights__grid { grid-template-columns: 1fr; } .insights__header { flex-direction: column; align-items: flex-start; } .insight-card__image { width: 120px; } }
-    @media (min-width: 769px) and (max-width: 960px) { .insights__grid { grid-template-columns: repeat(2, 1fr); } .insight-card__image { width: 140px; } }
+    @media (max-width: 768px) { .insights__grid { grid-template-columns: 1fr; } .insights__header { flex-direction: column; align-items: flex-start; } }
+    @media (min-width: 769px) and (max-width: 960px) { .insights__grid { grid-template-columns: repeat(2, 1fr); } }
     .diagnostic { background-color: var(--color-black); padding-block: var(--space-32); position: relative; overflow: hidden; }
     .diagnostic::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 100% at 0% 50%, rgba(171,127,88,0.08) 0%, transparent 60%); pointer-events: none; }
     .diagnostic__inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-24); align-items: center; }
@@ -865,7 +864,7 @@
         Playbook brings structure to complex programmes, guiding the right people to the right decisions with clear thinking, healthy challenge, and experience-led advice.
       </p>
       <div class="hero__actions">
-        <a href="#" class="btn-primary">
+        <a href="#model" class="btn-primary">
           The Playbook model
           <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1094,6 +1093,61 @@
   </section>
 
 
+  <!-- THE PLAYBOOK MODEL -->
+  <section class="model-band section--tight" id="model" aria-labelledby="model-heading">
+    <div class="container">
+      <div class="model-band__header reveal">
+        <div class="model-band__intro">
+          <span class="label-tag label-tag--on-dark">The Playbook model</span>
+          <h2 class="model-band__title" id="model-heading">
+            How experience becomes institutional judgement
+          </h2>
+          <p class="model-band__copy">
+            Organisations don't lack experience. They lack a way to remember it. The Playbook model describes the four-stage progression that closes that gap.
+          </p>
+          <p class="model-band__copy">
+            We strengthen the decisions that shape major programmes — and bring them under control when it matters most. Operating between board oversight and technical delivery, we remain independent from execution: ensuring decisions are clear, objective, and defensible.
+          </p>
+        </div>
+        <a href="/the-playbook-model" class="btn-outline-light" style="position:relative;z-index:1;">
+          Explore the model
+          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="model-stages reveal" role="tablist" aria-label="The Playbook Model stages">
+        <div class="model-stage model-stage--active" role="tab" aria-selected="true" tabindex="0" data-stage="0">
+          <div class="model-stage__number">01</div>
+          <div class="model-stage__name">Experience</div>
+          <div class="model-stage__desc">Experience teaches the lesson. Complex programmes generate the raw material — but only if it is captured before it walks out of the door.</div>
+          <div class="model-stage__bar"><div class="model-stage__bar-fill"></div></div>
+        </div>
+        <div class="model-stage" role="tab" aria-selected="false" tabindex="-1" data-stage="1">
+          <div class="model-stage__number">02</div>
+          <div class="model-stage__name">Insight</div>
+          <div class="model-stage__desc">Insight recognises the pattern. Experience becomes insight when organisations can see what recurs — across programmes, decisions, and failures.</div>
+          <div class="model-stage__bar"><div class="model-stage__bar-fill"></div></div>
+        </div>
+        <div class="model-stage" role="tab" aria-selected="false" tabindex="-1" data-stage="2">
+          <div class="model-stage__number">03</div>
+          <div class="model-stage__name">Judgement</div>
+          <div class="model-stage__desc">Judgement guides the decision. Insight becomes judgement when patterns are translated into principles that hold under pressure and scrutiny.</div>
+          <div class="model-stage__bar"><div class="model-stage__bar-fill"></div></div>
+        </div>
+        <div class="model-stage" role="tab" aria-selected="false" tabindex="-1" data-stage="3">
+          <div class="model-stage__number">04</div>
+          <div class="model-stage__name">Institutional memory</div>
+          <div class="model-stage__desc">A playbook ensures the lesson is not forgotten. Judgement is codified so it survives beyond individuals — and reaches the next decision when the stakes are high.</div>
+          <div class="model-stage__bar"><div class="model-stage__bar-fill"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
   <!-- SECTORS -->
   <section class="sectors section" aria-labelledby="sectors-heading">
     <div class="container">
@@ -1171,68 +1225,46 @@
       </div>
       <div class="insights__grid">
         <article class="insight-card reveal">
-          <div class="insight-card__body">
-            <div class="insight-card__meta">
-              <span class="insight-card__tag">Governance</span>
-              <span class="insight-card__dot" aria-hidden="true"></span>
-              <time class="insight-card__date" datetime="2026-03-10">10 March 2026</time>
-            </div>
-            <h3 class="insight-card__title">The most expensive lessons in any programme are the ones that must be learned twice</h3>
-            <p class="insight-card__excerpt">Why the Memory Gap, Translation Gap, and Decision Gap repeat — and what structurally closes them before financial commitment.</p>
-            <a href="#" class="insight-card__link">Read article <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
           <div class="insight-card__image">
             <img src="../images/hero/hero-governance-briefing-02.png" alt="" loading="lazy" class="insight-card__img">
             <div class="insight-card__image-overlay"></div>
           </div>
+          <div class="insight-card__meta">
+            <span class="insight-card__tag">Governance</span>
+            <span class="insight-card__dot" aria-hidden="true"></span>
+            <time class="insight-card__date" datetime="2026-03-10">10 March 2026</time>
+          </div>
+          <h3 class="insight-card__title">The most expensive lessons in any programme are the ones that must be learned twice</h3>
+          <p class="insight-card__excerpt">Why the Memory Gap, Translation Gap, and Decision Gap repeat — and what structurally closes them before financial commitment.</p>
+          <a href="#" class="insight-card__link">Read article <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
         <article class="insight-card reveal reveal-delay-1">
-          <div class="insight-card__body">
-            <div class="insight-card__meta">
-              <span class="insight-card__tag">Healthcare</span>
-              <span class="insight-card__dot" aria-hidden="true"></span>
-              <time class="insight-card__date" datetime="2026-02-24">24 February 2026</time>
-            </div>
-            <h3 class="insight-card__title">Why NHS capital programmes drift: diffuse accountability and the governance bridge</h3>
-            <p class="insight-card__excerpt">The structural conditions that allow NHS capital programmes to escalate in cost and complexity — and where independent sponsor-side advisory changes the outcome.</p>
-            <a href="#" class="insight-card__link">Read article <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
           <div class="insight-card__image">
             <img src="../images/insights/insights-architectural-detail-02.png" alt="" loading="lazy" class="insight-card__img">
             <div class="insight-card__image-overlay"></div>
           </div>
+          <div class="insight-card__meta">
+            <span class="insight-card__tag">Healthcare</span>
+            <span class="insight-card__dot" aria-hidden="true"></span>
+            <time class="insight-card__date" datetime="2026-02-24">24 February 2026</time>
+          </div>
+          <h3 class="insight-card__title">Why NHS capital programmes drift: diffuse accountability and the governance bridge</h3>
+          <p class="insight-card__excerpt">The structural conditions that allow NHS capital programmes to escalate in cost and complexity — and where independent sponsor-side advisory changes the outcome.</p>
+          <a href="#" class="insight-card__link">Read article <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
         <article class="insight-card reveal reveal-delay-2">
-          <div class="insight-card__body">
-            <div class="insight-card__meta">
-              <span class="insight-card__tag">Regeneration</span>
-              <span class="insight-card__dot" aria-hidden="true"></span>
-              <time class="insight-card__date" datetime="2026-02-07">7 February 2026</time>
-            </div>
-            <h3 class="insight-card__title">What the Governance Bridge looks like in residential regeneration</h3>
-            <p class="insight-card__excerpt">How the space between Board oversight and programme delivery creates risk in mixed-use schemes — and how structured sponsor-side advisory fills it.</p>
-            <a href="#" class="insight-card__link">Read article <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
           <div class="insight-card__image">
             <img src="../images/insights/insights-structural-detail-04.png" alt="" loading="lazy" class="insight-card__img">
             <div class="insight-card__image-overlay"></div>
           </div>
-        </article>
-        <article class="insight-card reveal reveal-delay-3">
-          <div class="insight-card__body">
-            <div class="insight-card__meta">
-              <span class="insight-card__tag">Governance</span>
-              <span class="insight-card__dot" aria-hidden="true"></span>
-              <time class="insight-card__date" datetime="2026-03-10">10 March 2026</time>
-            </div>
-            <h3 class="insight-card__title">The most expensive lessons in any programme are the ones that must be learned twice</h3>
-            <p class="insight-card__excerpt">Why the Memory Gap, Translation Gap, and Decision Gap repeat — and what structurally closes them before financial commitment.</p>
-            <a href="#" class="insight-card__link">Read article <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <div class="insight-card__meta">
+            <span class="insight-card__tag">Regeneration</span>
+            <span class="insight-card__dot" aria-hidden="true"></span>
+            <time class="insight-card__date" datetime="2026-02-07">7 February 2026</time>
           </div>
-          <div class="insight-card__image">
-            <img src="../images/hero/hero-governance-briefing-02.png" alt="" loading="lazy" class="insight-card__img">
-            <div class="insight-card__image-overlay"></div>
-          </div>
+          <h3 class="insight-card__title">What the Governance Bridge looks like in residential regeneration</h3>
+          <p class="insight-card__excerpt">How the space between Board oversight and programme delivery creates risk in mixed-use schemes — and how structured sponsor-side advisory fills it.</p>
+          <a href="#" class="insight-card__link">Read article <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </article>
       </div>
     </div>
