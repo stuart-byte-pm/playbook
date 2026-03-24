@@ -5,7 +5,7 @@ import type { DivIcon } from 'leaflet'
 
 const OFFICE = { lat: 52.286284949749955, lng: -1.5346219368765222 } // 5 North Hall, Spencer Yard, CV31 3SY
 const TRAIN_STATION = { lat: 52.28450574324147, lng: -1.5358281721167362 } // Leamington Spa station
-const CAR_PARK = { lat: 52.284774744856804, lng: -1.5336335173679758 } // Covent Garden car park
+const CAR_PARK = { lat: 52.284774744856804, lng: -1.5336335173679758 } // Bath Street car park
 
 interface MarkerData {
   position: [number, number]
@@ -16,7 +16,7 @@ interface MarkerData {
 const MARKERS: MarkerData[] = [
   { position: [OFFICE.lat, OFFICE.lng], label: 'Playbook Advisory Group — 5 North Hall, Spencer Yard', type: 'office' },
   { position: [TRAIN_STATION.lat, TRAIN_STATION.lng], label: 'Leamington Spa Railway Station — 5 min walk', type: 'station' },
-  { position: [CAR_PARK.lat, CAR_PARK.lng], label: 'Covent Garden Car Park — 2 min walk', type: 'parking' },
+  { position: [CAR_PARK.lat, CAR_PARK.lng], label: 'Bath Street Car Park — 2 min walk', type: 'parking' },
 ]
 
 function createIcon(L: typeof import('leaflet'), type: MarkerData['type']): DivIcon {
@@ -27,9 +27,9 @@ function createIcon(L: typeof import('leaflet'), type: MarkerData['type']): DivI
   }
 
   const labels: Record<MarkerData['type'], string> = {
-    office: 'P',
+    office: '🅿',
     station: '🚂',
-    parking: '🅿',
+    parking: 'P',
   }
 
   const colour = colours[type]

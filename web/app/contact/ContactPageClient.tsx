@@ -242,7 +242,7 @@ export default function ContactPageClient() {
                 >
                   <MapLegendItem colour="#af7e56" label="Playbook office" />
                   <MapLegendItem colour="#264852" label="Railway station (5 min)" />
-                  <MapLegendItem colour="#264852" label="Covent Garden car park (2 min)" />
+                  <MapLegendItem colour="#264852" label="Bath Street car park (2 min)" />
                 </div>
               </div>
             </div>
