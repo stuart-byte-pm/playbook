@@ -67,7 +67,7 @@ The Next.js application lives in the `web/` subdirectory. All build commands run
 
 All colour, typography, spacing, and animation values must come from the token file. Do not introduce arbitrary values.
 
-**Tailwind v4 note:** Tailwind v4 is in use. Design tokens are configured via the `@theme` directive in `web/app/globals.css` — there is no `tailwind.config.ts`. This produces identical utility class names (`bg-navy`, `text-gold`, `font-inter`, etc.). Do not attempt to create `tailwind.config.ts`.
+**Tailwind v4 note:** Tailwind v4 is in use. Design tokens are configured via the `@theme` directive in `web/app/globals.css` — there is no `tailwind.config.ts`. This produces identical utility class names (`bg-teal`, `text-gold`, `font-inter`, etc.). Do not attempt to create `tailwind.config.ts`.
 
 ### Core palette
 
@@ -78,16 +78,17 @@ The brand palette is defined in two tiers per `assets/files/playbook-consultancy
 | Token | Value | Use |
 |---|---|---|
 | `black` | `#000000` | Primary body text, high-contrast elements |
-| `gold` | `#AB7F58` | Accent, the guiding star mark, highlights |
+| `gold` | `#af7e56` | Accent, the guiding star mark, highlights |
 | `white` | `#FFFFFF` | Page background |
 
 **Supporting**
 
 | Token | Value | Use |
 |---|---|---|
-| `navy` | `#271F57` | Supporting backgrounds, headers |
-| `paper-dark` | `#FADCC1` | Alternating sections |
-| `mid-grey` | `#F4F4F4` | Secondary text, captions |
+| `teal` | `#264852` | Supporting backgrounds, headers |
+| `peach` | `#ffdfae` | Alternating sections |
+| `sand` | `#ebe7dc` | Secondary text, captions |
+| `pale-blue` | `#c3dae2` | Cool-toned supporting backgrounds |
 
 ### Typography
 
@@ -101,8 +102,8 @@ Font family: **Inter** (primary, via Google Fonts — variety of weights availab
 
 - **Playbook Model section** — auto-cycling 4-stage selector (Experience, Insight, Judgement, Institutional memory). Cycles every 3 seconds; click or arrow keys jump to a stage. Inactive stages at `opacity: 0.38`; active stage shows a gold progress bar animated via `@keyframes stageProgress`. The static step-box layout has been discarded.
 - **Diagnostic CTA section** — split layout: content left, full-height image right (`services-governance-workshop-04.png`, `aspect-ratio: 4/5`) with a left-edge gradient overlay blending into the black background. A meet-in-middle entrance animation: left column from `translateX(-80px)`, image from `translateX(80px)`, both to `translateX(0)` at 600ms `cubic-bezier(0.2, 0, 0, 1)`. Mobile uses `translateY(40px)`. `prefers-reduced-motion` respected.
-- **Dark section backgrounds** — the Model and Diagnostic CTA sections use black (`#000000`), not navy. Do not use navy for dark homepage section backgrounds.
-- **Gap cards** — hover state uses black, not navy.
+- **Dark section backgrounds** — the Model and Diagnostic CTA sections use black (`#000000`), not navy. Do not use teal for dark homepage section backgrounds.
+- **Gap cards** — hover state uses black, not teal.
 - **Rotating guiding star** — the decorative rotating `.hero__star-bg` SVG element has been rejected and removed. Do not reintroduce it in any form.
 - **Hero heading copy** — confirmed: "Organisations don't lack experience. They lack a way to remember it."
 
@@ -118,7 +119,7 @@ Full brand documents are in `assets/files/`. These govern all copy and design de
 - Use Oxford comma: "clarity, control, and confidence"
 - Named brand concepts always capitalised: the Playbook Paradox, the Capital Governance Diagnostic, the Memory Gap, the Translation Gap, the Decision Gap, the Governance Bridge
 - The brand mark uses a **guiding star** (derived from the `+`), not a plain plus symbol — reference it as "the guiding star" in copy and code comments
-- Brand positioning line: **"Connecting you to clarity"** (primary) — do not alter or paraphrase
+- Brand positioning line: **"Clarity. Control. Confidence."** (primary) — do not alter or paraphrase
 - Animation: subtle, purposeful, minimal — fade-ins and controlled transitions only; never decorative
 
 **Words to avoid in copy:** leverage (as a verb), stakeholder alignment, value-add, bespoke, cutting-edge, world-class, best-in-class, excited, passionate, delighted

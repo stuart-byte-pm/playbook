@@ -15,26 +15,27 @@
     :root {
       /* Colour — primary */
       --color-black:       #000000;
-      --color-gold:        #AB7F58;
+      --color-gold:        #af7e56;
       --color-white:       #FFFFFF;
 
       /* Colour — supporting */
-      --color-navy:        #271F57;
-      --color-paper-dark:  #FADCC1;
-      --color-mid-grey:    #F4F4F4;
+      --color-teal:        #264852;
+      --color-peach:       #ffdfae;
+      --color-sand:        #ebe7dc;
+      --color-pale-blue:   #c3dae2;
 
       /* Colour — semantic */
       --color-background-page:          #FFFFFF;
-      --color-background-section-dark:  #271F57;
-      --color-background-section-warm:  #FADCC1;
-      --color-background-section-light: #F4F4F4;
+      --color-background-section-dark:  #264852;
+      --color-background-section-warm:  #ffdfae;
+      --color-background-section-light: #ebe7dc;
       --color-text-primary:             #000000;
       --color-text-on-dark:             #FFFFFF;
       --color-text-secondary:           #555555;
-      --color-text-accent:              #AB7F58;
+      --color-text-accent:              #af7e56;
       --color-border-default:           #E5E5E5;
       --color-border-strong:            #000000;
-      --color-border-accent:            #AB7F58;
+      --color-border-accent:            #af7e56;
 
       /* Typography */
       --font-primary: 'Inter', sans-serif;
@@ -169,7 +170,7 @@
       height: 100vh;
       width: 220px;
       flex-shrink: 0;
-      background-color: var(--color-mid-grey);
+      background-color: var(--color-sand);
       border-right: 1px solid var(--color-border-default);
       overflow-y: auto;
       padding: var(--space-8) 0;
@@ -187,7 +188,7 @@
       font-weight: var(--weight-bold);
       letter-spacing: var(--ls-wider);
       text-transform: uppercase;
-      color: var(--color-navy);
+      color: var(--color-teal);
       line-height: var(--lh-snug);
     }
 
@@ -225,12 +226,12 @@
     }
 
     .ds-sidebar a:hover {
-      color: var(--color-navy);
+      color: var(--color-teal);
       background-color: var(--color-border-default);
     }
 
     .ds-sidebar a.active {
-      color: var(--color-navy);
+      color: var(--color-teal);
       font-weight: var(--weight-semibold);
     }
 
@@ -244,7 +245,7 @@
        PAGE HEADER
        ============================================================ */
     .ds-header {
-      background-color: var(--color-navy);
+      background-color: var(--color-teal);
       padding: var(--space-20) var(--space-16);
     }
 
@@ -555,13 +556,13 @@
     .ds-spacing-bar-wrap {
       flex: 1;
       height: 24px;
-      background-color: var(--color-mid-grey);
+      background-color: var(--color-sand);
       position: relative;
     }
 
     .ds-spacing-bar {
       height: 100%;
-      background-color: var(--color-navy);
+      background-color: var(--color-teal);
       opacity: 0.7;
     }
 
@@ -592,7 +593,7 @@
     .ds-motion-demo-box {
       width: 100%;
       height: 80px;
-      background-color: var(--color-mid-grey);
+      background-color: var(--color-sand);
       border: 1px solid var(--color-border-default);
       display: flex;
       align-items: center;
@@ -727,12 +728,12 @@
     .ds-duration-bar-wrap {
       flex: 1;
       height: 8px;
-      background-color: var(--color-mid-grey);
+      background-color: var(--color-sand);
     }
 
     .ds-duration-bar {
       height: 100%;
-      background-color: var(--color-navy);
+      background-color: var(--color-teal);
     }
 
     .ds-duration-value {
@@ -800,7 +801,7 @@
     .ds-radius-block {
       width: 80px;
       height: 80px;
-      background-color: var(--color-navy);
+      background-color: var(--color-teal);
     }
 
     .ds-radius-label {
@@ -890,8 +891,8 @@
     }
 
     .btn-primary:hover {
-      background-color: var(--color-navy);
-      border-color: var(--color-navy);
+      background-color: var(--color-teal);
+      border-color: var(--color-teal);
     }
 
     .btn-secondary {
@@ -941,7 +942,7 @@
 
     .tag {
       display: inline-block;
-      background-color: var(--color-mid-grey);
+      background-color: var(--color-sand);
       color: var(--color-black);
       font-size: var(--size-label);
       font-weight: var(--weight-medium);
@@ -1032,23 +1033,23 @@
       border: 1px solid var(--color-border-default);
     }
 
-    .variant-navy {
-      background-color: var(--color-navy);
+    .variant-teal {
+      background-color: var(--color-teal);
       color: var(--color-white);
     }
 
-    .variant-navy .ds-section-variant-label {
+    .variant-teal .ds-section-variant-label {
       color: var(--color-gold);
       opacity: 1;
     }
 
-    .variant-paper {
-      background-color: var(--color-paper-dark);
+    .variant-peach {
+      background-color: var(--color-peach);
       color: var(--color-black);
     }
 
-    .variant-grey {
-      background-color: var(--color-mid-grey);
+    .variant-sand {
+      background-color: var(--color-sand);
       color: var(--color-black);
     }
 
@@ -1103,7 +1104,7 @@
        8. BRAND CONCEPTS
        ============================================================ */
     .ds-brand-section {
-      background-color: var(--color-navy);
+      background-color: var(--color-teal);
       padding: var(--space-20) var(--space-16);
     }
 
@@ -1474,10 +1475,10 @@
               </div>
             </div>
             <div class="ds-colour-swatch ds-reveal">
-              <div class="ds-colour-block" style="background-color:#AB7F58;"></div>
+              <div class="ds-colour-block" style="background-color:#af7e56;"></div>
               <div class="ds-colour-info">
                 <div class="ds-colour-token">gold</div>
-                <div class="ds-colour-hex">#AB7F58</div>
+                <div class="ds-colour-hex">#af7e56</div>
                 <div class="ds-colour-use">Accent colour. The guiding star mark. Highlights. Active states. Never used for large background fills.</div>
               </div>
             </div>
@@ -1495,27 +1496,35 @@
           <p class="ds-subsection-title">Supporting palette</p>
           <div class="ds-colour-row">
             <div class="ds-colour-swatch ds-reveal">
-              <div class="ds-colour-block" style="background-color:#271F57;"></div>
+              <div class="ds-colour-block" style="background-color:#264852;"></div>
               <div class="ds-colour-info">
-                <div class="ds-colour-token">navy</div>
-                <div class="ds-colour-hex">#271F57</div>
+                <div class="ds-colour-token">teal</div>
+                <div class="ds-colour-hex">#264852</div>
                 <div class="ds-colour-use">Supporting section backgrounds. Hero variants. Headers. Dark overlays.</div>
               </div>
             </div>
             <div class="ds-colour-swatch ds-reveal">
-              <div class="ds-colour-block" style="background-color:#FADCC1;"></div>
+              <div class="ds-colour-block" style="background-color:#ffdfae;"></div>
               <div class="ds-colour-info">
-                <div class="ds-colour-token">paper-dark</div>
-                <div class="ds-colour-hex">#FADCC1</div>
-                <div class="ds-colour-use">Alternating section backgrounds. Warm tonal break without using navy. Never overused.</div>
+                <div class="ds-colour-token">peach</div>
+                <div class="ds-colour-hex">#ffdfae</div>
+                <div class="ds-colour-use">Alternating section backgrounds. Warm tonal break. Never overused.</div>
               </div>
             </div>
             <div class="ds-colour-swatch ds-reveal">
-              <div class="ds-colour-block" style="background-color:#F4F4F4; border-bottom: 1px solid #E5E5E5;"></div>
+              <div class="ds-colour-block" style="background-color:#ebe7dc; border-bottom: 1px solid #E5E5E5;"></div>
               <div class="ds-colour-info">
-                <div class="ds-colour-token">mid-grey</div>
-                <div class="ds-colour-hex">#F4F4F4</div>
+                <div class="ds-colour-token">sand</div>
+                <div class="ds-colour-hex">#ebe7dc</div>
                 <div class="ds-colour-use">Secondary text. Captions. Subtle dividers. Light section backgrounds.</div>
+              </div>
+            </div>
+            <div class="ds-colour-swatch ds-reveal">
+              <div class="ds-colour-block" style="background-color:#c3dae2; border-bottom: 1px solid #E5E5E5;"></div>
+              <div class="ds-colour-info">
+                <div class="ds-colour-token">pale-blue</div>
+                <div class="ds-colour-hex">#c3dae2</div>
+                <div class="ds-colour-use">Cool-toned supporting backgrounds. Alternate to sand for tonal variety.</div>
               </div>
             </div>
           </div>
@@ -1533,24 +1542,24 @@
               </div>
             </div>
             <div class="ds-semantic-swatch">
-              <div class="ds-semantic-block" style="background-color:#271F57;"></div>
+              <div class="ds-semantic-block" style="background-color:#264852;"></div>
               <div>
                 <div class="ds-semantic-label">background-section-dark</div>
-                <div class="ds-semantic-value">#271F57</div>
+                <div class="ds-semantic-value">#264852</div>
               </div>
             </div>
             <div class="ds-semantic-swatch">
-              <div class="ds-semantic-block" style="background-color:#FADCC1;"></div>
+              <div class="ds-semantic-block" style="background-color:#ffdfae;"></div>
               <div>
                 <div class="ds-semantic-label">background-section-warm</div>
-                <div class="ds-semantic-value">#FADCC1</div>
+                <div class="ds-semantic-value">#ffdfae</div>
               </div>
             </div>
             <div class="ds-semantic-swatch">
-              <div class="ds-semantic-block" style="background-color:#F4F4F4; border: 1px solid #E5E5E5;"></div>
+              <div class="ds-semantic-block" style="background-color:#ebe7dc; border: 1px solid #E5E5E5;"></div>
               <div>
                 <div class="ds-semantic-label">background-section-light</div>
-                <div class="ds-semantic-value">#F4F4F4</div>
+                <div class="ds-semantic-value">#ebe7dc</div>
               </div>
             </div>
             <div class="ds-semantic-swatch">
@@ -1575,10 +1584,10 @@
               </div>
             </div>
             <div class="ds-semantic-swatch">
-              <div class="ds-semantic-block" style="background-color:#AB7F58;"></div>
+              <div class="ds-semantic-block" style="background-color:#af7e56;"></div>
               <div>
                 <div class="ds-semantic-label">text-accent</div>
-                <div class="ds-semantic-value">#AB7F58</div>
+                <div class="ds-semantic-value">#af7e56</div>
               </div>
             </div>
             <div class="ds-semantic-swatch">
@@ -1596,10 +1605,10 @@
               </div>
             </div>
             <div class="ds-semantic-swatch">
-              <div class="ds-semantic-block" style="background-color:#AB7F58;"></div>
+              <div class="ds-semantic-block" style="background-color:#af7e56;"></div>
               <div>
                 <div class="ds-semantic-label">border-accent</div>
-                <div class="ds-semantic-value">#AB7F58</div>
+                <div class="ds-semantic-value">#af7e56</div>
               </div>
             </div>
           </div>
@@ -1610,7 +1619,7 @@
       <!-- ========================================================
            SECTION 2: TYPOGRAPHY
            ======================================================== -->
-      <section class="ds-section" id="typography" aria-labelledby="typography-title" style="background-color: var(--color-mid-grey);">
+      <section class="ds-section" id="typography" aria-labelledby="typography-title" style="background-color: var(--color-sand);">
         <div class="ds-section-inner">
           <div class="ds-section-header">
             <span class="ds-section-number">02</span>
@@ -1719,7 +1728,7 @@
               <div class="ds-weight-value">300</div>
               <div class="text-secondary text-small" style="margin-top:2px;">Display text only</div>
             </div>
-            <div style="font-size:2rem; font-weight:300; line-height:1.2; color:#000000;">Connecting you to clarity</div>
+            <div style="font-size:2rem; font-weight:300; line-height:1.2; color:#000000;">Clarity. Control. Confidence.</div>
           </div>
 
           <div class="ds-weight-row">
@@ -1728,7 +1737,7 @@
               <div class="ds-weight-value">400</div>
               <div class="text-secondary text-small" style="margin-top:2px;">Body copy</div>
             </div>
-            <div style="font-size:2rem; font-weight:400; line-height:1.2; color:#000000;">Connecting you to clarity</div>
+            <div style="font-size:2rem; font-weight:400; line-height:1.2; color:#000000;">Clarity. Control. Confidence.</div>
           </div>
 
           <div class="ds-weight-row">
@@ -1737,7 +1746,7 @@
               <div class="ds-weight-value">500</div>
               <div class="text-secondary text-small" style="margin-top:2px;">UI labels, navigation</div>
             </div>
-            <div style="font-size:2rem; font-weight:500; line-height:1.2; color:#000000;">Connecting you to clarity</div>
+            <div style="font-size:2rem; font-weight:500; line-height:1.2; color:#000000;">Clarity. Control. Confidence.</div>
           </div>
 
           <div class="ds-weight-row">
@@ -1746,7 +1755,7 @@
               <div class="ds-weight-value">600</div>
               <div class="text-secondary text-small" style="margin-top:2px;">Subheadings, callouts</div>
             </div>
-            <div style="font-size:2rem; font-weight:600; line-height:1.2; color:#000000;">Connecting you to clarity</div>
+            <div style="font-size:2rem; font-weight:600; line-height:1.2; color:#000000;">Clarity. Control. Confidence.</div>
           </div>
 
           <div class="ds-weight-row">
@@ -1755,7 +1764,7 @@
               <div class="ds-weight-value">700</div>
               <div class="text-secondary text-small" style="margin-top:2px;">h1–h3 headings</div>
             </div>
-            <div style="font-size:2rem; font-weight:700; line-height:1.2; color:#000000;">Connecting you to clarity</div>
+            <div style="font-size:2rem; font-weight:700; line-height:1.2; color:#000000;">Clarity. Control. Confidence.</div>
           </div>
 
           <hr class="subsection-divider">
@@ -1921,7 +1930,7 @@
       <!-- ========================================================
            SECTION 4: MOTION
            ======================================================== -->
-      <section class="ds-section" id="motion" aria-labelledby="motion-title" style="background-color: var(--color-mid-grey);">
+      <section class="ds-section" id="motion" aria-labelledby="motion-title" style="background-color: var(--color-sand);">
         <div class="ds-section-inner">
           <div class="ds-section-header">
             <span class="ds-section-number">04</span>
@@ -2098,7 +2107,7 @@
       <!-- ========================================================
            SECTION 6: SHADOWS
            ======================================================== -->
-      <section class="ds-section" id="shadows" aria-labelledby="shadows-title" style="background-color: var(--color-mid-grey);">
+      <section class="ds-section" id="shadows" aria-labelledby="shadows-title" style="background-color: var(--color-sand);">
         <div class="ds-section-inner">
           <div class="ds-section-header">
             <span class="ds-section-number">06</span>
@@ -2199,18 +2208,18 @@
               <h4 class="ds-section-variant-heading">Clarity, control, and confidence</h4>
               <p class="ds-section-variant-body">The foundation of every engagement. Standard body copy sits on white at full contrast.</p>
             </div>
-            <div class="ds-section-variant variant-navy">
-              <div class="ds-section-variant-label">section — navy</div>
-              <h4 class="ds-section-variant-heading">Connecting you to clarity</h4>
-              <p class="ds-section-variant-body">Hero sections, closing CTAs, and concept introductions. Gold accent on navy for emphasis.</p>
+            <div class="ds-section-variant variant-teal">
+              <div class="ds-section-variant-label">section — teal</div>
+              <h4 class="ds-section-variant-heading">Clarity. Control. Confidence.</h4>
+              <p class="ds-section-variant-body">Hero sections, closing CTAs, and concept introductions. Gold accent on teal for emphasis.</p>
             </div>
-            <div class="ds-section-variant variant-paper">
-              <div class="ds-section-variant-label">section — paper-dark</div>
+            <div class="ds-section-variant variant-peach">
+              <div class="ds-section-variant-label">section — peach</div>
               <h4 class="ds-section-variant-heading">A warm tonal break</h4>
-              <p class="ds-section-variant-body">Alternating section rhythm. Avoid using consecutively. Black text on paper-dark.</p>
+              <p class="ds-section-variant-body">Alternating section rhythm. Avoid using consecutively. Black text on peach.</p>
             </div>
-            <div class="ds-section-variant variant-grey">
-              <div class="ds-section-variant-label">section — mid-grey</div>
+            <div class="ds-section-variant variant-sand">
+              <div class="ds-section-variant-label">section — sand</div>
               <h4 class="ds-section-variant-heading">Secondary content areas</h4>
               <p class="ds-section-variant-body">Used for supporting sections, index pages, and reference content. Recedes behind primary sections.</p>
             </div>
@@ -2254,7 +2263,7 @@
             <!-- Positioning and pillars -->
             <div>
               <p class="ds-brand-block-title">Positioning line</p>
-              <p class="ds-brand-positioning"><strong>Connecting you to clarity</strong></p>
+              <p class="ds-brand-positioning"><strong>Clarity. Control. Confidence.</strong></p>
 
               <p class="ds-brand-block-title" style="margin-top: var(--space-10);">Three pillars</p>
               <div class="ds-brand-pillars">

@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+
+# Script to write homepage-demo-04.html
+import os
+
+out = r"C:\Users\Admin\OneDrive\Desktop\playbook+\assets\files\homepage-demo-04.html"
+
+html = r"""<!DOCTYPE html>
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
@@ -11,18 +17,17 @@
   <style>
     :root {
       --color-black:       #000000;
-      --color-gold:        #af7e56;
+      --color-gold:        #AB7F58;
       --color-white:       #FFFFFF;
-      --color-teal:        #264852;
-      --color-peach:       #ffdfae;
-      --color-sand:        #ebe7dc;
-      --color-pale-blue:   #c3dae2;
+      --color-navy:        #271F57;
+      --color-paper-dark:  #FADCC1;
+      --color-mid-grey:    #F4F4F4;
       --color-text-primary:   #000000;
       --color-text-on-dark:   #FFFFFF;
       --color-text-secondary: #555555;
-      --color-text-accent:    #af7e56;
+      --color-text-accent:    #AB7F58;
       --color-border-default: #E5E5E5;
-      --color-border-accent:  #af7e56;
+      --color-border-accent:  #AB7F58;
       --font-primary: 'Inter', Arial, sans-serif;
       --weight-light:    300;
       --weight-regular:  400;
@@ -80,7 +85,7 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
-    html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 120px; }
+    html { scroll-behavior: smooth; font-size: 16px; }
     body {
       font-family: var(--font-primary);
       font-size: var(--size-body);
@@ -126,7 +131,7 @@
       transition: background-color var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard), padding var(--duration-base) var(--ease-standard);
     }
     .nav.is-scrolled { background-color: rgba(255,255,255,0.96); backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--color-border-default); padding-block: var(--space-4); }
-    .nav__inner { padding-inline: var(--gutter); padding-inline-start: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav__inner { max-width: var(--max-width); margin-inline: auto; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: space-between; }
     .nav__logo { display: flex; align-items: center; gap: var(--space-3); }
     .nav__mark { width: 32px; height: 32px; flex-shrink: 0; }
     .nav__wordmark { font-size: var(--size-body-sm); font-weight: var(--weight-semibold); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-white); line-height: 1.2; transition: color var(--duration-base) var(--ease-standard); }
@@ -168,16 +173,16 @@
     .nav__drawer-footer { padding-top: var(--space-10); border-top: 1px solid rgba(255,255,255,0.07); margin-top: var(--space-6); }
     .nav__drawer-cta { display: inline-flex; align-items: center; gap: var(--space-3); font-size: var(--size-body-sm); font-weight: var(--weight-medium); letter-spacing: var(--ls-wide); padding: 0.875rem 1.75rem; background-color: var(--color-gold); color: var(--color-white); border-radius: var(--radius-sm); transition: background-color var(--duration-fast) var(--ease-standard); }
     .nav__drawer-cta:hover { background-color: #9a7050; }
-    .nav__drawer-tagline { margin-top: var(--space-6); font-size: var(--size-caption); letter-spacing: var(--ls-wider); text-transform: uppercase; color: rgba(255,255,255,0.8); }
-    .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; background-color: var(--color-teal); overflow: hidden; }
+    .nav__drawer-tagline { margin-top: var(--space-6); font-size: var(--size-caption); letter-spacing: var(--ls-wider); text-transform: uppercase; color: rgba(255,255,255,0.2); }
+    .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; background-color: var(--color-navy); overflow: hidden; }
     .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; filter: saturate(0.35) brightness(0.65); }
-    .hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.85), linear-gradient(to right, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.88) 50%, rgba(0,0,0,0.75) 100%), linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%); pointer-events: none; z-index: 0; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.5), linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.25) 100%), linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); pointer-events: none; z-index: 0; }
     .hero__grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 64px 64px; pointer-events: none; }
     .hero__content { position: relative; z-index: 1; max-width: var(--max-width); margin-inline: auto; padding-inline: var(--gutter); padding-block: var(--space-32) var(--space-24); display: flex; flex-direction: column; align-items: flex-start; }
     .hero__label { margin-bottom: var(--space-8); opacity: 0; animation: fadeUp var(--duration-slow) var(--ease-decelerate) 200ms forwards; }
     .hero__heading { font-size: var(--size-display); font-weight: var(--weight-bold); line-height: var(--lh-tight); letter-spacing: var(--ls-tight); color: var(--color-white); max-width: 22ch; margin-bottom: var(--space-8); opacity: 0; animation: fadeUp var(--duration-slow) var(--ease-decelerate) 320ms forwards; }
     .hero__heading em { font-style: normal; color: #ffffff; }
-    .hero__sub { font-size: var(--size-body-lg); font-weight: var(--weight-light); line-height: var(--lh-relaxed); color: #ffffff; max-width: 80ch; margin-bottom: var(--space-12); opacity: 0; animation: fadeUp var(--duration-slow) var(--ease-decelerate) 440ms forwards; }
+    .hero__sub { font-size: var(--size-body-lg); font-weight: var(--weight-light); line-height: var(--lh-relaxed); color: #ffffff; max-width: 52ch; margin-bottom: var(--space-12); opacity: 0; animation: fadeUp var(--duration-slow) var(--ease-decelerate) 440ms forwards; }
     .hero__actions { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; opacity: 0; animation: fadeUp var(--duration-slow) var(--ease-decelerate) 560ms forwards; }
     .btn-primary { display: inline-flex; align-items: center; gap: var(--space-3); font-size: var(--size-body-sm); font-weight: var(--weight-medium); letter-spacing: var(--ls-wide); padding: 0.875rem 1.75rem; background-color: var(--color-gold); color: var(--color-white); border-radius: var(--radius-sm); transition: background-color var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard); will-change: transform; }
     .btn-primary:hover { background-color: #9a7050; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(171,127,88,0.35); }
@@ -192,91 +197,32 @@
     .hero__scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent); animation: scrollPulse 2.4s ease-in-out infinite; }
     @keyframes scrollPulse { 0%, 100% { opacity: 0.3; transform: scaleY(1); } 50% { opacity: 0.7; transform: scaleY(1.1); } }
     .belief { background-color: var(--color-white); padding-block: var(--space-32); }
-    .belief__inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: stretch; }
-    .belief__image { position: relative; overflow: hidden; min-height: 420px; }
-    .belief__image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-    .belief__body { display: flex; flex-direction: column; justify-content: center; gap: var(--space-6); padding-block: var(--space-4); }
+    .belief__inner { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-20); align-items: start; }
+    .belief__eyebrow { padding-top: 0.5rem; }
+    .belief__image { margin-top: var(--space-8); width: 50%; overflow: hidden; }
+    .belief__image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .belief__body { border-top: 1px solid var(--color-border-default); padding-top: var(--space-8); }
     .belief__quote { font-size: var(--size-h3); font-weight: var(--weight-bold); line-height: var(--lh-snug); letter-spacing: var(--ls-tight); color: var(--color-black); margin-bottom: var(--space-8); }
     .belief__quote strong { font-weight: var(--weight-semibold); }
-    .belief__copy { font-size: var(--size-body); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--lh-relaxed); max-width: 55ch; margin-bottom: var(--space-8); }
-    .belief__link { display: inline-flex; align-self: flex-start; align-items: center; gap: var(--space-2); font-size: var(--size-body-sm); font-weight: var(--weight-medium); letter-spacing: var(--ls-wide); color: var(--color-black); border-bottom: 1px solid var(--color-black); padding-bottom: 2px; transition: color var(--duration-fast), border-color var(--duration-fast); }
+    .belief__copy { font-size: var(--size-body-lg); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--lh-relaxed); max-width: 55ch; margin-bottom: var(--space-8); }
+    .belief__link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--size-body-sm); font-weight: var(--weight-medium); letter-spacing: var(--ls-wide); color: var(--color-black); border-bottom: 1px solid var(--color-black); padding-bottom: 2px; transition: color var(--duration-fast), border-color var(--duration-fast); }
     .belief__link:hover { color: var(--color-gold); border-color: var(--color-gold); }
     .belief__link .arrow { transition: transform var(--duration-fast) var(--ease-standard); }
     .belief__link:hover .arrow { transform: translateX(3px); }
-    @media (max-width: 768px) { .belief__inner { grid-template-columns: 1fr; gap: var(--space-8); } .belief__image { min-height: 280px; position: relative; } }
-    .gaps { background-color: var(--color-teal); padding-block: var(--space-32); position: relative; overflow: hidden; }
-    /* Guiding star — large, top-right, rotated, bleeds off edge */
-    .gaps::before {
-      content: '';
-      position: absolute;
-      top: -80px;
-      right: -100px;
-      width: 500px;
-      height: 500px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 610 610'%3E%3Cpath fill='%23fff' d='M316.6,605c156.6-6,282.4-131.8,288.4-288.4-285.4.2-288.3,282.7-288.4,288.4Z'/%3E%3Cpath fill='%23fff' d='M5,316.6c6,156.6,131.8,282.4,288.3,288.4-.2-285.1-282-288.3-288.3-288.4Z'/%3E%3Cpath fill='%23fff' d='M605,293.3C599,136.8,473.2,11,316.7,5c.2,285,281.9,288.3,288.3,288.3Z'/%3E%3Cpath fill='%23fff' d='M5,293.3c284.8-.2,288.3-281.5,288.4-288.3C136.8,11,11,136.8,5,293.3Z'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0.07;
-      transform: rotate(20deg);
-      pointer-events: none;
-    }
-    /* Guiding star — smaller, bottom-left, counter-rotated */
-    .gaps::after {
-      content: '';
-      position: absolute;
-      bottom: -50px;
-      left: -60px;
-      width: 260px;
-      height: 260px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 610 610'%3E%3Cpath fill='%23fff' d='M316.6,605c156.6-6,282.4-131.8,288.4-288.4-285.4.2-288.3,282.7-288.4,288.4Z'/%3E%3Cpath fill='%23fff' d='M5,316.6c6,156.6,131.8,282.4,288.3,288.4-.2-285.1-282-288.3-288.3-288.4Z'/%3E%3Cpath fill='%23fff' d='M605,293.3C599,136.8,473.2,11,316.7,5c.2,285,281.9,288.3,288.3,288.3Z'/%3E%3Cpath fill='%23fff' d='M5,293.3c284.8-.2,288.3-281.5,288.4-288.3C136.8,11,11,136.8,5,293.3Z'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0.05;
-      transform: rotate(-10deg);
-      pointer-events: none;
-    }
-    .gaps__header { margin-bottom: var(--space-16); position: relative; z-index: 1; }
-    .gaps__title { font-size: var(--size-h2); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-white); margin-top: var(--space-6); max-width: 28ch; }
-    .gaps__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background-color: var(--color-border-default); position: relative; z-index: 1; }
-    .gap-card { background-color: var(--color-white); padding: var(--space-10) var(--space-8); display: flex; flex-direction: column; gap: var(--space-6); transition: background-color var(--duration-base) var(--ease-standard); position: relative; overflow: hidden; }
-    .gap-card__pillar { position: absolute; top: var(--space-8); right: var(--space-8); font-size: 2.25rem; font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: 1.3; color: rgba(0,0,0,0.07); pointer-events: none; user-select: none; z-index: 0; white-space: nowrap; }
-    .gap-card__pillar::after { content: attr(data-word); position: absolute; top: 0; left: 0; white-space: nowrap; color: #AF7E56; clip-path: inset(0 100% 0 0); transition: clip-path 450ms var(--ease-decelerate); }
-    .gap-card:hover .gap-card__pillar::after { clip-path: inset(0 0% 0 0); }
-    .gap-card.is-threaded .gap-card__pillar::after { clip-path: inset(0 0% 0 0); }
-    .gap-card__number,
-    .gap-card__name,
-    .gap-card__divider,
-    .gap-card__copy,
-    .gap-card__extra { position: relative; z-index: 1; }
-    .gap-card__extra { font-size: var(--size-body); font-weight: var(--weight-light); line-height: var(--lh-relaxed); color: var(--color-text-secondary); transition: color var(--duration-base) var(--ease-standard); }
-    .gap-card:hover .gap-card__extra,
-    .gap-card.is-threaded .gap-card__extra { color: rgba(255,255,255,0.6); }
+    @media (max-width: 768px) { .belief__inner { grid-template-columns: 1fr; gap: var(--space-8); } }
+    .gaps { background-color: var(--color-mid-grey); background-image: url('../images/backgrounds/background-image-04.png'); background-repeat: no-repeat; background-size: 100% auto; background-position: center bottom; padding-block: var(--space-32); }
+    .gaps__header { margin-bottom: var(--space-16); }
+    .gaps__title { font-size: var(--size-h2); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-black); margin-top: var(--space-6); max-width: 28ch; }
+    .gaps__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background-color: var(--color-border-default); }
+    .gap-card { background-color: var(--color-white); padding: var(--space-10) var(--space-8); display: flex; flex-direction: column; gap: var(--space-6); transition: background-color var(--duration-base) var(--ease-standard); }
     .gap-card:hover { background-color: var(--color-black); }
     .gap-card__number { font-size: var(--size-caption); font-weight: var(--weight-semibold); letter-spacing: var(--ls-widest); text-transform: uppercase; color: var(--color-gold); }
-    .gap-card__name { font-size: var(--size-h4); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); color: var(--color-black); transition: color var(--duration-base) var(--ease-standard); min-height: calc(var(--size-h4) * 1.65 * 2); display: flex; align-items: flex-start; }
+    .gap-card__name { font-size: var(--size-h4); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); color: var(--color-black); transition: color var(--duration-base) var(--ease-standard); }
     .gap-card__copy { font-size: var(--size-body); font-weight: var(--weight-light); line-height: var(--lh-relaxed); color: var(--color-text-secondary); transition: color var(--duration-base) var(--ease-standard); flex: 1; }
-    .gap-card__divider { position: relative; width: calc(100% + var(--space-8)); height: 1px; background-color: var(--color-border-default); }
-    .gap-card__divider::after { content: ''; position: absolute; inset: 0; background-color: var(--color-gold); transform: scaleX(0); transform-origin: left; transition: transform 450ms var(--ease-decelerate); }
+    .gap-card__divider { width: 24px; height: 1px; background-color: var(--color-border-default); transition: background-color var(--duration-base) var(--ease-standard), width var(--duration-base) var(--ease-standard); }
     .gap-card:hover .gap-card__name { color: var(--color-white); }
     .gap-card:hover .gap-card__copy { color: rgba(255,255,255,0.6); }
-    .gap-card:hover .gap-card__divider::after { transform: scaleX(1); }
-    .gap-card.is-threaded .gap-card__divider::after { transform: scaleX(1); }
-    .gap-card.is-threaded { background-color: var(--color-black); }
-    .gap-card.is-threaded .gap-card__name { color: var(--color-white); }
-    .gap-card.is-threaded .gap-card__copy { color: rgba(255,255,255,0.6); }
-    /* Continuous thread layout — desktop 3-column only */
-    @media (min-width: 769px) {
-      /* Card 2: bleed past both left and right edges to bridge the grid gaps */
-      .gaps__grid .gap-card:nth-child(2) .gap-card__divider {
-        width: calc(100% + var(--space-8) * 2);
-        margin-left: calc(-1 * var(--space-8));
-      }
-      /* Card 3: bleed past left edge only, padded right — mirrors card 1 */
-      .gaps__grid .gap-card:nth-child(3) .gap-card__divider {
-        width: calc(100% + var(--space-8));
-        margin-left: calc(-1 * var(--space-8));
-      }
-    }
+    .gap-card:hover .gap-card__divider { background-color: var(--color-gold); width: 40px; }
     @media (max-width: 768px) { .gaps__grid { grid-template-columns: 1fr; } }
     .services { background-color: var(--color-white); padding-block: var(--space-32); }
     .services__header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--space-16); gap: var(--space-8); }
@@ -287,39 +233,24 @@
     .service-row__content { z-index: 1; }
     .service-row__title { font-size: var(--size-h4); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); color: var(--color-black); margin-bottom: var(--space-2); transition: color var(--duration-base) var(--ease-standard); }
     .service-row__desc { font-size: var(--size-body-sm); color: var(--color-text-secondary); line-height: var(--lh-relaxed); max-width: 55ch; overflow: hidden; max-height: 0; opacity: 0; transition: max-height var(--duration-base) var(--ease-decelerate), opacity var(--duration-base) var(--ease-standard), color var(--duration-base) var(--ease-standard); }
-    .service-row:hover .service-row__desc { max-height: 12rem; opacity: 1; }
+    .service-row:hover .service-row__desc { max-height: 5rem; opacity: 1; }
     .service-row__arrow { z-index: 1; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-border-default); border-radius: 50%; color: var(--color-black); transition: transform var(--duration-base) var(--ease-standard), background-color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard), color var(--duration-base) var(--ease-standard); margin-top: 0.2rem; }
     .service-row:hover .service-row__arrow { transform: rotate(45deg); background-color: var(--color-gold); border-color: var(--color-gold); color: var(--color-white); }
     .service-row:hover .service-row__title { color: var(--color-gold); }
     .services__layout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: stretch; }
-    .services__image-panel { display: flex; flex-direction: column; position: sticky; top: 120px; align-self: start; }
-    .services__image-frame { position: relative; overflow: hidden; background-color: var(--color-white); border-radius: 20px; }
-    .services__image-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .services__image-panel { display: flex; flex-direction: column; }
+    .services__image-frame { position: relative; flex: 1; overflow: hidden; background-color: var(--color-mid-grey); }
+    .services__image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .services__image-caption { font-size: var(--size-caption); font-weight: var(--weight-medium); letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--color-text-secondary); margin-top: var(--space-3); }
     @media (max-width: 900px) { .services__layout { grid-template-columns: 1fr; } .services__image-panel { display: none; } }
     @media (max-width: 600px) { .services__header { flex-direction: column; align-items: flex-start; } .service-row { grid-template-columns: auto 1fr auto; gap: var(--space-4); } }
-    .model-band { background-color: var(--color-black); padding-block: var(--space-24); position: relative; overflow: hidden; isolation: isolate; }
+    .model-band { background-color: var(--color-black); padding-block: var(--space-24); position: relative; overflow: hidden; }
     .model-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 120% at 100% 50%, rgba(171,127,88,0.1) 0%, transparent 60%); pointer-events: none; }
-    /* Guiding star (gold outline) — large bottom-right, small top-left */
-    .model-band::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        url("data:image/svg+xml,%3Csvg width='610' height='610' viewBox='0 0 610 610' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M602.913 318.609C595.953 472.487 472.52 595.932 318.647 602.911C319.025 590.2 322.442 524.618 355.594 459.646C373.679 424.202 400.589 388.987 440.647 362.615C480.3 336.511 532.951 318.999 602.913 318.609Z' stroke='%23AF7E56' stroke-width='4'/%3E%3Cpath d='M7.08789 318.647C19.8493 319.025 85.5259 322.458 150.526 355.705C185.92 373.809 221.068 400.729 247.384 440.773C273.433 480.412 290.901 533.025 291.29 602.913C137.512 595.953 14.0669 472.52 7.08789 318.647Z' stroke='%23AF7E56' stroke-width='4'/%3E%3Cpath d='M318.709 7.08594C472.491 14.046 595.938 137.484 602.912 291.263C590.225 290.928 524.486 287.522 459.437 254.244C424.049 236.14 388.91 209.221 362.603 169.183C336.561 129.55 319.098 76.9494 318.709 7.08594Z' stroke='%23AF7E56' stroke-width='4'/%3E%3Cpath d='M291.352 7.08789C290.972 19.899 287.514 85.6715 254.183 150.713C236.06 186.076 209.131 221.176 169.101 247.453C129.476 273.464 76.9 290.901 7.08594 291.29C14.0464 137.512 137.479 14.0672 291.352 7.08789Z' stroke='%23AF7E56' stroke-width='4'/%3E%3C/svg%3E"),
-        url("data:image/svg+xml,%3Csvg width='610' height='610' viewBox='0 0 610 610' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M602.913 318.609C595.953 472.487 472.52 595.932 318.647 602.911C319.025 590.2 322.442 524.618 355.594 459.646C373.679 424.202 400.589 388.987 440.647 362.615C480.3 336.511 532.951 318.999 602.913 318.609Z' stroke='%23AF7E56' stroke-width='4'/%3E%3Cpath d='M7.08789 318.647C19.8493 319.025 85.5259 322.458 150.526 355.705C185.92 373.809 221.068 400.729 247.384 440.773C273.433 480.412 290.901 533.025 291.29 602.913C137.512 595.953 14.0669 472.52 7.08789 318.647Z' stroke='%23AF7E56' stroke-width='4'/%3E%3Cpath d='M318.709 7.08594C472.491 14.046 595.938 137.484 602.912 291.263C590.225 290.928 524.486 287.522 459.437 254.244C424.049 236.14 388.91 209.221 362.603 169.183C336.561 129.55 319.098 76.9494 318.709 7.08594Z' stroke='%23AF7E56' stroke-width='4'/%3E%3Cpath d='M291.352 7.08789C290.972 19.899 287.514 85.6715 254.183 150.713C236.06 186.076 209.131 221.176 169.101 247.453C129.476 273.464 76.9 290.901 7.08594 291.29C14.0464 137.512 137.479 14.0672 291.352 7.08789Z' stroke='%23AF7E56' stroke-width='4'/%3E%3C/svg%3E");
-      background-size: 175px 175px, 420px 420px;
-      background-position: -70px calc(100% + 70px), calc(100% + 30px) -25px;
-      background-repeat: no-repeat, no-repeat;
-      opacity: 0.6;
-      pointer-events: none;
-      z-index: -1;
-    }
-    .model-band__header { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-8); margin-bottom: var(--space-12); position: relative; z-index: 1; }
+    .model-band__header { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-8); margin-bottom: var(--space-12); }
     .model-band__intro { flex: 1; }
     .model-band__title { font-size: var(--size-h2); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-white); margin-top: var(--space-6); max-width: 32ch; }
     .model-band__copy { font-size: var(--size-body); font-weight: var(--weight-light); color: rgba(255,255,255,0.5); line-height: var(--lh-relaxed); max-width: 48ch; margin-top: var(--space-4); }
-    .model-stages { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); overflow: hidden; position: relative; z-index: 1; }
+    .model-stages { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); overflow: hidden; }
     .model-stage { padding: var(--space-8); border-right: 1px solid rgba(255,255,255,0.1); cursor: pointer; position: relative; opacity: 0.38; transition: opacity 320ms var(--ease-standard), background-color 320ms var(--ease-standard); overflow: hidden; user-select: none; }
     .model-stage:last-child { border-right: none; }
     .model-stage:hover { opacity: 0.65; }
@@ -347,7 +278,7 @@
     .sectors__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
     .sector-card { background-color: var(--color-white); display: flex; flex-direction: column; cursor: pointer; overflow: hidden; transition: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard); will-change: transform; }
     .sector-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
-    .sector-card__image { position: relative; aspect-ratio: 16/9; overflow: hidden; background-color: var(--color-teal); }
+    .sector-card__image { position: relative; aspect-ratio: 16/9; overflow: hidden; background-color: var(--color-navy); }
     .sector-card__image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--duration-slow) var(--ease-standard); }
     .sector-card:hover .sector-card__image img { transform: scale(1.04); }
     .sector-card__body { padding: var(--space-6) var(--space-6) var(--space-8); display: flex; flex-direction: column; gap: var(--space-4); flex: 1; }
@@ -362,7 +293,7 @@
     .insights__title { font-size: var(--size-h2); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-black); margin-top: var(--space-6); max-width: 22ch; }
     .insights__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
     .insight-card { display: flex; flex-direction: column; gap: 0; cursor: pointer; }
-    .insight-card__image { aspect-ratio: 16/9; background-color: var(--color-sand); overflow: hidden; position: relative; margin-bottom: var(--space-6); }
+    .insight-card__image { aspect-ratio: 16/9; background-color: var(--color-mid-grey); overflow: hidden; position: relative; margin-bottom: var(--space-6); }
     .insight-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--duration-slow) var(--ease-standard); }
     .insight-card:hover .insight-card__img { transform: scale(1.04); }
     .insight-card__image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%); pointer-events: none; }
@@ -371,7 +302,7 @@
     .insight-card__dot { width: 3px; height: 3px; border-radius: 50%; background: var(--color-border-default); }
     .insight-card__date { font-size: var(--size-caption); color: var(--color-text-secondary); }
     .insight-card__title { font-size: var(--size-h5); font-weight: var(--weight-semibold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-black); transition: color var(--duration-fast) var(--ease-standard); margin-bottom: var(--space-4); }
-    .insight-card:hover .insight-card__title { color: var(--color-teal); }
+    .insight-card:hover .insight-card__title { color: var(--color-navy); }
     .insight-card__excerpt { font-size: var(--size-body-sm); color: var(--color-text-secondary); line-height: var(--lh-relaxed); margin-bottom: var(--space-6); }
     .insight-card__link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--size-body-sm); font-weight: var(--weight-medium); color: var(--color-black); border-bottom: 1px solid var(--color-border-default); padding-bottom: 2px; align-self: flex-start; transition: color var(--duration-fast), border-color var(--duration-fast); }
     .insight-card__link .arrow { transition: transform var(--duration-fast) var(--ease-standard); }
@@ -385,16 +316,15 @@
     .diagnostic__eyebrow { margin-bottom: var(--space-8); }
     .diagnostic__title { font-size: var(--size-h1); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-tight); color: var(--color-white); margin-bottom: var(--space-8); }
     .diagnostic__copy { font-size: var(--size-body-lg); font-weight: var(--weight-light); color: rgba(255,255,255,0.5); line-height: var(--lh-relaxed); margin-bottom: var(--space-10); max-width: 44ch; }
-    .diagnostic__image { position: relative; overflow: hidden; border-radius: 20px; aspect-ratio: 4/5; align-self: stretch; }
-    .diagnostic__image-icon { position: absolute; bottom: 32px; left: 32px; width: 64px; height: 64px; z-index: 2; pointer-events: none; }
-    .diagnostic__image img:not(.diagnostic__image-icon) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--duration-slow) var(--ease-standard); }
+    .diagnostic__image { position: relative; overflow: hidden; border-radius: var(--radius-md); aspect-ratio: 4/5; align-self: stretch; }
+    .diagnostic__image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--duration-slow) var(--ease-standard); }
     .diagnostic__image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.25) 0%, transparent 40%); pointer-events: none; }
     .diagnostic:hover .diagnostic__image img { transform: scale(1.03); }
     .diagnostic--meet .diagnostic__content { opacity: 0; transform: translateX(-80px); transition: opacity 600ms cubic-bezier(0.2, 0, 0, 1), transform 600ms cubic-bezier(0.2, 0, 0, 1); }
     .diagnostic--meet .diagnostic__image { opacity: 0; transform: translateX(80px); transition: opacity 600ms cubic-bezier(0.2, 0, 0, 1), transform 600ms cubic-bezier(0.2, 0, 0, 1); }
     .diagnostic--meet.is-visible .diagnostic__content, .diagnostic--meet.is-visible .diagnostic__image { opacity: 1; transform: translateX(0); }
     @media (max-width: 768px) { .diagnostic__inner { grid-template-columns: 1fr; } .diagnostic__image { aspect-ratio: 16/9; } .diagnostic--meet .diagnostic__content, .diagnostic--meet .diagnostic__image { transform: translateY(40px); } .diagnostic--meet.is-visible .diagnostic__content, .diagnostic--meet.is-visible .diagnostic__image { transform: translateY(0); } }
-    .contact { background-color: var(--color-sand); padding-block: var(--space-24); }
+    .contact { background-color: var(--color-mid-grey); padding-block: var(--space-24); }
     .contact__inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-24); align-items: start; }
     .contact__title { font-size: var(--size-h2); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-black); margin-top: var(--space-6); margin-bottom: var(--space-6); }
     .contact__copy { font-size: var(--size-body); color: var(--color-text-secondary); line-height: var(--lh-relaxed); max-width: 40ch; }
@@ -410,7 +340,7 @@
     .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--color-black); box-shadow: 0 0 0 3px rgba(0,0,0,0.06); }
     .form-textarea { resize: vertical; min-height: 120px; line-height: var(--lh-relaxed); }
     .form-submit { display: inline-flex; align-items: center; gap: var(--space-3); font-size: var(--size-body-sm); font-weight: var(--weight-medium); letter-spacing: var(--ls-wide); padding: 0.875rem 1.75rem; background-color: var(--color-black); color: var(--color-white); border-radius: var(--radius-sm); align-self: flex-start; transition: background-color var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard); will-change: transform; }
-    .form-submit:hover { background-color: var(--color-teal); transform: translateY(-1px); }
+    .form-submit:hover { background-color: var(--color-navy); transform: translateY(-1px); }
     .form-submit:active { transform: translateY(0); }
     .form-submit .arrow { transition: transform var(--duration-fast) var(--ease-standard); }
     .form-submit:hover .arrow { transform: translateX(3px); }
@@ -419,8 +349,6 @@
     .footer__top { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-20); padding-bottom: var(--space-12); border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: var(--space-10); }
     .footer__brand { display: flex; align-items: flex-start; gap: var(--space-4); }
     .footer__tagline { font-size: var(--size-body-sm); font-weight: var(--weight-light); color: rgba(255,255,255,0.35); line-height: var(--lh-relaxed); margin-top: var(--space-4); max-width: 22ch; }
-    .footer__wordmark-svg { height: 48px; width: auto; display: block; margin-bottom: var(--space-4); }
-    .footer__wordmark-svg .wm { fill: rgba(255,255,255,0.7); }
     .footer__nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
     .footer__nav-group-title { font-size: var(--size-caption); font-weight: var(--weight-semibold); letter-spacing: var(--ls-widest); text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: var(--space-4); }
     .footer__nav-links { display: flex; flex-direction: column; gap: var(--space-3); list-style: none; }
@@ -467,352 +395,35 @@
     .gap-card.is-visible .gap-card__number-digit:nth-child(1) { transition-delay: 40ms; }
     .gap-card.is-visible .gap-card__number-digit:nth-child(2) { transition-delay: 120ms; }
     /* WHERE WE SIT */
-    /* ============================================================
-       WHERE WE SIT — manifesto row format
-       ============================================================ */
-    .where-we-sit {
-      background-color: var(--color-black);
-      padding-block: var(--space-32);
-      position: relative;
-      overflow: hidden;
-    }
-    .where-we-sit::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 100% 0%, rgba(171,127,88,0.07) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .wws__bg-icon {
-      position: absolute;
-      bottom: -120px;
-      right: -100px;
-      width: 620px;
-      height: auto;
-      opacity: 0.35;
-      transform: rotate(0deg);
-      pointer-events: none;
-      user-select: none;
-      z-index: 0;
-      width: 775px;
-    }
-    .where-we-sit .container { position: relative; z-index: 1; }
-    .wws__header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-16);
-      align-items: end;
-      padding-bottom: var(--space-16);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: var(--space-16);
-    }
-    .wws__title {
-      font-size: var(--size-h1);
-      font-weight: var(--weight-bold);
-      letter-spacing: var(--ls-tight);
-      line-height: var(--lh-tight);
-      color: var(--color-white);
-      margin-top: var(--space-6);
-    }
-    .wws__intro {
-      font-size: var(--size-body);
-      font-weight: var(--weight-light);
-      line-height: var(--lh-relaxed);
-      color: var(--color-white);
-      align-self: end;
-    }
-    /* Declaration rows */
-    .wws__rows { margin-bottom: var(--space-10); }
-    .wws__row {
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      align-items: center;
-      gap: var(--space-8);
-      padding-block: var(--space-6);
-      padding-left: var(--space-6);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      position: relative;
-      cursor: default;
-      opacity: 0;
-      transform: translateX(-36px);
-      transition:
-        opacity 420ms var(--ease-decelerate),
-        transform 420ms var(--ease-decelerate),
-        background-color var(--duration-base) var(--ease-standard);
-    }
-    .wws__row::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 2px;
-      background: var(--color-gold);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 360ms var(--ease-decelerate);
-    }
-    .wws__row.wws-in {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .wws__row.wws-in::before { transform: scaleY(1); }
-    .wws__row:hover { background-color: rgba(255,255,255,0.025); }
-    .wws__row-num {
-      font-size: var(--size-caption);
-      font-weight: var(--weight-semibold);
-      letter-spacing: var(--ls-widest);
-      color: var(--color-gold);
-      opacity: 0.6;
-      transition: opacity var(--duration-base) var(--ease-standard);
-    }
-    .wws__row:hover .wws__row-num { opacity: 1; }
-    .wws__row-text {
-      font-size: clamp(1.1rem, 1.6vw, 1.4rem);
-      font-weight: var(--weight-medium);
-      letter-spacing: var(--ls-tight);
-      color: rgba(255,255,255,0.75);
-      line-height: var(--lh-snug);
-      transition: color var(--duration-base) var(--ease-standard),
-                  transform var(--duration-base) var(--ease-standard);
-    }
-    .wws__row:hover .wws__row-text {
-      color: var(--color-white);
-      transform: translateX(6px);
-    }
-    /* "We are not" footnote */
-    .wws__footnote {
-      display: flex;
-      align-items: baseline;
-      gap: var(--space-4);
-      flex-wrap: wrap;
-      padding-top: var(--space-8);
-      opacity: 0;
-      transition: opacity 500ms var(--ease-decelerate);
-    }
-    .wws__footnote.wws-in { opacity: 1; }
-    .wws__footnote-label {
-      font-size: var(--size-caption);
-      font-weight: var(--weight-semibold);
-      letter-spacing: var(--ls-widest);
-      text-transform: uppercase;
-      color: var(--color-white);
-      white-space: nowrap;
-    }
-    .wws__footnote-items {
-      font-size: var(--size-body-sm);
-      color: var(--color-white);
-      font-weight: var(--weight-light);
-    }
-    @media (max-width: 768px) {
-      .wws__header { grid-template-columns: 1fr; gap: var(--space-8); }
-      .wws__row { grid-template-columns: 44px 1fr; gap: var(--space-4); }
-    }
-
-    /* ============================================================
-       NAV WORDMARK SVG
-       ============================================================ */
-    .nav__wordmark-svg {
-      height: 88px;
-      width: auto;
-      display: block;
-    }
-    .nav__wordmark-svg .wm {
-      fill: var(--color-white);
-      transition: fill var(--duration-base) var(--ease-standard);
-    }
-    .nav.is-scrolled .nav__wordmark-svg .wm {
-      fill: var(--color-black);
-    }
-    /* ============================================================
-       SPLASH SCREEN
-       ============================================================ */
-    .splash {
-      position: fixed;
-      inset: 0;
-      z-index: 500;
-      background-color: var(--color-black);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 1;
-      transition: opacity 500ms var(--ease-standard);
-    }
-    .splash.is-hiding { opacity: 0; pointer-events: none; }
-    body.splash-active { overflow: hidden; }
-    .splash__inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-6);
-      padding: var(--space-8);
-      max-width: 480px;
-      width: 100%;
-      animation: splashContentIn 700ms var(--ease-decelerate) both;
-    }
-    @keyframes splashContentIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .splash__wordmark {
-      height: 200px;
-      width: auto;
-      display: block;
-      /* Negative margin compensates for internal SVG whitespace at the bottom of the viewBox */
-      margin-bottom: -3rem;
-    }
-    .splash__wordmark .wm { fill: var(--color-white); }
-    .splash__icon {
-      width: 72px;
-      height: 72px;
-      display: block;
-      animation: splashSpin 2.4s linear infinite;
-    }
-    .splash__icon path { fill: var(--color-white); }
-    @keyframes splashSpin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-    .splash__rule {
-      width: 36px;
-      height: 1px;
-      background: var(--color-gold);
-      opacity: 0.5;
-    }
-    .splash__definition { text-align: center; }
-    .splash__word {
-      font-size: var(--size-h4);
-      font-weight: var(--weight-semibold);
-      letter-spacing: var(--ls-tight);
-      color: var(--color-white);
-      margin-bottom: var(--space-1);
-    }
-    .splash__pos {
-      font-size: var(--size-body-sm);
-      font-style: italic;
-      font-weight: var(--weight-light);
-      color: rgba(255,255,255,0.4);
-      letter-spacing: var(--ls-wide);
-      margin-bottom: var(--space-4);
-    }
-    .splash__defs {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
-      padding: 0;
-    }
-    .splash__defs li {
-      font-size: var(--size-body-sm);
-      font-weight: var(--weight-light);
-      line-height: var(--lh-relaxed);
-      color: rgba(255,255,255,0.55);
-      padding-left: var(--space-4);
-      border-left: 1px solid rgba(171,127,88,0.45);
-      text-align: left;
-    }
-    .splash__loading {
-      display: flex;
-      align-items: center;
-      gap: 0.2em;
-      font-size: var(--size-label);
-      font-weight: var(--weight-medium);
-      letter-spacing: var(--ls-widest);
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-top: var(--space-2);
-    }
-    .splash__loading-dots {
-      display: flex;
-      gap: 0.15em;
-    }
-    .splash__loading-dots span {
-      animation: dotPulse 1.4s ease-in-out infinite both;
-      opacity: 0;
-    }
-    .splash__loading-dots span:nth-child(1) { animation-delay: 0ms; }
-    .splash__loading-dots span:nth-child(2) { animation-delay: 200ms; }
-    .splash__loading-dots span:nth-child(3) { animation-delay: 400ms; }
-    @keyframes dotPulse {
-      0%, 80%, 100% { opacity: 0; }
-      40%            { opacity: 1; }
-    }
-    /* ── Article overlay ─────────────────────────────────── */
-    .article-overlay { position: fixed; inset: 0; z-index: 900; background: var(--color-white); overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity 360ms var(--ease-standard); }
-    .article-overlay.is-open { opacity: 1; pointer-events: all; }
-    .article-overlay__inner { max-width: 720px; margin: 0 auto; padding: var(--space-16) var(--space-8) var(--space-24); }
-    .article-overlay__back { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--size-body-sm); font-weight: var(--weight-medium); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-gold); cursor: pointer; border: none; background: none; padding: 0; margin-bottom: var(--space-12); transition: opacity 140ms; }
-    .article-overlay__back:hover { opacity: 0.7; }
-    .article-overlay__back svg { transform: rotate(180deg); }
-    .article-overlay__tag { font-size: var(--size-caption); font-weight: var(--weight-semibold); letter-spacing: var(--ls-widest); text-transform: uppercase; color: var(--color-gold); }
-    .article-overlay__date { font-size: var(--size-caption); color: var(--color-text-secondary); margin-left: var(--space-3); }
-    .article-overlay__meta { margin-bottom: var(--space-6); }
-    .article-overlay__title { font-size: var(--size-h2); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-black); margin-bottom: var(--space-8); max-width: 22ch; }
-    .article-overlay__image { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--radius-md); margin-bottom: var(--space-10); }
-    .article-overlay__body p { font-size: var(--size-body); line-height: var(--lh-relaxed); color: var(--color-text-primary); margin-bottom: var(--space-6); }
-    .article-overlay__body h3 { font-size: var(--size-h4); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); margin-bottom: var(--space-4); margin-top: var(--space-10); color: var(--color-black); }
-    .article-overlay__body blockquote { border-left: 3px solid var(--color-gold); padding-left: var(--space-6); margin: var(--space-8) 0; font-style: italic; color: var(--color-text-secondary); font-size: var(--size-body-lg); line-height: var(--lh-relaxed); }
+    .where-we-sit__inner { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-20); align-items: start; }
+    .where-we-sit__title { font-size: var(--size-h2); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-snug); color: var(--color-black); margin-top: var(--space-6); max-width: 16ch; }
+    .where-we-sit__intro { font-size: var(--size-body-lg); font-weight: var(--weight-light); line-height: var(--lh-relaxed); color: var(--color-text-secondary); max-width: 58ch; margin-bottom: var(--space-6); }
+    .where-we-sit__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); margin-top: var(--space-8); padding-top: var(--space-8); border-top: 1px solid var(--color-border-default); }
+    .where-we-sit__col-label { font-size: var(--size-caption); font-weight: var(--weight-semibold); letter-spacing: var(--ls-widest); text-transform: uppercase; color: var(--color-gold); margin-bottom: var(--space-4); }
+    .where-we-sit__list { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+    .where-we-sit__list li { font-size: var(--size-body-sm); line-height: var(--lh-relaxed); color: var(--color-text-primary); padding-left: var(--space-4); position: relative; }
+    .where-we-sit__list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 6px; height: 1px; background: var(--color-gold); }
+    .where-we-sit__list--not li { color: var(--color-text-secondary); }
+    .where-we-sit__list--not li::before { background: var(--color-border-default); }
+    @media (max-width: 900px) { .where-we-sit__inner { grid-template-columns: 1fr; } .where-we-sit__grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 
 <body>
 
-  <!-- SPLASH SCREEN -->
-  <div class="splash" id="splash" role="status" aria-label="Loading Playbook Advisory Group">
-    <div class="splash__inner">
-      <svg class="splash__wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 700" role="img" aria-label="Playbook Advisory Group">
-        <path class="wm" d="M496.7,403.6v-197.6h-12.8l-51.8,9.7v6.2l2.8,2.5c6.2,4.4,10.3,12.5,10.3,20v159.2c0,7.5-4.1,15.3-10.3,20l-2.8,2.2v6.6h77.7v-6.6l-3.1-2.2c-5.6-4.7-10-12.5-10-20Z"/>
-        <path class="wm" d="M676.9,412.9c-2.5,4.4-7.2,4.4-7.2,4.4-6.2,0-8.7-3.1-8.7-11.2v-78.1c0-48.7-39.3-60.9-74.3-60.9s-62.8,15.3-62.8,36.8,10.9,25.3,24.7,25.3,24.7-10.9,24.7-24-3.7-14.7-9.1-19c1.6-1.2,4.7-2.2,9.1-2.2,10.9,0,27.5,6.9,33.7,27.5-2.2,25.9-93.7,19.7-93.7,77.1s22.2,46.8,50.9,46.8,35.6-8.1,45.9-23.7c3.4,15.9,15.3,23.7,32.2,23.7s34.7-14.7,34.7-22.5ZM609.1,372.7c-1.9,18.4-13.1,30.6-24.4,30.6s-19.7-9.7-19.7-25.3c0-26.9,28.4-32.2,44-43.4v38.1Z"/>
-        <path class="wm" d="M1444.2,403.4v-19.2c-2.1-47.6-49.8-48.5-51.6-48.5v67.7c0,7.5-4.1,15.3-10.3,20l-2.8,2.2v6.6h77.8v-6.6l-3.1-2.2c-5.6-4.7-10-12.5-10-20Z"/>
-        <path class="wm" d="M1543,421.8c-6.2-3.7-12.8-10.3-15.6-17.5l-11.9-29.1c-6.1-15.1-18.3-28.8-32.7-37.2-13.9,4.1-22.1,13-27.1,22.1l24.4,60.4c3.1,6.9,9.7,11.6,17.2,11.6h53.1v-6.6l-7.5-3.7Z"/>
-        <path class="wm" d="M1512.6,294.6c5.9-5,14.7-10.6,21.2-13.7l8.7-4.1v-6.6h-53.1v6.6l.3.3c5.3,5.6,4.7,12.5-1.3,17.5l-26.6,21.6c4,4,8.5,6.9,13,9.1l37.7-30.6Z"/>
-        <path class="wm" d="M1392.7,244v87.5c45.2,0,50.8-39.6,51.6-49.5v-76.4h-12.8l-51.9,9.7v6.2l2.8,2.5c6.2,4.4,10.3,12.5,10.3,20Z"/>
-        <path class="wm" d="M787,282.5h1.3c4.8,1.1,8.5,2.3,11.1,3.6,2.6,1.3,4.3,3.5,5.1,6.5.8,3,0,7.4-2.4,13.1l-29.6,71-30.1-71c-2.2-5.4-3.2-9.6-2.9-12.6.2-2.9,1.6-5.2,4.2-6.9,2.6-1.6,6.6-2.9,12.1-3.8v-8.8h-97.3v8.5c.9.2,1.6.5,2.3,1,4.4,1.3,8.3,3.6,11.9,7,3.6,3.4,7.3,9.3,11.3,17.8l59.4,139-1.6,3.8c-2.3,5.5-5.7,10.5-10.2,15-4.5,4.5-10.6,6.4-18.5,5.7-2.5-.2-5-1-7.3-2.2-2.3-1.3-4.7-2.7-7-4.1-2.3-1.5-4.9-2.8-7.6-4-2.8-1.2-5.7-1.8-8.9-1.8s-7.3,1-11.8,2.9c-5.9,2.8-9.8,7-11.5,12.6-1.7,5.6-1.2,11.2,1.6,16.7,2.8,5.5,7.7,10.2,14.8,14,7.1,3.8,16.4,5.2,27.9,4.1,8.7-.6,16.1-3,22.1-7,6.1-4,11.4-9,15.9-14.8,4.6-5.8,8.5-12.3,11.8-19.4,3.3-7.1,6.3-14.2,9.1-21.2,1.5-3.4,3.8-9.2,7-17.4,2-5.1,4.2-10.7,6.5-16.6l43.4-105.3c3.5-8.9,7.3-15,11.4-18.1,4.1-3.2,9-5.5,14.7-7,.4,0,.9-.1,1.3-.3v-8.8h-59.4v8.8Z"/>
-        <path class="wm" d="M1296,267.1c-50.9,0-85.2,33.7-85.2,84.3s34,84,83.7,84,84.6-35,84.6-85.2-32.8-83.1-83.1-83.1ZM1294.4,416.1c-19,0-31.8-25.3-31.8-64s13.1-65.3,32.2-65.3,32.5,25.3,32.5,64.6-13.1,64.6-32.8,64.6Z"/>
-        <path class="wm" d="M1119.3,267.1c-50.9,0-85.2,33.7-85.2,84.3s34,84,83.7,84,84.6-35,84.6-85.2-32.8-83.1-83.1-83.1ZM1117.7,416.1c-19,0-31.8-25.3-31.8-64s13.1-65.3,32.2-65.3,32.5,25.3,32.5,64.6-13.1,64.6-32.8,64.6Z"/>
-        <path class="wm" d="M948.5,267.1c-18.1,0-30.9,5.6-40,14.7v-75.9h-12.8l-51.8,9.7v6.2l2.8,2.5c6.2,4.4,10.3,12.5,10.3,20v188h12.8l8.4-3.4c2.8-1.2,6.2-1.9,9.7-1.9s8.7.9,13.1,2.8c11.2,4.4,23.4,5.6,34.7,5.6,59.3,0,89.3-33.4,89.3-83.4s-30.9-84.9-76.5-84.9ZM939.8,416.1c-19.4,0-30.3-22.8-31.2-36.5v-35c1.6-35.3,14.7-57.8,33.4-57.8s31.5,25.9,31.5,63.7-13.1,65.6-33.7,65.6Z"/>
-        <path class="wm" d="M353.4,267.5c-18.1,0-30.9,5.6-40,14.7v-11.6h-12.8l-51.8,9.7v6.6l2.8,2.2c6.2,4.4,10.3,12.5,10.3,20v159.2c0,7.5-4.1,15.6-10.3,20l-2.8,2.5v6.2h77.7v-6.2l-3.1-2.5c-5.6-4.4-10-12.5-10-20v-50c9.7,11.2,23.7,17.5,42.8,17.5,43.7,0,73.7-33.4,73.7-83.4s-30.9-84.9-76.5-84.9ZM346.2,416.4c-18.4,0-31.2-22.8-32.8-57.8v-14.1c1.6-35,14.7-57.5,33.4-57.5s31.5,26.2,31.5,63.7-13.1,65.6-32.2,65.6Z"/>
-      </svg>
-      <div class="splash__rule" aria-hidden="true"></div>
-      <div class="splash__definition">
-        <p class="splash__word">play·book</p>
-        <p class="splash__pos">noun</p>
-        <ol class="splash__defs">
-          <li>a notional range of possible strategies, methodologies, and tactics in any sphere of activity</li>
-          <li>any plan or set of strategies, as for outlining a campaign in business or politics</li>
-        </ol>
-      </div>
-      <!-- Guiding star icon — spinning loading indicator -->
-      <svg class="splash__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 610 610" aria-hidden="true">
-        <path d="M316.6,605c156.6-6,282.4-131.8,288.4-288.4-285.4.2-288.3,282.7-288.4,288.4Z"/>
-        <path d="M5,316.6c6,156.6,131.8,282.4,288.3,288.4-.2-285.1-282-288.3-288.3-288.4Z"/>
-        <path d="M605,293.3C599,136.8,473.2,11,316.7,5c.2,285,281.9,288.3,288.3,288.3Z"/>
-        <path d="M5,293.3c284.8-.2,288.3-281.5,288.4-288.3C136.8,11,11,136.8,5,293.3Z"/>
-      </svg>
-      <p class="splash__loading" aria-live="polite">
-        Loading
-        <span class="splash__loading-dots" aria-hidden="true">
-          <span>.</span><span>.</span><span>.</span>
-        </span>
-      </p>
-    </div>
-  </div>
-
   <!-- NAVIGATION -->
   <header class="nav" id="nav" role="banner">
     <div class="nav__inner">
       <a href="/" class="nav__logo" aria-label="Playbook Advisory Group — home">
-        <svg class="nav__wordmark-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 700" role="img" aria-label="Playbook Advisory Group">
-          <path class="wm" d="M496.7,403.6v-197.6h-12.8l-51.8,9.7v6.2l2.8,2.5c6.2,4.4,10.3,12.5,10.3,20v159.2c0,7.5-4.1,15.3-10.3,20l-2.8,2.2v6.6h77.7v-6.6l-3.1-2.2c-5.6-4.7-10-12.5-10-20Z"/>
-          <path class="wm" d="M676.9,412.9c-2.5,4.4-7.2,4.4-7.2,4.4-6.2,0-8.7-3.1-8.7-11.2v-78.1c0-48.7-39.3-60.9-74.3-60.9s-62.8,15.3-62.8,36.8,10.9,25.3,24.7,25.3,24.7-10.9,24.7-24-3.7-14.7-9.1-19c1.6-1.2,4.7-2.2,9.1-2.2,10.9,0,27.5,6.9,33.7,27.5-2.2,25.9-93.7,19.7-93.7,77.1s22.2,46.8,50.9,46.8,35.6-8.1,45.9-23.7c3.4,15.9,15.3,23.7,32.2,23.7s34.7-14.7,34.7-22.5ZM609.1,372.7c-1.9,18.4-13.1,30.6-24.4,30.6s-19.7-9.7-19.7-25.3c0-26.9,28.4-32.2,44-43.4v38.1Z"/>
-          <path class="wm" d="M1444.2,403.4v-19.2c-2.1-47.6-49.8-48.5-51.6-48.5v67.7c0,7.5-4.1,15.3-10.3,20l-2.8,2.2v6.6h77.8v-6.6l-3.1-2.2c-5.6-4.7-10-12.5-10-20Z"/>
-          <path class="wm" d="M1543,421.8c-6.2-3.7-12.8-10.3-15.6-17.5l-11.9-29.1c-6.1-15.1-18.3-28.8-32.7-37.2-13.9,4.1-22.1,13-27.1,22.1l24.4,60.4c3.1,6.9,9.7,11.6,17.2,11.6h53.1v-6.6l-7.5-3.7Z"/>
-          <path class="wm" d="M1512.6,294.6c5.9-5,14.7-10.6,21.2-13.7l8.7-4.1v-6.6h-53.1v6.6l.3.3c5.3,5.6,4.7,12.5-1.3,17.5l-26.6,21.6c4,4,8.5,6.9,13,9.1l37.7-30.6Z"/>
-          <path class="wm" d="M1392.7,244v87.5c45.2,0,50.8-39.6,51.6-49.5v-76.4h-12.8l-51.9,9.7v6.2l2.8,2.5c6.2,4.4,10.3,12.5,10.3,20Z"/>
-          <path class="wm" d="M787,282.5h1.3c4.8,1.1,8.5,2.3,11.1,3.6,2.6,1.3,4.3,3.5,5.1,6.5.8,3,0,7.4-2.4,13.1l-29.6,71-30.1-71c-2.2-5.4-3.2-9.6-2.9-12.6.2-2.9,1.6-5.2,4.2-6.9,2.6-1.6,6.6-2.9,12.1-3.8v-8.8h-97.3v8.5c.9.2,1.6.5,2.3,1,4.4,1.3,8.3,3.6,11.9,7,3.6,3.4,7.3,9.3,11.3,17.8l59.4,139-1.6,3.8c-2.3,5.5-5.7,10.5-10.2,15-4.5,4.5-10.6,6.4-18.5,5.7-2.5-.2-5-1-7.3-2.2-2.3-1.3-4.7-2.7-7-4.1-2.3-1.5-4.9-2.8-7.6-4-2.8-1.2-5.7-1.8-8.9-1.8s-7.3,1-11.8,2.9c-5.9,2.8-9.8,7-11.5,12.6-1.7,5.6-1.2,11.2,1.6,16.7,2.8,5.5,7.7,10.2,14.8,14,7.1,3.8,16.4,5.2,27.9,4.1,8.7-.6,16.1-3,22.1-7,6.1-4,11.4-9,15.9-14.8,4.6-5.8,8.5-12.3,11.8-19.4,3.3-7.1,6.3-14.2,9.1-21.2,1.5-3.4,3.8-9.2,7-17.4,2-5.1,4.2-10.7,6.5-16.6l43.4-105.3c3.5-8.9,7.3-15,11.4-18.1,4.1-3.2,9-5.5,14.7-7,.4,0,.9-.1,1.3-.3v-8.8h-59.4v8.8Z"/>
-          <path class="wm" d="M1296,267.1c-50.9,0-85.2,33.7-85.2,84.3s34,84,83.7,84,84.6-35,84.6-85.2-32.8-83.1-83.1-83.1ZM1294.4,416.1c-19,0-31.8-25.3-31.8-64s13.1-65.3,32.2-65.3,32.5,25.3,32.5,64.6-13.1,64.6-32.8,64.6Z"/>
-          <path class="wm" d="M1119.3,267.1c-50.9,0-85.2,33.7-85.2,84.3s34,84,83.7,84,84.6-35,84.6-85.2-32.8-83.1-83.1-83.1ZM1117.7,416.1c-19,0-31.8-25.3-31.8-64s13.1-65.3,32.2-65.3,32.5,25.3,32.5,64.6-13.1,64.6-32.8,64.6Z"/>
-          <path class="wm" d="M948.5,267.1c-18.1,0-30.9,5.6-40,14.7v-75.9h-12.8l-51.8,9.7v6.2l2.8,2.5c6.2,4.4,10.3,12.5,10.3,20v188h12.8l8.4-3.4c2.8-1.2,6.2-1.9,9.7-1.9s8.7.9,13.1,2.8c11.2,4.4,23.4,5.6,34.7,5.6,59.3,0,89.3-33.4,89.3-83.4s-30.9-84.9-76.5-84.9ZM939.8,416.1c-19.4,0-30.3-22.8-31.2-36.5v-35c1.6-35.3,14.7-57.8,33.4-57.8s31.5,25.9,31.5,63.7-13.1,65.6-33.7,65.6Z"/>
-          <path class="wm" d="M353.4,267.5c-18.1,0-30.9,5.6-40,14.7v-11.6h-12.8l-51.8,9.7v6.6l2.8,2.2c6.2,4.4,10.3,12.5,10.3,20v159.2c0,7.5-4.1,15.6-10.3,20l-2.8,2.5v6.2h77.7v-6.2l-3.1-2.5c-5.6-4.4-10-12.5-10-20v-50c9.7,11.2,23.7,17.5,42.8,17.5,43.7,0,73.7-33.4,73.7-83.4s-30.9-84.9-76.5-84.9ZM346.2,416.4c-18.4,0-31.2-22.8-32.8-57.8v-14.1c1.6-35,14.7-57.5,33.4-57.5s31.5,26.2,31.5,63.7-13.1,65.6-32.2,65.6Z"/>
+        <svg class="nav__mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="16" cy="16" r="15.5" stroke="#AB7F58" stroke-opacity="0.3"/>
+          <path d="M16 5 L17.5 13.5 L26 12 L19 17 L26 22 L17.5 18.5 L16 27 L14.5 18.5 L6 22 L13 17 L6 12 L14.5 13.5 Z" fill="none" stroke="#AB7F58" stroke-width="1.2" stroke-linejoin="round"/>
+          <circle cx="16" cy="16" r="2" fill="#AB7F58"/>
         </svg>
+        <div>
+          <div class="nav__wordmark">Playbook</div>
+          <div style="font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);transition:color 220ms;">Advisory Group</div>
+        </div>
       </a>
       <nav aria-label="Primary navigation">
         <ul class="nav__links">
@@ -844,7 +455,7 @@
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
-      <p class="nav__drawer-tagline">Clarity, Control, Confidence</p>
+      <p class="nav__drawer-tagline">Connecting you to clarity</p>
     </div>
   </nav>
 
@@ -858,13 +469,19 @@
         <span class="label-tag label-tag--on-dark">Senior-led, sponsor-side advisory</span>
       </div>
       <h1 class="hero__heading" id="hero-heading">
-        Clarity. Control. Confidence.
+        Organisations don't lack experience. They lack a way to <em>remember it</em>.
       </h1>
       <p class="hero__sub">
-        Playbook brings structure to complex programmes, guiding the right people to the right decisions with clear thinking, healthy challenge, and experience-led advice.
+        We strengthen the decisions that shape major programmes — and bring them under control when it matters most. Operating between board oversight and technical delivery, we remain independent from execution: ensuring decisions are clear, objective, and defensible.
       </p>
       <div class="hero__actions">
-        <a href="#model" class="btn-primary">
+        <a href="#diagnostic" class="btn-primary">
+          The Capital Governance Diagnostic
+          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#model" class="btn-ghost">
           The Playbook model
           <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -883,22 +500,20 @@
   <section class="belief section" aria-labelledby="belief-heading">
     <div class="container">
       <div class="belief__inner">
-        <div class="belief__image reveal">
-          <img src="../images/sections/homepage-section-02-woman-pondering.png" alt="" loading="lazy">
+        <div class="belief__eyebrow reveal">
+          <span class="label-tag">The problem</span>
+          <div class="belief__image">
+            <img src="../images/sections/homepage-section-02.png" alt="" loading="lazy">
+          </div>
         </div>
         <div class="belief__body">
-          <span class="label-tag reveal">The problem</span>
-          <blockquote class="belief__quote reveal reveal-delay-1">
+          <blockquote class="belief__quote reveal">
             "Major programmes rarely fail in delivery. They fail in the decisions that precede it."
           </blockquote>
-          <p class="belief__copy reveal reveal-delay-2">
-            Unclear governance. Lack of clarity. Diffused accountability. Experience that never reaches the moment of decision.
+          <p class="belief__copy reveal reveal-delay-1">
+            Unclear governance. Lack of clarity. Diffused accountability. Experience that never reaches the moment of decision. By the time issues become visible, risk is already embedded. We work with sponsors and senior leaders to bring structure, clarity, and control to the environments where those decisions are made.
           </p>
-          <p class="belief__copy reveal reveal-delay-2">
-            By the time issues become visible, risk is already embedded.<br>
-            We work with sponsors and senior leaders to bring structure, clarity, and control to the environments where those decisions are made.
-          </p>
-          <a href="#where-we-sit" class="belief__link reveal reveal-delay-3">
+          <a href="#" class="belief__link reveal reveal-delay-2">
             How we work
             <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -911,47 +526,43 @@
 
 
   <!-- WHERE WE SIT -->
-  <section class="where-we-sit" id="where-we-sit" aria-labelledby="where-heading">
-    <img class="wws__bg-icon" src="../images/brand-assets/icon/Playbook_Icon_Outline_White_RGB.svg" alt="" aria-hidden="true">
+  <section class="where-we-sit section" aria-labelledby="where-heading">
     <div class="container">
-
-      <!-- Header: title left, intro right -->
-      <div class="wws__header reveal">
-        <div>
-          <span class="label-tag label-tag--on-dark">Where we sit</span>
-          <h2 class="wws__title" id="where-heading">Independent by design</h2>
+      <div class="where-we-sit__inner">
+        <div class="where-we-sit__left reveal">
+          <span class="label-tag">Where we sit</span>
+          <h2 class="where-we-sit__title" id="where-heading">
+            Independent by design
+          </h2>
         </div>
-        <p class="wws__intro">
-          Delivery capability is abundant. What is often missing is independent sponsor-side authority — ensuring decisions are clear, governance is robust, and programmes are set up to succeed before delivery begins.
-        </p>
+        <div class="where-we-sit__right">
+          <p class="where-we-sit__intro reveal reveal-delay-1">
+            Delivery capability is abundant. What is often missing is independent sponsor-side authority — ensuring decisions are clear, governance is robust, and programmes are set up to succeed before delivery begins.
+          </p>
+          <p class="where-we-sit__intro reveal reveal-delay-2">
+            Our role sits earlier — and alongside — delivery. We work with sponsors to strengthen the authority, governance, and decision-making environment in which complex programmes are set up and run.
+          </p>
+          <div class="where-we-sit__grid reveal reveal-delay-3">
+            <div class="where-we-sit__col">
+              <div class="where-we-sit__col-label">We are</div>
+              <ul class="where-we-sit__list">
+                <li>Sponsor-side advisory, aligned to client interests</li>
+                <li>Specialists in governance and decision quality</li>
+                <li>Engaged early to reduce risk and strengthen outcomes</li>
+                <li>Independent from delivery and execution</li>
+              </ul>
+            </div>
+            <div class="where-we-sit__col">
+              <div class="where-we-sit__col-label">We are not</div>
+              <ul class="where-we-sit__list where-we-sit__list--not">
+                <li>A design or construction consultancy</li>
+                <li>A delivery-led project management firm</li>
+                <li>Embedded resource or capacity support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <!-- Declaration rows -->
-      <div class="wws__rows">
-        <div class="wws__row">
-          <span class="wws__row-num">01</span>
-          <span class="wws__row-text">Sponsor-side advisory, aligned to client interests</span>
-        </div>
-        <div class="wws__row">
-          <span class="wws__row-num">02</span>
-          <span class="wws__row-text">Specialists in governance and decision quality</span>
-        </div>
-        <div class="wws__row">
-          <span class="wws__row-num">03</span>
-          <span class="wws__row-text">Engaged early to reduce risk and strengthen outcomes</span>
-        </div>
-        <div class="wws__row">
-          <span class="wws__row-num">04</span>
-          <span class="wws__row-text">Independent from technical delivery and execution</span>
-        </div>
-      </div>
-
-      <!-- "We are not" footnote -->
-      <div class="wws__footnote">
-        <span class="wws__footnote-label">We are not —</span>
-        <span class="wws__footnote-items">A design &amp; construction consultancy · Embedded resource or capacity support</span>
-      </div>
-
     </div>
   </section>
 
@@ -960,7 +571,7 @@
   <section class="gaps section" aria-labelledby="engagement-heading">
     <div class="container">
       <div class="gaps__header">
-        <span class="label-tag label-tag--on-dark reveal">When we are typically engaged</span>
+        <span class="label-tag reveal">When we are typically engaged</span>
         <h2 class="gaps__title reveal reveal-delay-1" id="engagement-heading">
           Three moments where independent advisory changes the outcome
         </h2>
@@ -974,8 +585,6 @@
           <p class="gap-card__copy">
             Where a major scheme is being defined, we work with sponsors to scope complex programmes, strengthen governance, and ensure decisions are clear and aligned from the outset — establishing the clarity required to proceed with confidence.
           </p>
-          <p class="gap-card__extra">We take ownership of the outcomes and scope out what is needed to maximise success from the outset.</p>
-          <div class="gap-card__pillar" aria-hidden="true" data-word="Clarity.">Clarity.</div>
         </article>
 
         <article class="gap-card reveal reveal-delay-1" role="listitem">
@@ -985,8 +594,6 @@
           <p class="gap-card__copy">
             Where a programme is drifting, unclear, or exposed, we establish where issues sit, bring structure to decision-making, and define a clear recovery plan — restoring the control and stable footing that the programme needs.
           </p>
-          <p class="gap-card__extra">We can provide swift diagnosis to provide clear and objective observations to get things back on track.</p>
-          <div class="gap-card__pillar" aria-hidden="true" data-word="Control.">Control.</div>
         </article>
 
         <article class="gap-card reveal reveal-delay-2" role="listitem">
@@ -996,8 +603,6 @@
           <p class="gap-card__copy">
             Where sponsors, funders, or governance bodies require an independent view, we assess whether governance is functioning, whether decisions remain aligned to strategy, and whether risks are being appropriately managed.
           </p>
-          <p class="gap-card__extra">We continue looking after the clients' interests with experience-led oversight and assurance.</p>
-          <div class="gap-card__pillar" aria-hidden="true" data-word="Confidence.">Confidence.</div>
         </article>
 
       </div>
@@ -1026,8 +631,9 @@
       <div class="services__layout">
         <div class="services__image-panel reveal">
           <div class="services__image-frame">
-            <img src="../images/sections/what-we-do-section-man-woman-at-laptop.png" alt="Sponsor-side advisory in practice" loading="lazy">
+            <img src="../images/sectors/sectors-private-development-02.png" alt="Sponsor-side advisory in practice" loading="lazy">
           </div>
+          <p class="services__image-caption">Sponsor-side advisory</p>
         </div>
 
         <div class="services__list" role="list">
@@ -1036,17 +642,17 @@
             <span class="service-row__index">01</span>
             <div class="service-row__content">
               <h3 class="service-row__title">Capital investment strategy</h3>
-              <p class="service-row__desc">Upstream strategic advisory on major capital investment decisions — defining the governance structure, business case rationale, and decision framework before commitment. Establishing the context to which successful funding applications will need to respond.</p>
+              <p class="service-row__desc">Upstream strategic advisory on major capital investment decisions — defining the governance structure, business case rationale, and decision framework before commitment.</p>
             </div>
             <div class="service-row__arrow" aria-hidden="true">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 3h10v10M3 13L13 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
           </div>
 
-          <div class="service-row reveal reveal-delay-1" role="listitem" tabindex="0" aria-label="Programme setup and governance">
+          <div class="service-row reveal reveal-delay-1" role="listitem" tabindex="0" aria-label="Programme governance">
             <span class="service-row__index">02</span>
             <div class="service-row__content">
-              <h3 class="service-row__title">Programme setup and governance</h3>
+              <h3 class="service-row__title">Programme governance</h3>
               <p class="service-row__desc">Designing and strengthening governance frameworks that direct complex programmes with clarity — establishing accountabilities, decision disciplines, and escalation structures.</p>
             </div>
             <div class="service-row__arrow" aria-hidden="true">
@@ -1080,7 +686,7 @@
             <span class="service-row__index">05</span>
             <div class="service-row__content">
               <h3 class="service-row__title">Funding and business case advisory</h3>
-              <p class="service-row__desc">Supporting the development of investment cases and funding submissions that hold under scrutiny — structuring the argument, evidence base, and approval pathway. We specialise in creating compelling cases that respond to the strategic context to maximise opportunity to secure funding for capital investments.</p>
+              <p class="service-row__desc">Supporting the development of investment cases and funding submissions that hold under scrutiny — structuring the argument, evidence base, and approval pathway.</p>
             </div>
             <div class="service-row__arrow" aria-hidden="true">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 3h10v10M3 13L13 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1105,11 +711,8 @@
           <p class="model-band__copy">
             Organisations don't lack experience. They lack a way to remember it. The Playbook model describes the four-stage progression that closes that gap.
           </p>
-          <p class="model-band__copy">
-            We strengthen the decisions that shape major programmes — and bring them under control when it matters most. Operating between board oversight and technical delivery, we remain independent from execution: ensuring decisions are clear, objective, and defensible.
-          </p>
         </div>
-        <a href="/the-playbook-model" class="btn-outline-light" style="position:relative;z-index:1;">
+        <a href="#" class="btn-outline-light">
           Explore the model
           <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1164,11 +767,11 @@
           </div>
           <div class="sector-card__body">
             <h3 class="sector-card__name">Public sector</h3>
-            <p class="sector-card__sub">Local authorities, NHS trusts, and education institutions — navigating political complexity, audit scrutiny, and the accountability structures of public capital programmes.</p>
+            <p class="sector-card__sub">Local authorities, NHS trusts, and higher education institutions — navigating political complexity, audit scrutiny, and the accountability structures of public capital programmes.</p>
             <div class="sector-card__tags">
               <span class="tag">Local authority</span>
               <span class="tag">Healthcare</span>
-              <span class="tag">Education</span>
+              <span class="tag">Higher education</span>
             </div>
           </div>
         </article>
@@ -1183,7 +786,6 @@
               <span class="tag">Regeneration</span>
               <span class="tag">Manufacturing</span>
               <span class="tag">Commercial</span>
-              <span class="tag">Residential</span>
             </div>
           </div>
         </article>
@@ -1293,8 +895,7 @@
           </a>
         </div>
         <div class="diagnostic__image">
-          <img src="../images/lifestyle/lifestyle-individual-urban-walk-16.png" alt="Senior adviser in an urban setting" loading="lazy">
-          <img class="diagnostic__image-icon" src="../images/brand-assets/icon/Playbook_Icon_White_RGB.svg" width="64" height="64" alt="" aria-hidden="true">
+          <img src="../images/services/services-walkthrough-06.png" alt="Governance advisory session in progress" loading="lazy">
         </div>
       </div>
     </div>
@@ -1311,14 +912,18 @@
           <p class="contact__copy">
             Playbook operates as an extension of the senior leadership team. If you are dealing with a complex programme — or want to strengthen governance before problems arise — speak with us directly.
           </p>
-          <div class="contact__offices" aria-label="Contact details">
+          <div class="contact__offices" aria-label="Our offices">
+            <div class="office">
+              <span class="office__label">Headquarters</span>
+              <address class="office__address" style="font-style:normal;">Spencer Yard<br>Leamington Spa</address>
+            </div>
+            <div class="office">
+              <span class="office__label">Midlands</span>
+              <address class="office__address" style="font-style:normal;">Jewellery Quarter<br>Birmingham</address>
+            </div>
             <div class="office">
               <span class="office__label">Email</span>
               <a href="mailto:hello@playbook-group.co.uk" class="office__address" style="color:inherit;border-bottom:1px solid var(--color-border-default);display:inline-block;padding-bottom:2px;transition:color 140ms,border-color 140ms;">hello@playbook-group.co.uk</a>
-            </div>
-            <div class="office">
-              <span class="office__label">Telephone</span>
-              <span class="office__address">Number to be confirmed</span>
             </div>
           </div>
         </div>
@@ -1364,116 +969,21 @@
   </section>
 
 
-  <!-- ARTICLE OVERLAYS -->
-  <div class="article-overlay" id="article-1" role="dialog" aria-modal="true" aria-label="Article: The most expensive lessons">
-    <div class="article-overlay__inner">
-      <button class="article-overlay__back" aria-label="Back to insights">
-        <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Back to insights
-      </button>
-      <div class="article-overlay__meta">
-        <span class="article-overlay__tag">Governance</span>
-        <span class="article-overlay__date">10 March 2026</span>
-      </div>
-      <h1 class="article-overlay__title">The most expensive lessons in any programme are the ones that must be learned twice</h1>
-      <img class="article-overlay__image" src="../images/hero/hero-governance-briefing-02.png" alt="">
-      <div class="article-overlay__body">
-        <p>Every major capital programme carries within it the accumulated knowledge of those who have run programmes before. The challenge — and the consistent failure — is that this knowledge rarely reaches the moment of decision in a form that is usable.</p>
-        <p>Three structural gaps explain why the same expensive lessons are learned, forgotten, and learned again.</p>
-        <h3>The Memory Gap</h3>
-        <p>Organisations accumulate experience through delivery. But experience held in individuals — not in structures — leaves with those individuals. When a programme concludes and the team disperses, what was learned disperses with it. The next programme begins not from the point where the last one ended, but from a similar starting position.</p>
-        <blockquote>"The most expensive knowledge in any organisation is the knowledge it has already paid for once."</blockquote>
-        <p>The Memory Gap is not a failure of individuals. It is a structural condition — the absence of any mechanism that captures judgement, not just data.</p>
-        <h3>The Translation Gap</h3>
-        <p>Even where experience exists, it is rarely held in a form that informs decisions at board level. Technical teams understand what has gone wrong. Senior sponsors frequently do not — not because the information is unavailable, but because no one has translated it into the language of strategic risk and accountability.</p>
-        <p>The Translation Gap widens at exactly the point where the decisions are most consequential: before commitment, when governance structures are being established and the framework for the entire programme is being set.</p>
-        <h3>The Decision Gap</h3>
-        <p>Governance structures are designed to enable good decisions. But governance that is well-designed on paper does not automatically produce good decisions in practice. Without independent challenge — a sponsor-side voice that is not aligned to delivery — decisions drift towards the path of least resistance rather than the path of least risk.</p>
-        <p>The Decision Gap is most visible in hindsight. It appears as a series of individually defensible choices that collectively produced an outcome nobody intended.</p>
-        <h3>Closing the gaps structurally</h3>
-        <p>The Playbook Model addresses all three gaps — not by improving individual capability, but by changing the structural conditions in which decisions are made. By bringing institutional memory into the governance framework, by translating experience into a form that sponsors can use, and by providing independent challenge at the point of decision, the gaps can be closed before they become visible.</p>
-        <p>The most expensive lessons are the ones that must be learned twice. The discipline of governance is ensuring they are only learned once.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="article-overlay" id="article-2" role="dialog" aria-modal="true" aria-label="Article: Why NHS capital programmes drift">
-    <div class="article-overlay__inner">
-      <button class="article-overlay__back" aria-label="Back to insights">
-        <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Back to insights
-      </button>
-      <div class="article-overlay__meta">
-        <span class="article-overlay__tag">Healthcare</span>
-        <span class="article-overlay__date">24 February 2026</span>
-      </div>
-      <h1 class="article-overlay__title">Why NHS capital programmes drift: diffuse accountability and the governance bridge</h1>
-      <img class="article-overlay__image" src="../images/insights/insights-architectural-detail-02.png" alt="">
-      <div class="article-overlay__body">
-        <p>NHS capital programmes operate within a governance environment that is structurally different from the private sector — and the difference matters. Public accountability, democratic oversight, and clinical governance requirements create layers of authority that are not always aligned to the commercial disciplines of programme delivery.</p>
-        <p>The result, consistently, is drift. Not the dramatic failure of a programme collapsing overnight, but the gradual expansion of scope, cost, and timeline that is visible only in retrospect.</p>
-        <h3>Why accountability diffuses</h3>
-        <p>In NHS programmes, accountability for capital investment decisions is distributed across multiple bodies: the trust board, the integrated care board, NHS England, and often a range of clinical and operational stakeholders. Each body has legitimate authority. None has singular ownership of the outcome.</p>
-        <blockquote>"Diffuse accountability is not the same as shared accountability. Shared accountability requires clear governance. Diffuse accountability produces inertia."</blockquote>
-        <p>When no single body is accountable for the programme's success in commercial terms, the incentive to make difficult decisions early — to challenge scope, to constrain cost, to manage risk — is weakened. Difficult conversations are deferred. Drift begins.</p>
-        <h3>The governance bridge</h3>
-        <p>The Governance Bridge describes the span between board-level oversight and programme-level delivery. In well-governed programmes, this bridge is staffed by people whose role is to translate board intent into programme discipline — to ensure that the decisions taken at programme level remain aligned to the strategy authorised at board level.</p>
-        <p>In NHS capital programmes, this bridge is frequently unstaffed — or staffed by delivery-side professionals whose primary accountability is to the programme, not to the sponsor. The board receives information filtered through delivery interests. Challenge is limited. Governance becomes retrospective rather than preventative.</p>
-        <h3>What independent sponsor-side advisory changes</h3>
-        <p>Playbook operates on the bridge — not in delivery. Our role is to represent the sponsor's interests with clarity and independence: to ask the questions that the delivery structure is not incentivised to ask, and to ensure that the board's decisions are informed by an objective assessment of programme risk.</p>
-        <p>In NHS programmes, where the governance environment is complex and the cost of getting it wrong is borne by public funds, the value of an independent sponsor-side voice is not optional. It is structural.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="article-overlay" id="article-3" role="dialog" aria-modal="true" aria-label="Article: Governance Bridge in residential regeneration">
-    <div class="article-overlay__inner">
-      <button class="article-overlay__back" aria-label="Back to insights">
-        <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Back to insights
-      </button>
-      <div class="article-overlay__meta">
-        <span class="article-overlay__tag">Regeneration</span>
-        <span class="article-overlay__date">7 February 2026</span>
-      </div>
-      <h1 class="article-overlay__title">What the Governance Bridge looks like in residential regeneration</h1>
-      <img class="article-overlay__image" src="../images/insights/insights-membrane-structure-05.png" alt="">
-      <div class="article-overlay__body">
-        <p>Residential regeneration schemes are structurally complex. They combine development risk, community obligation, political oversight, and long-duration financial commitment in a way that few other programme types replicate. The governance requirements that follow from this complexity are significant — and frequently underestimated.</p>
-        <p>The space between board oversight and programme delivery is where regeneration schemes most commonly lose direction. Understanding what the Governance Bridge looks like in this context is essential to managing it.</p>
-        <h3>The particular challenge of mixed-use schemes</h3>
-        <p>Mixed-use regeneration — residential, commercial, public realm, and community assets delivered within a single programme — creates a governance challenge that is more than the sum of its parts. Each use type carries different risk profiles, different stakeholder obligations, and different decision timelines. Coordinating these within a coherent governance structure requires a sponsor-side authority that is independent of any single workstream.</p>
-        <blockquote>"In mixed-use schemes, the risk is not that any individual component fails. It is that decisions taken in isolation across components collectively produce an outcome the board never authorised."</blockquote>
-        <h3>Where the bridge breaks down</h3>
-        <p>In regeneration, the bridge between board and delivery typically breaks down in one of three ways: scope creep driven by community and political pressure that is not challenged at governance level; financial drift where viability assumptions made at business case stage are not revalidated as the programme evolves; and decision paralysis where the complexity of stakeholder interests prevents clear, timely decisions being made.</p>
-        <p>All three are governance failures. All three are preventable with the right structure in place before delivery begins.</p>
-        <h3>What sponsor-side advisory provides</h3>
-        <p>Playbook's role in residential regeneration is to occupy the bridge: to provide the sponsor with an independent, structured view of how the programme is performing against its governance framework, and to maintain the discipline of decision-making throughout the programme lifecycle.</p>
-        <p>This is not project management. It is the governance authority that makes good project management possible — ensuring that what is being managed is the right thing, in the right way, with the right accountabilities in place.</p>
-      </div>
-    </div>
-  </div>
-
   <!-- FOOTER -->
   <footer class="footer" aria-label="Site footer">
     <div class="container">
       <div class="footer__top">
         <div class="footer__brand">
           <div>
-            <svg class="footer__wordmark-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 700" role="img" aria-label="Playbook Advisory Group">
-              <path class="wm" d="M496.7,403.6v-197.6h-12.8l-51.8,9.7v6.2l2.8,2.5c6.2,4.4,10.3,12.5,10.3,20v159.2c0,7.5-4.1,15.3-10.3,20l-2.8,2.2v6.6h77.7v-6.6l-3.1-2.2c-5.6-4.7-10-12.5-10-20Z"/>
-              <path class="wm" d="M676.9,412.9c-2.5,4.4-7.2,4.4-7.2,4.4-6.2,0-8.7-3.1-8.7-11.2v-78.1c0-48.7-39.3-60.9-74.3-60.9s-62.8,15.3-62.8,36.8,10.9,25.3,24.7,25.3,24.7-10.9,24.7-24-3.7-14.7-9.1-19c1.6-1.2,4.7-2.2,9.1-2.2,10.9,0,27.5,6.9,33.7,27.5-2.2,25.9-93.7,19.7-93.7,77.1s22.2,46.8,50.9,46.8,35.6-8.1,45.9-23.7c3.4,15.9,15.3,23.7,32.2,23.7s34.7-14.7,34.7-22.5ZM609.1,372.7c-1.9,18.4-13.1,30.6-24.4,30.6s-19.7-9.7-19.7-25.3c0-26.9,28.4-32.2,44-43.4v38.1Z"/>
-              <path class="wm" d="M1444.2,403.4v-19.2c-2.1-47.6-49.8-48.5-51.6-48.5v67.7c0,7.5-4.1,15.3-10.3,20l-2.8,2.2v6.6h77.8v-6.6l-3.1-2.2c-5.6-4.7-10-12.5-10-20Z"/>
-              <path class="wm" d="M1543,421.8c-6.2-3.7-12.8-10.3-15.6-17.5l-11.9-29.1c-6.1-15.1-18.3-28.8-32.7-37.2-13.9,4.1-22.1,13-27.1,22.1l24.4,60.4c3.1,6.9,9.7,11.6,17.2,11.6h53.1v-6.6l-7.5-3.7Z"/>
-              <path class="wm" d="M1512.6,294.6c5.9-5,14.7-10.6,21.2-13.7l8.7-4.1v-6.6h-53.1v6.6l.3.3c5.3,5.6,4.7,12.5-1.3,17.5l-26.6,21.6c4,4,8.5,6.9,13,9.1l37.7-30.6Z"/>
-              <path class="wm" d="M1392.7,244v87.5c45.2,0,50.8-39.6,51.6-49.5v-76.4h-12.8l-51.9,9.7v6.2l2.8,2.5c6.2,4.4,10.3,12.5,10.3,20Z"/>
-              <path class="wm" d="M787,282.5h1.3c4.8,1.1,8.5,2.3,11.1,3.6,2.6,1.3,4.3,3.5,5.1,6.5.8,3,0,7.4-2.4,13.1l-29.6,71-30.1-71c-2.2-5.4-3.2-9.6-2.9-12.6.2-2.9,1.6-5.2,4.2-6.9,2.6-1.6,6.6-2.9,12.1-3.8v-8.8h-97.3v8.5c.9.2,1.6.5,2.3,1,4.4,1.3,8.3,3.6,11.9,7,3.6,3.4,7.3,9.3,11.3,17.8l59.4,139-1.6,3.8c-2.3,5.5-5.7,10.5-10.2,15-4.5,4.5-10.6,6.4-18.5,5.7-2.5-.2-5-1-7.3-2.2-2.3-1.3-4.7-2.7-7-4.1-2.3-1.5-4.9-2.8-7.6-4-2.8-1.2-5.7-1.8-8.9-1.8s-7.3,1-11.8,2.9c-5.9,2.8-9.8,7-11.5,12.6-1.7,5.6-1.2,11.2,1.6,16.7,2.8,5.5,7.7,10.2,14.8,14,7.1,3.8,16.4,5.2,27.9,4.1,8.7-.6,16.1-3,22.1-7,6.1-4,11.4-9,15.9-14.8,4.6-5.8,8.5-12.3,11.8-19.4,3.3-7.1,6.3-14.2,9.1-21.2,1.5-3.4,3.8-9.2,7-17.4,2-5.1,4.2-10.7,6.5-16.6l43.4-105.3c3.5-8.9,7.3-15,11.4-18.1,4.1-3.2,9-5.5,14.7-7,.4,0,.9-.1,1.3-.3v-8.8h-59.4v8.8Z"/>
-              <path class="wm" d="M1296,267.1c-50.9,0-85.2,33.7-85.2,84.3s34,84,83.7,84,84.6-35,84.6-85.2-32.8-83.1-83.1-83.1ZM1294.4,416.1c-19,0-31.8-25.3-31.8-64s13.1-65.3,32.2-65.3,32.5,25.3,32.5,64.6-13.1,64.6-32.8,64.6Z"/>
-              <path class="wm" d="M1119.3,267.1c-50.9,0-85.2,33.7-85.2,84.3s34,84,83.7,84,84.6-35,84.6-85.2-32.8-83.1-83.1-83.1ZM1117.7,416.1c-19,0-31.8-25.3-31.8-64s13.1-65.3,32.2-65.3,32.5,25.3,32.5,64.6-13.1,64.6-32.8,64.6Z"/>
-              <path class="wm" d="M948.5,267.1c-18.1,0-30.9,5.6-40,14.7v-75.9h-12.8l-51.8,9.7v6.2l2.8,2.5c6.2,4.4,10.3,12.5,10.3,20v188h12.8l8.4-3.4c2.8-1.2,6.2-1.9,9.7-1.9s8.7.9,13.1,2.8c11.2,4.4,23.4,5.6,34.7,5.6,59.3,0,89.3-33.4,89.3-83.4s-30.9-84.9-76.5-84.9ZM939.8,416.1c-19.4,0-30.3-22.8-31.2-36.5v-35c1.6-35.3,14.7-57.8,33.4-57.8s31.5,25.9,31.5,63.7-13.1,65.6-33.7,65.6Z"/>
-              <path class="wm" d="M353.4,267.5c-18.1,0-30.9,5.6-40,14.7v-11.6h-12.8l-51.8,9.7v6.6l2.8,2.2c6.2,4.4,10.3,12.5,10.3,20v159.2c0,7.5-4.1,15.6-10.3,20l-2.8,2.5v6.2h77.7v-6.2l-3.1-2.5c-5.6-4.4-10-12.5-10-20v-50c9.7,11.2,23.7,17.5,42.8,17.5,43.7,0,73.7-33.4,73.7-83.4s-30.9-84.9-76.5-84.9ZM346.2,416.4c-18.4,0-31.2-22.8-32.8-57.8v-14.1c1.6-35,14.7-57.5,33.4-57.5s31.5,26.2,31.5,63.7-13.1,65.6-32.2,65.6Z"/>
-            </svg>
-            <p class="footer__tagline">Clarity, Control, Confidence.<br>Senior-led, sponsor-side advisory for capital programmes.</p>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <circle cx="16" cy="16" r="15.5" stroke="#AB7F58" stroke-opacity="0.3"/>
+                <path d="M16 5 L17.5 13.5 L26 12 L19 17 L26 22 L17.5 18.5 L16 27 L14.5 18.5 L6 22 L13 17 L6 12 L14.5 13.5 Z" fill="none" stroke="#AB7F58" stroke-width="1.2" stroke-linejoin="round"/>
+                <circle cx="16" cy="16" r="2" fill="#AB7F58"/>
+              </svg>
+              <span style="font-size:0.8rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.7);">Playbook Advisory Group</span>
+            </div>
+            <p class="footer__tagline">Connecting you to clarity.<br>Senior-led, sponsor-side advisory for capital programmes.</p>
           </div>
         </div>
         <nav class="footer__nav" aria-label="Footer navigation">
@@ -1512,6 +1022,7 @@
         <ul class="footer__legal-links">
           <li><a href="#" class="footer__legal-link">Privacy policy</a></li>
           <li><a href="#" class="footer__legal-link">Legal notices</a></li>
+          <li><a href="#" class="footer__legal-link">Carbon Reduction Policy</a></li>
         </ul>
       </div>
     </div>
@@ -1604,9 +1115,10 @@
       if (!heading || prefersReducedMotion) return;
       heading.style.opacity = '1';
       heading.style.animation = 'none';
-      const words = ['Clarity.', 'Control.', 'Confidence.'];
+      const plain  = ['Organisations', "don't", 'lack', 'experience.', 'They', 'lack', 'a', 'way', 'to'];
+      const accent = ['remember', 'it.'];
       let delay = 280;
-      const step = 180;
+      const step = 58;
       function makeWord(text, d) {
         const outer = document.createElement('span');
         outer.className = 'hero__word';
@@ -1618,11 +1130,19 @@
         return outer;
       }
       heading.innerHTML = '';
-      words.forEach((word, i) => {
+      plain.forEach((word, i) => {
         if (i > 0) heading.appendChild(document.createTextNode(' '));
         heading.appendChild(makeWord(word, delay));
         delay += step;
       });
+      heading.appendChild(document.createTextNode(' '));
+      const em = document.createElement('em');
+      accent.forEach((word, i) => {
+        if (i > 0) em.appendChild(document.createTextNode(' '));
+        em.appendChild(makeWord(word, delay));
+        delay += step;
+      });
+      heading.appendChild(em);
     }
 
     buildHeroHeading();
@@ -1754,58 +1274,6 @@
 
     document.querySelectorAll('.gap-card').forEach(card => { card.setAttribute('tabindex', '0'); });
 
-    // Persistent golden thread — once a card is hovered it stays threaded
-    document.querySelectorAll('.gap-card').forEach(card => {
-      card.addEventListener('mouseenter', () => card.classList.add('is-threaded'));
-    });
-
-    // Equalise .gap-card__extra heights so their tops align across all cards.
-    // flex: 1 on .gap-card__copy means copy fills the remaining space after extras;
-    // equal extra heights → equal copy heights → equal top-of-extra positions.
-    (function () {
-      function equalizeGapCardExtras() {
-        var extras = Array.from(document.querySelectorAll('.gap-card__extra'));
-        extras.forEach(function (el) { el.style.minHeight = ''; });
-        var maxH = Math.max.apply(null, extras.map(function (el) { return el.offsetHeight; }));
-        extras.forEach(function (el) { el.style.minHeight = maxH + 'px'; });
-      }
-      window.addEventListener('load', equalizeGapCardExtras);
-      window.addEventListener('resize', equalizeGapCardExtras);
-    }());
-
-    // ── Where We Sit — manifesto row animation ───────────────────
-    (function () {
-      const rowsEl   = document.querySelector('.wws__rows');
-      const footnote = document.querySelector('.wws__footnote');
-      if (!rowsEl) return;
-      const rows = rowsEl.querySelectorAll('.wws__row');
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          rows.forEach((row, i) => {
-            setTimeout(() => row.classList.add('wws-in'), i * 110);
-          });
-          if (footnote) {
-            setTimeout(() => footnote.classList.add('wws-in'), rows.length * 110 + 160);
-          }
-          observer.unobserve(entry.target);
-        });
-      }, { threshold: 0.1 });
-
-      observer.observe(rowsEl);
-    })();
-
-    // ── Lock services image height to services list — prevents zoom on row hover
-    (function () {
-      const frame = document.querySelector('.services__image-frame');
-      const list  = document.querySelector('.services__list');
-      if (!frame || !list) return;
-      function lockHeight() { frame.style.height = list.offsetHeight + 'px'; }
-      lockHeight();
-      window.addEventListener('resize', lockHeight);
-    })();
-
     const navSections = document.querySelectorAll('section[id]');
     const navLinks    = document.querySelectorAll('.nav__link');
     const navObserver = new IntersectionObserver(entries => {
@@ -1831,7 +1299,7 @@
         setTimeout(() => {
           formSubmit.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Enquiry sent';
           formSubmit.style.opacity = '1';
-          formSubmit.style.backgroundColor = 'var(--color-teal)';
+          formSubmit.style.backgroundColor = 'var(--color-navy)';
         }, 1200);
       });
     }
@@ -1848,63 +1316,10 @@
     });
   </script>
 
-  <script>
-    /* ============================================================
-       SPLASH SCREEN — shown once per session, auto-dismisses at 3s
-       ============================================================ */
-    (function () {
-      var splash = document.getElementById('splash');
-      if (!splash) return;
-      if (sessionStorage.getItem('splashSeen')) {
-        splash.style.display = 'none';
-        return;
-      }
-      document.body.classList.add('splash-active');
-      // Begin fade-out at 5.5s (transition is 500ms → total 6s visible)
-      setTimeout(function () {
-        splash.classList.add('is-hiding');
-        setTimeout(function () {
-          splash.remove();
-          document.body.classList.remove('splash-active');
-          sessionStorage.setItem('splashSeen', '1');
-        }, 500);
-      }, 5500);
-    }());
-
-    // ── Article overlays ─────────────────────────────────────────────────────
-    (function () {
-      const links = document.querySelectorAll('.insight-card__link');
-      const overlays = [
-        document.getElementById('article-1'),
-        document.getElementById('article-2'),
-        document.getElementById('article-3')
-      ];
-      links.forEach(function (link, i) {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          const overlay = overlays[i];
-          if (!overlay) return;
-          overlay.classList.add('is-open');
-          document.body.style.overflow = 'hidden';
-          overlay.focus();
-        });
-      });
-      overlays.forEach(function (overlay) {
-        if (!overlay) return;
-        const backBtn = overlay.querySelector('.article-overlay__back');
-        backBtn.addEventListener('click', function () {
-          overlay.classList.remove('is-open');
-          document.body.style.overflow = '';
-        });
-        overlay.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape') {
-            overlay.classList.remove('is-open');
-            document.body.style.overflow = '';
-          }
-        });
-      });
-    })();
-  </script>
-
 </body>
-</html>
+</html>"""
+
+with open(out, 'w', encoding='utf-8') as f:
+    f.write(html)
+
+print("Done. Bytes written:", len(html.encode('utf-8')))

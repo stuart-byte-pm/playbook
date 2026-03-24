@@ -1,0 +1,131 @@
+{
+  "generatedAt": "2026-03-18T15:19:21.264Z",
+  "model": "black-forest-labs/flux-1.1-pro",
+  "run": 3,
+  "notes": "All professionals depicted are 25-40 years old per brand update 2026-03-18",
+  "totalRequested": 10,
+  "totalGenerated": 10,
+  "totalFailed": 0,
+  "images": [
+    {
+      "filename": "hero-rooftop-adviser-07.png",
+      "outputDir": "hero",
+      "aspectRatio": "16:9",
+      "prompt": "A confident professional man aged around 32 standing on a rooftop terrace of a contemporary office building, looking out over an active urban regeneration construction site below, holding a rolled set of drawings, business casual attire, late afternoon golden light, city skyline and cranes in mid-distance, shallow depth of field, cinematic editorial photography, warm cinematic colour grading, no text or logos visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "hero-rooftop-adviser-07.png",
+        "url": "https://replicate.delivery/xezq/OY5ADJO1RB6pMFniRhguHKrjiOq5i161MHJec8ZckDUbnDJLA/tmpd6u6r0fw.png"
+      }
+    },
+    {
+      "filename": "hero-atrium-mezzanine-08.png",
+      "outputDir": "hero",
+      "aspectRatio": "16:9",
+      "prompt": "A young professional woman aged around 28 standing on a mezzanine walkway inside a large modern civic building atrium nearing completion, looking down to the double-height floor below, concrete and glass structure, scaffolding partially removed, natural light from a glazed roof, candid documentary moment, architectural photography style, muted warm tones, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "hero-atrium-mezzanine-08.png",
+        "url": "https://replicate.delivery/xezq/ZzeCeiGTD3rn6EowCTfXlHUfR3hf4fbzro1mBsjGHHhnyzhkF/tmpdnbrh98d.png"
+      }
+    },
+    {
+      "filename": "hero-schedule-closeup-09.png",
+      "outputDir": "hero",
+      "aspectRatio": "16:9",
+      "prompt": "Close overhead view of a large printed programme schedule or project timeline pinned to a pale timber surface, a young professional's forearms in shirtsleeves visible at the bottom edge gesturing at a section, natural directional light from one side creating crisp shadows, editorial documentary photography, warm paper tones, no readable text on documents, no faces visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "hero-schedule-closeup-09.png",
+        "url": "https://replicate.delivery/xezq/oltYTWstuBb8BFC5lhBzO5FxQCdAROZhLdgETwG6Rht3zhkF/tmpek96r0yw.png"
+      }
+    },
+    {
+      "filename": "services-standing-desk-review-07.png",
+      "outputDir": "services",
+      "aspectRatio": "16:9",
+      "prompt": "A man and a woman both in their early thirties standing side by side at a height-adjustable desk in a contemporary open-plan office, looking together at a laptop displaying a data dashboard, engaged natural conversation, warm natural light from large windows behind, modern office with pale walls and timber accents, candid lifestyle documentary photography, warm neutral colour grading, laptop screen not legible, no text visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "services-standing-desk-review-07.png",
+        "url": "https://replicate.delivery/xezq/WklkK6bh4d5KExHLeX3xdJedrGJpdNTaIYKidH8eGRAufcIZB/tmpetrbyabw.png"
+      }
+    },
+    {
+      "filename": "services-site-professional-female-08.png",
+      "outputDir": "services",
+      "aspectRatio": "16:9",
+      "prompt": "A young professional woman aged around 30 walking through the steel frame of a large building under construction, wearing a hard hat and holding a printed document, confident purposeful expression, construction daylight filtering through the open structure, candid documentary moment, editorial photography style, warm muted tones, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "services-site-professional-female-08.png",
+        "url": "https://replicate.delivery/xezq/s1FgERKLLMpAE5N6GLx81rmzPCnmSshFNbQeXI0bcq2HoDJLA/tmpv33bq9if.png"
+      }
+    },
+    {
+      "filename": "services-risk-register-still-09.png",
+      "outputDir": "services",
+      "aspectRatio": "16:9",
+      "prompt": "Editorial still-life of a pale oak desktop with printed risk register pages, architectural drawings marked up in red ballpoint pen, a metal ruler and a scale bar, a single mechanical pencil resting across the papers, no face or person, soft directional natural light from a nearby window casting long shadows across the surface, editorial photography, muted warm paper tones, no readable text",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "services-risk-register-still-09.png",
+        "url": "https://replicate.delivery/xezq/DBPJtO6Yn9ZuO5dEZ3yepDT6blOD0p6Gsm9y5a0mdc7QoDJLA/tmpb0_95rzw.png"
+      }
+    },
+    {
+      "filename": "sectors-residential-mixed-use-05.png",
+      "outputDir": "sectors",
+      "aspectRatio": "16:9",
+      "prompt": "Exterior of a contemporary private residential and mixed-use development at golden hour, modern British architecture with pale brick ground floor retail colonnade and residential floors above, street level with trees and wide pavement, warm evening light catching the upper floors, architectural photography, warm cinematic colour grading, no people, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "sectors-residential-mixed-use-05.png",
+        "url": "https://replicate.delivery/xezq/1pgGmrm2k5IoHJ6IWHGf89fkp7eNgNxwGxKsNKPLrPLuhOksA/tmpb1h04gmr.png"
+      }
+    },
+    {
+      "filename": "sectors-transport-interchange-06.png",
+      "outputDir": "sectors",
+      "aspectRatio": "16:9",
+      "prompt": "Interior of a modern British public transport interchange, contemporary civic architecture, long vaulted concrete and glass roof structure, clean platforms, natural daylight flooding through the glazed canopy, sense of scale and public infrastructure quality, architectural documentary photography, muted cool-warm tonal palette, no people, no text or destination boards visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "sectors-transport-interchange-06.png",
+        "url": "https://replicate.delivery/xezq/XGnzDemtdPwGLyOIUTpbJ6dhKejxrmSYeGnUEIDRPh2WiOksA/tmpuygg4zis.png"
+      }
+    },
+    {
+      "filename": "insights-portrait-adviser-04.png",
+      "outputDir": "insights",
+      "aspectRatio": "16:9",
+      "prompt": "Editorial portrait of a young professional man aged around 31, seated in a low chair beside a large window in a minimal contemporary office, one arm resting on the chair back, calm direct expression toward camera, soft natural side-lighting from the window, shallow depth of field with pale wall and window frame as background, editorial portrait photography, warm cinematic colour grading, professional but relaxed, no text visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "insights-portrait-adviser-04.png",
+        "url": "https://replicate.delivery/xezq/T5XQrwufaSUqP6LFM5rTN402WwwIXl64RwmLcNYtNg1woDJLA/tmpox80xozj.png"
+      }
+    },
+    {
+      "filename": "insights-membrane-structure-05.png",
+      "outputDir": "insights",
+      "aspectRatio": "16:9",
+      "prompt": "Abstract macro architectural photograph of a woven tensile structural membrane or ETFE cushion roof panel, close-up revealing the geometric pattern of fine cables and translucent material, soft diffused daylight passing through creating subtle tonal gradations, editorial architectural photography, muted cool-white colour palette, no people, no text or signage",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "insights-membrane-structure-05.png",
+        "url": "https://replicate.delivery/xezq/pMdVempTUDQYPKjwyNcJfa0pefy7zkB9Nmo8XzmGdhtjHdIZB/tmpakhx9_7k.png"
+      }
+    }
+  ]
+}

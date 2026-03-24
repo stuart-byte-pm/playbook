@@ -116,12 +116,12 @@ All six tasks complete. The Next.js app lives in `web/` subdirectory. Tailwind v
 
 ### FOUND-02
 **Title:** Configure Tailwind design tokens
-**Description:** Map all brand colour, typography, and spacing tokens into `tailwind.config.ts` as named theme extensions. Colours: `black`, `gold`, `white`, `navy`, `paper-dark`, `mid-grey`. Font family: `inter`. No arbitrary values permitted anywhere in the codebase after this point. Acceptance: all tokens available as Tailwind classes (e.g. `bg-navy`, `text-gold`, `font-inter`).
+**Description:** Map all brand colour, typography, and spacing tokens into `tailwind.config.ts` as named theme extensions. Colours: `black`, `gold`, `white`, `teal`, `peach`, `sand`, `pale-blue`. Font family: `inter`. No arbitrary values permitted anywhere in the codebase after this point. Acceptance: all tokens available as Tailwind classes (e.g. `bg-teal`, `text-gold`, `font-inter`).
 **Phase:** Foundation
 **Status:** ✅ complete
 **Session:** 1
 **Depends on:** [FOUND-01]
-**Notes:** Tailwind v4 deviation: no `tailwind.config.ts` exists. All six brand colours and Inter font are configured via `@theme` directive in `web/app/globals.css`. Produces identical utility class names (`bg-navy`, `text-gold`, `font-inter`, etc.). This is the correct v4 approach.
+**Notes:** Tailwind v4 deviation: no `tailwind.config.ts` exists. All seven brand colours and Inter font are configured via `@theme` directive in `web/app/globals.css`. Produces identical utility class names (`bg-teal`, `text-gold`, `font-inter`, etc.). This is the correct v4 approach.
 
 ---
 
@@ -185,7 +185,7 @@ Single-file HTML/CSS/JS prototype at `assets/files/homepage-demo.html`. Validate
 **Notes:** Completed 2026-03-17. Confirmed design decisions:
 - Playbook Model section: auto-cycling 4-stage selector (Experience, Insight, Judgement, Institutional memory). Cycles every 3 seconds via IntersectionObserver + setInterval. Click or arrow keys to jump to a stage. Inactive stages at opacity 0.38. Active stage shows gold progress bar animated via `@keyframes stageProgress`. Static step-box layout removed.
 - Diagnostic CTA section: split layout — content left, full-height image right (`services-governance-workshop-04.png`, aspect-ratio 4/5) with left-edge gradient overlay. Meet-in-middle animation: left column from translateX(-80px), image from translateX(80px), both to translateX(0) at 600ms cubic-bezier(0.2, 0, 0, 1). Mobile uses translateY(40px). prefers-reduced-motion respected.
-- Dark section backgrounds: black (`#000000`) used for Model and Diagnostic sections. Navy (`#271F57`) is NOT used for dark homepage section backgrounds.
+- Dark section backgrounds: black (`#000000`) used for Model and Diagnostic sections. Teal (`#264852`) is NOT used for dark homepage section backgrounds.
 - Gap cards: hover state uses black, not navy.
 - Rotating guiding star decorative element: rejected. `.hero__star-bg` removed in full. Do not reintroduce.
 - Hero heading copy confirmed: "Organisations don't lack experience. They lack a way to remember it."
@@ -202,7 +202,7 @@ Build the shared component library before touching any page. Each component must
 
 ### DS-01
 **Title:** Build the Button component
-**Description:** Build a reusable `Button` component with primary (gold on navy), secondary (outline), and ghost variants. Supports `href` prop for anchor usage and `onClick` for interactive usage. Acceptance: all three variants render correctly at desktop and mobile sizes; no inline styles; fully typed props with TypeScript.
+**Description:** Build a reusable `Button` component with primary (gold on teal), secondary (outline), and ghost variants. Supports `href` prop for anchor usage and `onClick` for interactive usage. Acceptance: all three variants render correctly at desktop and mobile sizes; no inline styles; fully typed props with TypeScript.
 **Phase:** Design system
 **Status:** ⬜ not started
 **Session:** 2
@@ -229,13 +229,13 @@ Build the shared component library before touching any page. Each component must
 **Status:** ⬜ not started
 **Session:** 2
 **Depends on:** [DS-01, DS-02]
-**Notes:** The dark variant uses `bg-navy` with `text-white`; the light variant uses `bg-white` with `text-black`. Paper-dark (`#FADCC1`) alternating sections sit outside the Card — they are a layout-level concern.
+**Notes:** The dark variant uses `bg-teal` with `text-white`; the light variant uses `bg-white` with `text-black`. Peach (`#ffdfae`) alternating sections sit outside the Card — they are a layout-level concern.
 
 ---
 
 ### DS-04
 **Title:** Build the Section component and alternating section pattern
-**Description:** Build a `Section` layout component that wraps page content blocks, applies correct vertical padding, and accepts a `variant` prop to switch between white, navy, and paper-dark backgrounds. Acceptance: three background variants render correctly; padding is consistent; the alternating section pattern (white → paper-dark → white → navy) is achievable by composing Section instances.
+**Description:** Build a `Section` layout component that wraps page content blocks, applies correct vertical padding, and accepts a `variant` prop to switch between white, teal, and peach backgrounds. Acceptance: three background variants render correctly; padding is consistent; the alternating section pattern (white → peach → white → teal) is achievable by composing Section instances.
 **Phase:** Design system
 **Status:** ⬜ not started
 **Session:** 2
@@ -290,18 +290,18 @@ Build the persistent site chrome before any page content. Navigation and footer 
 **Status:** ⬜ not started
 **Session:** 3
 **Depends on:** [DS-01, DS-02, DS-06]
-**Notes:** Use a transparent/dark header on the homepage hero and a solid navy header on all other pages — this requires a layout-level prop or context. Logo file must be sourced from `assets/` before this task begins.
+**Notes:** Use a transparent/dark header on the homepage hero and a solid teal header on all other pages — this requires a layout-level prop or context. Logo file must be sourced from `assets/` before this task begins.
 
 ---
 
 ### LAYOUT-02
 **Title:** Build the site footer
-**Description:** Build the `Footer` component with office addresses (Spencer Yard, Leamington Spa; Jewellery Quarter, Birmingham), contact email (`hello@playbook-group.co.uk`), LinkedIn link, privacy policy link, and legal notices link. Uses navy background with white/gold text. Acceptance: all links resolve or have placeholder `href`; footer is responsive; address markup uses `<address>` element.
+**Description:** Build the `Footer` component with office addresses (Spencer Yard, Leamington Spa; Jewellery Quarter, Birmingham), contact email (`hello@playbook-group.co.uk`), LinkedIn link, privacy policy link, and legal notices link. Uses teal background with white/gold text. Acceptance: all links resolve or have placeholder `href`; footer is responsive; address markup uses `<address>` element.
 **Phase:** Layout
 **Status:** ⬜ not started
 **Session:** 3
 **Depends on:** [DS-02, DS-06]
-**Notes:** The brand positioning line "Connecting you to clarity" may appear in the footer — confirm with brand documents before adding.
+**Notes:** The brand positioning line "Clarity. Control. Confidence." may appear in the footer — confirm with brand documents before adding.
 
 ---
 
@@ -318,7 +318,7 @@ Build the persistent site chrome before any page content. Navigation and footer 
 
 ### LAYOUT-04
 **Title:** Build the page hero component
-**Description:** Build a reusable `PageHero` component for internal pages (non-homepage). Accepts a title, optional subtitle, and optional overline. Uses navy background with white type. The homepage hero is a separate, bespoke component built in the next phase. Acceptance: renders correctly at all breakpoints; heading hierarchy is correct (h1 for the title); no layout shift on load.
+**Description:** Build a reusable `PageHero` component for internal pages (non-homepage). Accepts a title, optional subtitle, and optional overline. Uses teal background with white type. The homepage hero is a separate, bespoke component built in the next phase. Acceptance: renders correctly at all breakpoints; heading hierarchy is correct (h1 for the title); no layout shift on load.
 **Phase:** Layout
 **Status:** ⬜ not started
 **Session:** 3
@@ -335,7 +335,7 @@ Build pages in order of strategic priority: homepage first (the primary trust si
 
 ### PAGE-01
 **Title:** Build the homepage
-**Description:** Build the `/` homepage with: a bespoke hero section (headline, positioning line "Connecting you to clarity", CTA), a concept introduction section (the Playbook Paradox framing), a service overview grid (five services, each linking to `/services/[slug]`), and a sector signpost section. Acceptance: page renders correctly at all breakpoints; all CTAs link to correct routes; copy matches brand tone; page passes Lighthouse performance score of 90+ on mobile.
+**Description:** Build the `/` homepage with: a bespoke hero section (headline, positioning line "Clarity. Control. Confidence.", CTA), a concept introduction section (the Playbook Paradox framing), a service overview grid (five services, each linking to `/services/[slug]`), and a sector signpost section. Acceptance: page renders correctly at all breakpoints; all CTAs link to correct routes; copy matches brand tone; page passes Lighthouse performance score of 90+ on mobile.
 **Phase:** Core pages
 **Status:** ⬜ not started
 **Session:** 4
@@ -624,7 +624,7 @@ This phase refines the insights experience beyond basic CMS wiring — filtering
 **Status:** ⬜ not started
 **Session:** 11
 **Depends on:** [PAGE-01, PAGE-02, PAGE-03, PAGE-04, PAGE-05]
-**Notes:** Run a codebase-wide search for each banned word before signing off. Also confirm the brand positioning line "Connecting you to clarity" has not been altered or paraphrased anywhere.
+**Notes:** Run a codebase-wide search for each banned word before signing off. Also confirm the brand positioning line "Clarity. Control. Confidence." has not been altered or paraphrased anywhere.
 
 ---
 

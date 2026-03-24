@@ -171,10 +171,10 @@
     }
 
     .label-tag--on-dark {
-      color: rgba(255,255,255,0.6);
+      color: #ffffff;
     }
     .label-tag--on-dark::before {
-      background: rgba(255,255,255,0.4);
+      background: #ffffff;
     }
 
     /* ============================================================
@@ -300,26 +300,135 @@
       color: var(--color-white);
     }
 
-    /* Mobile menu toggle */
+    /* Hamburger toggle — always visible */
+    .nav__links { display: none; }
+    .nav__cta   { display: none; }
+
     .nav__toggle {
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 5px;
       width: 24px;
       padding: 4px 0;
+      cursor: pointer;
+      z-index: 210;
+      position: relative;
     }
     .nav__toggle span {
       display: block;
       height: 1.5px;
       background: var(--color-white);
       transition: transform var(--duration-base) var(--ease-standard),
-                  opacity var(--duration-fast) var(--ease-standard);
+                  opacity var(--duration-fast) var(--ease-standard),
+                  background-color var(--duration-base) var(--ease-standard);
     }
     .nav.is-scrolled .nav__toggle span { background: var(--color-black); }
 
-    @media (max-width: 900px) {
-      .nav__links, .nav__cta { display: none; }
-      .nav__toggle { display: flex; }
+    /* Hamburger → X when open */
+    .nav__toggle.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav__toggle.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav__toggle.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    /* Force white while menu is open regardless of scroll state */
+    .nav__toggle.is-open span { background: var(--color-white) !important; }
+
+    /* ============================================================
+       NAV DRAWER
+       ============================================================ */
+    .nav__backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 150;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-base) var(--ease-standard);
+    }
+    .nav__backdrop.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .nav__drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(420px, 100vw);
+      background-color: var(--color-black);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      padding: 7rem var(--space-10) var(--space-10);
+      transform: translateX(100%);
+      transition: transform var(--duration-page) var(--ease-decelerate);
+      overflow-y: auto;
+    }
+    .nav__drawer.is-open {
+      transform: translateX(0);
+    }
+
+    .nav__drawer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+    }
+
+    .nav__drawer-link {
+      display: block;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--ls-tight);
+      color: rgba(255,255,255,0.35);
+      padding-block: var(--space-6);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: color var(--duration-fast) var(--ease-standard);
+      line-height: 1.1;
+    }
+    .nav__drawer-link:hover { color: var(--color-white); }
+    .nav__drawer-link:last-child { border-bottom: none; }
+
+    /* Staggered entrance for drawer links */
+    .nav__drawer.is-open .nav__drawer-link {
+      animation: drawerLinkIn 400ms var(--ease-decelerate) both;
+    }
+    .nav__drawer.is-open li:nth-child(1) .nav__drawer-link { animation-delay: 80ms; }
+    .nav__drawer.is-open li:nth-child(2) .nav__drawer-link { animation-delay: 130ms; }
+    .nav__drawer.is-open li:nth-child(3) .nav__drawer-link { animation-delay: 180ms; }
+    .nav__drawer.is-open li:nth-child(4) .nav__drawer-link { animation-delay: 230ms; }
+    @keyframes drawerLinkIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .nav__drawer-footer {
+      padding-top: var(--space-10);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin-top: var(--space-6);
+    }
+
+    .nav__drawer-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--size-body-sm);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--ls-wide);
+      padding: 0.875rem 1.75rem;
+      background-color: var(--color-gold);
+      color: var(--color-white);
+      border-radius: var(--radius-sm);
+      transition: background-color var(--duration-fast) var(--ease-standard);
+    }
+    .nav__drawer-cta:hover { background-color: #9a7050; }
+
+    .nav__drawer-tagline {
+      margin-top: var(--space-6);
+      font-size: var(--size-caption);
+      letter-spacing: var(--ls-wider);
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
     }
 
     /* ============================================================
@@ -332,10 +441,19 @@
       flex-direction: column;
       justify-content: flex-end;
       background-color: var(--color-navy);
-      background-image: url('../images/hero/hero-briefing-table-06.png');
-      background-size: cover;
-      background-position: center 30%;
       overflow: hidden;
+    }
+
+    /* Video background */
+    .hero__video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+      filter: saturate(0.35) brightness(0.65);
     }
 
     /* Photo overlay — ensures text legibility across the full image */
@@ -344,8 +462,9 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to right, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%),
-        linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 50%, transparent 100%);
+        rgba(0,0,0,0.5),
+        linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.25) 100%),
+        linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -395,14 +514,14 @@
 
     .hero__heading em {
       font-style: normal;
-      color: var(--color-gold);
+      color: #ffffff;
     }
 
     .hero__sub {
       font-size: var(--size-body-lg);
       font-weight: var(--weight-light);
       line-height: var(--lh-relaxed);
-      color: rgba(255,255,255,0.65);
+      color: #ffffff;
       max-width: 52ch;
       margin-bottom: var(--space-12);
       opacity: 0;
@@ -456,15 +575,15 @@
       font-size: var(--size-body-sm);
       font-weight: var(--weight-medium);
       letter-spacing: var(--ls-wide);
-      color: rgba(255,255,255,0.7);
-      border-bottom: 1px solid rgba(255,255,255,0.2);
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255,255,255,0.5);
       padding-bottom: 2px;
       transition: color var(--duration-fast) var(--ease-standard),
                   border-color var(--duration-fast) var(--ease-standard);
     }
     .btn-ghost:hover {
       color: var(--color-white);
-      border-color: rgba(255,255,255,0.6);
+      border-color: #ffffff;
     }
     .btn-ghost .arrow {
       transition: transform var(--duration-fast) var(--ease-standard);
@@ -1837,21 +1956,52 @@
         </ul>
       </nav>
 
-      <a href="#contact" class="nav__cta">Talk to Playbook</a>
-
-      <!-- Mobile toggle -->
-      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false">
+      <!-- Hamburger toggle -->
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
         <span></span><span></span><span></span>
       </button>
 
     </div>
   </header>
 
+  <!-- Nav backdrop -->
+  <div class="nav__backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+  <!-- Nav drawer -->
+  <nav class="nav__drawer" id="navDrawer" role="dialog" aria-modal="true" aria-label="Site navigation">
+    <ul class="nav__drawer-links">
+      <li><a href="#model"    class="nav__drawer-link">The Playbook model</a></li>
+      <li><a href="#services" class="nav__drawer-link">Services</a></li>
+      <li><a href="#"         class="nav__drawer-link">Sectors</a></li>
+      <li><a href="#"         class="nav__drawer-link">Insights</a></li>
+    </ul>
+    <div class="nav__drawer-footer">
+      <a href="#contact" class="nav__drawer-cta">
+        Talk to Playbook
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <p class="nav__drawer-tagline">Connecting you to clarity</p>
+    </div>
+  </nav>
+
 
   <!-- ============================================================
        HERO
        ============================================================ -->
   <section class="hero" aria-labelledby="hero-heading">
+    <!-- Video background — autoplays, loops, muted (required for autoplay), hidden from assistive tech -->
+    <video
+      class="hero__video"
+      src="../../web/public/videos/istockphoto-931929622-640_adpp_is.mp4"
+      autoplay
+      loop
+      muted
+      playsinline
+      aria-hidden="true"
+    ></video>
+
     <div class="hero__grid" aria-hidden="true"></div>
 
 
@@ -2535,6 +2685,63 @@
         scrollTicking = true;
       }
     }, { passive: true });
+
+
+    // ── Nav drawer ────────────────────────────────────────────────
+    (function () {
+      const toggle   = document.getElementById('navToggle');
+      const drawer   = document.getElementById('navDrawer');
+      const backdrop = document.getElementById('navBackdrop');
+      if (!toggle || !drawer || !backdrop) return;
+
+      let isOpen = false;
+
+      function openMenu() {
+        isOpen = true;
+        toggle.classList.add('is-open');
+        drawer.classList.add('is-open');
+        backdrop.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'Close menu');
+        document.body.style.overflow = 'hidden';
+        // Focus first link after transition
+        setTimeout(() => drawer.querySelector('.nav__drawer-link')?.focus(), 380);
+      }
+
+      function closeMenu() {
+        isOpen = false;
+        toggle.classList.remove('is-open');
+        drawer.classList.remove('is-open');
+        backdrop.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+        document.body.style.overflow = '';
+      }
+
+      toggle.addEventListener('click', () => isOpen ? closeMenu() : openMenu());
+      backdrop.addEventListener('click', closeMenu);
+
+      // Close on link click
+      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+      // Escape key
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && isOpen) closeMenu();
+      });
+
+      // Trap focus inside drawer
+      drawer.addEventListener('keydown', e => {
+        if (e.key !== 'Tab' || !isOpen) return;
+        const focusable = Array.from(drawer.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])'));
+        const first = focusable[0];
+        const last  = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      });
+    })();
 
 
     // ── Hero heading — word-by-word clip animation ────────────────

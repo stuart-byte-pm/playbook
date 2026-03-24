@@ -1,0 +1,258 @@
+{
+  "generatedAt": "2026-03-18T15:35:47.489Z",
+  "model": "black-forest-labs/flux-1.1-pro",
+  "run": 4,
+  "notes": [
+    "Lifestyle and community imagery — no suits, no hard hats, no construction sites.",
+    "Casual / smart-casual dress. Real-world everyday settings.",
+    "Families welcome including multi-generational groups.",
+    "Adults 25-40 years old; grandparent figures 50s-60s max.",
+    "Strong ethnic diversity across the full set."
+  ],
+  "subdirectory": "lifestyle",
+  "totalRequested": 20,
+  "totalGenerated": 20,
+  "totalFailed": 0,
+  "images": [
+    {
+      "filename": "lifestyle-couple-coffee-01.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A young South Asian couple in their early thirties sitting across from each other at a small wooden table in a warm independent coffee shop, casual everyday clothing — she wears a light linen shirt, he wears a relaxed navy t-shirt — both smiling mid-conversation, flat white cups on the table, warm afternoon light through large windows, candid lifestyle photography, natural warm colour grading, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-couple-coffee-01.png",
+        "url": "https://replicate.delivery/xezq/1hiSAVJUgoLfHiiMoxicY6y9JZANEMxuLu1sTeAh0CdObHSWA/tmpakpfkk4a.png"
+      }
+    },
+    {
+      "filename": "lifestyle-couple-plaza-02.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A young Black couple in their late twenties walking together through a contemporary urban plaza, relaxed modern clothing — she wears a beige linen jacket over a white t-shirt and jeans, he wears a grey hoodie and dark trousers — holding hands and laughing, modern mixed-use building facade behind them with trees and street planters, bright overcast natural daylight, candid street photography style, warm neutral colour grading, no text or logos visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-couple-plaza-02.png",
+        "url": "https://replicate.delivery/xezq/ik02r4SgmkokOphgD6zhKe7vWujh0HOrJADjfL757bxkbHSWA/tmp6vtu4hr3.png"
+      }
+    },
+    {
+      "filename": "lifestyle-couple-waterfront-03.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A young mixed-ethnicity couple — East Asian woman and white British man, both around 30 — standing at a waterfront railing overlooking a regenerated urban dockside, casual clothing, she leans against him looking out at the water, early evening golden light reflecting off the water, modern apartment buildings and greenery in background, candid lifestyle documentary photography, warm cinematic colour grading, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-couple-waterfront-03.png",
+        "url": "https://replicate.delivery/xezq/fh6a4GHXxpXOTK6Lgzf1wSnKil74tvfSZfEh5rJSYihYvdIZB/tmp8h4kxoij.png"
+      }
+    },
+    {
+      "filename": "lifestyle-couple-library-04.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "4:5",
+      "prompt": "A young couple in their early thirties — a Black woman and a mixed-race man — sitting close together on a bench in a bright modern public library or learning hub, she reads a book, he has a laptop on his knee, both dressed casually in relaxed everyday clothing, warm natural light from tall windows, bookshelves and timber interior behind them, candid lifestyle photography, warm muted tones, no legible text on screens or book covers",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-couple-library-04.png",
+        "url": "https://replicate.delivery/xezq/e61UaPEzqoUpf0iG2Rx8F7lzkOgPsQ0XGODN9QiG7ieT4OksA/tmpz6ko3o33.png"
+      }
+    },
+    {
+      "filename": "lifestyle-family-courtyard-05.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A young South Asian family — mother and father both around 32, two young children aged roughly 4 and 7 — playing together in a landscaped residential courtyard garden, surrounded by contemporary brick apartment buildings with balconies and greenery, casual everyday clothing, bright natural daylight, candid spontaneous moment with the children running, warm lifestyle documentary photography, warm natural colour grading, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-family-courtyard-05.png",
+        "url": "https://replicate.delivery/xezq/PHC3fdo6r6Xja6t7XsYWu7EWfKL4lRhSFs6H0KdXpd1ccHSWA/tmp6dwc6pc3.png"
+      }
+    },
+    {
+      "filename": "lifestyle-family-community-centre-06.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A young Black family — mother around 30, father around 33, one toddler on the father's shoulders — walking through the bright entrance lobby of a modern community centre or public leisure building, casual relaxed clothing, large glazed facade letting in natural daylight, timber and concrete interior, laughing candid moment, lifestyle documentary photography, warm neutral colour grading, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-family-community-centre-06.png",
+        "url": "https://replicate.delivery/xezq/Tb4DdodGBNLVOVRtBPHCNgDCQ5aIWsUq0OfmipYXHdRYuDJLA/tmpxxih_wg2.png"
+      }
+    },
+    {
+      "filename": "lifestyle-family-park-path-07.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A young white British family — mother and father both around 29, one child aged around 5 on a small bicycle — on a wide path through a contemporary urban park adjacent to modern residential buildings, relaxed weekend clothing, soft dappled natural light through tree canopy, candid moment with the parents walking alongside the child, lifestyle photography, warm earthy colour grading, no text visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-family-park-path-07.png",
+        "url": "https://replicate.delivery/xezq/URhPZ8ijfJRCSSMFvPA3ckEjlry0ts4pI6GBmCTvfBvDdHSWA/tmp7rx6suea.png"
+      }
+    },
+    {
+      "filename": "lifestyle-family-new-home-08.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A young multi-ethnic family — South Asian mother around 31, white British father around 34, baby held in arms — standing on the threshold of a modern new-build apartment doorway, looking outward with calm happy expressions, contemporary residential building exterior visible with pale brick and timber cladding, natural daylight, candid lifestyle documentary photography, warm colour grading, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-family-new-home-08.png",
+        "url": "https://replicate.delivery/xezq/eFMbP6DgvK29ZKJL2LTQfJKZfBVf9shMlx8E2cNETa7Z1dIZB/tmp4bbjwx7w.png"
+      }
+    },
+    {
+      "filename": "lifestyle-family-rooftop-terrace-09.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A young East Asian family — mother around 30, father around 33, young child aged around 6 — sitting at an outdoor table on a communal rooftop terrace of a contemporary apartment building, city skyline visible beyond, casual clothing, warm late afternoon sunlight, the child draws while parents talk over drinks, candid lifestyle photography, cinematic warm colour grading, no text or logos visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-family-rooftop-terrace-09.png",
+        "url": "https://replicate.delivery/xezq/wGYvU6ueHG3iPiCasb0CZ05lP1NzwRTnBUSX95HfxnupdHSWA/tmp2lomx_4b.png"
+      }
+    },
+    {
+      "filename": "lifestyle-family-mixed-gen-cafe-10.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A multi-generational family group in a warm modern café — young Black couple in their early thirties, their two young children, and an active healthy-looking grandmother aged around 58 in casual clothes — all seated around a large table sharing food, natural window light, animated conversation, candid lifestyle photography, warm golden colour grading, no legible text or signage",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-family-mixed-gen-cafe-10.png",
+        "url": "https://replicate.delivery/xezq/G8J5awfLR50vbCjEwflNNd7BmsJPT4x8X2dwSni82uKBeOksA/tmpyo3alczd.png"
+      }
+    },
+    {
+      "filename": "lifestyle-community-lobby-11.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A small diverse group of young residents in their late twenties and early thirties — South Asian woman, white British man, Black woman, mixed-race man — gathered casually in the bright entrance lobby of a contemporary apartment building, some holding coffee cups, one looks at a phone, relaxed casual clothing, morning natural light from a glazed entrance wall, candid documentary lifestyle photography, warm neutral colour grading, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-community-lobby-11.png",
+        "url": "https://replicate.delivery/xezq/gxJeoLWnrZxEdiQI1SIiaMDcA5ZYQSK7eBJFcHyGnJ5XeOksA/tmp4aunqkvy.png"
+      }
+    },
+    {
+      "filename": "lifestyle-community-square-12.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A relaxed outdoor community scene in a contemporary urban public square — several young adults in their twenties and thirties of mixed ethnicities sitting and standing around low seating, some chatting, one reading, one with a takeaway coffee, modern mixed-use buildings with ground floor retail on all sides, trees and planting, bright natural daylight, candid street documentary photography, warm colour grading, no legible text or signage",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-community-square-12.png",
+        "url": "https://replicate.delivery/xezq/aAYX73BhaIq5MJZdA2WW2isyS7ZOkyA3yEfUfWu96gXteOksA/tmpwup9xiwp.png"
+      }
+    },
+    {
+      "filename": "lifestyle-community-multigenerational-13.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A multi-generational group in a contemporary urban park — a young South Asian couple in their early thirties, their child aged around 8, and two active healthy grandparent figures in their late fifties dressed in casual relaxed clothing — all walking together on a wide path beside modern residential architecture and mature trees, golden afternoon light, candid lifestyle documentary photography, warm earthy colour grading, no text visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-community-multigenerational-13.png",
+        "url": "https://replicate.delivery/xezq/ExZjJtEiVFYGNdqs9eT9evJei6rEhFVli5yZqoyfK6mL8dIZB/tmphbchr_rz.png"
+      }
+    },
+    {
+      "filename": "lifestyle-community-coworking-14.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "Three young professionals in their late twenties — a Black woman, an East Asian man, and a white woman — sitting informally in a bright co-working lounge space, casual clothing, one laptop open, relaxed conversation, modern interior with biophilic planting, natural light from tall windows, no corporate formality, candid lifestyle photography, warm muted colour grading, no legible text on screens",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-community-coworking-14.png",
+        "url": "https://replicate.delivery/xezq/KIzTbAKdpl6JJ9fFUbr1oiztyijihuIT6HGqUMckAVrqvDJLA/tmp24yz0wvv.png"
+      }
+    },
+    {
+      "filename": "lifestyle-individual-window-15.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "4:5",
+      "prompt": "A young Black woman around 28 sitting alone at a café window table, casual clothing — oversized cream knit jumper — looking out at the street with a contemplative calm expression, a coffee cup on the table, soft morning natural light, shallow depth of field, candid portrait photography, warm golden colour grading, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-individual-window-15.png",
+        "url": "https://replicate.delivery/xezq/6zeQyjwdqNQbf02VLQx8pw7pAeIax7Yc1ajONEXEt9TQfdIZB/tmp3d7pz238.png"
+      }
+    },
+    {
+      "filename": "lifestyle-individual-urban-walk-16.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A young South Asian man around 31 walking alone along a wide contemporary urban street, casual clothing — light jacket, plain t-shirt, dark jeans — relaxed gait, looking slightly to the side with a calm confident expression, modern mixed-use buildings on either side, street trees, natural overcast daylight, candid street photography style, warm neutral colour grading, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-individual-urban-walk-16.png",
+        "url": "https://replicate.delivery/xezq/mTZubQQnCUL2NNjCfb6mb0Gt1E3TyAknt5cZROepyAP8fOksA/tmpek8170w1.png"
+      }
+    },
+    {
+      "filename": "lifestyle-individual-bench-17.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "4:5",
+      "prompt": "A young white British woman around 26 sitting alone on a modern timber bench in a landscaped residential courtyard, looking at her phone with a slight smile, casual relaxed clothing — jeans and a soft khaki jacket — modern apartment building visible softly blurred behind her, dappled natural light, candid lifestyle photography, warm earthy colour grading, no legible text on phone screen",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-individual-bench-17.png",
+        "url": "https://replicate.delivery/xezq/5zVqol2bLe2efIsVHDGus1KomEfeAKHPglZrdpRIyy6AC8QyC/tmps1oo4_u9.png"
+      }
+    },
+    {
+      "filename": "lifestyle-arch-streetscene-18.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "A contemporary British urban streetscene at ground level — pale brick mixed-use buildings with active retail ground floor, wide pavement with trees and cycle lanes, several everyday people in casual clothing visible at a comfortable distance as part of the scene, bright overcast natural daylight, architectural lifestyle photography, warm neutral colour grading, no legible text or signage",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-arch-streetscene-18.png",
+        "url": "https://replicate.delivery/xezq/gDGVSSnKiFqwFBneWTelDpA3fVXfKUqkwbbv4UoclEBYCeQyC/tmpxdavwzr2.png"
+      }
+    },
+    {
+      "filename": "lifestyle-arch-entrance-19.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "The welcoming entrance of a modern contemporary apartment building or community hub — pale brick and dark steel facade, double-height glazed entrance, a young family and a couple visible at human scale near the entrance, generous landscaping and seating outside, soft natural daylight, architectural documentary photography style, warm muted tones, no text or signage visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-arch-entrance-19.png",
+        "url": "https://replicate.delivery/xezq/lDQnIreRZTXeVESNI9W3TzbYGOynZDYtCHib0C1YUL79gHSWA/tmpnx3hy3ng.png"
+      }
+    },
+    {
+      "filename": "lifestyle-arch-rooftop-view-20.png",
+      "outputDir": "lifestyle",
+      "aspectRatio": "16:9",
+      "prompt": "Looking across a communal rooftop garden terrace of a contemporary residential building toward a cityscape of mixed modern and traditional urban architecture, a young couple in casual clothing visible in the mid-ground leaning on the parapet, lush planting in the foreground, warm late afternoon golden light, wide cinematic composition, lifestyle architectural photography, warm cinematic colour grading, no text visible",
+      "result": {
+        "success": true,
+        "skipped": false,
+        "filename": "lifestyle-arch-rooftop-view-20.png",
+        "url": "https://replicate.delivery/xezq/fTZMEjMrltTjWyzMPIFhzNXXRXygjxfjtLl5Io3lV04ThHSWA/tmp6m7zeifi.png"
+      }
+    }
+  ]
+}

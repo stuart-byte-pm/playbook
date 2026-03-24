@@ -10,13 +10,14 @@
 @theme {
   /* Brand colours — primary */
   --color-black: #000000;
-  --color-gold: #AB7F58;
+  --color-gold: #af7e56;
   --color-white: #FFFFFF;
 
   /* Brand colours — supporting */
-  --color-navy: #271F57;
-  --color-paper-dark: #FADCC1;
-  --color-mid-grey: #F4F4F4;
+  --color-teal: #264852;
+  --color-peach: #ffdfae;
+  --color-sand: #ebe7dc;
+  --color-pale-blue: #c3dae2;
 
   /* Typography */
   --font-inter: 'Inter', sans-serif;
@@ -25,9 +26,10 @@
 /* CSS custom properties for direct consumption outside Tailwind */
 :root {
   --color-black: #000000;
-  --color-gold: #AB7F58;
+  --color-gold: #af7e56;
   --color-white: #FFFFFF;
-  --color-navy: #271F57;
-  --color-paper-dark: #FADCC1;
-  --color-mid-grey: #F4F4F4;
+  --color-teal: #264852;
+  --color-peach: #ffdfae;
+  --color-sand: #ebe7dc;
+  --color-pale-blue: #c3dae2;
 }

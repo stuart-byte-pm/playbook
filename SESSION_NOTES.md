@@ -1,3 +1,136 @@
+## Session — 2026-03-24 (Homepage demo v4 — client feedback pass, tasks 17–31)
+
+### What we worked on
+- Completed all remaining Small tasks from `plan/playbook_website_tasks-23-03.xlsx` (tasks 17–31, excluding blocked Medium tasks)
+- Task 17: What We Do item 2 label — renamed to "Programme setup and governance"
+- Task 18: What We Do item 1 copy — appended funding application context sentence
+- Task 19: What We Do item 5 copy — appended compelling funding cases sentence
+- Task 21: Playbook Model "Explore the model" button — fixed `href` to `/the-playbook-model`
+- Task 22: Playbook Model background texture — added repeating guiding star pattern via CSS `::after`
+- Task 24: Sectors — renamed "Higher education" tag and description text to "Education"
+- Task 25: Sectors — added "Residential" tag to Private sector card
+- Task 27: Thought Leadership — implemented full-screen article overlay system with three complete articles
+- Task 30: Contact — removed Headquarters and Midlands address blocks
+- Task 31: Contact — added Telephone placeholder entry ("Number to be confirmed")
+- Bug fix: service row expand clipping — `max-height` on hover state increased from `5rem` to `12rem` to prevent clipped descriptions after tasks 18/19 added second sentences
+
+### Key decisions
+- **Article overlay approach (task 27):** Full-screen white overlay rather than modal or inline expand — cleaner reading experience and easier to implement in a single-file prototype. Three complete on-brand articles written inline; back button and Escape key dismiss.
+- **Service row max-height fix:** Fixed value of `5rem` was always fragile — increased to `12rem` which comfortably covers all five rows at current copy lengths while keeping the CSS transition approach intact.
+- **"Explore the model" destination:** Button now links to `/the-playbook-model` — correct for the production site structure even though the dedicated page doesn't exist in the prototype.
+
+### Output / artefacts produced
+- `assets/files/homepage-demo-04.html` — updated with all Small task changes (tasks 17–31) and service row bug fix
+
+### Outstanding / next steps
+- **Client sign-off** on `homepage-demo-04.html` required before Next.js component build begins
+- **Medium tasks still outstanding:** 7 (Problem section image), 13 (When Engaged background colour), 20 (Playbook Model — evaluate moving to dedicated page), 23 (Sectors — replace placeholder images), 26 (Sectors — dedicated pages per sector), 28 (Thought Leadership editorial layout), 29 (Article authoring workflow), 32, 33 — all require client input or content before implementation
+- Once sign-off received, next phase is **DS-01 through DS-07** (design system components in `web/components/`)
+
+---
+
+## Session — 2026-03-23 (Homepage demo v4 — client feedback pass, tasks 1–16)
+
+### What we worked on
+- Worked through all unblocked Small tasks from `plan/playbook_website_tasks-23-03.xlsx`
+- Task 1: Splash/loading screen — full-screen branded overlay, session-once, 6s auto-dismiss
+- Task 2: Nav logo — increased to 88px, removed max-width/auto margins, left-pinned at 24px
+- Task 3: Hero sub-headline copy updated to client-supplied line
+- Task 4: Playbook Model section — added governance bridge second paragraph
+- Task 5: Removed Diagnostic CTA button from hero; promoted Playbook Model button to primary
+- Task 6: Fixed hero button scroll target with `scroll-padding-top: 120px`
+- Task 8: Fixed "How we work" button scroll target to `#where-we-sit`
+- Task 9: Split Problem section closing paragraph into two for emphasis
+- Task 10: Updated Where We Sit point 04 wording to include "technical"
+- Task 11: Removed "delivery-led project management firm" from Where We Sit footnote
+- Task 12: Rebuilt golden thread as `scaleX` left-to-right draw; added cross-card bleed for continuous thread; persistent `is-threaded` state on first hover
+- Tasks 14–16: Brand pillar watermarks (Clarity/Control/Confidence) with `clip-path` wipe reveal; added `.gap-card__extra` copy to each card
+- Alignment fix: resolved `.gap-card__extra` vertical misalignment — CSS `flex: 1` on copy plus JS `equalizeGapCardExtras()` on load/resize
+- Updated `plan/playbook_website_tasks-23-03.xlsx` column F Comments for tasks 1–16; task 13 changed to Medium
+
+### Key decisions
+- **Splash screen timing:** 6 seconds total (doubled from initial 3s per client request); `sessionStorage` flag prevents re-show within the same browser session
+- **Nav max-width removal:** Client wanted logo more prominent and left-pushed; removing `max-width` and `margin: auto` achieves this without breaking the right-side nav items
+- **Golden thread technique:** `scaleX` with `transform-origin: left` rather than `width` animation — smoother, GPU-accelerated, no layout shift. Cross-card bleed uses `width: calc(100% + var(--space-8) * 2)` and negative `margin-left` on card 2, scoped to `min-width: 769px` only
+- **Brand pillar reveal:** `clip-path: inset(0 100% 0 0)` → `inset(0 0% 0 0)` — left-to-right wipe timed to match the thread draw at 450ms. Uses `::after` pseudo-element with `content: attr(data-word)` to overlay gold colour on top of the near-invisible grey base
+- **Extra alignment approach:** Three attempts before settling on the correct solution. `flex: 1` on copy gives bottom-aligned extras (wrong); JS equalization of copy heights created a circular grid-row-height dependency (wrong direction). Final fix: JS equalizes `.gap-card__extra` heights on load — equal extra heights + `flex: 1` on copy → equal copy heights → equal top-of-extra positions
+- **Task 13 size change:** Background colour task for When Engaged section changed from Small to Medium — client has a specific brand colour direction that needs confirmation before implementing
+
+### Output / artefacts produced
+- `assets/files/homepage-demo-04.html` — updated with all 15 Small task changes
+- `plan/playbook_website_tasks-23-03.xlsx` — column F populated for tasks 1–16
+
+### Outstanding / next steps
+- **Remaining Small tasks:** 17 (What We Do item 2 label), 18 (What We Do item 1 copy), 19 (What We Do item 5 copy), 21 (Playbook Model "Explore the Model" button fix), 22 (Playbook Model background texture), 24 (Sectors — rename Higher Education to Education), 25 (Sectors — add Residential to Private tab), 27 (Thought Leadership — article open/detail view), 30 (Contact — remove HQ/Locations block), 31 (Contact — add landline placeholder)
+- **Medium tasks (skipped — dependencies):** 7, 13, 20, 23, 26, 28, 29, 32, 33
+- Client sign-off on `homepage-demo-04.html` still required before Next.js component build begins
+- Next session: continue with remaining Small tasks from the top of the list (task 17 first)
+
+---
+
+## Session — 2026-03-20 (Homepage demo v4 — content and design)
+
+### What we worked on
+- Created `homepage-demo-04.html` from the client content brief (`homepage-content-brief.md`) and tone of voice guide
+- Updated all copy across the homepage to match the brief: hero, problem statement, where we sit, service areas, diagnostic CTA
+- Replaced the nav guiding star icon with the official `Playbook_White_RGB.svg` wordmark inline SVG
+- Iterated the hero: changed heading to "Clarity. Control. Confidence.", centred content vertically, darkened overlay, widened sub-text
+- Rebuilt "The Problem" section as a 50/50 image/content split
+- Rebuilt "Where We Sit" section twice — first as Option A (dark animated columns), then fully replaced with Option 1 (manifesto declaration rows with scroll-triggered slide-in animation)
+- Added decorative `Playbook_Icon_Outline_White_RGB.svg` as large background element in "Where We Sit"
+- Fixed services section image zoom bug using JS height lock; added sticky image panel and rounded corners
+- Multiple copy and typography corrections throughout (font sizes, text colours, padding, underline fix)
+
+### Key decisions
+- **Hero heading:** "Clarity. Control. Confidence." replaces the previously confirmed "Organisations don't lack experience…" — client brief takes precedence
+- **"Where We Sit" redesign:** Two full iterations. The manifesto row format (Option 1) was chosen as it makes each "We are" statement feel like a declaration rather than a list item. The contrast with the muted footnote treatment subordinates "We are not" appropriately.
+- **Services image zoom fix:** `align-items: stretch` was causing the image panel to grow with hover-expanded rows. Fixed via a JS `lockHeight()` function that measures and pins the image frame height to the services list height on load — completely prevents zoom with no layout trade-offs.
+- **Nav wordmark:** Switched from inline guiding star SVG + text to the official brand wordmark SVG. Fill colour controlled via CSS class `.wm` so it transitions white → black on scroll.
+- **Decorative icon:** `Playbook_Icon_Outline_White_RGB.svg` used as a large background watermark in the "Where We Sit" section. Positioned bottom-right, bleeds off the edge, upright (no rotation), `opacity: 0.35`.
+
+### Output / artefacts produced
+- `assets/files/homepage-demo-04.html` — current homepage design candidate
+- `assets/images/sections/homepage-section-02-woman-pondering.png` — used in "The Problem"
+- `assets/images/sections/what-we-do-section-man-woman-at-laptop.png` — used in "What We Do"
+
+### Outstanding / next steps
+- Client sign-off on `homepage-demo-04.html` before moving to Next.js component build
+- Sectors, Insights, and Diagnostic CTA sections may benefit from further image review
+- The `homepage-demo-04.html` prototype should be used as the reference for all Phase 2 homepage component builds (replacing `homepage-demo.html` references in the project plan)
+- Consider whether the "When We Are Engaged" section (three service area cards) needs further visual treatment
+
+---
+
+## Session — 2026-03-18 (Image library expansion)
+
+### What we worked on
+- Generated two new batches of images using the image-generator agent (Run 3 and Run 4)
+- Run 3: 10 images — corrected age direction (25–40 years old replacing previous "senior" descriptors). Covered hero, services, sectors, and insights categories with professionals in formal/workplace contexts
+- Run 4: 20 images — new casual lifestyle direction: no suits, no hard hats, no construction sites. Focused on everyday environments (cafés, plazas, lobbies, parks, rooftop terraces), families, couples, and community groups
+
+### Key decisions
+- **Age correction:** All people in generated images must be 25–40 years old. Prior runs produced elderly/senior subjects due to imprecise prompting. Direction corrected and saved to agent memory for all future runs.
+- **Lifestyle category introduced:** Run 4 introduced a new `lifestyle/` image category not previously in the library — distinct from hero/services/sectors/insights. Covers human-scale, warm, candid-feeling imagery for use across the site.
+- **No formal attire or site PPE:** Run 4 explicitly removed suits, hard hats, and construction site settings. Casual and smart-casual dress only going forward for people-inclusive images.
+- **Families included:** First generation run to include family groups (couples with children, multi-generational groups). Grandparent figures capped at 50s–60s, active and healthy.
+- **Ethnic diversity:** Explicitly briefed across Run 4 — South Asian, Black, East Asian, white British, and mixed-ethnicity subjects represented.
+
+### Output / artefacts produced
+- `assets/images/hero/` — 3 new images (`hero-rooftop-adviser-07.png`, `hero-atrium-mezzanine-08.png`, `hero-schedule-closeup-09.png`)
+- `assets/images/services/` — 3 new images (`services-standing-desk-review-07.png`, `services-site-professional-female-08.png`, `services-risk-register-still-09.png`)
+- `assets/images/sectors/` — 2 new images (`sectors-residential-mixed-use-05.png`, `sectors-transport-interchange-06.png`)
+- `assets/images/insights/` — 2 new images (`insights-portrait-adviser-04.png`, `insights-membrane-structure-05.png`)
+- `assets/images/lifestyle/` — 20 new lifestyle images covering couples, families, community groups, individuals, and architecture scenes
+- `assets/images/generation-manifest-run3.json` and `generation-manifest-run4.json`
+- `scripts/generate-images-run3.js` and `scripts/generate-images-run4.js`
+
+### Outstanding / next steps
+- Review generated images and shortlist which to use per page/section
+- Session 2 (Design system — DS-01 through DS-07) remains the next build session
+- Lifestyle imagery may be most useful for the homepage hero, Diagnostic CTA section, and sector pages — identify placement once DS is complete
+
+---
+
 ## Session 2 — 2026-03-17 (Design system components) — NEXT SESSION
 
 ### Recommended tasks (DS-01 through DS-07)
