@@ -20,10 +20,10 @@ export default function ContactPageClient() {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState)
 
   return (
-    <main className="bg-sand" style={{ minHeight: '100vh' }}>
+    <main className="bg-white" style={{ minHeight: '100vh' }}>
       {/* Header */}
       <section
-        className="bg-teal"
+        className="bg-black"
         style={{ paddingBlock: 'var(--space-20, 5rem)' }}
       >
         <div
@@ -285,7 +285,7 @@ export default function ContactPageClient() {
           font-size: var(--size-body-sm, 0.875rem);
           color: var(--color-black, #000);
           background-color: var(--color-white, #fff);
-          border: 1px solid var(--color-border-default, #E5E5E5);
+          border: 1px solid #D1D5DB;
           border-radius: var(--radius-sm, 2px);
           padding: 0.75rem 1rem;
           outline: none;
