@@ -1,5 +1,4 @@
 import Splash from '@/components/Splash'
-import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
 import BeliefSection from '@/components/BeliefSection'
 import WhereWeSitSection from '@/components/WhereWeSitSection'
@@ -9,11 +8,6 @@ import SectorsSection from '@/components/SectorsSection'
 import InsightsSection from '@/components/InsightsSection'
 import DiagnosticCTA from '@/components/DiagnosticCTA'
 import ContactSection from '@/components/ContactSection'
-import Footer from '@/components/Footer'
-
-/* Homepage — Playbook Advisory Group
-   Statically generated at build time.
-   Section order matches homepage-demo-04.html exactly. */
 
 export const metadata = {
   title: 'Playbook Advisory Group — Connecting you to clarity',
@@ -25,7 +19,6 @@ export default function HomePage() {
   return (
     <>
       <Splash />
-      <Nav />
       <main id="main-content">
         <Hero />
         <BeliefSection />
@@ -37,7 +30,6 @@ export default function HomePage() {
         <DiagnosticCTA />
         <ContactSection />
       </main>
-      <Footer />
     </>
   )
 }

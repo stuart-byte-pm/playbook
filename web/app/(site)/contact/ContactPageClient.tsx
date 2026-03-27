@@ -1,18 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
-import dynamic from 'next/dynamic'
 import { submitContactForm, type ContactFormState } from './actions'
-
-const ContactMap = dynamic(() => import('@/components/ContactMap'), {
-  ssr: false,
-  loading: () => (
-    <div
-      className="w-full rounded-sm bg-sand"
-      style={{ aspectRatio: '16/10', minHeight: '300px' }}
-    />
-  ),
-})
 
 const initialState: ContactFormState = { success: false, error: null }
 
@@ -24,15 +13,45 @@ export default function ContactPageClient() {
       {/* Header */}
       <section
         className="bg-black"
-        style={{ paddingBlock: 'var(--space-20, 5rem)' }}
+        style={{ paddingBlock: 'var(--space-20, 5rem)', position: 'relative', overflow: 'hidden' }}
       >
-        <div
-          className="mx-auto"
+        {/* Large decorative guiding star — right edge */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/brand-assets/icon/Playbook_Icon_White_RGB.svg"
+          alt=""
+          aria-hidden="true"
           style={{
-            maxWidth: 'var(--max-width-content, 1280px)',
-            paddingInline: 'var(--container-padding, 5rem)',
+            position: 'absolute',
+            top: '-80px',
+            right: '-120px',
+            width: '520px',
+            height: 'auto',
+            opacity: 0.12,
+            pointerEvents: 'none',
+            userSelect: 'none',
+            transform: 'rotate(15deg)',
           }}
-        >
+        />
+        {/* Small decorative guiding star — left edge */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/brand-assets/icon/Playbook_Icon_White_RGB.svg"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            bottom: '-40px',
+            left: '-50px',
+            width: '180px',
+            height: 'auto',
+            opacity: 0.07,
+            pointerEvents: 'none',
+            userSelect: 'none',
+            transform: 'rotate(-10deg)',
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <span
             className="inline-block uppercase tracking-widest font-medium text-gold"
             style={{
@@ -62,13 +81,7 @@ export default function ContactPageClient() {
           paddingBlock: 'var(--space-24, 6rem)',
         }}
       >
-        <div
-          className="mx-auto"
-          style={{
-            maxWidth: 'var(--max-width-content, 1280px)',
-            paddingInline: 'var(--container-padding, 5rem)',
-          }}
-        >
+        <div className="container">
           <div className="contact-grid">
             {/* Left column — Form */}
             <div>
@@ -103,23 +116,21 @@ export default function ContactPageClient() {
                       type="email"
                       name="email"
                       autoComplete="email"
-                      placeholder="your@email.com"
+                      placeholder="yourname@email.com"
                       required
                     />
                   </FormField>
 
-                  <FormField label="Subject" required>
-                    <select className="form-select" name="subject" required defaultValue="">
-                      <option value="" disabled>Select a subject</option>
-                      <option value="diagnostic">Capital Governance Diagnostic</option>
-                      <option value="governance">Programme governance</option>
-                      <option value="advisory">Sponsor-side advisory</option>
-                      <option value="recovery">Programme health / recovery</option>
-                      <option value="general">General enquiry</option>
-                    </select>
+                  <FormField label="Subject">
+                    <input
+                      className="form-input"
+                      type="text"
+                      name="subject"
+                      placeholder="Please enter your subject line here"
+                    />
                   </FormField>
 
-                  <FormField label="Message" required>
+                  <FormField label="Message">
                     <textarea
                       className="form-textarea"
                       name="message"
@@ -143,7 +154,8 @@ export default function ContactPageClient() {
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="form-submit"
+                    className="btn-primary"
+                    style={{ alignSelf: 'flex-start' }}
                   >
                     {isPending ? 'Sending\u2026' : 'Send enquiry'}
                     {!isPending && (
@@ -186,27 +198,43 @@ export default function ContactPageClient() {
                 </div>
               </div>
 
-              {/* Building image placeholder */}
+              {/* Image — matches the Diagnostic CTA section on the homepage */}
               <div
-                className="w-full rounded-sm overflow-hidden"
-                style={{
-                  aspectRatio: '16/9',
-                  backgroundColor: 'var(--color-pale-blue, #c3dae2)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
+                className="w-full overflow-hidden"
+                style={{ aspectRatio: '16/9', position: 'relative', borderRadius: '20px' }}
               >
-                <span
-                  className="uppercase tracking-widest font-medium"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/sandbox/campus 1.jpg"
+                  alt=""
                   style={{
-                    fontSize: 'var(--size-caption, 0.75rem)',
-                    color: 'var(--color-teal, #264852)',
-                    letterSpacing: 'var(--ls-widest, 0.1em)',
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
                   }}
-                >
-                  Building image — coming soon
-                </span>
+                />
+                {/* Pill SVG overlay — centred */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/brand-assets/icon/Playbook_Icon_Pill_White_RGB.svg"
+                  alt=""
+                  aria-hidden="true"
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    right: 'auto',
+                    bottom: 'auto',
+                    transform: 'translate(-50%, -50%)',
+                    width: '128px',
+                    height: '128px',
+                    zIndex: 2,
+                    pointerEvents: 'none',
+                  }}
+                />
               </div>
 
               {/* Map */}
@@ -222,17 +250,27 @@ export default function ContactPageClient() {
                 >
                   Find us
                 </h2>
-                <ContactMap />
+                {/* Outer clip — hides the Google My Maps toolbar (~48px) by
+                    shifting the iframe up using absolute positioning */}
                 <div
-                  className="flex flex-wrap"
-                  style={{
-                    gap: 'var(--space-4, 1rem)',
-                    marginTop: 'var(--space-3, 0.75rem)',
-                  }}
+                  className="w-full overflow-hidden rounded-sm"
+                  style={{ position: 'relative', height: '400px' }}
                 >
-                  <MapLegendItem colour="#af7e56" label="Playbook office" />
-                  <MapLegendItem colour="#264852" label="Railway station (5 min)" />
-                  <MapLegendItem colour="#264852" label="Bath Street car park (2 min)" />
+                  <iframe
+                    src="https://www.google.com/maps/d/embed?mid=1KxxCnRjLacddB5PsqlR-c08HULETvh8&ehbc=2E312F"
+                    style={{
+                      position: 'absolute',
+                      top: '-90px',
+                      left: 0,
+                      width: '100%',
+                      height: 'calc(100% + 90px)',
+                      border: 0,
+                    }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Playbook Advisory Group location map"
+                  />
                 </div>
               </div>
             </div>
@@ -366,11 +404,6 @@ export default function ContactPageClient() {
           border-color: var(--color-gold, #af7e56);
         }
 
-        /* Leaflet marker reset */
-        .contact-map-marker {
-          background: transparent !important;
-          border: none !important;
-        }
       `}</style>
     </main>
   )
@@ -470,21 +503,3 @@ function SuccessMessage() {
   )
 }
 
-function MapLegendItem({ colour, label }: { colour: string; label: string }) {
-  return (
-    <div className="flex items-center" style={{ gap: 'var(--space-2, 0.5rem)' }}>
-      <span
-        className="inline-block rounded-full"
-        style={{ width: '10px', height: '10px', backgroundColor: colour }}
-      />
-      <span
-        style={{
-          fontSize: 'var(--size-caption, 0.75rem)',
-          color: 'var(--color-text-secondary, #555)',
-        }}
-      >
-        {label}
-      </span>
-    </div>
-  )
-}

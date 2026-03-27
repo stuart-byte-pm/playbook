@@ -1,3 +1,49 @@
+## Session — 2026-03-27
+
+### What we worked on
+- Converted `homepage-demo-04.html` into a fully working Next.js homepage with 15 components
+- Built and debugged the splash screen (session-once, sessionStorage flag, 5.5s auto-dismiss)
+- Fixed multiple invisible section headings caused by `reveal` class never receiving `is-visible`
+- Fixed BeliefSection gold icon stretching full-size due to `.belief__image img` CSS override
+- Fixed ServicesSection image panel invisible due to unobserved `reveal-left` class
+- Removed PlaybookModelSection from homepage per user instruction
+- Fixed DiagnosticCTA slow loading (image priority + looser IntersectionObserver threshold)
+- Fixed DiagnosticCTA pill SVG path (`Playbook_Icon_Pill_White_RGB.svg` — user supplied file)
+- Updated all "Talk to Playbook" / "Request the Diagnostic" CTAs to link to `/contact`
+- Updated Nav contact link to `/contact`
+- Replaced Leaflet map on contact page with Google My Maps embed; hidden toolbar via CSS offset
+- Replaced building image placeholder with `campus 1.jpg` + pill SVG overlay + 20px border-radius
+- Overhauled contact page form: subject changed to text input, mandatory fields limited to Name/Email, email placeholder updated, submit button changed to gold `btn-primary`
+- Fixed contact page layout centering (switched to `.container` class)
+- Added decorative guiding star treatment to contact page header (solid white filled SVGs)
+- Restructured app into `(site)` route group so Nav + Footer are shared automatically across all pages
+- Cleared stale `.next/types` cache after route group restructure
+
+### Key decisions
+- **Route group `(site)`:** All site pages now in `app/(site)/` with a shared layout providing Nav + Footer. Studio stays outside the group. Any new page created inside `(site)` automatically gets Nav and Footer — no per-page work required.
+- **Splash approach:** Render always in DOM (not state-gated) to avoid SSR/hydration null render issue; JS hides or dismisses it client-side
+- **Google My Maps over Leaflet:** User preferred modern appearance; My Maps allows multiple custom pins without API key; toolbar hidden with CSS offset
+- **DiagnosticCTA image `priority`:** Image is below the fold but lazy loading caused visible blank-then-load when section animates in; `priority` preloads it with the page
+- **Contact form subject:** Changed from dropdown to free-text input at user request — simpler and more flexible
+
+### Output / artefacts produced
+- `web/components/` — 15 new components: Splash, Nav, Hero, BeliefSection, WhereWeSitSection, GapsSection, ServicesSection, SectorsSection, InsightsSection, DiagnosticCTA, ContactSection, Footer, RevealWrapper, ArrowIcon, WordmarkSvg
+- `web/app/(site)/layout.tsx` — shared site layout
+- `web/app/(site)/page.tsx` — homepage (Nav/Footer removed, now from layout)
+- `web/app/(site)/contact/` — contact page files moved into route group
+- `web/app/(site)/insights/`, `services/`, `sectors/`, `the-playbook-model/` — all moved into group
+- `web/app/globals.css` — significantly expanded with all component CSS, keyframes, splash styles
+
+### Outstanding / next steps
+- **Resend integration (FORM-01):** Wire both contact forms (homepage + contact page) to `hello@playbook-group.co.uk`
+- **Sanity CMS wiring:** Replace static placeholder articles in InsightsSection with live CMS data
+- **Building image:** Replace `campus 1.jpg` with actual Playbook office photo when available
+- **Phone number:** Update "Number to be confirmed" once confirmed
+- **Other pages:** `/the-playbook-model`, `/services/[slug]`, `/sectors/[slug]`, `/insights` and `/insights/[slug]` pages need building out
+- **Analytics:** Plausible placeholder in `layout.tsx` — set up post-launch
+
+---
+
 ## Session — 2026-03-24 (Contact page build + refinement)
 
 ### What we worked on

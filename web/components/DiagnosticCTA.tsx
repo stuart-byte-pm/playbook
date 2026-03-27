@@ -65,7 +65,7 @@ export default function DiagnosticCTA() {
               understanding of how decisions are being made, where risks sit, and where governance
               needs to strengthen — before delivery begins and significant commitments are made.
             </p>
-            <a href="#contact" className="btn-primary">
+            <a href="/contact" className="btn-primary">
               Request the Diagnostic
               <ArrowIcon size={16} />
             </a>

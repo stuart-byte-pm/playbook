@@ -1,3 +1,56 @@
+## [2026-03-27] — Homepage build, contact page overhaul, site-wide Nav/Footer, route group restructure
+
+### Added
+- `web/components/Splash.tsx` — session-once splash screen (sessionStorage flag, 5.5s auto-dismiss, spinning guiding star, dictionary definition, wordmark)
+- `web/components/Nav.tsx` — fixed nav with scroll state, mobile drawer, focus trap, progress bar
+- `web/components/Hero.tsx` — full-viewport hero with video background, animated heading, scroll indicator
+- `web/components/BeliefSection.tsx` — belief quote section with image and line-by-line reveal
+- `web/components/WhereWeSitSection.tsx` — manifesto rows on black background with staggered animation
+- `web/components/GapsSection.tsx` — three engagement cards (Before commitment, Under pressure, Independent assurance)
+- `web/components/ServicesSection.tsx` — sticky image panel + accordion service rows
+- `web/components/SectorsSection.tsx` — three sector cards with 3D tilt on hover
+- `web/components/InsightsSection.tsx` — four insight cards (static placeholder, Sanity to be wired)
+- `web/components/DiagnosticCTA.tsx` — split layout with meet-in-middle entrance animation, pill SVG overlay
+- `web/components/ContactSection.tsx` — homepage enquiry form (placeholder, not wired to Resend)
+- `web/components/Footer.tsx` — full site footer with nav columns and legal strip
+- `web/components/RevealWrapper.tsx` — shared IntersectionObserver scroll reveal component
+- `web/components/ArrowIcon.tsx`, `web/components/WordmarkSvg.tsx` — shared SVG utilities
+- `web/app/(site)/layout.tsx` — shared site layout providing Nav + Footer to all site pages
+- Splash CSS added to `web/app/globals.css`
+
+### Changed
+- **Route group restructure:** All site pages moved from `web/app/` into `web/app/(site)/` — Nav and Footer are now provided by the group layout automatically. Studio (`/studio`) remains outside the group and is unaffected.
+- **Homepage `page.tsx`:** Nav, Footer removed (now in layout); Splash retained
+- **Contact page — map:** Replaced Leaflet/OpenStreetMap with Google My Maps embed (`iframe`). Toolbar hidden via absolute positioning offset (`top: -90px`)
+- **Contact page — building image:** Replaced pale-blue placeholder with `campus 1.jpg` + centred pill SVG overlay (matching DiagnosticCTA section), `border-radius: 20px`
+- **Contact page — form:** Subject field changed from `<select>` to `<input type="text">` with placeholder "Please enter your subject line here". Only Name and Email are mandatory. Email placeholder updated to `yourname@email.com`. Submit button changed to `btn-primary` (gold) with `align-self: flex-start`
+- **Contact page — layout:** Container switched to `.container` class for consistent centering. Header section given decorative guiding star treatment (large gold outline right, small white outline left — solid filled version on user request)
+- **Contact page — header:** Decorative stars updated to solid white `Playbook_Icon_White_RGB.svg`
+- **Nav:** Contact link updated to `/contact` (was `#contact`). Mobile drawer CTA updated to `/contact`
+- **Hero:** "Talk to Playbook" CTA updated to `/contact`
+- **DiagnosticCTA:** "Request the Diagnostic" CTA updated to `/contact`. Main image switched to Next.js `<Image priority>` to eliminate lazy-load delay
+- **GapsSection, ServicesSection, SectorsSection, InsightsSection:** Section h2 headings converted from bare `reveal` class to `RevealWrapper` so they correctly animate into view
+- **BeliefSection:** Gold icon inline style corrected (`right/bottom: auto`, `width/height` in style prop) to prevent `.belief__image img` CSS from stretching it full-size
+- **ServicesSection:** `reveal-left` removed from image panel (was never observed, kept panel invisible)
+- `web/app/globals.css` — added all component CSS, keyframes, splash styles, `form-label--required` rule
+
+### Fixed
+- Multiple section headings invisible on load due to `reveal` class never receiving `is-visible` (fixed by using `RevealWrapper`)
+- BeliefSection gold icon filling entire image container (fixed by moving dimensions to inline style)
+- ServicesSection sticky image panel invisible (fixed by removing unobserved `reveal-left`)
+- DiagnosticCTA slow perceived load (image now `priority`, IntersectionObserver threshold reduced to `0.05`)
+- Splash `animation: ... both` fill mode causing invisible content (animation removed from `.splash__inner`)
+- Stale `.next/types` cache after route group restructure (cleared)
+- Contact page containers not centering (switched from ad-hoc inline `max-width` to `.container` class)
+
+### Notes
+- Insights section uses static placeholder articles — Sanity CMS wiring deferred
+- Contact form on homepage uses simulated 1.2s delay — Resend Server Action deferred (FORM-01)
+- `PlaybookModelSection` removed from homepage per user instruction (section deleted from design)
+- Google My Maps embed requires third-party cookies — will show "refused to connect" in incognito; works in normal browser windows
+
+---
+
 ## [2026-03-24] — Contact page: final updates — coordinates, icons, address, copy
 
 ### Changed

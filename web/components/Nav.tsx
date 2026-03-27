@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { href: '#services', label: 'Services' },
   { href: '#sectors', label: 'Sectors' },
   { href: '#insights', label: 'Insights' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export default function Nav() {
@@ -156,7 +156,7 @@ export default function Nav() {
           ))}
         </ul>
         <div className="nav__drawer-footer">
-          <a href="#contact" className="nav__drawer-cta" onClick={closeMenu}>
+          <a href="/contact" className="nav__drawer-cta" onClick={closeMenu}>
             Talk to Playbook
             <ArrowIcon size={16} />
           </a>
