@@ -6,6 +6,7 @@
    On mobile: translateY(40px) instead. */
 
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import ArrowIcon from './ArrowIcon'
 
 export default function DiagnosticCTA() {
@@ -30,7 +31,7 @@ export default function DiagnosticCTA() {
           }
         })
       },
-      { threshold: 0.15, rootMargin: '0px 0px -48px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px 0px 0px' }
     )
 
     observer.observe(inner)
@@ -72,21 +73,35 @@ export default function DiagnosticCTA() {
 
           {/* Right: image with gradient overlay */}
           <div className="diagnostic__image">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/sandbox/campus 1.jpg"
               alt="Senior adviser in an urban setting"
-              loading="lazy"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: 'cover' }}
+              priority
             />
-            {/* Guiding star pill mark — centred */}
+            {/* Guiding star — white, centred over image.
+                Inline style overrides the CSS default (bottom:32px left:32px)
+                to centre the icon, matching the demo-04 inline style. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="diagnostic__image-icon"
               src="/images/brand-assets/icon/Playbook_Icon_Pill_White_RGB.svg"
-              width={128}
-              height={128}
               alt=""
               aria-hidden="true"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                bottom: 'auto',
+                right: 'auto',
+                transform: 'translate(-50%,-50%)',
+                width: '128px',
+                height: '128px',
+                zIndex: 2,
+                pointerEvents: 'none',
+              }}
             />
           </div>
         </div>

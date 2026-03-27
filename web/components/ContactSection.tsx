@@ -60,15 +60,16 @@ export default function ContactSection() {
           </RevealWrapper>
 
           {/* Right: contact form */}
-          <RevealWrapper variant="right" delay={1} className="contact__form">
+          <RevealWrapper variant="right" delay={1}>
             <form
+              className="contact__form"
               noValidate
               aria-label="Contact form"
               onSubmit={handleSubmit}
             >
               <div className="form-row">
                 <div className="form-group">
-                  <label className="form-label" htmlFor="name">Name</label>
+                  <label className="form-label form-label--required" htmlFor="name">Name</label>
                   <input
                     className="form-input"
                     type="text"
@@ -87,34 +88,32 @@ export default function ContactSection() {
                     id="org"
                     name="organisation"
                     placeholder="Your organisation"
-                    required
                   />
                 </div>
               </div>
 
               <div className="form-group">
-                <label className="form-label" htmlFor="email">Email</label>
+                <label className="form-label form-label--required" htmlFor="email">Email</label>
                 <input
                   className="form-input"
                   type="email"
                   id="email"
                   name="email"
                   autoComplete="email"
-                  placeholder="your@email.com"
+                  placeholder="yourname@email.com"
                   required
                 />
               </div>
 
               <div className="form-group">
                 <label className="form-label" htmlFor="subject">Subject</label>
-                <select className="form-select" id="subject" name="subject">
-                  <option value="" disabled>Select a subject</option>
-                  <option value="diagnostic">Capital Governance Diagnostic</option>
-                  <option value="governance">Programme governance</option>
-                  <option value="advisory">Sponsor-side advisory</option>
-                  <option value="recovery">Programme health / recovery</option>
-                  <option value="general">General enquiry</option>
-                </select>
+                <input
+                  className="form-input"
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  placeholder="Please add your subject line here"
+                />
               </div>
 
               <div className="form-group">

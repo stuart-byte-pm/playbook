@@ -101,9 +101,9 @@ export default function GapsSection() {
           <RevealWrapper as="span" className="label-tag label-tag--on-dark">
             When we are typically engaged
           </RevealWrapper>
-          <h2 className="gaps__title reveal reveal-delay-1" id="engagement-heading">
+          <RevealWrapper as="h2" className="gaps__title" delay={1} id="engagement-heading">
             Three moments where independent advisory changes the outcome
-          </h2>
+          </RevealWrapper>
         </div>
 
         <div className="gaps__grid" role="list" ref={cardsRef}>

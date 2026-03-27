@@ -102,18 +102,15 @@ export default function ServicesSection() {
             <RevealWrapper as="span" className="label-tag">
               What we do
             </RevealWrapper>
-            <h2
-              className="services__title reveal reveal-delay-1"
-              id="services-heading"
-            >
+            <RevealWrapper as="h2" className="services__title" delay={1} id="services-heading">
               Sponsor-side advisory, independent from delivery
-            </h2>
+            </RevealWrapper>
           </div>
         </div>
 
         <div className="services__layout">
           {/* Sticky image panel — hidden on small screens via CSS */}
-          <div className="services__image-panel reveal-left">
+          <div className="services__image-panel">
             <div className="services__image-frame" ref={frameRef}>
               <Image
                 src="/images/sections/what-we-do-section-men-women-at-laptop.jpg"

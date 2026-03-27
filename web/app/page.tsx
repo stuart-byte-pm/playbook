@@ -1,10 +1,10 @@
+import Splash from '@/components/Splash'
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
 import BeliefSection from '@/components/BeliefSection'
 import WhereWeSitSection from '@/components/WhereWeSitSection'
 import GapsSection from '@/components/GapsSection'
 import ServicesSection from '@/components/ServicesSection'
-import PlaybookModelSection from '@/components/PlaybookModelSection'
 import SectorsSection from '@/components/SectorsSection'
 import InsightsSection from '@/components/InsightsSection'
 import DiagnosticCTA from '@/components/DiagnosticCTA'
@@ -24,6 +24,7 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
+      <Splash />
       <Nav />
       <main id="main-content">
         <Hero />
@@ -31,7 +32,6 @@ export default function HomePage() {
         <WhereWeSitSection />
         <GapsSection />
         <ServicesSection />
-        <PlaybookModelSection />
         <SectorsSection />
         <InsightsSection />
         <DiagnosticCTA />

@@ -52,9 +52,9 @@ export default function InsightsSection() {
             <RevealWrapper as="span" className="label-tag">
               Thought leadership
             </RevealWrapper>
-            <h2 className="insights__title reveal reveal-delay-1" id="insights-heading">
+            <RevealWrapper as="h2" className="insights__title" delay={1} id="insights-heading">
               Perspectives on governance, capital programmes, and decision quality
-            </h2>
+            </RevealWrapper>
           </div>
           <RevealWrapper
             as="a"

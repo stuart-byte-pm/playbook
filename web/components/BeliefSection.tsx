@@ -61,19 +61,23 @@ export default function BeliefSection() {
               style={{ objectFit: 'cover' }}
               loading="lazy"
             />
-            {/* Guiding star mark — centred decorative overlay */}
+            {/* Guiding star mark — 80×80 centred decorative overlay.
+                Inline style overrides the broad `.belief__image img` rule
+                (position:absolute; inset:0; width:100%; height:100%). */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/brand-assets/icon/Playbook_Icon_Gold_RGB.svg"
               alt=""
               aria-hidden="true"
-              width={80}
-              height={80}
               style={{
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
+                right: 'auto',
+                bottom: 'auto',
                 transform: 'translate(-50%,-50%)',
+                width: '80px',
+                height: '80px',
                 zIndex: 2,
                 pointerEvents: 'none',
               }}

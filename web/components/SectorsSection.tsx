@@ -74,9 +74,9 @@ export default function SectorsSection() {
           <RevealWrapper as="span" className="label-tag">
             Sectors we serve
           </RevealWrapper>
-          <h2 className="sectors__title reveal reveal-delay-1" id="sectors-heading">
+          <RevealWrapper as="h2" className="sectors__title" delay={1} id="sectors-heading">
             Senior-led advisory across public, private, and infrastructure
-          </h2>
+          </RevealWrapper>
         </div>
 
         <div className="sectors__grid" ref={containerRef}>

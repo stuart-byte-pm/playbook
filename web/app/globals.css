@@ -1658,6 +1658,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   text-transform: uppercase;
   color: var(--color-text-secondary);
 }
+.form-label--required::after {
+  content: ' *';
+  color: var(--color-gold);
+}
 .form-input,
 .form-select,
 .form-textarea {
@@ -1787,6 +1791,121 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow: hidden;
   clip: rect(0,0,0,0);
   border: 0;
+}
+
+/* ============================================================
+   Splash screen
+   ============================================================ */
+
+body.splash-active { overflow: hidden; }
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background-color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 500ms var(--ease-standard);
+}
+.splash.is-hiding { opacity: 0; pointer-events: none; }
+
+.splash__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  max-width: 480px;
+  width: 100%;
+}
+
+.splash__wordmark {
+  height: 200px;
+  width: auto;
+  display: block;
+  /* Negative margin compensates for internal SVG whitespace */
+  margin-bottom: -3rem;
+}
+.splash__wordmark .wm { fill: var(--color-white); }
+
+.splash__rule {
+  width: 36px;
+  height: 1px;
+  background: var(--color-gold);
+  opacity: 0.5;
+}
+
+.splash__definition { text-align: center; }
+
+.splash__word {
+  font-size: var(--size-h4);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--ls-tight);
+  color: var(--color-white);
+  margin-bottom: var(--space-1);
+}
+.splash__pos {
+  font-size: var(--size-body-sm);
+  font-style: italic;
+  font-weight: var(--weight-light);
+  color: rgba(255,255,255,0.4);
+  letter-spacing: var(--ls-wide);
+  margin-bottom: var(--space-4);
+}
+.splash__defs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0;
+}
+.splash__defs li {
+  font-size: var(--size-body-sm);
+  font-weight: var(--weight-light);
+  line-height: var(--lh-relaxed);
+  color: rgba(255,255,255,0.55);
+  padding-left: var(--space-4);
+  border-left: 1px solid rgba(171,127,88,0.45);
+  text-align: left;
+}
+
+.splash__icon {
+  width: 72px;
+  height: 72px;
+  display: block;
+  animation: splashSpin 2.4s linear infinite;
+}
+.splash__icon path { fill: var(--color-white); }
+@keyframes splashSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.splash__loading {
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+  font-size: var(--size-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-top: var(--space-2);
+}
+.splash__loading-dots { display: flex; gap: 0.15em; }
+.splash__loading-dots span {
+  animation: dotPulse 1.4s ease-in-out infinite both;
+  opacity: 0;
+}
+.splash__loading-dots span:nth-child(1) { animation-delay: 0ms; }
+.splash__loading-dots span:nth-child(2) { animation-delay: 200ms; }
+.splash__loading-dots span:nth-child(3) { animation-delay: 400ms; }
+@keyframes dotPulse {
+  0%, 80%, 100% { opacity: 0; }
+  40%           { opacity: 1; }
 }
 
 /* ============================================================
