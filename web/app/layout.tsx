@@ -25,7 +25,7 @@ export default function RootLayout({
       <head>
         {/* TODO: Add Plausible Analytics script here once account is set up post-launch */}
       </head>
-      <body className="font-inter antialiased">
+      <body className="font-inter antialiased" style={{ overflowX: 'hidden' }}>
         {children}
       </body>
     </html>
