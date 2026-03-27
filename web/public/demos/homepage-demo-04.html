@@ -387,7 +387,7 @@
     .diagnostic__title { font-size: var(--size-h1); font-weight: var(--weight-bold); letter-spacing: var(--ls-tight); line-height: var(--lh-tight); color: var(--color-white); margin-bottom: var(--space-8); }
     .diagnostic__copy { font-size: var(--size-body-lg); font-weight: var(--weight-light); color: rgba(255,255,255,0.5); line-height: var(--lh-relaxed); margin-bottom: var(--space-10); max-width: 44ch; }
     .diagnostic__image { position: relative; overflow: hidden; border-radius: 20px; aspect-ratio: 4/5; align-self: stretch; }
-    .diagnostic__image-icon { position: absolute; bottom: 32px; left: 32px; width: 64px; height: 64px; z-index: 2; pointer-events: none; }
+    .diagnostic__image-icon { position: absolute; bottom: 32px; left: 32px; width: 128px; height: 128px; z-index: 2; pointer-events: none; }
     .diagnostic__image img:not(.diagnostic__image-icon) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--duration-slow) var(--ease-standard); }
     .diagnostic__image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.25) 0%, transparent 40%); pointer-events: none; }
     .diagnostic:hover .diagnostic__image img { transform: scale(1.03); }
@@ -900,8 +900,8 @@
             By the time issues become visible, risk is already embedded.<br>
             We work with sponsors and senior leaders to bring structure, clarity, and control to the environments where those decisions are made.
           </p>
-          <a href="#where-we-sit" class="belief__link reveal reveal-delay-3">
-            How we work
+          <a href="#services" class="belief__link reveal reveal-delay-3">
+            What we do
             <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -1017,12 +1017,6 @@
             Sponsor-side advisory, independent from delivery
           </h2>
         </div>
-        <a href="#" class="belief__link reveal reveal-delay-2" style="white-space:nowrap;align-self:flex-end;">
-          All services
-          <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
       </div>
 
       <div class="services__layout">
@@ -1263,7 +1257,8 @@
         </div>
         <div class="diagnostic__image">
           <img src="../images/sandbox/campus%201.jpg" alt="Senior adviser in an urban setting" loading="lazy">
-          <img class="diagnostic__image-icon" src="../images/brand-assets/icon/Playbook_Icon_White_RGB.svg" width="64" height="64" alt="" aria-hidden="true">
+          <img class="diagnostic__image-icon" src="../images/brand-assets/icon/Playbook_Icon_Pill_White_RGB.svg" width="128" height="128" alt="" aria-hidden="true" style="top:50%;left:50%;bottom:auto;transform:translate(-50%,-50%);">
+
         </div>
       </div>
     </div>
