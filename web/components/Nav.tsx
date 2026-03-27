@@ -162,7 +162,7 @@ export default function Nav() {
         </ul>
         <div className="nav__drawer-footer">
           <a href="/contact" className="nav__drawer-cta" onClick={closeMenu}>
-            Talk to Playbook
+            Talk to playbook
             <ArrowIcon size={16} />
           </a>
           <p className="nav__drawer-tagline">Clarity, Control, Confidence</p>

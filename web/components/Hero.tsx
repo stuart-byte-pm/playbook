@@ -73,7 +73,7 @@ export default function Hero() {
 
         <div className="hero__actions">
           <a href="/contact" className="btn-primary">
-            Talk to Playbook
+            Talk to playbook
             <ArrowIcon size={16} />
           </a>
         </div>
