@@ -1,3 +1,47 @@
+## Session — 2026-03-27 (Insights blog system build)
+
+### What we worked on
+- Planned and built the full insights/blog system across four sessions (A–D) plus polish
+- Created a CMS-agnostic data access layer (`web/lib/insights.ts`) with TypeScript `Insight` interface
+- Wrote four full-length articles (800–1,200 words each) in the Playbook tone of voice
+- Built the insights landing page (`/insights`) with featured article hero, tag filtering, search, load-more pagination, and empty state
+- Built individual article pages (`/insights/[slug]`) with prose typography, social sharing, contact CTA, and related insights
+- Refactored `InsightsSection` homepage component to use shared `InsightCard` component
+- Overhauled the nav state model: flipped from "default transparent, override to dark" to "default dark, override to transparent on homepage" — fixes nav visibility on all light-background pages
+- Fixed hamburger menu visibility on light pages (increased line thickness, explicit hex colours)
+- Added `darkHeroPages` array to Nav for pages needing transparent nav treatment
+- Cross-page consistency audit and accessibility improvements (card click overlay, heading hierarchy, semantic HTML)
+
+### Key decisions
+- **CMS-agnostic architecture:** All blog content served through `web/lib/insights.ts` abstraction. When WordPress is connected later, only this file changes — no component or styling rework needed
+- **Featured article:** Manually pinned via `featured: true` flag in data; falls back to most recent if none flagged
+- **CTA links to contact page:** End-of-article CTA confirmed as linking to `/contact` (not Diagnostic)
+- **Tag set:** Governance, Healthcare, Regeneration, Capital programmes — "funding" excluded
+- **Nav default flipped:** Dark-text-on-white is now the default state. Only pages listed in `darkHeroPages` get transparent nav. This means new pages automatically get the correct nav without developer intervention
+- **Existing images sufficient:** No new images needed for the blog — existing four cover images reused
+
+### Output / artefacts produced
+- `web/lib/types.ts` — Insight interface
+- `web/lib/insights.ts` — data access layer (7 functions)
+- `web/lib/insights/` — 4 article content files (memory-gap, nhs-capital-programmes, governance-bridge-regen, decision-gap)
+- `web/components/InsightCard.tsx`, `TagFilter.tsx`, `InsightSearch.tsx`, `ShareButtons.tsx`, `ArticleCTA.tsx`, `RelatedInsights.tsx` — 6 new components
+- `web/app/(site)/insights/page.tsx` — landing page (rewritten)
+- `web/app/(site)/insights/InsightsPageClient.tsx` — client component for filter/search/grid
+- `web/app/(site)/insights/[slug]/page.tsx` — article page (rewritten)
+- `web/components/InsightsSection.tsx` — refactored to use InsightCard
+- `web/components/Nav.tsx` — nav state model overhauled
+- `web/app/globals.css` — ~200 lines of new CSS (insights hub, article page, prose, share, CTA, nav flip)
+- `plan/INSIGHTS_BLOG_PLAN.md` — full build plan including future WordPress session
+
+### Outstanding / next steps
+- **Session E — WordPress integration:** Connect blog to WordPress instance as content backend (planned in `INSIGHTS_BLOG_PLAN.md`)
+- **Browser testing:** Visual review of all three page types at mobile, tablet, and desktop breakpoints
+- **Session docs update for PROJECT_PLAN.md:** Update task statuses for Phase 6 (Insights pages)
+- **Resend integration (FORM-01):** Still outstanding — wire contact form to `hello@playbook-group.co.uk`
+- **Other pages:** `/the-playbook-model`, `/services/[slug]`, `/sectors/[slug]` still need building out
+
+---
+
 ## Session — 2026-03-27
 
 ### What we worked on

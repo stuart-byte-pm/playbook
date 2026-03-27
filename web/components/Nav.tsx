@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import WordmarkSvg from './WordmarkSvg'
 import ArrowIcon from './ArrowIcon'
@@ -8,11 +9,15 @@ import ArrowIcon from './ArrowIcon'
 const NAV_LINKS = [
   { href: '#services', label: 'Services' },
   { href: '#sectors', label: 'Sectors' },
-  { href: '#insights', label: 'Insights' },
+  { href: '/insights', label: 'Insights' },
   { href: '/contact', label: 'Contact' },
 ]
 
 export default function Nav() {
+  const pathname = usePathname()
+  /* Pages with dark hero banners where the nav starts transparent with white text */
+  const darkHeroPages = ['/', '/contact', '/privacy-policy', '/terms-and-conditions']
+  const isTransparentPage = darkHeroPages.includes(pathname)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const drawerRef = useRef<HTMLElement>(null)
@@ -95,7 +100,7 @@ export default function Nav() {
   return (
     <>
       <header
-        className={`nav${isScrolled ? ' is-scrolled' : ''}`}
+        className={`nav${isTransparentPage && !isScrolled ? ' nav--transparent' : ''}`}
         id="nav"
         role="banner"
       >

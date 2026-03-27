@@ -1,3 +1,46 @@
+## [2026-03-27] — Insights blog system: data layer, landing page, article pages, nav overhaul
+
+### Added
+- `web/lib/types.ts` — `Insight` TypeScript interface with `featured` flag for manual pinning
+- `web/lib/insights.ts` — CMS-agnostic data access layer (7 exported functions: `getAllInsights`, `getInsightBySlug`, `getInsightsByTag`, `getFeaturedInsight`, `searchInsights`, `getAllTags`, `getAllSlugs`)
+- `web/lib/insights/memory-gap.ts` — Article 1: "The most expensive lessons in any programme are the ones that must be learned twice" (~1,200 words, Governance tag, featured)
+- `web/lib/insights/nhs-capital-programmes.ts` — Article 2: "Why NHS capital programmes drift" (~1,050 words, Healthcare tag)
+- `web/lib/insights/governance-bridge-regen.ts` — Article 3: "What the Governance Bridge looks like in residential regeneration" (~1,020 words, Regeneration tag)
+- `web/lib/insights/decision-gap.ts` — Article 4: "Closing the Decision Gap" (~1,050 words, Capital programmes tag)
+- `web/components/InsightCard.tsx` — shared card component with clickable title overlay, reading time, proper slug links
+- `web/components/TagFilter.tsx` — horizontal pill/tab filter bar (All + 4 tags), client-side
+- `web/components/InsightSearch.tsx` — debounced (250ms) search input with icon
+- `web/components/ShareButtons.tsx` — LinkedIn, X, email, copy-link sharing with clipboard feedback
+- `web/components/ArticleCTA.tsx` — end-of-article dark CTA block linking to `/contact`
+- `web/components/RelatedInsights.tsx` — related articles section using shared InsightCard
+- `web/app/(site)/insights/InsightsPageClient.tsx` — client component with tag filter, search, grid, load-more pagination (6 per page), empty state
+- `web/app/(site)/insights/page.tsx` — insights landing page with SEO metadata, featured article hero, filter/search/grid
+- `web/app/(site)/insights/[slug]/page.tsx` — individual article page with cover image, prose typography, share buttons, CTA, related insights, `generateStaticParams()` for SSG
+- `plan/INSIGHTS_BLOG_PLAN.md` — full build plan for the blog system (Sessions A–E including future WordPress integration)
+
+### Changed
+- `web/components/InsightsSection.tsx` — replaced hardcoded `INSIGHTS` array with data layer imports; refactored to use shared `InsightCard` component; card links now point to `/insights/[slug]`
+- `web/components/Nav.tsx` — complete nav state model overhaul: default is now dark-text-on-white (works on every page automatically); only homepage gets `nav--transparent` override for transparent/white-text state over dark hero; added `darkHeroPages` array (`/`, `/contact`, `/privacy-policy`, `/terms-and-conditions`) for pages with dark hero banners; removed `is-scrolled` class in favour of `nav--transparent`; uses `usePathname()` for route detection
+- `web/app/globals.css` — added: insights hub styles (featured card, tag filter pills, search input, grid, pagination, load-more, empty state), article page styles (back nav, header, cover image, prose typography for h2/h3/p/ul/blockquote/strong, share buttons, article CTA, related insights grid), responsive overrides for all new components; nav CSS flipped (default = white bg + dark text, `nav--transparent` = transparent + white text); hamburger lines increased from 1.5px to 2px with explicit hex colours for visibility
+- Nav `Insights` link changed from `#insights` anchor to `/insights` route
+
+### Fixed
+- Nav invisible on light-background pages (insights, contact, etc.) — was rendering white text on white background due to `is-scrolled` state not being set before hydration; fixed by flipping the default
+- Hamburger menu invisible on light pages — default span background now explicit `#000000` (was relying on CSS variable that could flash white during hydration)
+- Featured article card was wrapped in `<a>` tag causing nested interactive elements — restructured as `<article>` with proper link in `<h2>` and standalone "Read article" link
+- Insight cards not fully clickable despite `cursor: pointer` — added `::after` pseudo-element overlay on title link making entire card clickable; "Read article" link given `z-index: 2` to remain independently focusable
+
+### Notes
+- All four articles written in Playbook tone of voice: British English, sentence case headings, no exclamation marks, Oxford commas, all brand concepts capitalised
+- Tag set: Governance, Healthcare, Regeneration, Capital programmes — "funding" excluded per client decision
+- Featured article determined by `featured: true` flag (manual pin) — falls back to most recent if none flagged
+- End-of-article CTA links to contact page per client decision
+- Data layer is CMS-agnostic: when WordPress is connected, only `web/lib/insights.ts` needs rewriting
+- Build output: 13 pages (9 static + 4 SSG via `generateStaticParams`)
+- WordPress integration planned as Session E (future) — see `plan/INSIGHTS_BLOG_PLAN.md`
+
+---
+
 ## [2026-03-27] — Homepage build, contact page overhaul, site-wide Nav/Footer, route group restructure
 
 ### Added
