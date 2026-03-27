@@ -62,7 +62,7 @@ export default function Footer() {
           </p>
           <ul className="footer__legal-links">
             <li><a href="/privacy-policy" className="footer__legal-link">Privacy policy</a></li>
-            <li><a href="/legal-notices" className="footer__legal-link">Legal notices</a></li>
+            <li><a href="/terms-and-conditions" className="footer__legal-link">Terms and conditions</a></li>
           </ul>
         </div>
       </div>

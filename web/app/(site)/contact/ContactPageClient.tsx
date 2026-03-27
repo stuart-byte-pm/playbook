@@ -198,7 +198,19 @@ export default function ContactPageClient() {
                 </div>
               </div>
 
-              {/* Image — matches the Diagnostic CTA section on the homepage */}
+              {/* Image */}
+              <div>
+                <h2
+                  className="font-semibold uppercase"
+                  style={{
+                    fontSize: 'var(--size-caption, 0.75rem)',
+                    letterSpacing: 'var(--ls-widest, 0.1em)',
+                    color: 'var(--color-gold, #af7e56)',
+                    marginBottom: 'var(--space-4, 1rem)',
+                  }}
+                >
+                  Our building
+                </h2>
               <div
                 className="w-full overflow-hidden"
                 style={{ aspectRatio: '16/9', position: 'relative', borderRadius: '20px' }}
@@ -235,6 +247,7 @@ export default function ContactPageClient() {
                     pointerEvents: 'none',
                   }}
                 />
+              </div>
               </div>
 
               {/* Map */}
