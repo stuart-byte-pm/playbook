@@ -8,7 +8,7 @@ export default function ArticleCTA() {
           Every engagement begins with clarity
         </span>
         <h2 className="article-cta__title">
-          Talk to Playbook
+          Talk to playbook
         </h2>
         <p className="article-cta__copy">
           If this article resonates with the challenges your programme is facing,

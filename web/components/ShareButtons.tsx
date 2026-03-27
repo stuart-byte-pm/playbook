@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface ShareButtonsProps {
   title: string
@@ -9,16 +9,18 @@ interface ShareButtonsProps {
 
 export default function ShareButtons({ title, slug }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false)
+  const [baseUrl, setBaseUrl] = useState('')
 
-  const url = typeof window !== 'undefined'
-    ? `${window.location.origin}/insights/${slug}`
-    : `/insights/${slug}`
+  useEffect(() => {
+    setBaseUrl(window.location.origin)
+  }, [])
 
+  const url = `${baseUrl}/insights/${slug}`
   const encodedUrl = encodeURIComponent(url)
   const encodedTitle = encodeURIComponent(title)
 
   function handleCopy() {
-    navigator.clipboard.writeText(url).then(() => {
+    navigator.clipboard.writeText(`${window.location.origin}/insights/${slug}`).then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     })

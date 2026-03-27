@@ -32,10 +32,9 @@ export default function Footer() {
             <div>
               <h3 className="footer__nav-group-title">Company</h3>
               <ul className="footer__nav-links">
-                <li><a href="/the-playbook-model" className="footer__nav-link">The Playbook model</a></li>
                 <li><a href="/#sectors" className="footer__nav-link">Sectors</a></li>
                 <li><a href="/insights" className="footer__nav-link">Insights</a></li>
-                <li><a href="/#contact" className="footer__nav-link">Contact</a></li>
+                <li><a href="/contact" className="footer__nav-link">Contact</a></li>
               </ul>
             </div>
             <div>

@@ -7,7 +7,7 @@ import WordmarkSvg from './WordmarkSvg'
 import ArrowIcon from './ArrowIcon'
 
 const NAV_LINKS = [
-  { href: '#services', label: 'Services' },
+  { href: '/', label: 'Home' },
   { href: '#sectors', label: 'Sectors' },
   { href: '/insights', label: 'Insights' },
   { href: '/contact', label: 'Contact' },
