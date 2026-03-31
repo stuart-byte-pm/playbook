@@ -15,7 +15,7 @@ export const metadata = {
     'Senior-led, sponsor-side advisory for capital programme governance. Clarity, Control, Confidence.',
 }
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <>
       <Splash />

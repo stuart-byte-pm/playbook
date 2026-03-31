@@ -446,6 +446,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   gap: 5px;
   width: 24px;
   padding: 4px 0;
+  margin-right: 16px;
   cursor: pointer;
   z-index: 210;
   position: relative;
@@ -490,6 +491,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow-y: auto;
 }
 .nav__drawer.is-open { transform: translateX(0); }
+
+.nav__drawer-close {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  padding: var(--space-2);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.nav__drawer-close:hover { color: var(--color-white); }
 
 .nav__drawer-links {
   list-style: none;
@@ -1421,6 +1433,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-6);
 }
+.insights__grid > * {
+  height: 100%;
+}
 .insight-card {
   display: flex;
   flex-direction: row;
@@ -1428,6 +1443,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   align-items: stretch;
   cursor: pointer;
   padding-bottom: var(--space-6);
+  height: 100%;
   border-bottom: 1px solid var(--color-border-default);
   position: relative;
 }

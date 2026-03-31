@@ -44,6 +44,7 @@ export default function Nav() {
       })
     }
 
+    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', handleScroll)
@@ -161,6 +162,15 @@ export default function Nav() {
         aria-modal={isOpen}
         aria-label="Site navigation"
       >
+        <button
+          className="nav__drawer-close"
+          aria-label="Close menu"
+          onClick={closeMenu}
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+        </button>
         <ul className="nav__drawer-links">
           {NAV_LINKS.map(({ href, label }) => (
             <li key={href}>
