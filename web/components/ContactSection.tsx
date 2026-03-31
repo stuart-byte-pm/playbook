@@ -3,16 +3,28 @@
 import { useState } from 'react'
 import RevealWrapper from './RevealWrapper'
 import ArrowIcon from './ArrowIcon'
+import { submitContactForm } from '@/app/(site)/contact/actions'
 
 export default function ContactSection() {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus('sending')
-    /* Placeholder: replace with Resend Server Action in a later sprint */
-    await new Promise((resolve) => setTimeout(resolve, 1200))
-    setStatus('sent')
+    setErrorMsg(null)
+
+    const formData = new FormData(e.currentTarget)
+    formData.set('form_source', 'homepage')
+
+    const result = await submitContactForm({ success: false, error: null }, formData)
+
+    if (result.success) {
+      setStatus('sent')
+    } else {
+      setStatus('error')
+      setErrorMsg(result.error)
+    }
   }
 
   return (
@@ -126,13 +138,27 @@ export default function ContactSection() {
                 />
               </div>
 
+              {status === 'error' && errorMsg && (
+                <p
+                  style={{
+                    fontSize: 'var(--size-body-sm, 0.875rem)',
+                    color: '#b91c1c',
+                    fontWeight: 500,
+                    margin: 0,
+                  }}
+                  role="alert"
+                >
+                  {errorMsg}
+                </p>
+              )}
+
               <button
                 type="submit"
                 className="form-submit"
-                disabled={status !== 'idle'}
+                disabled={status === 'sending'}
                 style={status === 'sent' ? { backgroundColor: 'var(--color-teal)' } : undefined}
               >
-                {status === 'idle' && (
+                {(status === 'idle' || status === 'error') && (
                   <>
                     Send enquiry
                     <ArrowIcon size={16} />

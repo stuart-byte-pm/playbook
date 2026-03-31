@@ -1,3 +1,21 @@
+## [2026-03-31] — Contact form integration with WordPress
+
+### Added
+- `wordpress/mu-plugins/playbook-form-handler.php` — WordPress mu-plugin providing custom REST endpoint (`POST /wp-json/playbook/v1/contact`), `pb_form_entry` CPT for submission storage, `wp_mail()` email notifications, admin meta box, and custom list columns
+- `plan/form-research.md` — full research document evaluating 5 integration approaches with comparison matrix, recommendation rationale, and implementation details
+
+### Changed
+- `web/app/(site)/contact/actions.ts` — rewired from stub to POST submissions to WordPress REST endpoint, with server-side validation and error handling
+- `web/components/ContactSection.tsx` — homepage form now uses the shared Server Action instead of placeholder stub; added `form_source: 'homepage'` identifier and error state display
+
+### Notes
+- mu-plugin deployed to `cms.playbook-group.co.uk` via SFTP (GoDaddy Managed WordPress, host: `f05.c16.myftpupload.com`)
+- Email notifications currently sent to `stuart@byte-pm.com` for testing — change to `hello@playbook-group.co.uk` in line 98 of the mu-plugin after testing is complete
+- "Form submissions" menu item now visible in WP admin dashboard
+- Both forms (`/contact` page and homepage section) submit through the same Server Action; `form_source` field distinguishes origin
+
+---
+
 ## [2026-03-31] — Session E (continued): WordPress code integration
 
 ### Added

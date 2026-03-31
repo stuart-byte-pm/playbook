@@ -1,3 +1,36 @@
+## Session — 2026-03-31 (Contact form integration with WordPress)
+
+### What we worked on
+- Researched 5 approaches for integrating Next.js forms with WordPress as the form backend (CPT + built-in REST, CF7, Gravity Forms, headless plugins, hybrid Resend + WP, custom REST endpoint)
+- Selected Approach D (custom WordPress REST endpoint) as the simplest viable solution
+- Built and deployed a WordPress mu-plugin (`playbook-form-handler.php`) that registers a CPT, REST endpoint, email notifications, and admin UI
+- Rewired the contact page Server Action (`actions.ts`) to POST to the WordPress endpoint
+- Updated the homepage contact form (`ContactSection.tsx`) to use the same Server Action with error handling
+- Deployed the mu-plugin to `cms.playbook-group.co.uk` via SFTP on GoDaddy Managed WordPress
+- Documented the full research, decision rationale, and implementation in `plan/form-research.md`
+
+### Key decisions
+- Approach D (custom WP REST endpoint) chosen over Resend hybrid, CF7, and Gravity Forms — simplest solution, no paid plugins, no auth complexity, client gets full WP admin visibility
+- Public endpoint (no authentication) — same security model as any web form
+- Both forms route through a single Server Action; `form_source` field distinguishes homepage vs contact page submissions
+- Email set to `stuart@byte-pm.com` for testing phase
+
+### Output / artefacts produced
+- `wordpress/mu-plugins/playbook-form-handler.php` — WordPress mu-plugin (deployed to server)
+- `web/app/(site)/contact/actions.ts` — updated Server Action
+- `web/components/ContactSection.tsx` — updated homepage form
+- `plan/form-research.md` — research document with implementation details
+
+### Outstanding / next steps
+- Test form submissions from both the `/contact` page and homepage section
+- Verify email notifications arrive at `stuart@byte-pm.com`
+- Verify submissions appear in WP admin under "Form submissions"
+- After testing: change email recipient in mu-plugin line 98 to `hello@playbook-group.co.uk` and re-upload via SFTP
+- Consider adding spam protection (honeypot or reCAPTCHA) if needed
+- Consider installing WP Mail SMTP plugin if email deliverability is unreliable
+
+---
+
 ## Session — 2026-03-31 (Session E continued: WordPress code integration)
 
 ### What we worked on

@@ -38,11 +38,10 @@ The Next.js application lives in the `web/` subdirectory. All build commands run
 ├── web/                    Next.js application (App Router, TypeScript, Tailwind v4)
 │   ├── app/                Next.js App Router pages and layouts
 │   ├── components/         Shared UI components (to be created in Session 2)
-│   ├── lib/                Utilities, Sanity client, helpers
-│   ├── sanity/             Sanity schema definitions and client
+│   ├── lib/                Utilities, WordPress client, helpers
 │   ├── public/             Static assets
 │   ├── .env.local          Environment variables (not committed — see VERCEL_SETUP.md)
-│   ├── next.config.ts      Next.js config (turbopack.root set; remotePatterns TBC in DS-07)
+│   ├── next.config.ts      Next.js config (turbopack.root set; remotePatterns for cms.playbook-group.co.uk)
 │   └── VERCEL_SETUP.md     Manual deployment instructions
 ├── assets/                 Brand files, PDFs, exported docs
 ├── plan/                   Project plan
@@ -168,14 +167,13 @@ Contact form routes to `hello@playbook-group.co.uk` via Resend Server Action.
 
 ## Open decisions — all resolved
 
-All six pre-build decisions were resolved before Session 1. Outcomes:
+All pre-build decisions were resolved. Outcomes:
 
-1. **Sanity Studio location:** embedded at `/studio` in the Next.js app. Implemented.
-2. **Sanity CDN:** confirmed acceptable. `cdn.sanity.io` to be added to `images.remotePatterns` in DS-07.
-3. **Analytics:** deferred to post-launch. Placeholder comment in `web/app/layout.tsx`.
-4. **Article author field:** single entity — "Playbook Advisory Group". No author schema required.
-5. **Article tags:** confirmed at launch. Initial tag set: governance, healthcare, regeneration, capital programmes, funding.
-6. **Cookie consent:** deferred to pre-live audit (LAUNCH-04). No third-party tracking in the build; confirm before production deploy.
+1. **CMS:** WordPress (self-hosted at `cms.playbook-group.co.uk`). REST API, public read-only. Integrated — insights data layer fetches from WP REST API with ISR (60s revalidation). Sanity was originally planned but replaced by WordPress before integration.
+2. **Analytics:** deferred to post-launch. Placeholder comment in `web/app/layout.tsx`.
+3. **Article author field:** single entity — "Playbook Advisory Group". No author schema required.
+4. **Article tags:** confirmed at launch. Tag set: Governance, Healthcare, Regeneration, Capital programmes. "Funding" excluded from the insights blog.
+5. **Cookie consent:** deferred to pre-live audit (LAUNCH-04). No third-party tracking in the build; confirm before production deploy.
 
 ---
 

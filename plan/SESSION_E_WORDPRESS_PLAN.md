@@ -318,5 +318,5 @@ These will be kept during development as a reference for verifying WordPress con
 - [x] **Step 6** — Image configuration (`next.config.ts` remotePatterns)
 - [x] **Step 7** — Fallback handling (graceful degradation on WP downtime)
 - [x] **Step 8** — Build test to verify compilation (passed — 13/13 pages generated)
-- [ ] **Step 9** — Content migration verification (render check against static originals)
-- [ ] **Step 10** — Remove static content files (`web/lib/insights/*.ts`)
+- [x] **Step 9** — Content migration verification (render check against static originals)
+- [x] **Step 10** — Remove static content files (`web/lib/insights/*.ts`)
