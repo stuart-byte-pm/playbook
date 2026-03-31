@@ -1,3 +1,59 @@
+## Session — 2026-03-31 (Session E continued: WordPress code integration)
+
+### What we worked on
+- Implemented full WordPress REST API integration for insights (Steps 2–8 of `plan/SESSION_E_WORDPRESS_PLAN.md`)
+- Created `web/lib/wordpress.ts` — WP REST API client with post-to-Insight mapping, HTML entity decoding, reading time calculation, and related post derivation by category
+- Rewrote `web/lib/insights.ts` — all 7 functions converted from sync to async, fetching from WordPress with static content fallback on failure
+- Updated 4 consumer files to `async`/`await`: `insights/page.tsx`, `insights/[slug]/page.tsx`, `InsightsSection.tsx`, `RelatedInsights.tsx`
+- Added ISR with `revalidate = 60` on both insights routes
+- Added `remotePatterns` for `cms.playbook-group.co.uk` in `next.config.ts`
+- Build verified — 13/13 pages compiled and generated successfully
+- Updated `CLAUDE.md` to reflect WordPress replacing Sanity as the CMS
+
+### Key decisions
+- Static content files kept as fallback (not removed yet) — `fetchInsights()` returns static data if WordPress is unreachable
+- No HTML sanitisation for now — WordPress is admin-controlled, not user-submitted content; noted as future hardening step
+- Related posts derived automatically by category (up to 3, excluding current post, newest first)
+- Author hardcoded as "Playbook Advisory Group" (single-author brand)
+
+### Outstanding
+- Step 9: Content migration verification — visually confirm WordPress-rendered articles match static originals
+- Step 10: Remove static content files (`web/lib/insights/*.ts`) once verified
+
+---
+
+## Session — 2026-03-27 (Session E: WordPress integration prep)
+
+### What we worked on
+- Wrote a detailed implementation plan for WordPress integration (`plan/SESSION_E_WORDPRESS_PLAN.md`) covering all 8 steps: env vars, API client, data layer rewrite, consumer updates, ISR, image config, fallback handling, and content verification
+- Seeded WordPress at `cms.playbook-group.co.uk` with all blog content via the REST API:
+  - Created 4 categories (Governance, Healthcare, Regeneration, Capital programmes)
+  - Published all 4 articles with full HTML content, matching slugs, correct dates, and category assignments
+  - Uploaded 4 featured images to the WordPress media library and linked them to posts
+  - Set "The most expensive lessons" as a sticky post (featured article)
+
+### Key decisions
+- **WP REST API (no GraphQL):** Standard `/wp-json/wp/v2/posts` endpoint with `?_embed` for featured images and categories in a single call
+- **Sticky posts for featured flag:** Uses WordPress's built-in sticky post feature instead of ACF custom fields — maps directly to `featured: true` in the `Insight` interface
+- **Related articles by category:** Will be derived automatically from same-category posts instead of manual `relatedSlugs` — better for CMS-managed content
+- **Reading time calculated:** Will be computed from word count (strip HTML, divide by 200, round up) instead of stored in WordPress
+- **ISR at 60 seconds:** Editorial changes in WordPress will be visible on the site within ~60 seconds
+- **No external packages:** WordPress client will use native `fetch()` — no additional dependencies
+
+### Output / artefacts produced
+- `plan/SESSION_E_WORDPRESS_PLAN.md` — full implementation plan with file map, WP field mapping, execution order, and risks
+- 4 WordPress posts (IDs 8–11) with content, categories, featured images, and sticky flag
+- 4 WordPress media uploads (IDs 12, 14, 16, 18) — featured images for each post
+- 4 WordPress categories (IDs 2–5)
+
+### Outstanding / next steps
+- **Code integration:** Implement the 8 steps in `SESSION_E_WORDPRESS_PLAN.md` — rewrite `insights.ts`, create `wordpress.ts` client, update consumers with `await`, add ISR, configure `next.config.ts` image patterns
+- **Revoke application password:** `claude-code` application password in WordPress should be revoked now that seeding is complete
+- **Content migration verification:** After code changes, verify all 4 articles render identically from WordPress as they did from static files
+- **Static content cleanup:** Remove `web/lib/insights/*.ts` article files after verification
+
+---
+
 ## Session — 2026-03-27 (Insights blog system build)
 
 ### What we worked on

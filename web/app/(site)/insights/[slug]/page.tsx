@@ -10,13 +10,15 @@ interface InsightPageProps {
   params: Promise<{ slug: string }>
 }
 
+export const revalidate = 60
+
 export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }))
+  return (await getAllSlugs()).map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: InsightPageProps): Promise<Metadata> {
   const { slug } = await params
-  const insight = getInsightBySlug(slug)
+  const insight = await getInsightBySlug(slug)
   if (!insight) return {}
 
   return {
@@ -44,7 +46,7 @@ function formatDate(iso: string): string {
 
 export default async function InsightPage({ params }: InsightPageProps) {
   const { slug } = await params
-  const insight = getInsightBySlug(slug)
+  const insight = await getInsightBySlug(slug)
 
   if (!insight) notFound()
 

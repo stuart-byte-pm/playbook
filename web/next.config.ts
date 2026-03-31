@@ -7,6 +7,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cms.playbook-group.co.uk',
+        pathname: '/wp-content/uploads/**',
+      },
+    ],
+  },
 }
 
 export default nextConfig

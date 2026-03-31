@@ -18,14 +18,14 @@ A B2B marketing website for Playbook Advisory Group — a senior-led, sponsor-si
 |---|---|---|
 | Framework | Next.js (App Router) | TypeScript throughout |
 | Styling | Tailwind CSS | Mapped to design tokens |
-| CMS | Sanity | Non-technical editor UI; free tier |
+| CMS | WordPress | Self-hosted at cms.playbook-group.co.uk; REST API |
 | Hosting | Vercel | Native ISR support |
 | Email | Resend | Contact form via Server Action |
 | Analytics | Plausible (preferred) | Privacy-first, no cookie banner |
 
 **Rendering strategy:**
 - SSG for all static pages
-- ISR for `/insights/[slug]` and `/insights` index — revalidated by Sanity webhook on publish
+- ISR for `/insights/[slug]` and `/insights` index — revalidated every 60s via WordPress REST API
 
 ---
 

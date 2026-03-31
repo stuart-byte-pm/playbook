@@ -6,9 +6,9 @@ interface RelatedInsightsProps {
   slugs: string[]
 }
 
-export default function RelatedInsights({ slugs }: RelatedInsightsProps) {
-  const related = slugs
-    .map((s) => getInsightBySlug(s))
+export default async function RelatedInsights({ slugs }: RelatedInsightsProps) {
+  const results = await Promise.all(slugs.map((s) => getInsightBySlug(s)))
+  const related = results
     .filter((i): i is Insight => i !== undefined)
     .slice(0, 3)
 

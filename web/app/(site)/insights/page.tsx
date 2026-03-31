@@ -24,10 +24,12 @@ function formatDate(iso: string): string {
   })
 }
 
-export default function InsightsPage() {
-  const allInsights = getAllInsights()
-  const featured = getFeaturedInsight()
-  const tags = getAllTags()
+export const revalidate = 60
+
+export default async function InsightsPage() {
+  const allInsights = await getAllInsights()
+  const featured = await getFeaturedInsight()
+  const tags = await getAllTags()
   const remaining = allInsights.filter((i) => i.slug !== featured.slug)
 
   return (

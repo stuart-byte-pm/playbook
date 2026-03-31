@@ -1,3 +1,43 @@
+## [2026-03-31] — Session E (continued): WordPress code integration
+
+### Added
+- `web/lib/wordpress.ts` — WordPress REST API client with post-to-Insight mapping, HTML helpers, and graceful error handling
+- `WORDPRESS_API_URL` environment variable in `web/.env.local`
+- ISR configuration (`revalidate = 60`) on `/insights` and `/insights/[slug]` routes
+- `remotePatterns` for `cms.playbook-group.co.uk` in `web/next.config.ts`
+
+### Changed
+- `web/lib/insights.ts` — all 7 functions rewritten from synchronous (static data) to async (WordPress REST API), with static fallback on failure
+- `web/app/(site)/insights/page.tsx` — async server component with `await` calls
+- `web/app/(site)/insights/[slug]/page.tsx` — `await` added to `generateStaticParams`, `generateMetadata`, and page component
+- `web/components/InsightsSection.tsx` — async server component with `await`
+- `web/components/RelatedInsights.tsx` — async with `Promise.all` batch fetch
+- `CLAUDE.md` — CMS updated from Sanity to WordPress
+
+### Notes
+- Static content files (`web/lib/insights/*.ts`) retained as fallback — will be removed after content verification (Step 9)
+- Build verified: 13/13 pages compiled and generated successfully
+
+---
+
+## [2026-03-27] — Session E: WordPress integration planning and content seeding
+
+### Added
+- `plan/SESSION_E_WORDPRESS_PLAN.md` — full implementation plan for WordPress integration covering API client, data layer rewrite, ISR configuration, image handling, consumer updates, and fallback strategy
+- 4 WordPress categories created via REST API: Governance (ID 2), Healthcare (ID 3), Regeneration (ID 4), Capital programmes (ID 5)
+- 4 blog posts published in WordPress via REST API with full article content, correct slugs, dates, categories, and sticky flag
+- 4 featured images uploaded to WordPress media library and assigned to their respective posts
+
+### Notes
+- WordPress instance: `cms.playbook-group.co.uk` — public read-only REST API at `/wp-json/wp/v2/posts`
+- Content seeded via application password authentication (temporary, should be revoked after session)
+- All post slugs match the existing static data layer exactly: `the-most-expensive-lessons`, `nhs-capital-programmes-drift`, `governance-bridge-residential-regeneration`, `closing-the-decision-gap`
+- "The most expensive lessons" post set as sticky (maps to `featured: true` in the `Insight` interface)
+- Images hosted at `cms.playbook-group.co.uk/wp-content/uploads/` — `next.config.ts` will need `remotePatterns` update during code integration
+- Code integration (rewriting `insights.ts`, adding ISR, updating consumers) planned but not yet implemented — see `plan/SESSION_E_WORDPRESS_PLAN.md` for full step-by-step
+
+---
+
 ## [2026-03-27] — Insights blog system: data layer, landing page, article pages, nav overhaul
 
 ### Added

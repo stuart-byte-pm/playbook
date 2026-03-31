@@ -3,8 +3,8 @@ import ArrowIcon from './ArrowIcon'
 import InsightCard from './InsightCard'
 import { getAllInsights } from '../lib/insights'
 
-export default function InsightsSection() {
-  const insights = getAllInsights()
+export default async function InsightsSection() {
+  const insights = await getAllInsights()
 
   return (
     <section className="insights section" id="insights" aria-labelledby="insights-heading">
