@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import ArrowIcon from './ArrowIcon'
@@ -23,11 +23,6 @@ export default function Nav() {
   const toggleRef = useRef<HTMLButtonElement>(null)
   const scrollTicking = useRef(false)
 
-  /* Sync scroll state before first paint to prevent flash */
-  useLayoutEffect(() => {
-    setIsScrolled(window.scrollY > 40)
-  }, [])
-
   /* Scroll detection — update nav state and progress bar */
   useEffect(() => {
     const progressBar = document.createElement('div')
@@ -37,6 +32,7 @@ export default function Nav() {
 
     const handleScroll = () => {
       if (scrollTicking.current) return
+      if (document.body.classList.contains('splash-active')) return
       scrollTicking.current = true
       requestAnimationFrame(() => {
         const scrollY = window.scrollY
@@ -49,8 +45,17 @@ export default function Nav() {
       })
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    /* Delay scroll listener to avoid false triggers during page streaming / splash */
+    const startTimer = setTimeout(() => {
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      /* Sync initial scroll position now that the page has settled */
+      if (!document.body.classList.contains('splash-active')) {
+        setIsScrolled(window.scrollY > 40)
+      }
+    }, 100)
+
     return () => {
+      clearTimeout(startTimer)
       window.removeEventListener('scroll', handleScroll)
       progressBar.remove()
     }
