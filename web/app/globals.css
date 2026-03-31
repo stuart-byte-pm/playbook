@@ -131,6 +131,7 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   scroll-padding-top: 120px;
+  overflow-x: hidden;
 }
 
 body {
@@ -362,22 +363,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  padding-top: calc(var(--space-4) + env(safe-area-inset-top, 0px));
+  padding-top: var(--space-4);
   padding-bottom: var(--space-4);
   background-color: rgba(255,255,255,0.96);
   backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 var(--color-border-default);
   transition: background-color var(--duration-base) var(--ease-standard),
-              box-shadow var(--duration-base) var(--ease-standard),
-              padding var(--duration-base) var(--ease-standard);
+              box-shadow var(--duration-base) var(--ease-standard);
 }
 
-/* Transparent override — homepage only, before scroll */
+/* Transparent override — dark hero pages, before scroll */
 .nav--transparent {
   background-color: transparent;
   backdrop-filter: none;
   box-shadow: none;
-  padding-block: var(--space-6);
 }
 
 .nav__inner {
@@ -2378,6 +2377,7 @@ body.splash-active { overflow: hidden; }
    ============================================================ */
 
 @media (max-width: 768px) {
+  .nav__wordmark-svg { height: 36px; }
   .belief__inner { grid-template-columns: 1fr; gap: var(--space-8); }
   .belief__image { min-height: 280px; }
   .gaps__grid { grid-template-columns: 1fr; }
