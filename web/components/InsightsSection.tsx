@@ -31,7 +31,7 @@ export default async function InsightsSection() {
         </div>
 
         <div className="insights__grid">
-          {insights.map((insight, i) => (
+          {insights.slice(0, 4).map((insight, i) => (
             <RevealWrapper
               key={insight.slug}
               variant="scale"

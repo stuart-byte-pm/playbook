@@ -1,5 +1,3 @@
-import WordmarkSvg from './WordmarkSvg'
-
 export default function Footer() {
   return (
     <footer className="footer" aria-label="Site footer">
@@ -9,7 +7,12 @@ export default function Footer() {
           {/* Brand column */}
           <div className="footer__brand">
             <div>
-              <WordmarkSvg className="footer__wordmark-svg" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/brand-assets/wordmark/playbook-wordmark-white.svg"
+                alt="Playbook"
+                className="footer__wordmark-svg"
+              />
               <p className="footer__tagline">
                 Clarity, Control, Confidence.<br />
                 Senior-led, sponsor-side advisory for capital programmes.

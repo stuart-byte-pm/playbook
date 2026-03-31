@@ -389,11 +389,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .nav__logo { display: flex; align-items: center; gap: var(--space-3); }
 
 .nav__wordmark-svg { height: 88px; width: auto; display: block; }
-.nav__wordmark-svg .wm {
-  fill: var(--color-black);
-  transition: fill var(--duration-base) var(--ease-standard);
-}
-.nav--transparent .nav__wordmark-svg .wm { fill: var(--color-white); }
+.nav__wordmark--light { display: none; }
+.nav--transparent .nav__wordmark--dark { display: none; }
+.nav--transparent .nav__wordmark--light { display: block; }
 
 /* Desktop nav links — hidden on mobile */
 .nav__links {
@@ -1507,6 +1505,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   line-height: var(--lh-relaxed);
   margin-bottom: var(--space-4);
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .insight-card__link {
   position: relative;
@@ -1746,8 +1748,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-top: var(--space-4);
   max-width: 22ch;
 }
-.footer__wordmark-svg { height: 48px; width: auto; display: block; margin-bottom: var(--space-4); }
-.footer__wordmark-svg .wm { fill: rgba(255,255,255,0.7); }
+.footer__wordmark-svg { height: 48px; width: auto; display: block; margin-bottom: var(--space-4); opacity: 0.7; }
 .footer__nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
 .footer__nav-group-title {
   font-size: var(--size-caption);

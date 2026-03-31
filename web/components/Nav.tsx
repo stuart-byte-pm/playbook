@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import WordmarkSvg from './WordmarkSvg'
 import ArrowIcon from './ArrowIcon'
 
 const NAV_LINKS = [
@@ -106,7 +105,18 @@ export default function Nav() {
       >
         <div className="nav__inner">
           <Link href="/" className="nav__logo" aria-label="Playbook Advisory Group — home">
-            <WordmarkSvg className="nav__wordmark-svg" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/brand-assets/wordmark/playbook-wordmark-black.svg"
+              alt="Playbook"
+              className="nav__wordmark-svg nav__wordmark--dark"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/brand-assets/wordmark/playbook-wordmark-white.svg"
+              alt="Playbook"
+              className="nav__wordmark-svg nav__wordmark--light"
+            />
           </Link>
 
           <nav aria-label="Primary navigation">
