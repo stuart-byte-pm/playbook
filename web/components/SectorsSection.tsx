@@ -5,11 +5,13 @@
 
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import RevealWrapper from './RevealWrapper'
 
 const SECTORS = [
   {
     name: 'Public sector',
+    slug: 'public-sector',
     sub: 'Local authorities, NHS trusts, and education institutions — navigating political complexity, audit scrutiny, and the accountability structures of public capital programmes.',
     image: '/images/sandbox/Hospital 1.jpg',
     imageAlt: 'Public sector capital programme',
@@ -17,6 +19,7 @@ const SECTORS = [
   },
   {
     name: 'Private sector',
+    slug: 'private-sector',
     sub: 'Developer sponsors, regeneration leads, manufacturers, and commercial operators — strengthening governance where investment scale demands independent discipline.',
     image: '/images/sandbox/private sector.jpg',
     imageAlt: 'Private sector development',
@@ -24,6 +27,7 @@ const SECTORS = [
   },
   {
     name: 'Infrastructure',
+    slug: 'infrastructure',
     sub: 'Logistics, transport, highways, utilities, and defence — complex long-duration programmes where independent governance authority and decision discipline are structurally critical.',
     image: '/images/sandbox/High rise buid.jpg',
     imageAlt: 'Infrastructure programme',
@@ -80,35 +84,36 @@ export default function SectorsSection() {
         </div>
 
         <div className="sectors__grid" ref={containerRef}>
-          {SECTORS.map(({ name, sub, image, imageAlt, tags }, i) => (
-            <RevealWrapper
-              key={name}
-              as="article"
-              variant="scale"
-              delay={i as 0 | 1 | 2}
-              className="sector-card"
-              tabIndex={0}
-            >
-              <div className="sector-card__image">
-                <Image
-                  src={image}
-                  alt={imageAlt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 960px) 50vw, 33vw"
-                  style={{ objectFit: 'cover' }}
-                  loading="lazy"
-                />
-              </div>
-              <div className="sector-card__body">
-                <h3 className="sector-card__name">{name}</h3>
-                <p className="sector-card__sub">{sub}</p>
-                <div className="sector-card__tags">
-                  {tags.map((tag) => (
-                    <span key={tag} className="tag">{tag}</span>
-                  ))}
+          {SECTORS.map(({ name, slug, sub, image, imageAlt, tags }, i) => (
+            <Link key={name} href={`/sectors/${slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <RevealWrapper
+                as="article"
+                variant="scale"
+                delay={i as 0 | 1 | 2}
+                className="sector-card"
+                tabIndex={-1}
+              >
+                <div className="sector-card__image">
+                  <Image
+                    src={image}
+                    alt={imageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 960px) 50vw, 33vw"
+                    style={{ objectFit: 'cover' }}
+                    loading="lazy"
+                  />
                 </div>
-              </div>
-            </RevealWrapper>
+                <div className="sector-card__body">
+                  <h3 className="sector-card__name">{name}</h3>
+                  <p className="sector-card__sub">{sub}</p>
+                  <div className="sector-card__tags">
+                    {tags.map((tag) => (
+                      <span key={tag} className="tag">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </RevealWrapper>
+            </Link>
           ))}
         </div>
       </div>

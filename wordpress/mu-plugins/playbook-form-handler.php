@@ -107,8 +107,7 @@ function pb_handle_contact_submission( WP_REST_Request $request ): WP_REST_Respo
 	}
 
 	// Send email notification
-	// TESTING: Change this to hello@playbook-group.co.uk when ready for production
-	$to = 'stuart@byte-pm.com';
+	$to = 'hello@playbook-group.co.uk';
 
 	$body = sprintf(
 		"New enquiry via the Playbook website\n\n" .

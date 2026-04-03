@@ -5,9 +5,15 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import ArrowIcon from './ArrowIcon'
 
+const SECTOR_CHILDREN = [
+  { href: '/sectors/public-sector', label: 'Public sector' },
+  { href: '/sectors/private-sector', label: 'Private sector' },
+  { href: '/sectors/infrastructure', label: 'Infrastructure' },
+]
+
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
-  { href: '#sectors', label: 'Sectors' },
+  { href: '/sectors', label: 'Sectors', children: SECTOR_CHILDREN },
   { href: '/insights', label: 'Insights' },
   { href: '/contact', label: 'Contact' },
 ]
@@ -16,7 +22,8 @@ export default function Nav() {
   const pathname = usePathname()
   /* Pages with dark hero banners where the nav starts transparent with white text */
   const darkHeroPages = ['/', '/contact', '/privacy-policy', '/terms-and-conditions']
-  const isTransparentPage = darkHeroPages.includes(pathname ?? '/')
+  const isDarkHero = darkHeroPages.includes(pathname ?? '/') ||
+    (pathname ?? '').startsWith('/sectors/')
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const drawerRef = useRef<HTMLElement>(null)
@@ -106,10 +113,12 @@ export default function Nav() {
   function openMenu() { setIsOpen(true) }
   function closeMenu() { setIsOpen(false) }
 
+  const isTransparent = isDarkHero && !isScrolled
+
   return (
     <>
       <header
-        className={`nav${isTransparentPage && !isScrolled ? ' nav--transparent' : ''}`}
+        className={`nav${isTransparent ? ' nav--transparent' : ''}`}
         id="nav"
         role="banner"
       >
@@ -131,11 +140,29 @@ export default function Nav() {
 
           <nav aria-label="Primary navigation">
             <ul className="nav__links">
-              {NAV_LINKS.map(({ href, label }) => (
-                <li key={href}>
-                  <a href={href} className="nav__link">{label}</a>
-                </li>
-              ))}
+              {NAV_LINKS.map(({ href, label, children }) =>
+                children ? (
+                  <li key={href} className="nav__dropdown">
+                    <span className="nav__link nav__dropdown-trigger">
+                      {label}
+                      <svg className="nav__dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                        <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <ul className="nav__dropdown-menu">
+                      {children.map((child) => (
+                        <li key={child.href}>
+                          <Link href={child.href}>{child.label}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : (
+                  <li key={href}>
+                    <a href={href} className="nav__link">{label}</a>
+                  </li>
+                )
+              )}
             </ul>
           </nav>
 
@@ -181,11 +208,26 @@ export default function Nav() {
           </svg>
         </button>
         <ul className="nav__drawer-links">
-          {NAV_LINKS.map(({ href, label }) => (
+          {NAV_LINKS.map(({ href, label, children }) => (
             <li key={href}>
-              <a href={href} className="nav__drawer-link" onClick={closeMenu}>
-                {label}
-              </a>
+              {children ? (
+                <>
+                  <span className="nav__drawer-link">{label}</span>
+                  <ul className="nav__drawer-sublinks">
+                    {children.map((child) => (
+                      <li key={child.href}>
+                        <Link href={child.href} className="nav__drawer-sublink" onClick={closeMenu}>
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a href={href} className="nav__drawer-link" onClick={closeMenu}>
+                  {label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
