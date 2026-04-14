@@ -1,3 +1,25 @@
+## [2026-04-02] — Sector pages build (Public, Private, Infrastructure)
+
+### Added
+- `web/lib/sector-data.ts` — structured TypeScript data file containing all content for 3 sector pages (12 sub-sectors total), sourced from `assets/files/playbook-wording-for-sector-pages.docx`
+- `web/app/(site)/sectors/[slug]/SectorPageClient.tsx` — full sector page client component with hero, pressure overview, alternating two-column sub-sector sections, support section, and DiagnosticCTA
+- `web/app/(site)/sectors/[slug]/page.tsx` — SSG page with `generateStaticParams` (3 slugs) and `generateMetadata`
+- `plan/SECTOR_PAGES_PLAN.md` — build plan with content mapping, image assignments, layout decisions, and technical approach
+
+### Changed
+- `web/components/Nav.tsx` — added "Sectors" as top-level nav item with hover dropdown (desktop) and sub-links (mobile drawer) listing all 3 sector pages; sector pages added to dark hero transparent nav list
+- `web/components/SectorsSection.tsx` — homepage sector cards now wrapped in `<Link>` to `/sectors/{slug}`; added `slug` field to sector data
+- `web/app/globals.css` — added full sector page CSS: hero with background image + decorative stars, pressure overview card (sand bg, two-column bullet grid), alternating split sub-sector layout (content/image flip), risk/mitigation pairs with gold arrows, dark support section, nav dropdown styles, mobile responsive overrides
+
+### Notes
+- Sub-sector layout uses alternating two-column split: Row 1 = content left / image right, Row 2 = image left / content right
+- Each sub-sector has two distinct images (`image` and `image2`) to avoid repetition
+- Decorative guiding star SVGs placed on hero sections, second images (right-side placement), and support section background
+- Pressure overview refactored from loose two-column grid to compact card layout with two-column bullet grid on sand background
+- Risk/mitigation displayed as inline pairs with gold arrow separators
+
+---
+
 ## [2026-03-31] — Contact form integration with WordPress
 
 ### Added

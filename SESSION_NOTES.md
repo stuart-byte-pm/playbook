@@ -1,3 +1,40 @@
+## Session — 2026-04-02 (Sector pages build)
+
+### What we worked on
+- Extracted content from `assets/files/playbook-wording-for-sector-pages.docx` for all 3 sector pages (Public, Private, Infrastructure — 12 sub-sectors total)
+- Created a structured build plan (`plan/SECTOR_PAGES_PLAN.md`) and aligned on all design decisions before writing code
+- Built the full sector page template with SSG, metadata, hero, pressure overview, sub-sector sections, support section, and DiagnosticCTA reuse
+- Implemented alternating two-column split layout for sub-sectors (content left / image right, then image left / content right)
+- Added "Sectors" dropdown to the nav with child links for all 3 pages (desktop hover + mobile drawer)
+- Linked homepage sector cards to their respective sector pages
+- Iterated on layout: refactored pressure section from loose two-column grid to compact card with two-column bullet grid; added second distinct image per sub-sector to avoid repetition; added decorative guiding star on second images
+
+### Key decisions
+- Sub-sector layout: full-width scroll-through sections with alternating image/content sides (not accordions)
+- Risk/mitigation: styled inline pairs with gold arrow separator
+- Hero images: `Students 1.jpg` (public), `Resi 1.jpg` (private), `Manufacturing 3.jpg` (infrastructure)
+- Nav: "Sectors" added as top-level dropdown with 3 child links
+- Bottom CTA: reuse existing `DiagnosticCTA` component
+- Sector pages get transparent nav treatment (dark hero)
+- Pressure section redesigned as a contained card on sand background after feedback on excessive whitespace
+
+### Output / artefacts produced
+- `web/lib/sector-data.ts` — all sector content as typed data
+- `web/app/(site)/sectors/[slug]/page.tsx` — SSG page component
+- `web/app/(site)/sectors/[slug]/SectorPageClient.tsx` — client component with full page template
+- `web/components/Nav.tsx` — updated with sectors dropdown
+- `web/components/SectorsSection.tsx` — updated with links to sector pages
+- `web/app/globals.css` — sector page styles, nav dropdown styles, responsive overrides
+- `plan/SECTOR_PAGES_PLAN.md` — build plan
+
+### Outstanding / next steps
+- Review all 3 sector pages on dev for visual polish, spacing consistency, and responsive behaviour
+- Consider whether sub-sector images need replacing with higher quality or more contextually appropriate photography
+- Service pages (`/services/[slug]`) are still stubs — next candidate for build
+- Consider adding breadcrumb navigation on sector pages
+
+---
+
 ## Session — 2026-03-31 (Contact form integration with WordPress)
 
 ### What we worked on
