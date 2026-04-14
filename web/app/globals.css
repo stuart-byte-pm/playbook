@@ -2492,7 +2492,7 @@ body.splash-active { overflow: hidden; }
   font-size: var(--size-body-sm);
   line-height: var(--lh-relaxed);
   color: var(--color-text-secondary);
-  padding-left: var(--space-5);
+  padding-left: var(--space-6);
   position: relative;
 }
 
@@ -2513,7 +2513,6 @@ body.splash-active { overflow: hidden; }
   color: var(--color-black);
   border-left: 3px solid var(--color-gold);
   padding-left: var(--space-6);
-  max-width: 64ch;
 }
 
 /* Sub-sector sections */
