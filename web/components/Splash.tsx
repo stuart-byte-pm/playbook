@@ -5,7 +5,6 @@
    CSS/JS rather than React state to avoid hydration issues. */
 
 import { useEffect } from 'react'
-import WordmarkSvg from './WordmarkSvg'
 
 export default function Splash() {
   useEffect(() => {
@@ -46,10 +45,11 @@ export default function Splash() {
       aria-label="Loading Playbook Advisory Group"
     >
       <div className="splash__inner">
-        <WordmarkSvg
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/brand-assets/wordmark/playbook-wordmark-white-registered.svg"
+          alt="Playbook Advisory Group"
           className="splash__wordmark"
-          ariaLabel="Playbook Advisory Group"
-          height={200}
         />
 
         <div className="splash__rule" aria-hidden="true" />
