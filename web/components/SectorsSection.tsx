@@ -29,7 +29,7 @@ const SECTORS = [
     name: 'Infrastructure',
     slug: 'infrastructure',
     sub: 'Logistics, transport, highways, utilities, and defence — complex long-duration programmes where independent governance authority and decision discipline are structurally critical.',
-    image: '/images/sandbox/High rise buid.jpg',
+    image: '/images/sandbox/water.jpg',
     imageAlt: 'Infrastructure programme',
     tags: ['Transport', 'Utilities', 'Defence'],
   },

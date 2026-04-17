@@ -9,7 +9,7 @@ export default function Footer() {
             <div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/brand-assets/wordmark/playbook-wordmark-white.svg"
+                src="/images/brand-assets/wordmark/playbook-wordmark-white-registered.svg"
                 alt="Playbook"
                 className="footer__wordmark-svg"
               />
@@ -25,11 +25,11 @@ export default function Footer() {
             <div>
               <h3 className="footer__nav-group-title">Advisory</h3>
               <ul className="footer__nav-links">
-                <li><a href="/services/capital-investment-strategy" className="footer__nav-link">Capital investment strategy</a></li>
-                <li><a href="/services/programme-governance" className="footer__nav-link">Programme governance</a></li>
-                <li><a href="/services/sponsor-side-advisory" className="footer__nav-link">Sponsor-side advisory</a></li>
-                <li><a href="/services/programme-health-diagnostics" className="footer__nav-link">Health diagnostics</a></li>
-                <li><a href="/services/funding-and-business-case" className="footer__nav-link">Funding and business case</a></li>
+                <li><span className="footer__nav-link">Capital investment strategy</span></li>
+                <li><span className="footer__nav-link">Programme governance</span></li>
+                <li><span className="footer__nav-link">Sponsor-side advisory</span></li>
+                <li><span className="footer__nav-link">Health diagnostics</span></li>
+                <li><span className="footer__nav-link">Funding and business case</span></li>
               </ul>
             </div>
             <div>
@@ -48,9 +48,8 @@ export default function Footer() {
                     hello@playbook-group.co.uk
                   </a>
                 </li>
-                <li><a href="#" className="footer__nav-link">LinkedIn</a></li>
-                <li><a href="#" className="footer__nav-link">Spencer Yard, Leamington Spa</a></li>
-                <li><a href="#" className="footer__nav-link">Jewellery Quarter, Birmingham</a></li>
+                <li><a href="https://www.linkedin.com/company/playbookadvisory" className="footer__nav-link" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                <li><span className="footer__nav-link">Playbook HQ, Spencer Yard, Leamington Spa</span></li>
               </ul>
             </div>
           </nav>

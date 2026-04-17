@@ -92,7 +92,7 @@ export default function WhereWeSitSection() {
         <div className="wws__footnote" ref={footnoteRef}>
           <span className="wws__footnote-label">We are not &mdash;</span>
           <span className="wws__footnote-items">
-            A design &amp; construction consultancy · Embedded resource or capacity support
+            A &lsquo;design &amp; construction consultancy&rsquo;
           </span>
         </div>
       </div>

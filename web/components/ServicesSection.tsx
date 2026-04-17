@@ -8,7 +8,7 @@ const SERVICES = [
   {
     index: '01',
     title: 'Capital investment strategy',
-    desc: 'Upstream strategic advisory on major capital investment decisions — defining the governance structure, business case rationale, and decision framework before commitment. Establishing the context to which successful funding applications will need to respond.',
+    desc: 'Upstream strategic advisory on major capital investment decisions — defining the governance structure, strategic rationale, development appraisal and decision framework before commitment. Establishing the context to which successful funding applications will need to respond.',
   },
   {
     index: '02',

@@ -126,13 +126,13 @@ export default function Nav() {
           <Link href="/" className="nav__logo" aria-label="Playbook Advisory Group — home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/brand-assets/wordmark/playbook-wordmark-black.svg"
+              src="/images/brand-assets/wordmark/playbook-wordmark-black-registered.svg"
               alt="Playbook"
               className="nav__wordmark-svg nav__wordmark--dark"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/brand-assets/wordmark/playbook-wordmark-white.svg"
+              src="/images/brand-assets/wordmark/playbook-wordmark-white-registered.svg"
               alt="Playbook"
               className="nav__wordmark-svg nav__wordmark--light"
             />
