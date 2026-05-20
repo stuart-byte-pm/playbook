@@ -74,7 +74,7 @@ export default function PrivacyPolicyPage() {
 
             <h3>3.2 Information collected automatically</h3>
             <p>
-              When you visit this website, we may collect limited technical data including your IP address, browser type, pages visited, and the date and time of your visit. This is collected for the purposes of website security, performance monitoring, and analytics. We do not use cookies for advertising or tracking purposes.
+              When you visit this website and have given consent via our cookie banner, we use Google Analytics 4 to collect anonymised usage data including pages visited, approximate location (country/region only), device and browser type, and how you arrived at the site. This data is used to understand how the website is used and to improve its content. IP addresses are not stored. No advertising cookies are used. Without your consent, no analytics data is collected. You can withdraw consent at any time via the &quot;Cookie preferences&quot; link in the footer.
             </p>
 
             <h3>3.3 Information from business correspondence</h3>
@@ -108,6 +108,7 @@ export default function PrivacyPolicyPage() {
               <li><strong>Service providers:</strong> third-party providers who process data on our behalf (such as email delivery services), bound by data processing agreements and permitted to use your data only for the services they provide to us</li>
               <li><strong>Professional advisers:</strong> our lawyers, accountants, and insurers where necessary for the conduct of our business</li>
               <li><strong>Legal requirements:</strong> where we are required to disclose data by law, court order, or regulatory authority</li>
+              <li><strong>Google LLC (Google Analytics 4):</strong> anonymised usage data is processed by Google LLC under the EU&ndash;US Data Privacy Framework. We have configured Google Analytics to disable Google signals, disable data sharing with Google products, and use device-based reporting only.</li>
             </ul>
 
             <h2>7. Data retention</h2>
@@ -117,12 +118,15 @@ export default function PrivacyPolicyPage() {
             <ul>
               <li>Enquiry data from the contact form is retained for up to 24 months from the date of last contact unless a client relationship develops</li>
               <li>Data relating to active client engagements is retained for the duration of the engagement and for a period of seven years thereafter, in line with standard professional practice</li>
-              <li>Website analytics data is retained in aggregated form only</li>
+              <li>Google Analytics data is retained for 14 months and is anonymised at the point of collection. Aggregated reports may be retained indefinitely.</li>
             </ul>
 
             <h2>8. International transfers</h2>
             <p>
               We do not routinely transfer personal data outside the United Kingdom. Where any transfer does occur, we ensure appropriate safeguards are in place in accordance with UK GDPR requirements.
+            </p>
+            <p>
+              Google Analytics data may be processed in the United States by Google LLC. This transfer is covered by Google LLC&apos;s certification under the EU&ndash;US Data Privacy Framework, providing an adequate level of protection under UK GDPR.
             </p>
 
             <h2>9. Your rights</h2>
@@ -152,12 +156,64 @@ export default function PrivacyPolicyPage() {
               Our website may contain links to third-party websites. We are not responsible for the privacy practices of those sites and encourage you to read their privacy policies before providing any personal data.
             </p>
 
-            <h2>12. Changes to this policy</h2>
+            <h2 id="cookies">12. Cookies</h2>
+            <p>
+              A cookie is a small text file that a website stores on your device. We use cookies sparingly and only where necessary or where you have given consent.
+            </p>
+
+            <h3>12.1 Strictly necessary cookies</h3>
+            <p>
+              These are always active and do not require consent. They store your cookie preferences so we don&apos;t ask again on every page.
+            </p>
+            <table className="legal-table">
+              <thead>
+                <tr><th>Name</th><th>Purpose</th><th>Duration</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>playbook_consent_v1</code></td>
+                  <td>Stores your cookie preferences</td>
+                  <td>12 months</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              <em>This is stored in your browser&apos;s local storage, not as a cookie, but is functionally equivalent. It is listed here for transparency.</em>
+            </p>
+
+            <h3>12.2 Analytics cookies</h3>
+            <p>
+              These are only set after you click <strong>Accept</strong> on the cookie banner. They allow us to understand how the site is used so we can improve it.
+            </p>
+            <table className="legal-table">
+              <thead>
+                <tr><th>Name</th><th>Provider</th><th>Purpose</th><th>Duration</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>_ga</code></td>
+                  <td>Google</td>
+                  <td>Distinguishes unique visitors</td>
+                  <td>2 years</td>
+                </tr>
+                <tr>
+                  <td><code>_ga_&lt;container-id&gt;</code></td>
+                  <td>Google</td>
+                  <td>Maintains session state</td>
+                  <td>2 years</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              You can change or withdraw your consent at any time using the <strong>Cookie preferences</strong> link in the website footer. Withdrawing consent will not delete cookies already stored &mdash; you can clear those via your browser settings.
+            </p>
+
+            <h2>13. Changes to this policy</h2>
             <p>
               We may update this policy from time to time to reflect changes in our practices or in applicable law. The date at the top of this page indicates when the policy was last revised. We encourage you to review this page periodically.
             </p>
 
-            <h2>13. Contact us</h2>
+            <h2>14. Contact us</h2>
             <p>
               If you have any questions about this privacy policy or about how we handle your personal data, please contact us:
             </p>
@@ -224,6 +280,37 @@ export default function PrivacyPolicyPage() {
         .legal-prose a:hover {
           color: var(--color-gold);
           border-color: var(--color-gold);
+        }
+        .legal-prose em {
+          font-style: italic;
+          color: var(--color-text-secondary);
+        }
+        .legal-prose code {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          font-size: 0.9em;
+          background: var(--color-sand, #ebe7dc);
+          padding: 0.1em 0.35em;
+          border-radius: 3px;
+        }
+        .legal-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: var(--space-6);
+          font-size: var(--size-body-sm, 0.875rem);
+        }
+        .legal-table th,
+        .legal-table td {
+          text-align: left;
+          padding: var(--space-3) var(--space-4);
+          border-bottom: 1px solid var(--color-border-default, #ebe7dc);
+          vertical-align: top;
+          line-height: var(--lh-relaxed);
+          color: var(--color-text-secondary);
+        }
+        .legal-table th {
+          font-weight: var(--weight-semibold);
+          color: var(--color-black);
+          border-bottom-width: 2px;
         }
       `}</style>
     </main>

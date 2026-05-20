@@ -21,7 +21,7 @@ A B2B marketing website for Playbook Advisory Group — a senior-led, sponsor-si
 | CMS | WordPress | Self-hosted at cms.playbook-group.co.uk; REST API |
 | Hosting | Vercel | Native ISR support |
 | Email | Resend | Contact form via Server Action |
-| Analytics | Plausible (preferred) | Privacy-first, no cookie banner |
+| Analytics | Google Analytics 4 (GA4) | Client-side via direct gtag.js. Requires consent banner — see `plan/ga4-gdpr-implementation.md` |
 
 **Rendering strategy:**
 - SSG for all static pages
@@ -170,10 +170,10 @@ Contact form routes to `hello@playbook-group.co.uk` via Resend Server Action.
 All pre-build decisions were resolved. Outcomes:
 
 1. **CMS:** WordPress (self-hosted at `cms.playbook-group.co.uk`). REST API, public read-only. Integrated — insights data layer fetches from WP REST API with ISR (60s revalidation). Sanity was originally planned but replaced by WordPress before integration.
-2. **Analytics:** deferred to post-launch. Placeholder comment in `web/app/layout.tsx`.
+2. **Analytics:** Google Analytics 4 (GA4), client-side via direct `gtag.js`. Implementation plan in `plan/ga4-gdpr-implementation.md`. Requires consent banner (custom build) and Google Consent Mode v2 — must ship together. Placeholder comment in `web/app/layout.tsx`.
 3. **Article author field:** single entity — "Playbook Advisory Group". No author schema required.
 4. **Article tags:** confirmed at launch. Tag set: Governance, Healthcare, Regeneration, Capital programmes. "Funding" excluded from the insights blog.
-5. **Cookie consent:** deferred to pre-live audit (LAUNCH-04). No third-party tracking in the build; confirm before production deploy.
+5. **Cookie consent:** custom-built banner required to ship alongside GA4. Spec in `plan/ga4-gdpr-implementation.md`. Banner must be live before GA4 fires any events.
 
 ---
 

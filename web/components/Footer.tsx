@@ -1,3 +1,5 @@
+import CookiePreferencesButton from './consent/CookiePreferencesButton'
+
 export default function Footer() {
   return (
     <footer className="footer" aria-label="Site footer">
@@ -64,6 +66,7 @@ export default function Footer() {
           <ul className="footer__legal-links">
             <li><a href="/privacy-policy" className="footer__legal-link">Privacy policy</a></li>
             <li><a href="/terms-and-conditions" className="footer__legal-link">Terms and conditions</a></li>
+            <li><CookiePreferencesButton className="footer__legal-link footer__legal-link--button" /></li>
           </ul>
         </div>
       </div>

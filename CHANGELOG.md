@@ -1,3 +1,48 @@
+## [2026-05-20] — Google Analytics 4 + GDPR-compliant consent banner
+
+### Added
+- `plan/ga4-gdpr-implementation.md` — full implementation plan covering legal framework (UK GDPR, PECR, ICO guidance, Google Consent Mode v2), architecture, GA4 property setup, banner UX + copy, file-by-file build map, §10 test checklist, launch sequence, and risks
+- `web/lib/consent/types.ts` — TypeScript types: `ConsentChoices`, `ConsentRecord`, `ConsentCategory`, `CategoryMetadata`
+- `web/lib/consent/constants.ts` — storage key, version, `DEFAULT_CHOICES`, `ACCEPT_ALL_CHOICES`, `CATEGORIES` metadata
+- `web/lib/consent/storage.ts` — `readConsent` / `writeConsent` / `clearAnalyticsCookies` (purges `_ga`, `_ga_*`, `_gid`, `_gat` across host + parent domain when consent is withdrawn)
+- `web/lib/consent/gtag.ts` — typed wrappers: `gtagConsentUpdate`, `trackPageview`
+- `web/components/consent/ConsentProvider.tsx` — client component holding consent state in React context; lazy-loads `gtag.js` only when analytics granted; mounts `PageviewTracker` for SPA navigation
+- `web/components/consent/ConsentBanner.tsx` — bottom sticky bar with Accept / Decline / Customise buttons (equal prominence per ICO)
+- `web/components/consent/ConsentPreferencesModal.tsx` — granular preferences modal (Strictly necessary disabled-on / Analytics togglable); ESC to close, focus trap on open
+- `web/components/consent/PageviewTracker.tsx` — SPA navigation → `page_view` event (wrapped in `Suspense` for `useSearchParams`)
+- `web/components/consent/useConsent.ts` — hook for accessing consent state from any client component
+- `web/components/consent/CookiePreferencesButton.tsx` — footer button that re-opens the preferences modal (mandatory for compliance — withdrawal must be as easy as the right to give)
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-NG0PPMR71X` in `web/.env.local` and Vercel (Production, Preview, Development)
+
+### Changed
+- `web/app/layout.tsx` — removed Plausible TODO comment; added Google Consent Mode v2 default-denied script via `next/script` (`strategy="beforeInteractive"`); wrapped children in `<ConsentProvider>`; added `suppressHydrationWarning` on `<html>` to tolerate third-party browser extensions mutating the root element
+- `web/components/Footer.tsx` — added "Cookie preferences" button (third legal link); imports `CookiePreferencesButton`
+- `web/app/globals.css` — added `.footer__legal-link--button` style (button styled as link for the cookie preferences trigger)
+- `web/app/(site)/privacy-policy/page.tsx` — 5 edits per the plan: (1) section 3.2 rewritten to describe GA4 consent-based collection, (2) section 6 adds Google LLC as a processor under the EU–US Data Privacy Framework, (3) section 7 retention updated to 14 months for GA4, (4) section 8 augmented with US transfer note, (5) new section 12 (Cookies) inserted with `id="cookies"` anchor and two cookie tables; old sections 12 and 13 renumbered to 13 and 14. Added `<table>` / `<code>` / `<em>` styles to `.legal-prose` block
+- `web/VERCEL_SETUP.md` — documented `NEXT_PUBLIC_GA_MEASUREMENT_ID` as a required env var across all three environments
+- `CLAUDE.md` — switched the Analytics row from Plausible to GA4; updated open decisions #2 (analytics) and #5 (cookie consent) to point to the implementation plan
+
+### Why
+The site was built without analytics, with Plausible named in `CLAUDE.md` as the preferred privacy-first choice. The client confirmed a pivot to Google Analytics 4 — the trade-off being that GA4 requires a UK GDPR / PECR-compliant consent banner where Plausible would not have. The work spans the full stack: GA4 property setup on Google's side (Stuart), Consent Mode v2 default-denied with conditional `gtag.js` loading (only loads after Accept), a custom-built consent banner with granular preferences modal, a permanent footer link to withdraw consent, privacy policy updates listing Google as a processor + new cookie table, and a complete test checklist before launch.
+
+### Notes
+- Banner body copy (confirmed): "We use essential cookies to keep our website secure and working properly. Optional cookies help us improve performance and personalise content to improve your experience. Choose Accept to allow optional cookies or Decline to use only essential cookies. See our privacy policy for details."
+- Buttons: Accept (gold solid), Decline (sand-bordered transparent, equal prominence per ICO), Customise (tertiary underline)
+- Storage: `localStorage` key `playbook_consent_v1` (not a cookie — avoids the meta-problem of needing consent to store the consent record). Bumping the version forces every visitor to re-consent (use this when adding new tracking vendors or otherwise materially changing collection).
+- GA4 property settings configured by Stuart: 14-month data retention, Google signals disabled, all four data-sharing checkboxes off, reporting identity set to device-based, EU/UK consent region intact (default).
+- Pre-consent guarantee: the user makes **zero** network requests to any Google domain. Stricter than Consent Mode alone requires, but it gives us a clean compliance story.
+- TypeScript build passes clean. Two Next.js 16 issues encountered and fixed: (1) manual `<head>` clashed with `metadata` export → switched to `next/script` `beforeInteractive`; (2) a browser-side GA opt-out extension on Stuart's machine was injecting `data-google-analytics-opt-out=""` onto `<html>` after page load, causing a React 19 hydration mismatch → `suppressHydrationWarning` on `<html>` (the extension is on Stuart's machine, not a real bug).
+- Resolves `LAUNCH-04` (cookie consent) from the project plan once verified live.
+
+### Deployment status — partial (next session to complete)
+- ✅ Code shipped on the working tree (uncommitted at time of writing)
+- ✅ `NEXT_PUBLIC_GA_MEASUREMENT_ID` set in Vercel across Production / Preview / Development
+- ⏳ Local §10 test checklist — **pending Stuart's browser walkthrough** (must use a clean profile without the GA opt-out extension)
+- ⏳ Vercel Preview deployment + repeat §10 — pending local pass
+- ⏳ Production deploy + 24h Realtime verification — pending Preview pass
+
+---
+
 ## [2026-05-20] — Contact form email delivery via Resend (Approach E)
 
 ### Added
@@ -13,11 +58,19 @@
 GoDaddy Managed WordPress blocks outbound SMTP traffic on all ports (including 587 and 465). `wp_mail()` was silently failing — submissions were stored in WordPress but no email was ever delivered to `hello@playbook-group.co.uk`. The fix is Approach E from `plan/form-research.md`: send email directly from Vercel via Resend's HTTPS API, which bypasses GoDaddy's network restrictions entirely.
 
 ### Notes
-- Resend sender: `Playbook Website <hello@playbook-group.co.uk>` (domain verified in Resend)
+- Resend sender: `Playbook Website <hello@playbook-group.co.uk>` (domain verified in Resend on 2026-05-20)
 - Recipient: configurable via `CONTACT_NOTIFICATION_EMAIL` (set to `hello@playbook-group.co.uk` in production)
 - Reply-To header set to the submitter's email, so the client can reply directly from their inbox
-- Updated mu-plugin needs to be re-uploaded via SFTP to `wp-content/mu-plugins/` on `cms.playbook-group.co.uk`
-- Vercel env vars (`RESEND_API_KEY`, `CONTACT_NOTIFICATION_EMAIL`) must be added before redeploy
+- `RESEND_API_KEY` set locally in `web/.env.local`
+- TypeScript build passes clean
+
+### Deployment status — partial (next session to complete)
+- ✅ Code changes committed locally
+- ✅ Resend domain verified, API key added to local env
+- ⏳ Vercel env vars (`RESEND_API_KEY`, `CONTACT_NOTIFICATION_EMAIL`) — **not yet added**
+- ⏳ Vercel redeploy — **pending env var addition**
+- ⏳ mu-plugin v1.1 — **not yet uploaded via SFTP to cms.playbook-group.co.uk**
+- ⏳ End-to-end test — pending production deploy
 
 ---
 

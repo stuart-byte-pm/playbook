@@ -1,3 +1,136 @@
+## Session — 2026-05-20 (GA4 + GDPR consent banner)
+
+### What we worked on
+- Confirmed a pivot from Plausible (named in `CLAUDE.md` as the preferred analytics) to **Google Analytics 4**. The trade-off: GA4 requires a UK GDPR / PECR-compliant consent banner where Plausible would not have.
+- Resolved seven scoping decisions before writing any code: (1) Plausible → GA4, (2) custom-build banner (not Cookiebot or another third-party CMP), (3) GA4 page + event tracking only — no Ads, Meta Pixel, LinkedIn, HubSpot, or Hotjar, (4) direct `gtag.js` (no GTM), (5) existing privacy policy fine as a placeholder with three specific edits + one new section, (6) client-side via browser, (7) no internal traffic IP to filter.
+- Drafted `plan/ga4-gdpr-implementation.md` — 14 sections covering legal framework, architecture, GA4 property setup, banner UX/copy, Consent Mode v2 wiring, file-by-file build map, test checklist, launch sequence, and risks. Single canonical reference for the work.
+- Stuart set up the GA4 property on Google's side: created property + web data stream, applied the privacy-focused settings (14-month retention, Google signals off, all four data-sharing checkboxes off, device-based reporting), and copied the Measurement ID to local + Vercel env.
+- Built the entire consent infrastructure: 4 lib files (`types`, `constants`, `storage`, `gtag`) + 6 client components (Provider, Banner, Modal, PageviewTracker, hook, CookiePreferencesButton). Integrated into root layout and footer.
+- Edited the privacy policy per the approved diff: 3 section rewrites + augmented section 8 + new section 12 (Cookies) with `#cookies` anchor and two cookie tables; renumbered sections 12 → 13 and 13 → 14. Added `<table>` / `<code>` / `<em>` styles to the legal-prose block.
+- Fixed two Next.js 16 / React 19 issues encountered during the local dev test:
+  1. **Manual `<head>` vs `metadata` export conflict** — switched the inline Consent Mode default script from a raw `<script dangerouslySetInnerHTML>` in `<head>` to `next/script` with `strategy="beforeInteractive"` at the top of `<body>`.
+  2. **Hydration mismatch on `<html>`** — a Google Analytics Opt-out browser extension on Stuart's machine was injecting `data-google-analytics-opt-out=""` onto the `<html>` element client-side. Added `suppressHydrationWarning` to `<html>`. Not a real bug; just tolerating a third-party extension.
+- Updated banner copy to a more casual register per Stuart's preference (final: "We use essential cookies to keep our website secure and working properly…"). Buttons relabelled: Accept analytics → Accept; Reject → Decline.
+
+### Key decisions
+- **Custom-build banner over a third-party CMP** — boutique advisory brand; banner is a brand surface and a generic CMP widget would look off. Trade-off: we own consent-storage maintenance.
+- **No GTM** — direct gtag.js. Simpler, leaner, and we have no plans for other tags. Adding GTM later is a one-day refactor if needed.
+- **Pre-consent, zero Google network requests** — stricter than Consent Mode alone strictly requires. The Consent Mode default-denied state is the only Google-related code that runs unconditionally. `gtag.js` itself is loaded conditionally via `<Script>` only after the user accepts. Gives us a clean compliance story.
+- **`localStorage` (not a cookie) for the consent record** — avoids the meta-problem of needing consent to store the consent record. Versioned (`playbook_consent_v1`) so a bump forces re-consent on any material policy change.
+- **Equal prominence Accept / Decline** — both solid-background buttons of identical size. ICO non-negotiable.
+- **Permanent "Cookie preferences" footer link** — withdrawal must be as easy as the right to give consent. Re-opens the preferences modal.
+- **Anchor `#cookies` in privacy policy** — banner link sends users directly to the new section 12 cookie table.
+
+### Output / artefacts produced
+- `plan/ga4-gdpr-implementation.md` — single canonical reference
+- 10 new files in `web/lib/consent/` and `web/components/consent/`
+- 5 edited files: `web/app/layout.tsx`, `web/components/Footer.tsx`, `web/app/globals.css`, `web/app/(site)/privacy-policy/page.tsx`, `web/VERCEL_SETUP.md`
+- 2 edited reference files: `CLAUDE.md` (analytics + decisions), `CHANGELOG.md` (this session's entry)
+- Env: `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-NG0PPMR71X` set locally and in Vercel
+- TypeScript build passes clean
+
+### Outstanding / next steps — **for next session**
+
+**Priority 1: Local §10 verification (15 min)**
+1. Hard-restart `npm run dev`
+2. Open a clean incognito window in a browser **without** the GA Opt-out extension (Stuart's main profile has it installed — it would block all GA4 requests during testing). Recommended: Firefox or a fresh Chrome profile.
+3. Walk the §10 test checklist from `plan/ga4-gdpr-implementation.md`:
+   - **Pre-consent:** no requests to `googletagmanager.com` / `google-analytics.com`, no `_ga` cookies, banner renders, tab order correct (Accept → Decline → Customise → privacy policy link)
+   - **Accept:** `gtag/js` + `g/collect` requests appear, `_ga` + `_ga_<container-id>` cookies set, GA4 Realtime shows the visitor within ~30s, reload — banner does not reappear
+   - **Decline:** no GA4 requests, no `_ga` cookies, reload — banner does not reappear
+   - **Withdraw via footer link after Accept:** modal opens with current toggle state, toggle Analytics off + Save Preferences → `_ga` cookies cleared, no further GA4 requests
+
+**Priority 2: Vercel Preview deployment (5–10 min)**
+1. Push the branch (or merge to main if working on main)
+2. Vercel auto-deploys to Preview
+3. Repeat the §10 checklist on the Preview URL
+4. Verify GA4 DebugView via the *Google Analytics Debugger* Chrome extension
+
+**Priority 3: Production deploy + post-launch verification**
+1. Merge to `main` → Vercel auto-promotes to production
+2. Within 24 hours: verify GA4 Realtime is showing traffic, banner appears for new sessions
+3. Mark `LAUNCH-04` resolved in `plan/PROJECT_PLAN.md`
+
+**Priority 4: Documentation tidy**
+- `CHANGELOG.md` + `SESSION_NOTES.md` entries done ✅
+- Consider a quick visual QA on the banner across breakpoints (mobile bottom-edge spacing, desktop padding, focus ring visibility on all three buttons)
+
+### Risks / things to watch
+- **Stuart's main browser has the Google Analytics Opt-out add-on** — GA4 hits won't fire on his machine even after consent is granted. Must test in a clean profile or different browser to actually verify GA4 is receiving data.
+- **Banner shows on every first visit (by design)** — if the marketing team or client complains about "ruining first impression", the next iteration could explore a more minimal first paint with the banner appearing on scroll or delayed. Current implementation is the compliant baseline; anything fancier is optional.
+- **`_ga` cookies are 2-year by default** — Safari's ITP caps that to 7 days. Acceptable, not our problem to fix.
+- **Future tracking tools** — if Ads, Meta Pixel, or any other vendor is added later, each one adds a new banner category, a new cookie-table row, and a new processor entry in the privacy policy. **Bump `playbook_consent_v1` → `v2` to force re-consent** when this happens. Version-bump pattern is documented in plan §7.2 and §12.
+
+---
+
+## Session — 2026-05-20 (Contact form email — pivot to Resend, Approach E)
+
+### What we worked on
+- Troubleshot why contact form submissions were storing in WP admin but not arriving at `hello@playbook-group.co.uk`
+- Diagnosed the root cause: **GoDaddy Managed WordPress blocks outbound SMTP on all ports**. `wp_mail()` calls were timing out silently (Connection timed out, code 110). Confirmed via WP Mail SMTP test using `smtp.office365.com:587`.
+- Evaluated three remediation paths: (1) Microsoft 365 OAuth via WP Mail SMTP, (2) HTTPS-API mailer plugin (Brevo/SendLayer), (3) pivot to Resend from the Next.js Server Action (Approach E from `plan/form-research.md`)
+- Selected Option 3 — Resend from the Server Action — because it bypasses GoDaddy entirely, matches the original tech stack in `CLAUDE.md`, and was rated "Best reliability" in the original research
+- Installed `resend` SDK in `web/`, built a branded HTML email template, rewrote the Server Action to run WP storage and Resend email **in parallel via `Promise.allSettled`** so each can fail independently
+- Stripped the broken `wp_mail()` call from the mu-plugin (v1.1.0), leaving it storage-only
+- Verified TypeScript build passes clean
+- Verified the `playbook-group.co.uk` domain in Resend so we can send from `hello@playbook-group.co.uk` (not the test sender)
+
+### Key decisions
+- **Approach E over Approach D** for email delivery — the original "simplest" choice (D) hit a hard hosting limitation, and the hybrid approach is now the right one
+- **Sender:** `Playbook Website <hello@playbook-group.co.uk>` (DKIM-signed by Resend on the verified domain)
+- **Reply-To:** submitter's email, so the client can reply directly from Outlook to the enquirer
+- **Both systems run in parallel, not sequentially** — submission succeeds as long as at least one side works; only fails to the user if both fail
+- **Mu-plugin keeps its CPT + admin UI + REST endpoint** — strips only the email step. WordPress remains the source of truth for submission storage.
+- **Email template:** plain HTML (not React Email) — single email type, doesn't justify the dependency
+
+### Output / artefacts produced
+- `web/lib/email/contact-notification.ts` — branded HTML + plain-text template (teal header, gold accent, formatted timestamp, full submission detail)
+- `web/app/(site)/contact/actions.ts` — rewritten Server Action using `Promise.allSettled` to fan out to WP + Resend
+- `wordpress/mu-plugins/playbook-form-handler.php` — v1.1.0 (wp_mail removed, header updated, changelog comment added)
+- `web/.env.local` — `RESEND_API_KEY` and `CONTACT_NOTIFICATION_EMAIL` set locally
+- `web/package.json` — `resend` dependency added
+- `CHANGELOG.md` — full entry with rationale and deployment status
+
+### Outstanding / next steps — **for next session**
+
+**Priority 1: Deploy (5–10 min)**
+1. **Add env vars to Vercel** (Production, Preview, Development environments):
+   - `RESEND_API_KEY` = the `re_...` key (already in local `.env.local`)
+   - `CONTACT_NOTIFICATION_EMAIL` = `hello@playbook-group.co.uk`
+2. **Redeploy Vercel** — Deployments → latest → ⋯ → Redeploy (so the new env vars take effect)
+3. **Re-upload the mu-plugin via SFTP** to `cms.playbook-group.co.uk`:
+   - Source: `wordpress/mu-plugins/playbook-form-handler.php` (local v1.1.0)
+   - Destination: `/wp-content/mu-plugins/playbook-form-handler.php` (replaces v1.0.0)
+   - Host: `f05.c16.myftpupload.com`, port 22, SFTP
+   - Credentials in GoDaddy → Managed WordPress → site Settings → SFTP
+
+**Priority 2: End-to-end testing (10 min)**
+1. Submit the contact form on the **live `/contact` page** → confirm:
+   - Email arrives at `hello@playbook-group.co.uk` within ~5s
+   - Submission appears in WP admin → Form submissions
+   - Reply to the test email → confirm it routes to the submitter, not back to `hello@`
+2. Submit the **homepage contact section** form → confirm same as above + `form_source: homepage` shows in WP admin
+3. Submit with invalid data (missing required fields) → confirm validation error displays without breaking the page
+4. Check the email lands in the **Inbox**, not Junk (first-time send may need to be marked "Not junk" once for future deliverability)
+
+**Priority 3: Optional hardening (deferred — only if needed)**
+- Spam protection — honeypot field on both forms (cheap; 10 min) or reCAPTCHA v3 (more involved)
+- Rate limiting on the WP REST endpoint (e.g. max 5 submissions per IP per hour)
+- Add a delivery-status post-meta back to the mu-plugin (`_pb_email_sent: yes/no`) so the WP admin list shows which submissions emailed successfully — would require the Server Action to call back to WP after Resend completes. **Not urgent** since Resend has its own dashboard showing delivery status.
+- Update `plan/form-research.md` to note we pivoted from Approach D to Approach E and why — for accuracy in the project record
+
+**Priority 4: Cleanup**
+- Once tested successfully in production for a few days, consider removing the WP Mail SMTP plugin from the WordPress install (it's no longer needed and adds maintenance overhead)
+- The mu-plugin admin notice in the description ("Email notifications are sent from the Next.js application via Resend") should be visible to the client in WP admin → Plugins → Must-Use — useful for them to understand the architecture if they ever look
+
+### Risks / things to watch
+- **First Resend send may take longer than subsequent sends** while domain reputation warms up — normal, not a problem
+- **`hello@playbook-group.co.uk` is both sender and recipient** — Outlook may flag this as "from yourself" the first time; once marked safe it'll be fine
+- **Resend free tier:** 100 emails/day, 3,000/month — well within the contact form's expected volume, but worth monitoring usage in Resend dashboard
+- If the form ever fails completely, **submissions are still stored in WordPress** (the two systems are decoupled) — client can recover any missed enquiry from WP admin
+
+---
+
 ## Session — 2026-04-02 (Sector pages build)
 
 ### What we worked on
