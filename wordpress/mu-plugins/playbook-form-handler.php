@@ -1,11 +1,17 @@
 <?php
 /**
  * Plugin Name: Playbook Contact Form Handler
- * Description: REST endpoint for headless contact form submissions. Stores entries as a custom post type and sends email notifications.
- * Version: 1.0.0
+ * Description: REST endpoint for headless contact form submissions. Stores entries as a custom post type. Email notifications are sent from the Next.js application via Resend.
+ * Version: 1.1.0
  * Author: Playbook Advisory Group
  *
  * Installation: Upload this file to wp-content/mu-plugins/ on the WordPress instance.
+ *
+ * Changelog:
+ *   1.1.0 — Removed wp_mail() call. GoDaddy Managed WordPress blocks outbound SMTP,
+ *           so email is now sent from Vercel via Resend (web/app/(site)/contact/actions.ts).
+ *           This plugin is now storage-only.
+ *   1.0.0 — Initial release.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -106,34 +112,8 @@ function pb_handle_contact_submission( WP_REST_Request $request ): WP_REST_Respo
 		], 500 );
 	}
 
-	// Send email notification
-	$to = 'hello@playbook-group.co.uk';
-
-	$body = sprintf(
-		"New enquiry via the Playbook website\n\n" .
-		"Name: %s\n" .
-		"Organisation: %s\n" .
-		"Email: %s\n\n" .
-		"Subject: %s\n\n" .
-		"Message:\n%s\n\n" .
-		"---\n" .
-		"Form source: %s\n" .
-		"Submitted: %s",
-		$name,
-		$org,
-		$email,
-		$subject,
-		$message,
-		$source,
-		current_time( 'Y-m-d H:i:s' )
-	);
-
-	$headers = [
-		'From: Playbook Website <noreply@playbook-group.co.uk>',
-		'Reply-To: ' . $name . ' <' . $email . '>',
-	];
-
-	wp_mail( $to, '[Playbook] New enquiry: ' . $subject, $body, $headers );
+	// Email notifications are sent from the Next.js Server Action via Resend.
+	// GoDaddy Managed WordPress blocks outbound SMTP, so wp_mail() cannot deliver reliably.
 
 	return new WP_REST_Response( [
 		'success' => true,

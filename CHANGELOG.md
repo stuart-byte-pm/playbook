@@ -1,3 +1,26 @@
+## [2026-05-20] — Contact form email delivery via Resend (Approach E)
+
+### Added
+- `web/lib/email/contact-notification.ts` — branded HTML + plain-text email template for new enquiries (teal header, gold accent, full submission details, Reply-To wired to the submitter)
+- `resend` npm package added to `web/package.json` dependencies
+- `CONTACT_NOTIFICATION_EMAIL` environment variable in `web/.env.local`
+
+### Changed
+- `web/app/(site)/contact/actions.ts` — rewritten to send email via Resend in parallel with WordPress storage using `Promise.allSettled`. Each side fails independently; the form only surfaces an error to the user if both fail.
+- `wordpress/mu-plugins/playbook-form-handler.php` — bumped to v1.1.0. Removed the `wp_mail()` call and its headers/body block. Plugin is now storage-only.
+
+### Why
+GoDaddy Managed WordPress blocks outbound SMTP traffic on all ports (including 587 and 465). `wp_mail()` was silently failing — submissions were stored in WordPress but no email was ever delivered to `hello@playbook-group.co.uk`. The fix is Approach E from `plan/form-research.md`: send email directly from Vercel via Resend's HTTPS API, which bypasses GoDaddy's network restrictions entirely.
+
+### Notes
+- Resend sender: `Playbook Website <hello@playbook-group.co.uk>` (domain verified in Resend)
+- Recipient: configurable via `CONTACT_NOTIFICATION_EMAIL` (set to `hello@playbook-group.co.uk` in production)
+- Reply-To header set to the submitter's email, so the client can reply directly from their inbox
+- Updated mu-plugin needs to be re-uploaded via SFTP to `wp-content/mu-plugins/` on `cms.playbook-group.co.uk`
+- Vercel env vars (`RESEND_API_KEY`, `CONTACT_NOTIFICATION_EMAIL`) must be added before redeploy
+
+---
+
 ## [2026-04-02] — Sector pages build (Public, Private, Infrastructure)
 
 ### Added
